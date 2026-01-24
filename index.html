@@ -1,0 +1,74 @@
+<section id="terminal" class="py-20 px-10 relative">
+    <div class="max-w-6xl mx-auto glass-card p-10 rounded-2xl relative overflow-hidden">
+        <div class="flex justify-between items-center mb-10">
+            <div>
+                <h2 class="text-2xl font-bold tracking-tight">SS COMPREHENSIVE TERMINAL</h2>
+                <p class="text-blue-500 font-mono text-xs mt-1">SYSTEM STATUS: OPERATIONAL // V5.6</p>
+            </div>
+            <div class="text-right">
+                <span class="text-gray-500 text-xs block">MARKET VOLATILITY</span>
+                <span class="text-green-400 font-mono text-xl">0.82%</span>
+            </div>
+        </div>
+        
+        <div class="h-[400px] w-full">
+            <canvas id="stockChart"></canvas>
+        </div>
+
+        <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 border-t border-white/10 pt-8 text-[10px] font-mono text-gray-500">
+            <div>[ SCANNING SECTORS... OK ]</div>
+            <div>[ INDEXING LIQUIDITY... OK ]</div>
+            <div>[ V5.6 ALGO... ACTIVE ]</div>
+            <div class="text-blue-400 animate-pulse">[ COMPASS ALIGNED ]</div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('stockChart').getContext('2d');
+    
+    // Gradient untuk area bawah garis
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(59, 130, 246, 0.3)');
+    gradient.addColorStop(1, 'rgba(59, 130, 246, 0)');
+
+    const stockChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: Array(20).fill(''),
+            datasets: [{
+                label: 'Market Index',
+                data: [30, 45, 35, 55, 40, 60, 50, 75, 65, 85, 70, 90, 80, 95, 88, 105, 95, 115, 110, 130],
+                borderColor: '#3b82f6',
+                borderWidth: 3,
+                pointRadius: 0,
+                fill: true,
+                backgroundColor: gradient,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { display: false },
+                x: { display: false }
+            },
+            animation: {
+                duration: 2000,
+                easing: 'easeInOutQuart'
+            }
+        }
+    });
+
+    // Simulasi Real-time Update
+    setInterval(() => {
+        stockChart.data.datasets[0].data.shift();
+        const lastVal = stockChart.data.datasets[0].data[stockChart.data.datasets[0].data.length - 1];
+        stockChart.data.datasets[0].data.push(lastVal + (Math.random() * 10 - 5));
+        stockChart.update('none');
+    }, 2000);
+</script>
