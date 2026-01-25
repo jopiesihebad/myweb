@@ -19,11 +19,11 @@
 body {
   background: var(--bg);
   color: var(--text);
-  overflow: hidden; /* locked scroll experience */
+  overflow: hidden; /* locked scroll */
 }
 
 /* =================================================
-   2. HERO (LOCKED – BENCHMARK)
+   2. HERO (BENCHMARK – JANGAN DIUBAH)
 ================================================= */
 
 .hero {
@@ -116,7 +116,6 @@ body {
 .btn {
   padding: 12px 22px;
   border-radius: 999px;
-  text-decoration: none;
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
@@ -161,7 +160,7 @@ body {
 }
 
 /* =================================================
-   5. PAGE 2 – CORE VALUES (4 BOX ALL DEVICES)
+   5. PAGE 2 – CORE VALUES (RAPI & SINKRON)
 ================================================= */
 
 .page.values {
@@ -176,10 +175,13 @@ body {
   gap: 32px;
   max-width: 1200px;
   padding: 0 24px;
+  align-items: stretch;
   text-align: center;
 }
 
 .page.values .feature-card.glass {
+  min-height: 360px;
+
   background: rgba(255,255,255,0.06);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
@@ -192,14 +194,12 @@ body {
   align-items: center;
 }
 
-/* ICON */
 .page.values .icon {
   font-size: 40px;
   color: var(--accent);
   margin-bottom: 20px;
 }
 
-/* TEXT */
 .page.values h3 {
   font-size: 20px;
   margin-bottom: 16px;
@@ -210,10 +210,11 @@ body {
   font-size: 14px;
   color: var(--muted);
   line-height: 1.65;
+  margin-top: auto; /* kunci bawah sejajar */
 }
 
 /* =================================================
-   6. PAGE 3 – METHODOLOGY (4 BOX + CTA)
+   6. PAGE 3 – METHODOLOGY (RAPI & SINKRON)
 ================================================= */
 
 .page.next {
@@ -242,9 +243,12 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 32px;
+  align-items: stretch;
 }
 
 .page.next .step.glass {
+  min-height: 360px;
+
   background: rgba(255,255,255,0.06);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
@@ -257,7 +261,6 @@ body {
   align-items: center;
 }
 
-/* STEP NUMBER */
 .page.next .step span {
   font-size: 12px;
   color: var(--accent);
@@ -274,9 +277,10 @@ body {
   font-size: 14px;
   color: var(--muted);
   line-height: 1.6;
+  margin-top: auto; /* bawah sejajar */
 }
 
-/* CTA */
+/* CTA PAGE 3 */
 .next-cta {
   margin-top: 56px;
   display: flex;
@@ -313,7 +317,7 @@ body {
 }
 
 /* =================================================
-   8. MOBILE FONT TUNING (NO GRID CHANGE)
+   8. MOBILE TYPO ONLY (GRID TETAP 4)
 ================================================= */
 
 @media (max-width: 768px) {
