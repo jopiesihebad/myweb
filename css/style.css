@@ -162,3 +162,142 @@ body {
   padding: 32px;
   border-radius: 16px;
 }
+
+/* =========================
+   FEATURES SECTION (ICON FONT)
+========================= */
+
+.features {
+  max-width: 1100px;
+  margin: 160px auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 32px;
+}
+
+.feature-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid #1f2937;
+  border-radius: 20px;
+  padding: 40px 32px;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(124,124,255,.18);
+}
+
+/* ICON */
+.icon-wrap {
+  font-size: clamp(28px, 5vw, 42px); /* RESPONSIVE */
+  color: var(--accent);
+  margin-bottom: 20px;
+  transition: transform .3s ease, opacity .3s ease;
+}
+
+.feature-card:hover .icon-wrap {
+  transform: scale(1.12);
+  opacity: .9;
+}
+
+.feature-card h3 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.feature-card p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .features {
+    margin: 120px auto;
+  }
+
+  .feature-card {
+    padding: 32px 24px;
+  }
+}
+
+/* =========================
+   CORE VALUES – GLASS STYLE
+========================= */
+
+.features {
+  max-width: 1100px;
+  margin: 160px auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 32px;
+}
+
+/* GLASS CARD */
+.feature-card.glass {
+  text-align: center;
+  padding: 48px 32px;
+  border-radius: 24px;
+
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(124, 124, 255, 0.25);
+  box-shadow:
+    0 20px 60px rgba(124, 124, 255, 0.12),
+    inset 0 0 0 1px rgba(255,255,255,0.04);
+
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.feature-card.glass:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 30px 80px rgba(124, 124, 255, 0.25),
+    inset 0 0 0 1px rgba(255,255,255,0.06);
+}
+
+/* ICON */
+.icon-wrap {
+  font-size: clamp(32px, 5vw, 48px);
+  color: var(--accent);
+  margin-bottom: 24px;
+  transition: transform .3s ease;
+}
+
+.feature-card:hover .icon-wrap {
+  transform: scale(1.15);
+}
+
+/* TITLE */
+.feature-card h3 {
+  font-size: 20px;
+  margin-bottom: 16px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* CONTENT */
+.feature-card p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .features {
+    margin: 120px auto;
+  }
+
+  .feature-card.glass {
+    padding: 40px 24px;
+  }
+}
