@@ -528,3 +528,63 @@ body {
   }
 }
 
+/* =========================
+   PAGE 2 – CORE VALUES GRID
+========================= */
+
+.values-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2x2 SEMUA DEVICE */
+  gap: 32px;
+
+  text-align: center;
+}
+
+/* =========================
+   PAGE 3 – METHODOLOGY GRID
+========================= */
+
+.next-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.roadmap {
+  margin-top: 48px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* DESKTOP: 4 sejajar */
+  gap: 32px;
+}
+
+/* =========================
+   CTA PAGE 3
+========================= */
+
+.next-cta {
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+}
+
+/* =========================
+   RESPONSIVE BREAKPOINTS
+========================= */
+
+@media (max-width: 1024px) {
+  .roadmap {
+    grid-template-columns: repeat(2, 1fr); /* Tablet: 2x2 */
+  }
+}
+
+@media (max-width: 640px) {
+  .roadmap {
+    grid-template-columns: repeat(2, 1fr); /* Mobile: 2x2 */
+  }
+}
