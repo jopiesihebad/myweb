@@ -440,3 +440,45 @@ body {
   margin: 12px 0;
   font-size: 18px;
 }
+
+/* =========================
+   PAGE 2 – CORE VALUES GRID
+========================= */
+
+.values-inner {
+  max-width: 1200px;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  text-align: center;
+}
+
+/* =========================
+   PAGE 3 – METHODOLOGY GRID
+========================= */
+
+.roadmap {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+/* =========================
+   RESPONSIVE BREAKPOINTS
+========================= */
+
+@media (max-width: 1024px) {
+  .values-inner,
+  .roadmap {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .values-inner,
+  .roadmap {
+    grid-template-columns: 1fr;
+  }
+}
+
