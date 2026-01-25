@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>StockIndexer — Market Intelligence Platform</title>
+  <title>StockIndexer — Institutional Market Intelligence</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- SEO -->
-  <meta name="description" content="StockIndexer is a next-generation market intelligence platform delivering real-time insights, analytics, and data-driven signals for modern investors." />
+  <meta name="description" content="StockIndexer builds institutional-grade market intelligence infrastructure for modern investors and funds." />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="StockIndexer — Market Intelligence Platform" />
-  <meta property="og:description" content="Institutional-grade insights and analytics for modern market participants." />
+  <meta property="og:title" content="StockIndexer — Institutional Market Intelligence" />
+  <meta property="og:description" content="Data infrastructure and market intelligence for the next generation of investors." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://stockindexer.com/" />
-  <meta property="og:image" content="https://stockindexer.com/og-image.png" />
+  <meta property="og:image" content="https://stockindexer.com/assets/og-image.png" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -30,58 +30,75 @@
 
 <body>
 
-  <!-- Background Mesh -->
-  <div class="mesh-bg"></div>
+  <!-- HERO VIDEO -->
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="assets/hero.mp4" type="video/mp4">
+  </video>
+
+  <!-- Overlay -->
+  <div class="overlay"></div>
 
   <header>
     <div class="logo">STOCKINDEXER</div>
-    <a href="#" class="btn primary">Request Access</a>
+    <a href="#waitlist" class="btn primary">Request Access</a>
   </header>
 
-  <main class="hero">
+  <main class="hero reveal">
     <h1>
       Market intelligence<br>
-      built for the <span>next era</span><br>
-      of investing
+      built for <span>institutional scale</span>
     </h1>
 
     <p>
-      StockIndexer delivers real-time insights, analytics,
-      and data-driven signals designed for serious market participants.
+      StockIndexer is building data infrastructure and intelligence
+      trusted by professional investors, funds, and research teams.
     </p>
 
     <div class="cta">
-      <a href="#" class="btn primary">Get Early Access</a>
-      <a href="#" class="btn ghost">View Methodology</a>
+      <a href="#waitlist" class="btn primary">Join Waitlist</a>
+      <a href="#vision" class="btn ghost">Investor Vision</a>
     </div>
   </main>
 
-  <section class="features">
-    <div class="card">
-      <h3>Institutional-Grade Data</h3>
-      <p>High-quality market data pipelines engineered for accuracy, speed, and reliability.</p>
+  <section id="vision" class="features">
+    <div class="card reveal">
+      <h3>Institutional Data Quality</h3>
+      <p>Engineered pipelines delivering accurate, low-latency market data at scale.</p>
     </div>
 
-    <div class="card">
-      <h3>Actionable Signals</h3>
-      <p>Transform raw market data into clear, actionable intelligence.</p>
+    <div class="card reveal">
+      <h3>Signal-Driven Insights</h3>
+      <p>Transforming raw data into decision-grade intelligence.</p>
     </div>
 
-    <div class="card">
-      <h3>Built to Scale</h3>
-      <p>Infrastructure designed for growth, performance, and global reach.</p>
+    <div class="card reveal">
+      <h3>Built for Funds & Teams</h3>
+      <p>Designed to support research workflows, compliance, and long-term growth.</p>
     </div>
   </section>
 
+  <!-- WAITLIST -->
+  <section id="waitlist" class="waitlist reveal">
+    <h2>Get early access</h2>
+    <p>Join the waitlist to receive updates and early access.</p>
+
+    <form>
+      <input type="email" placeholder="you@domain.com" required />
+      <button type="submit" class="btn primary">Join</button>
+    </form>
+
+    <small>No spam. Investor-only updates.</small>
+  </section>
+
   <footer>
-    © 2026 StockIndexer. All rights reserved.
+    © 2026 StockIndexer. Built for the next era of investing.
   </footer>
 
   <!-- Cloudflare Web Analytics -->
   <script
     defer
     src="https://static.cloudflareinsights.com/beacon.min.js"
-    data-cf-beacon='{"token": "PASTE_TOKEN_KAMU_DI_SINI"}'>
+    data-cf-beacon='{"token": "PASTE_TOKEN_KAMU"}'>
   </script>
 
   <!-- JS -->
@@ -89,4 +106,3 @@
 
 </body>
 </html>
-
