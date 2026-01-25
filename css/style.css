@@ -341,6 +341,13 @@ body {
   margin-bottom: 20px;
 }
 
+/* PAGE 2 CTA */
+.values-cta {
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+}
+
 /* PAGE 3 */
 .next {
   display: flex;
@@ -352,6 +359,42 @@ body {
 .next-inner h2 {
   font-size: 48px;
   margin-bottom: 16px;
+}
+
+/* =========================
+   PAGE 3 – STEP CARD FIX
+========================= */
+
+.step {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid #1f2937;
+  border-radius: 20px;
+  padding: 32px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* NUMBER */
+.step span {
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+/* TITLE */
+.step h4 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+/* CONTENT */
+.step p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
 }
 
 /* =========================
