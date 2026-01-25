@@ -13,112 +13,108 @@
 
 <body>
 
-<div class="page-container">
+<!-- ================= PAGE 1 : HERO ================= -->
+<section class="hero">
 
-  <!-- PAGE 1 : HERO -->
-  <section class="page hero active">
+  <video class="hero-bg" autoplay muted loop playsinline>
+    <source src="assets/hero.mp4" type="video/mp4">
+  </video>
 
-    <video class="hero-bg" autoplay muted loop playsinline>
-      <source src="assets/hero.mp4" type="video/mp4">
-    </video>
+  <div class="hero-overlay"></div>
 
-    <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <header class="hero-header">
+      <div class="logo">STOCKINDEXER</div>
+      <a href="#values" class="btn primary">Explore</a>
+    </header>
 
-    <div class="hero-inner">
-      <header class="hero-header">
-        <div class="logo">STOCKINDEXER</div>
-        <a href="#values" class="btn primary">Explore</a>
-      </header>
+    <div class="hero-content">
+      <h1>
+        Market intelligence<br>
+        built for <span>institutional scale</span>
+      </h1>
 
-      <div class="hero-content">
-        <h1>
-          Market intelligence<br>
-          built for <span>institutional scale</span>
-        </h1>
-
-        <p>
-          Decision-grade data infrastructure trusted by
-          professional investors and research teams.
-        </p>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- PAGE 2 : CORE VALUES -->
-  <section class="page values" id="values">
-
-    <div class="values-inner">
-
-      <div class="feature-card">
-        <i class="fa-solid fa-layer-group icon"></i>
-        <h3>Institutional Data Quality</h3>
-        <p>High-fidelity market data engineered for professional reliability.</p>
-      </div>
-
-      <div class="feature-card">
-        <i class="fa-solid fa-chart-line icon"></i>
-        <h3>Actionable Signals</h3>
-        <p>Clear insights translated into execution-ready intelligence.</p>
-      </div>
-
-      <div class="feature-card">
-        <i class="fa-solid fa-building-columns icon"></i>
-        <h3>Built for Scale</h3>
-        <p>Infrastructure designed for institutional workflows and growth.</p>
-      </div>
-
-      <div class="feature-card">
-        <i class="fa-solid fa-shield-halved icon"></i>
-        <h3>Risk & Governance</h3>
-        <p>Designed with transparency, controls, and governance in mind.</p>
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- PAGE 3 : METHODOLOGY -->
-  <section class="page next">
-
-    <div class="next-inner">
-      <h2>Our Methodology</h2>
-      <p class="subtitle">
-        A disciplined, research-driven approach to market intelligence.
+      <p>
+        Decision-grade data infrastructure trusted by
+        professional investors and research teams.
       </p>
+    </div>
+  </div>
 
-      <div class="roadmap">
+</section>
 
-        <div class="step">
-          <span>01</span>
-          <h4>Data Ingestion</h4>
-          <p>Multi-source market data collected and normalized.</p>
-        </div>
+<!-- ================= PAGE 2 : CORE VALUES ================= -->
+<section id="values" class="section values">
 
-        <div class="step">
-          <span>02</span>
-          <h4>Signal Processing</h4>
-          <p>Models extract patterns, momentum, and regime shifts.</p>
-        </div>
+  <div class="container grid values-grid">
 
-        <div class="step">
-          <span>03</span>
-          <h4>Risk Filtering</h4>
-          <p>Signals filtered through volatility and context layers.</p>
-        </div>
-
-        <div class="step">
-          <span>04</span>
-          <h4>Decision Layer</h4>
-          <p>Insights aligned with execution and portfolio workflows.</p>
-        </div>
-
-      </div>
+    <div class="card">
+      <i class="fa-solid fa-layer-group icon"></i>
+      <h3>Institutional Data Quality</h3>
+      <p>High-fidelity market data engineered for professional reliability.</p>
     </div>
 
-  </section>
+    <div class="card">
+      <i class="fa-solid fa-chart-line icon"></i>
+      <h3>Actionable Signals</h3>
+      <p>Clear insights translated into execution-ready intelligence.</p>
+    </div>
 
-</div>
+    <div class="card">
+      <i class="fa-solid fa-building-columns icon"></i>
+      <h3>Built for Scale</h3>
+      <p>Infrastructure designed for institutional workflows and growth.</p>
+    </div>
+
+    <div class="card">
+      <i class="fa-solid fa-shield-halved icon"></i>
+      <h3>Risk & Governance</h3>
+      <p>Designed with transparency, controls, and governance in mind.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================= PAGE 3 : METHODOLOGY ================= -->
+<section class="section methodology">
+
+  <div class="container">
+    <h2>Our Methodology</h2>
+    <p class="subtitle">
+      A disciplined, research-driven approach to market intelligence.
+    </p>
+
+    <div class="grid methodology-grid">
+
+      <div class="card">
+        <span class="step">01</span>
+        <h4>Data Ingestion</h4>
+        <p>Multi-source market data collected and normalized.</p>
+      </div>
+
+      <div class="card">
+        <span class="step">02</span>
+        <h4>Signal Processing</h4>
+        <p>Models extract patterns, momentum, and regime shifts.</p>
+      </div>
+
+      <div class="card">
+        <span class="step">03</span>
+        <h4>Risk Filtering</h4>
+        <p>Signals filtered through volatility and context layers.</p>
+      </div>
+
+      <div class="card">
+        <span class="step">04</span>
+        <h4>Decision Layer</h4>
+        <p>Insights aligned with execution and portfolio workflows.</p>
+      </div>
+
+    </div>
+  </div>
+
+</section>
 
 <script src="js/main.js"></script>
 </body>
