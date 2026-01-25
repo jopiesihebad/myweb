@@ -22,6 +22,35 @@ body {
   overflow: hidden; /* locked scroll */
 }
 
+/* =========================
+   TYPOGRAPHY SCALE
+========================= */
+
+h1 {
+  font-size: clamp(36px, 6vw, 72px);
+  line-height: 1.05;
+}
+
+h2 {
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.15;
+}
+
+h3 {
+  font-size: clamp(18px, 2.2vw, 20px);
+  line-height: 1.3;
+}
+
+h4 {
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
 /* =================================================
    2. HERO (BENCHMARK – JANGAN DIUBAH)
 ================================================= */
@@ -96,9 +125,10 @@ body {
 }
 
 .hero-content p {
-  margin-top: 24px;
-  font-size: 18px;
-  color: var(--muted);
+  margin-top: 20px;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .cta {
@@ -170,9 +200,8 @@ body {
 }
 
 .page.values .values-inner {
-  width: 100%;
-  max-width: 1200px;
-  padding: 0 24px;
+  gap: 28px;
+}
 
   display: grid;
   gap: 24px;
@@ -181,38 +210,21 @@ body {
   grid-template-columns: 1fr;
 }
 
+
 .page.values .feature-card {
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-
-  border: 1px solid rgba(124,124,255,0.25);
-  border-radius: 20px;
   padding: 32px 28px;
-
-  text-align: center;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .page.values .icon {
-  font-size: 36px;
-  color: var(--accent);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .page.values h3 {
-  font-size: 18px;
-  color: var(--accent);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .page.values p {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.6;
+  max-width: 260px;
 }
 
 /* TABLET */
@@ -257,44 +269,27 @@ body {
 }
 
 .page.next .roadmap {
-  display: grid;
-  gap: 24px;
+  gap: 28px;
+}
 
   /* MOBILE DEFAULT */
   grid-template-columns: 1fr;
 }
 
 .page.next .step {
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-
-  border: 1px solid rgba(124,124,255,0.25);
-  border-radius: 20px;
   padding: 32px 28px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
 }
 
 .page.next .step span {
-  font-size: 12px;
-  letter-spacing: 1px;
-  color: var(--accent);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .page.next .step h4 {
-  font-size: 18px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .page.next .step p {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.6;
+  max-width: 260px;
 }
 
 /* CTA */
@@ -362,6 +357,17 @@ body {
 
   .hero-content p {
     font-size: 15px;
+  }
+}
+
+@media (max-width: 640px) {
+  p {
+    font-size: 15px;
+  }
+
+  .page.values .feature-card,
+  .page.next .step {
+    padding: 28px 24px;
   }
 }
 
