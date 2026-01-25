@@ -312,3 +312,29 @@ body {
     font-size: 28px;
   }
 }
+
+/* ================= PAGE 3 MOBILE SPACING FIX ================= */
+
+@media (max-width: 1024px) {
+
+  /* beri jarak antara judul dan grid box */
+  .methodology .section-content h2 {
+    margin-bottom: 16px;
+  }
+
+  .methodology .section-content .subtitle {
+    margin-bottom: 40px; /* ini kunci utama */
+  }
+
+  /* turunkan grid box sedikit dari judul */
+  .methodology .methodology-grid {
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .methodology .section-content .subtitle {
+    margin-bottom: 48px;
+  }
+}
+
