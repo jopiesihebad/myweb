@@ -188,11 +188,14 @@ body {
    VIDEO SECTION (PAGE 3)
 ====================================================== */
 
+/* pastikan section video punya tinggi */
 .video-section {
-  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
-.section-bg {
+/* pastikan video benar-benar terlihat */
+.video-section .section-bg {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -200,22 +203,6 @@ body {
   object-fit: cover;
   opacity: 0.35;
   z-index: 0;
-}
-
-.section-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(6,7,11,0.7),
-    rgba(6,7,11,0.9)
-  );
-  z-index: 1;
-}
-
-.section-content {
-  position: relative;
-  z-index: 2;
 }
 
 /* ======================================================
