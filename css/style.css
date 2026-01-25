@@ -426,3 +426,16 @@ body {
     margin-top: 20px;
   }
 }
+
+/* ================= PRICING OVERFLOW FIX ================= */
+
+/* pastikan pricing section boleh overflow */
+.section.pricing {
+  overflow: visible !important;
+}
+
+/* pastikan container pricing juga aman */
+.section.pricing .container {
+  overflow: visible !important;
+}
+
