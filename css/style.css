@@ -439,3 +439,34 @@ body {
   overflow: visible !important;
 }
 
+/* ================= PRICING MOBILE FIX ================= */
+
+/* pastikan pricing tidak terpotong di SEMUA DEVICE */
+.section.pricing,
+.section.pricing .container,
+.section.pricing .pricing-card {
+  overflow: visible !important;
+}
+
+/* naikkan stacking context khusus mobile */
+@media (max-width: 1024px) {
+  .section.pricing {
+    position: relative;
+    z-index: 10;
+  }
+
+  .pricing-card {
+    z-index: 11;
+  }
+
+  .badge-popular {
+    z-index: 12;
+  }
+}
+
+@media (max-width: 1024px) {
+  .badge-popular {
+    transform: translate(-50%, 0);
+    will-change: transform;
+  }
+}
