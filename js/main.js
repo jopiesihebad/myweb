@@ -11,17 +11,17 @@ window.addEventListener("touchmove", e => e.preventDefault(), { passive: false }
 
 function goTo(index) {
   pages[current].classList.remove("active");
-  dots[current].classList.remove("active");
+  dots[current]?.classList.remove("active");
 
   current = index;
 
   pages[current].classList.add("active");
-  dots[current].classList.add("active");
+  dots[current]?.classList.add("active");
 
   pages[current].scrollIntoView({ behavior: "smooth" });
 }
 
-/* CTA BUTTON */
+/* CTA */
 document.querySelectorAll(".go-next").forEach(btn => {
   btn.addEventListener("click", () => {
     goTo(Math.min(current + 1, pages.length - 1));
