@@ -20,6 +20,10 @@ body {
 /* ================= HERO ================= */
 
 .hero {
+  margin-bottom: -24px;
+}
+
+.hero {
   position: relative;
   min-height: 100vh;
   overflow: hidden;
