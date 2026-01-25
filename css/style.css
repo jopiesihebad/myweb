@@ -200,4 +200,28 @@ body {
     padding: 64px 0;
   }
 }
-  
+
+  /* =========================
+   SECTION SPACING ADJUSTMENT
+   (Apple-style rhythm)
+========================= */
+
+/* Core Values (Page 2) */
+.section.values {
+  padding-bottom: 64px; /* diperkecil */
+}
+
+/* Methodology (Page 3) */
+.section.methodology {
+  padding-top: 64px; /* disamakan */
+}
+
+@media (max-width: 640px) {
+  .section.values {
+    padding-bottom: 48px;
+  }
+
+  .section.methodology {
+    padding-top: 48px;
+  }
+}
