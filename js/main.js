@@ -2,30 +2,26 @@ const pages = document.querySelectorAll(".page");
 const dots = document.querySelectorAll(".dot");
 let current = 0;
 
-const isDesktop = window.matchMedia("(min-width: 1025px)").matches;
-
 /* INIT */
 pages[0].classList.add("active");
 
-/* SCROLL LOCK: DESKTOP ONLY */
-if (isDesktop) {
-  window.addEventListener("wheel", e => e.preventDefault(), { passive: false });
-  window.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
-}
+/* LOCK SCROLL */
+window.addEventListener("wheel", e => e.preventDefault(), { passive: false });
+window.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
 
 function goTo(index) {
   pages[current].classList.remove("active");
-  dots[current]?.classList.remove("active");
+  dots[current].classList.remove("active");
 
   current = index;
 
   pages[current].classList.add("active");
-  dots[current]?.classList.add("active");
+  dots[current].classList.add("active");
 
   pages[current].scrollIntoView({ behavior: "smooth" });
 }
 
-/* CTA */
+/* CTA BUTTON */
 document.querySelectorAll(".go-next").forEach(btn => {
   btn.addEventListener("click", () => {
     goTo(Math.min(current + 1, pages.length - 1));
