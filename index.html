@@ -7,36 +7,27 @@
 
   <link rel="icon" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 </head>
 
 <body>
 
-  <nav class="dot-nav">
-  <span class="dot active" data-index="0"></span>
-  <span class="dot" data-index="1"></span>
-  <span class="dot" data-index="2"></span>
-</nav>
-
-
 <div class="page-container">
 
-  <!-- ================= PAGE 1 : HERO ================= -->
-  <section class="page hero">
+  <!-- PAGE 1 : HERO -->
+  <section class="page hero active">
 
     <video class="hero-bg" autoplay muted loop playsinline>
       <source src="assets/hero.mp4" type="video/mp4">
     </video>
 
-    <div class="hero-over
-      lay"></div>
+    <div class="hero-overlay"></div>
 
     <div class="hero-inner">
-
       <header class="hero-header">
         <div class="logo">STOCKINDEXER</div>
-        <button class="btn primary go-next">Explore</button>
+        <a href="#values" class="btn primary">Explore</a>
       </header>
 
       <div class="hero-content">
@@ -49,127 +40,86 @@
           Decision-grade data infrastructure trusted by
           professional investors and research teams.
         </p>
-
-        <div class="cta">
-          <button class="btn primary go-next">View Core Values</button>
-        </div>
       </div>
-
     </div>
+
   </section>
 
-  <!-- ================= PAGE 2 : CORE VALUES ================= -->
-  <section class="page values">
-    
-<div class="feature-card animate-item">
-  <div class="values-inner fixed-4">
+  <!-- PAGE 2 : CORE VALUES -->
+  <section class="page values" id="values">
 
-    <div class="feature-card glass">
-      <i class="fa-solid fa-layer-group icon"></i>
-      <h3>Institutional Data Quality</h3>
-      <p>
-        Decision-grade market data engineered for accuracy,
-        consistency, and professional reliability.
-      </p>
+    <div class="values-inner">
+
+      <div class="feature-card">
+        <i class="fa-solid fa-layer-group icon"></i>
+        <h3>Institutional Data Quality</h3>
+        <p>High-fidelity market data engineered for professional reliability.</p>
+      </div>
+
+      <div class="feature-card">
+        <i class="fa-solid fa-chart-line icon"></i>
+        <h3>Actionable Signals</h3>
+        <p>Clear insights translated into execution-ready intelligence.</p>
+      </div>
+
+      <div class="feature-card">
+        <i class="fa-solid fa-building-columns icon"></i>
+        <h3>Built for Scale</h3>
+        <p>Infrastructure designed for institutional workflows and growth.</p>
+      </div>
+
+      <div class="feature-card">
+        <i class="fa-solid fa-shield-halved icon"></i>
+        <h3>Risk & Governance</h3>
+        <p>Designed with transparency, controls, and governance in mind.</p>
+      </div>
+
     </div>
 
-    <div class="feature-card glass">
-      <i class="fa-solid fa-chart-line icon"></i>
-      <h3>Actionable Signals</h3>
-      <p>
-        Translating complex market behavior into
-        execution-ready intelligence.
-      </p>
-    </div>
+  </section>
 
-    <div class="feature-card glass">
-      <i class="fa-solid fa-building-columns icon"></i>
-      <h3>Built for Scale</h3>
-      <p>
-        Infrastructure designed for institutional workflows,
-        global markets, and long-term growth.
-      </p>
-    </div>
-
-    <div class="feature-card glass">
-      <i class="fa-solid fa-shield-halved icon"></i>
-      <h3>Risk & Governance</h3>
-      <p>
-        Designed with risk controls, transparency,
-        and institutional governance in mind.
-      </p>
-    </div>
-
-  </div>
-    </div>
-
-</section>
-
-  <!-- ================= PAGE 3 : PLACEHOLDER ================= -->
+  <!-- PAGE 3 : METHODOLOGY -->
   <section class="page next">
-    
-<div class="step animate-item">
-  <div class="next-inner">
 
-    <h2>Our Methodology</h2>
-    <p class="subtitle">
-      A disciplined, research-driven approach to market intelligence.
-    </p>
+    <div class="next-inner">
+      <h2>Our Methodology</h2>
+      <p class="subtitle">
+        A disciplined, research-driven approach to market intelligence.
+      </p>
 
-    <div class="roadmap fixed-4">
+      <div class="roadmap">
 
-      <div class="step glass">
-        <span>01</span>
-        <h4>Data Ingestion</h4>
-        <p>
-          Multi-source market data collected,
-          cleaned, and normalized in real time.
-        </p>
+        <div class="step">
+          <span>01</span>
+          <h4>Data Ingestion</h4>
+          <p>Multi-source market data collected and normalized.</p>
+        </div>
+
+        <div class="step">
+          <span>02</span>
+          <h4>Signal Processing</h4>
+          <p>Models extract patterns, momentum, and regime shifts.</p>
+        </div>
+
+        <div class="step">
+          <span>03</span>
+          <h4>Risk Filtering</h4>
+          <p>Signals filtered through volatility and context layers.</p>
+        </div>
+
+        <div class="step">
+          <span>04</span>
+          <h4>Decision Layer</h4>
+          <p>Insights aligned with execution and portfolio workflows.</p>
+        </div>
+
       </div>
-
-      <div class="step glass">
-        <span>02</span>
-        <h4>Signal Processing</h4>
-        <p>
-          Quantitative models extract patterns,
-          momentum, and regime shifts.
-        </p>
-      </div>
-
-      <div class="step glass">
-        <span>03</span>
-        <h4>Risk Filtering</h4>
-        <p>
-          Signals filtered through volatility,
-          regime, and market context layers.
-        </p>
-      </div>
-
-      <div class="step glass">
-        <span>04</span>
-        <h4>Decision Layer</h4>
-        <p>
-          Insights delivered in a format aligned
-          with execution workflows.
-        </p>
-      </div>
-
-    </div>
     </div>
 
-    <div class="next-cta">
-      <button class="btn primary go-next">Continue</button>
-    </div>
-
-  </div>
-
-</section>
-
-
+  </section>
 
 </div>
 
 <script src="js/main.js"></script>
 </body>
-
 </html>
