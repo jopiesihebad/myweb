@@ -388,3 +388,19 @@ body {
 .page.active .animate-item:nth-child(3) { transition-delay: .19s; }
 .page.active .animate-item:nth-child(4) { transition-delay: .26s; }
 
+/* =========================
+   SCROLL BEHAVIOR PER DEVICE
+========================= */
+
+/* DEFAULT: MOBILE & TABLET (SCROLL UNLOCK) */
+body {
+  overflow-y: auto;
+}
+
+/* DESKTOP ONLY: SCROLL LOCK */
+@media (min-width: 1025px) {
+  body {
+    overflow: hidden;
+  }
+}
+
