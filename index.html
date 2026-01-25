@@ -139,27 +139,27 @@
 
     <!-- Billing Toggle -->
     <div class="billing-toggle">
-      <label>
-        <input type="radio" name="billing" checked>
-        <span>Bulanan</span>
-      </label>
+  <label>
+    <input type="radio" name="billing" value="monthly" checked>
+    <span>Bulanan</span>
+  </label>
 
-      <label>
-        <input type="radio" name="billing">
-        <span>
-          Tahunan
-          <em class="save">hemat hingga 70% 🔥</em>
-        </span>
-      </label>
-    </div>
+  <label>
+    <input type="radio" name="billing" value="yearly">
+    <span>
+      Tahunan
+      <em class="save">hemat hingga 70% 🔥</em>
+    </span>
+  </label>
+</div>
 
     <!-- Pricing Card -->
     <div class="pricing-card">
 
       <div class="price">
-        <span class="amount">Rp. xxx.xxx</span>
-        <span class="period">/ bulan</span>
-      </div>
+  <span class="amount" id="price-amount">Rp. xxx.xxx</span>
+  <span class="period" id="price-period">/ bulan</span>
+</div>
 
       <ul class="feature-list">
         <li>✔ Institutional-grade market data</li>
