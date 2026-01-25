@@ -98,6 +98,15 @@ body {
   color: var(--muted);
 }
 
+/* ================= HERO CTA ================= */
+
+.hero-cta {
+  margin-top: 28px; /* Apple-style spacing */
+  display: flex;
+  justify-content: center;
+}
+
+
 /* ================= BUTTON ================= */
 
 .btn {
@@ -223,5 +232,11 @@ body {
 
   .section.methodology {
     padding-top: 48px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-cta {
+    margin-top: 24px;
   }
 }
