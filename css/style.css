@@ -81,16 +81,14 @@ body {
 }
 
 .hero-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 24px;
   text-align: center;
+  align-items: center;
+}
+
+.hero-content h1,
+.hero-content p {
+  text-align: center;
+}
 
   /* optical centering */
   transform: translateY(-4%);
