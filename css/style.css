@@ -470,3 +470,25 @@ body {
     will-change: transform;
   }
 }
+
+/* ================= BADGE POSITION FIX (FINAL) ================= */
+
+@media (max-width: 1024px) {
+
+  /* reset stacking context */
+  .section.pricing {
+    transform: none !important;
+  }
+
+  .pricing-card {
+    position: relative !important;
+    transform: none !important;
+  }
+
+  .badge-popular {
+    position: absolute !important;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
