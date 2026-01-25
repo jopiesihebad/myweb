@@ -217,8 +217,6 @@ body {
   }
 }
 
-
-
   /* =========================
    SECTION SPACING ADJUSTMENT
    (Apple-style rhythm)
@@ -286,5 +284,107 @@ body {
 .section-content {
   position: relative;
   z-index: 2;
+}
+
+/* ================= PRICING ================= */
+
+.pricing {
+  text-align: center;
+}
+
+.pricing h2 {
+  font-size: clamp(28px, 4vw, 40px);
+  margin-bottom: 8px;
+}
+
+.pricing .subtitle {
+  margin-bottom: 32px;
+}
+
+/* Billing Toggle */
+.billing-toggle {
+  display: inline-flex;
+  gap: 24px;
+  margin-bottom: 32px;
+  font-size: 14px;
+}
+
+.billing-toggle label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.billing-toggle input {
+  accent-color: var(--accent);
+}
+
+.billing-toggle .save {
+  margin-left: 6px;
+  font-style: normal;
+  color: #22c55e;
+  font-size: 12px;
+}
+
+/* Pricing Card */
+.pricing-card {
+  max-width: 420px;
+  margin: 0 auto;
+
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(124,124,255,0.25);
+  border-radius: 24px;
+
+  padding: 40px 32px;
+}
+
+/* Price */
+.price {
+  margin-bottom: 24px;
+}
+
+.amount {
+  display: block;
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.period {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* Feature List */
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 32px 0;
+  text-align: left;
+}
+
+.feature-list li {
+  font-size: 14px;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+/* CTA */
+.pricing-cta {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  margin-top: 16px;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .pricing-card {
+    padding: 32px 24px;
+  }
+
+  .amount {
+    font-size: 28px;
+  }
 }
 
