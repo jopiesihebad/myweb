@@ -1,15 +1,9 @@
-const reveals = document.querySelectorAll(".reveal");
+const pages = document.querySelectorAll(".page");
+let current = 0;
 
-const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("active");
-      }
-    });
-  },
-  { threshold: 0.15 }
-);
-
-reveals.forEach(el => observer.observe(el));
-
+document.querySelectorAll(".go-next").forEach(btn => {
+  btn.addEventListener("click", () => {
+    current = Math.min(current + 1, pages.length - 1);
+    pages[current].scrollIntoView({ behavior: "smooth" });
+  });
+});
