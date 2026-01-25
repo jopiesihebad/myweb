@@ -329,6 +329,7 @@ body {
 
 /* Pricing Card */
 .pricing-card {
+  position: relative;
   max-width: 420px;
   margin: 0 auto;
 
@@ -388,3 +389,38 @@ body {
   }
 }
 
+/* ================= BADGE ================= */
+
+.badge-popular {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: linear-gradient(135deg, #7c7cff, #4f46e5);
+  color: white;
+
+  padding: 6px 14px;
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .3px;
+
+  box-shadow: 0 8px 24px rgba(124,124,255,0.35);
+}
+
+/* ================= TRUST LINE ================= */
+
+.trust-line {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .trust-line {
+    margin-top: 20px;
+  }
+}
