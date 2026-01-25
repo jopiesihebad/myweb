@@ -30,7 +30,7 @@ body {
 }
 
 /* ======================================================
-   HERO
+   HERO (PAGE 1)
 ====================================================== */
 
 .hero {
@@ -38,6 +38,7 @@ body {
   min-height: 100vh;
   margin-bottom: -24px;
   overflow: hidden;
+  z-index: 1;
 }
 
 .hero-bg {
@@ -91,6 +92,7 @@ body {
   padding: 0 24px;
   text-align: center;
 
+  /* optical centering */
   transform: translateY(-4%);
 }
 
@@ -188,14 +190,14 @@ body {
    VIDEO SECTION (PAGE 3)
 ====================================================== */
 
-/* pastikan section video punya tinggi */
-.video-section {
+.section.methodology.video-section {
+  position: relative;
   min-height: 100vh;
+  isolation: isolate; /* ⬅️ mencegah video numpuk */
   overflow: hidden;
 }
 
-/* pastikan video benar-benar terlihat */
-.video-section .section-bg {
+.section.methodology.video-section .section-bg {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -205,17 +207,33 @@ body {
   z-index: 0;
 }
 
+.section.methodology.video-section .section-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(6,7,11,0.7),
+    rgba(6,7,11,0.9)
+  );
+  z-index: 1;
+}
+
+.section.methodology.video-section .section-content {
+  position: relative;
+  z-index: 2;
+}
+
 /* ======================================================
-   PRICING (ISOLATED & SAFE)
+   PRICING (PAGE 4 — ISOLATED)
 ====================================================== */
 
 .section.pricing {
   position: relative;
-  z-index: 1;
+  isolation: isolate;
   overflow: visible;
 }
 
-/* 👇 INI KUNCI UTAMA */
+/* jangan warisi transform dari section lain */
 .section.pricing * {
   transform: none !important;
 }
@@ -240,7 +258,7 @@ body {
   border-radius: 24px;
 }
 
-/* BADGE — SEKARANG PASTI NEMPEL */
+/* BADGE */
 .badge-popular {
   position: absolute;
   top: -14px;
@@ -298,7 +316,24 @@ body {
   color: var(--muted);
 }
 
-/* MOBILE */
+/* ======================================================
+   MOBILE & TABLET TUNING
+====================================================== */
+
+@media (max-width: 1024px) {
+  .methodology .section-content h2 {
+    margin-bottom: 16px;
+  }
+
+  .methodology .section-content .subtitle {
+    margin-bottom: 40px;
+  }
+
+  .methodology .methodology-grid {
+    margin-top: 16px;
+  }
+}
+
 @media (max-width: 640px) {
   .hero-content {
     transform: translateY(-2%);
@@ -311,30 +346,8 @@ body {
   .amount {
     font-size: 28px;
   }
-}
 
-/* ================= PAGE 3 MOBILE SPACING FIX ================= */
-
-@media (max-width: 1024px) {
-
-  /* beri jarak antara judul dan grid box */
-  .methodology .section-content h2 {
-    margin-bottom: 16px;
-  }
-
-  .methodology .section-content .subtitle {
-    margin-bottom: 40px; /* ini kunci utama */
-  }
-
-  /* turunkan grid box sedikit dari judul */
-  .methodology .methodology-grid {
-    margin-top: 16px;
-  }
-}
-
-@media (max-width: 640px) {
   .methodology .section-content .subtitle {
     margin-bottom: 48px;
   }
 }
-
