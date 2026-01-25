@@ -159,9 +159,9 @@ body {
   filter: blur(0);
 }
 
-/* =================================================
-   5. PAGE 2 – CORE VALUES (RAPI & SINKRON)
-================================================= */
+/* =========================
+   PAGE 2 – CORE VALUES (RESPONSIVE)
+========================= */
 
 .page.values {
   display: flex;
@@ -170,24 +170,27 @@ body {
 }
 
 .page.values .values-inner {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
+  width: 100%;
   max-width: 1200px;
   padding: 0 24px;
-  align-items: stretch;
-  text-align: center;
+
+  display: grid;
+  gap: 24px;
+
+  /* MOBILE DEFAULT */
+  grid-template-columns: 1fr;
 }
 
-.page.values .feature-card.glass {
-  min-height: 360px;
-
+.page.values .feature-card {
   background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
   border: 1px solid rgba(124,124,255,0.25);
-  border-radius: 24px;
-  padding: 48px 32px;
+  border-radius: 20px;
+  padding: 32px 28px;
+
+  text-align: center;
 
   display: flex;
   flex-direction: column;
@@ -195,27 +198,40 @@ body {
 }
 
 .page.values .icon {
-  font-size: 40px;
+  font-size: 36px;
   color: var(--accent);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .page.values h3 {
-  font-size: 20px;
-  margin-bottom: 16px;
+  font-size: 18px;
   color: var(--accent);
+  margin-bottom: 12px;
 }
 
 .page.values p {
   font-size: 14px;
   color: var(--muted);
-  line-height: 1.65;
-  margin-top: auto; /* kunci bawah sejajar */
+  line-height: 1.6;
 }
 
-/* =================================================
-   6. PAGE 3 – METHODOLOGY (RAPI & SINKRON)
-================================================= */
+/* TABLET */
+@media (min-width: 641px) {
+  .page.values .values-inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* DESKTOP */
+@media (min-width: 1025px) {
+  .page.values .values-inner {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* =========================
+   PAGE 3 – METHODOLOGY (RESPONSIVE)
+========================= */
 
 .page.next {
   display: flex;
@@ -224,48 +240,50 @@ body {
 }
 
 .next-inner {
+  width: 100%;
   max-width: 1200px;
   padding: 0 24px;
   text-align: center;
 }
 
 .next-inner h2 {
-  font-size: 48px;
+  font-size: clamp(28px, 4vw, 48px);
   margin-bottom: 12px;
 }
 
 .subtitle {
   color: var(--muted);
-  margin-bottom: 48px;
+  margin-bottom: 40px;
 }
 
 .page.next .roadmap {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
-  align-items: stretch;
+  gap: 24px;
+
+  /* MOBILE DEFAULT */
+  grid-template-columns: 1fr;
 }
 
-.page.next .step.glass {
-  min-height: 360px;
-
+.page.next .step {
   background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
   border: 1px solid rgba(124,124,255,0.25);
-  border-radius: 24px;
-  padding: 40px 28px;
+  border-radius: 20px;
+  padding: 32px 28px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .page.next .step span {
   font-size: 12px;
-  color: var(--accent);
   letter-spacing: 1px;
-  margin-bottom: 12px;
+  color: var(--accent);
+  margin-bottom: 10px;
 }
 
 .page.next .step h4 {
@@ -277,14 +295,27 @@ body {
   font-size: 14px;
   color: var(--muted);
   line-height: 1.6;
-  margin-top: auto; /* bawah sejajar */
 }
 
-/* CTA PAGE 3 */
+/* CTA */
 .next-cta {
-  margin-top: 56px;
+  margin-top: 40px;
   display: flex;
   justify-content: center;
+}
+
+/* TABLET */
+@media (min-width: 641px) {
+  .page.next .roadmap {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* DESKTOP */
+@media (min-width: 1025px) {
+  .page.next .roadmap {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 /* =================================================
