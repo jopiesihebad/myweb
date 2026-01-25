@@ -91,7 +91,7 @@ body {
 }
 
   /* optical centering */
-  transform: translateY(-4%);
+  transform: none;
 }
 
 .hero-content h1 {
@@ -331,11 +331,6 @@ body {
     margin-top: 16px;
   }
 }
-
-@media (max-width: 640px) {
-  .hero-content {
-    transform: translateY(-2%);
-  }
 
   .pricing-card {
     padding: 32px 24px;
