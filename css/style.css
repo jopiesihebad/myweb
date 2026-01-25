@@ -318,84 +318,87 @@ body {
   position: relative;
 }
 
-/* PAGE 2 : VALUES */
-.values {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/* =========================
+   PAGE 2 & 3 – FIXED GRID
+========================= */
 
-.values-inner {
-  max-width: 1100px;
+.values-inner,
+.next-inner {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 0 24px;
+
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 32px;
   text-align: center;
 }
 
-/* ICON */
-.values .icon {
-  font-size: clamp(36px, 5vw, 48px);
-  color: var(--accent);
-  margin-bottom: 20px;
-}
-
-/* PAGE 2 CTA */
-.values-cta {
+/* CTA DI BAWAH GRID */
+.page-cta {
   margin-top: 48px;
   display: flex;
   justify-content: center;
 }
 
-/* PAGE 3 */
-.next {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+/* ICON */
+.icon {
+  font-size: clamp(32px, 4vw, 44px);
+  color: var(--accent);
+  margin-bottom: 20px;
 }
 
-.next-inner h2 {
-  font-size: 48px;
-  margin-bottom: 16px;
-}
+/* GLASS CARD (REUSE) */
+.feature-card.glass,
+.step.glass {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 
-/* =========================
-   PAGE 3 – STEP CARD FIX
-========================= */
-
-.step {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid #1f2937;
-  border-radius: 20px;
-  padding: 32px;
+  border: 1px solid rgba(124,124,255,0.25);
+  border-radius: 24px;
+  padding: 40px 28px;
 
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: flex-start;
 }
 
-/* NUMBER */
-.step span {
-  font-size: 12px;
+/* TYPO */
+.feature-card.glass h3,
+.step.glass h4 {
   color: var(--accent);
-  letter-spacing: 1px;
   margin-bottom: 12px;
 }
 
-/* TITLE */
-.step h4 {
-  font-size: 18px;
-  margin-bottom: 12px;
-}
-
-/* CONTENT */
-.step p {
-  font-size: 14px;
+.feature-card.glass p,
+.step.glass p {
   color: var(--muted);
+  font-size: 14px;
   line-height: 1.6;
 }
+
+/* =========================
+   RESPONSIVE BREAKPOINTS
+========================= */
+
+/* TABLET */
+@media (max-width: 1024px) {
+  .values-inner,
+  .next-inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  .values-inner,
+  .next-inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 
 /* =========================
    CINEMATIC PAGE TRANSITION
