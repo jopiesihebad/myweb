@@ -745,3 +745,159 @@ body {
     grid-template-columns: 1fr;
   }
 }
+/* ======================================================
+   FINAL MOBILE & TABLET FIX — SAFE OVERRIDE
+====================================================== */
+
+/* ======================================================
+   1️⃣ PAGE 3 — METHODOLOGY (HP SPACING FIX)
+====================================================== */
+
+@media (max-width: 640px) {
+  .section.methodology h2 {
+    margin-bottom: 14px;
+  }
+
+  .section.methodology .subtitle {
+    margin-bottom: 56px; /* ⬅️ JARAK AMAN */
+  }
+
+  .methodology-grid {
+    gap: 28px;
+  }
+}
+
+/* ======================================================
+   2️⃣ PAGE 4 — PRICING TITLE SPACING (HP)
+====================================================== */
+
+@media (max-width: 640px) {
+  .section.pricing h2 {
+    margin-bottom: 14px;
+  }
+
+  .section.pricing .subtitle {
+    margin-bottom: 56px;
+  }
+}
+
+/* ======================================================
+   3️⃣ PAGE 4 — PRICING CARD GAP (HP & TABLET)
+====================================================== */
+
+.pricing-grid {
+  gap: 40px; /* desktop */
+}
+
+@media (max-width: 1024px) {
+  .pricing-grid {
+    gap: 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .pricing-grid {
+    gap: 36px;
+  }
+}
+
+/* ======================================================
+   4️⃣ PRICE STRIKETHROUGH — POSISI DI ATAS
+====================================================== */
+
+.price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.price-old {
+  order: -1;
+  margin-bottom: 6px;
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+/* ======================================================
+   5️⃣ PRICING DISCOUNT CARD — LEBIH NYALA
+====================================================== */
+
+.pricing-card.featured {
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 1px rgba(124,124,255,0.6),
+    0 24px 80px rgba(124,124,255,0.35);
+  transform: translateY(-4px);
+}
+
+/* ======================================================
+   6️⃣ PAGE 5 — AUDIENCE CARD GAP (HP)
+====================================================== */
+
+@media (max-width: 640px) {
+  .audience-grid {
+    gap: 40px;
+  }
+
+  .audience-column .card {
+    margin-bottom: 12px;
+  }
+}
+
+/* ======================================================
+   7️⃣ HILANGKAN “GARIS PEMBAGI” VISUAL
+====================================================== */
+
+/* hapus kesan garis antar section */
+.section + .section {
+  border-top: none;
+}
+
+/* divider payment jangan terlihat seperti garis */
+.divider {
+  border: none;
+  background: none;
+}
+
+/* ======================================================
+   8️⃣ FOOTER — CENTER + 2 ROW DI HP & TABLET
+====================================================== */
+
+/* center semua teks footer */
+.site-footer {
+  text-align: center;
+}
+
+.footer-desc,
+.footer-meta,
+.footer-disclaimer p {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* link footer jadi 2 kolom */
+.footer-col ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 18px;
+  justify-items: center;
+}
+
+/* tablet */
+@media (max-width: 1024px) {
+  .footer-col ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* HP — tetap 2 kolom (bukan 1) */
+@media (max-width: 640px) {
+  .footer-col ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 20px;
+  }
+
+  .footer-col a {
+    font-size: 12px;
+  }
+}
