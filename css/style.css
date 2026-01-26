@@ -898,6 +898,12 @@ body {
   margin-bottom: 16px;
 }
 
+.testimonial-avatar {
+  user-select: none;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
 /* TEXT */
 .testimonial-text {
   font-size: 15px;
