@@ -675,3 +675,73 @@ body {
     font-size: 13px; /* sedikit dibesarkan di HP */
   }
 }
+
+/* ======================================================
+   FINAL UI POLISH — SAFE OVERRIDE
+   (spacing, font, footer, header logo)
+====================================================== */
+
+/* Apple-like typography consistency */
+* {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Text",
+    "SF Pro Display",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+/* ===== GLOBAL SPACING ===== */
+.section h2 {
+  margin-bottom: 14px;
+}
+
+.section .subtitle {
+  margin-bottom: 56px;
+}
+
+.grid {
+  gap: 32px;
+}
+
+/* ===== HERO ===== */
+.hero-center h1 {
+  margin-bottom: 18px;
+}
+
+.header-logo {
+  height: 28px;
+  opacity: 0.9;
+}
+
+/* ===== PRICING ===== */
+.pricing-grid {
+  margin-top: 56px;
+}
+
+/* ===== AUDIENCE ===== */
+.audience-grid {
+  margin-top: 56px;
+}
+
+/* ===== FOOTER MULTI-ROW ===== */
+.footer-col ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 16px;
+}
+
+.footer-col a {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* mobile safety */
+@media (max-width: 640px) {
+  .footer-col ul {
+    grid-template-columns: 1fr;
+  }
+}
