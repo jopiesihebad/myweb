@@ -66,3 +66,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+
+// ================= PAYMENT HANDLER =================
+document.querySelectorAll('.pay-xendit').forEach(btn => {
+  btn.addEventListener('click', () => {
+
+    // TODO: ganti dengan payment link Xendit lo
+    const XENDIT_PAYMENT_URL = 'https://checkout.xendit.co/your-link';
+
+    // commitment signal
+    btn.disabled = true;
+    btn.textContent = 'Redirecting to secure payment…';
+
+    setTimeout(() => {
+      window.location.href = XENDIT_PAYMENT_URL;
+    }, 500);
+  });
+});
