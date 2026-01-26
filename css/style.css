@@ -412,6 +412,22 @@ body {
 .market-btn.tiktok { color: #22c55e; }
 .market-btn.blibli { color: #60a5fa; }
 
+/* ======================================================
+   THANK YOU
+====================================================== */
+
+.thankyou {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+.thankyou-note {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
 
 /* ======================================================
    PRICING GRID (2 BOX)
