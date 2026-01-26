@@ -6,9 +6,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="icon" href="assets/favicon.png" />
-  <link rel="stylesheet" href="css/style.css?v=1.0.0" />
+  <link rel="stylesheet" href="css/style.css?v=1.0.2" />
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- ================= BADGE PULSE (SAFE INLINE) ================= -->
+  <style>
+    /* Monthly badge pulse (subtle, premium) */
+    .badge-monthly {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #052e16;
+      font-weight: 700;
+      box-shadow: 0 6px 18px rgba(34,197,94,0.35);
+      animation: badgePulse 2.8s ease-in-out infinite;
+    }
+
+    @keyframes badgePulse {
+      0% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 6px 18px rgba(34,197,94,0.35);
+      }
+      50% {
+        transform: translateX(-50%) scale(1.04);
+        box-shadow: 0 10px 28px rgba(34,197,94,0.55);
+      }
+      100% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 6px 18px rgba(34,197,94,0.35);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .badge-monthly {
+        animation: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -22,15 +55,13 @@
 
   <div class="hero-overlay"></div>
 
-  <!-- HEADER (LOGO ONLY, NO CTA) -->
+  <!-- HEADER (LOGO ONLY) -->
   <header class="hero-header hero-header-center">
     <div class="logo-text">STOCKINDEXER</div>
   </header>
 
-  <!-- HERO CENTER -->
   <div class="hero-center">
 
-    <!-- LOGO ANCHOR -->
     <div class="section-logo">
       <img src="assets/logo.svg" alt="StockIndexer Logo">
     </div>
@@ -48,32 +79,38 @@
     <div class="hero-cta animate delay-3">
       <a href="#request" class="btn primary">Request invite</a>
     </div>
+
   </div>
 </section>
 
 <!-- ================= PAGE 2 : CORE VALUES ================= -->
 <section class="section values">
   <div class="container grid values-grid">
+
     <div class="card animate delay-1">
       <i class="fa-solid fa-layer-group icon"></i>
       <h3>Institutional Data Quality</h3>
       <p>High-fidelity market data engineered for professional reliability.</p>
     </div>
+
     <div class="card animate delay-2">
       <i class="fa-solid fa-chart-line icon"></i>
       <h3>Actionable Signals</h3>
       <p>Clear insights translated into execution-ready intelligence.</p>
     </div>
+
     <div class="card animate delay-3">
       <i class="fa-solid fa-building-columns icon"></i>
       <h3>Built for Scale</h3>
       <p>Infrastructure designed for institutional workflows and growth.</p>
     </div>
+
     <div class="card animate delay-4">
       <i class="fa-solid fa-shield-halved icon"></i>
       <h3>Risk & Governance</h3>
       <p>Designed with transparency, controls, and governance in mind.</p>
     </div>
+
   </div>
 </section>
 
@@ -88,7 +125,6 @@
 
   <div class="container section-content">
 
-    <!-- LOGO ANCHOR -->
     <div class="section-logo">
       <img src="assets/logo.svg" alt="StockIndexer Logo">
     </div>
@@ -99,26 +135,167 @@
     </p>
 
     <div class="grid methodology-grid">
+
       <div class="card animate delay-1">
         <span class="step">01</span>
         <h4>Data Ingestion</h4>
         <p>Multi-source market data collected and normalized.</p>
       </div>
+
       <div class="card animate delay-2">
         <span class="step">02</span>
         <h4>Signal Processing</h4>
         <p>Models extract patterns, momentum, and regime shifts.</p>
       </div>
+
       <div class="card animate delay-3">
         <span class="step">03</span>
         <h4>Risk Filtering</h4>
         <p>Signals filtered through volatility and context layers.</p>
       </div>
+
       <div class="card animate delay-4">
         <span class="step">04</span>
         <h4>Decision Layer</h4>
         <p>Insights aligned with execution and portfolio workflows.</p>
       </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= PAGE 4 : PRICING ================= -->
+<section class="section pricing" id="pricing">
+  <div class="container">
+
+    <h2>Simple, Transparent Pricing</h2>
+    <p class="subtitle">Built for professional investors and research teams.</p>
+
+    <div class="pricing-grid">
+
+      <!-- MONTHLY -->
+      <div class="pricing-card animate delay-1">
+
+        <div class="badge-popular badge-monthly">
+          Paling Populer
+        </div>
+
+        <div class="price">
+          <span class="amount">Rp. 299.000</span>
+          <span class="period">/ bulan</span>
+        </div>
+
+        <ul class="feature-list">
+          <li>✔ Full platform access</li>
+          <li>✔ Institutional-grade data</li>
+          <li>✔ Actionable signal engine</li>
+          <li>✔ Risk-aware analytics</li>
+          <li>✔ Professional workflows</li>
+        </ul>
+
+        <a href="#request" class="btn primary pricing-cta">
+          Request Invite
+        </a>
+      </div>
+
+      <!-- YEARLY -->
+      <div class="pricing-card featured animate delay-2">
+
+        <div class="badge-popular">
+          Diskon 70% 🔥
+        </div>
+
+        <div class="price">
+          <span class="price-old">Rp. 9.900.000</span>
+          <span class="amount">Rp. 2.900.000</span>
+          <span class="period">/ tahun</span>
+        </div>
+
+        <ul class="feature-list">
+          <li>✔ All monthly features included</li>
+          <li>✔ Priority infrastructure access</li>
+          <li>✔ Advanced signal layers</li>
+          <li>✔ Long-term data continuity</li>
+          <li>✔ Best value for professionals</li>
+        </ul>
+
+        <a href="#request" class="btn primary pricing-cta">
+          Request Invite
+        </a>
+      </div>
+
+    </div>
+
+    <p class="trust-line">Used by professional investors</p>
+  </div>
+</section>
+
+<!-- ================= PAGE 5 : AUDIENCE ================= -->
+<section class="section audience">
+  <div class="container">
+
+    <h2 class="animate delay-1">
+      Built for professionals.<br><span>Not for everyone.</span>
+    </h2>
+
+    <p class="subtitle animate delay-2">
+      StockIndexer is designed for disciplined, research-driven market participants.
+    </p>
+
+    <div class="audience-grid">
+
+      <div class="audience-column animate delay-3">
+        <h3>Who This Is For</h3>
+        <div class="card"><h4>Professional Traders</h4><p>Data-driven decision makers.</p></div>
+        <div class="card"><h4>Research Investors</h4><p>Signals with context.</p></div>
+        <div class="card"><h4>Institutional Teams</h4><p>Risk-managed workflows.</p></div>
+        <div class="card"><h4>Long-Term Thinkers</h4><p>Consistency over noise.</p></div>
+      </div>
+
+      <div class="audience-column muted animate delay-4">
+        <h3>Who This Is Not For</h3>
+        <div class="card"><h4>Get-rich-quick</h4><p>No instant profits.</p></div>
+        <div class="card"><h4>Signal chasers</h4><p>No blind alerts.</p></div>
+        <div class="card"><h4>Beginners</h4><p>Assumes market basics.</p></div>
+        <div class="card"><h4>Entertainment traders</h4><p>No dopamine trading.</p></div>
+      </div>
+
+    </div>
+
+    <div class="audience-cta animate delay-4">
+      <a href="#request" class="btn primary">Request Invite</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= PAGE 6 : REQUEST INVITE ================= -->
+<section class="section invite" id="request">
+  <div class="container invite-container">
+
+    <h2>Request an Invitation</h2>
+    <p class="subtitle">
+      Access is limited. Payment confirms serious interest.
+    </p>
+
+    <div class="payment-box animate delay-2">
+
+      <button class="btn primary pay-xendit">
+        Pay Securely (Xendit)
+      </button>
+
+      <p class="payment-note">
+        Secure checkout via bank transfer, QRIS, and e-wallets.
+      </p>
+
+      <div class="divider">or</div>
+
+      <div class="marketplace-grid">
+        <a class="market-btn shopee" href="#">Pay via Shopee</a>
+        <a class="market-btn tiktok" href="#">Pay via TikTok Shop</a>
+        <a class="market-btn blibli" href="#">Pay via Blibli</a>
+      </div>
+
     </div>
   </div>
 </section>
@@ -131,6 +308,7 @@
   </div>
 
   <div class="container footer-grid">
+
     <div class="footer-col brand">
       <p class="footer-desc">
         Institutional-grade market intelligence platform.<br>
@@ -164,6 +342,7 @@
         <li><a href="#">Contact</a></li>
       </ul>
     </div>
+
   </div>
 
   <div class="footer-disclaimer container">
