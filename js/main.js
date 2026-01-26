@@ -83,3 +83,10 @@ document.querySelectorAll('.pay-xendit').forEach(btn => {
     }, 500);
   });
 });
+
+// auto update year
+const yearEl = document.getElementById('year');
+if (yearEl) {
+  yearEl.textContent = new Date().getFullYear();
+}
+
