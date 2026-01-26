@@ -76,7 +76,7 @@ body {
 
 .logo {
   font-weight: 900;
-  letter-spacing: 6px;
+  letter-spacing: 2px;
 }
 
 .hero-center {
@@ -565,7 +565,7 @@ body {
   }
 
   .section-logo img {
-    height: 22px;
+    height: 42px;
   }
 }
 
@@ -594,7 +594,7 @@ body {
 }
 
 .footer-logo-center img {
-  height: 32px;
+  height: 42px;
   opacity: 0.6;
 }
 
