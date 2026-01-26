@@ -1,0 +1,52 @@
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.hero-center {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* =========================
+   PRICING
+========================= */
+
+.pricing-card {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 48px 32px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 24px;
+}
+
+.pricing-grid {
+  display: grid;
+  gap: 32px;
+  margin-top: 48px;
+}
+
+@media (min-width: 768px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.site-footer {
+  margin-top: 120px;
+  padding: 72px 0 40px;
+  background: rgba(255,255,255,0.02);
+}
