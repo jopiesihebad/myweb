@@ -825,10 +825,10 @@ body {
 .pricing-card.featured {
   border-color: var(--accent);
   box-shadow:
-    0 0 0 1px rgba(124,124,255,0.6),
-    0 24px 80px rgba(124,124,255,0.35);
-  transform: translateY(-4px);
+    0 0 0 1px rgba(124,124,255,0.55),
+    0 28px 90px rgba(124,124,255,0.35);
 }
+
 
 /* ======================================================
    6️⃣ PAGE 5 — AUDIENCE CARD GAP (HP)
@@ -900,4 +900,72 @@ body {
   .footer-col a {
     font-size: 12px;
   }
+}
+/* ===== PRICING GRID FIX ===== */
+
+.pricing-grid {
+  display: grid;
+  gap: 40px; /* jarak antar card */
+}
+
+/* matikan center auto margin */
+.pricing-card {
+  margin: 0;
+}
+
+/* tablet */
+@media (max-width: 1024px) {
+  .pricing-grid {
+    gap: 36px;
+  }
+}
+
+/* mobile */
+@media (max-width: 640px) {
+  .pricing-grid {
+    gap: 40px;
+  }
+}
+/* ===== PRICE ORDER FIX ===== */
+
+.price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.price-old {
+  order: -1;               /* ⬅️ PAKSA DI ATAS */
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+
+.amount {
+  font-size: 32px;
+  font-weight: 800;
+}
+/* ===== REMOVE DIVIDER / SEPARATOR LOOK ===== */
+
+/* antar section */
+.section + .section {
+  border-top: none !important;
+}
+
+/* divider payment */
+.divider {
+  border: none !important;
+  background: transparent !important;
+}
+
+/* footer separator */
+.footer-disclaimer {
+  border-top: none;
+}
+
+/* card jangan kelihatan seperti pembagi */
+.card {
+  border-color: rgba(124,124,255,0.22); /* lebih soft */
 }
