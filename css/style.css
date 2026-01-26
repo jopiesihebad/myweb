@@ -390,6 +390,22 @@ body {
   color: var(--muted);
 }
 
+/* PAGE 5 — FIX CARD SPACING (HP & TABLET) */
+.audience-grid .card {
+  margin-bottom: 16px;
+}
+
+@media (min-width: 768px) {
+  .audience-grid .card {
+    margin-bottom: 20px;
+  }
+}
+
+.audience-grid .card {
+  background-clip: padding-box;
+}
+
+
 /* ======================================================
    PAYMENT (PAGE 6)
 ====================================================== */
