@@ -89,4 +89,36 @@ const yearEl = document.getElementById('year');
 if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
 }
+// ================= TESTIMONIAL AVATAR INITIAL =================
+document.addEventListener('DOMContentLoaded', () => {
+
+  const avatars = document.querySelectorAll('.testimonial-avatar');
+
+  const colorPairs = [
+    ['#1f2937', '#111827'], // slate
+    ['#111827', '#020617'], // deep dark
+    ['#312e81', '#1e1b4b'], // indigo
+    ['#0f172a', '#020617'], // navy
+  ];
+
+  avatars.forEach((avatar, index) => {
+    const name = avatar.dataset.name || '';
+    const parts = name.trim().split(' ');
+
+    let initials = '';
+    if (parts.length >= 2) {
+      initials = parts[0][0] + parts[1][0];
+    } else if (parts.length === 1) {
+      initials = parts[0][0];
+    }
+
+    initials = initials.toUpperCase();
+    avatar.textContent = initials;
+
+    // deterministic color (biar konsisten)
+    const pair = colorPairs[index % colorPairs.length];
+    avatar.style.background = `linear-gradient(135deg, ${pair[0]}, ${pair[1]})`;
+  });
+
+});
 
