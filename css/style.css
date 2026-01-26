@@ -30,15 +30,13 @@ body {
 }
 
 /* ======================================================
-   HERO (PAGE 1)
+   HERO
 ====================================================== */
 
 .hero {
   position: relative;
   min-height: 100vh;
-  margin-bottom: -24px;
   overflow: hidden;
-  z-index: 1;
 }
 
 .hero-bg {
@@ -60,11 +58,19 @@ body {
 }
 
 .hero-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+
   max-width: 1200px;
   margin: 0 auto;
   padding: 32px 24px;
+
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
@@ -72,33 +78,44 @@ body {
   letter-spacing: 2px;
 }
 
-.hero-content h1,
-.hero-content p {
+.hero-center {
+  position: relative;
+  z-index: 2;
+
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   text-align: center;
+  padding: 0 24px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-  /* optical centering */
-  transform: none;
-}
-
-.hero-content h1 {
-  font-size: clamp(36px, 6vw, 72px);
+.hero-center h1 {
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 1.05;
   font-weight: 900;
+  letter-spacing: -0.02em;
 }
 
-.hero-content span {
+.hero-center span {
   color: var(--accent);
 }
 
-.hero-content p {
+.hero-center p {
   margin-top: 20px;
+  max-width: 640px;
+  font-size: 17px;
+  line-height: 1.6;
   color: var(--muted);
 }
 
 .hero-cta {
-  margin-top: 28px;
-  display: flex;
-  justify-content: center;
+  margin-top: 32px;
 }
 
 /* ======================================================
@@ -118,17 +135,19 @@ body {
 }
 
 /* ======================================================
-   SECTION & CONTAINER
+   SECTION & GRID
 ====================================================== */
 
 .section {
-  padding: 88px 0;
+  padding: 96px 0;
+}
+
+@media (max-width: 1024px) {
+  .section { padding: 80px 0; }
 }
 
 @media (max-width: 640px) {
-  .section {
-    padding: 64px 0;
-  }
+  .section { padding: 64px 0; }
 }
 
 .container {
@@ -138,14 +157,19 @@ body {
   text-align: center;
 }
 
-/* ======================================================
-   GRID & CARD
-====================================================== */
-
 .grid {
   display: grid;
   gap: 24px;
 }
+
+.values-grid,
+.methodology-grid {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* ======================================================
+   CARD
+====================================================== */
 
 .card {
   background: rgba(255,255,255,0.06);
@@ -172,27 +196,26 @@ body {
 }
 
 /* ======================================================
-   VIDEO SECTION (PAGE 3)
+   VIDEO SECTION
 ====================================================== */
 
-.section.methodology.video-section {
+.video-section {
   position: relative;
   min-height: 100vh;
-  isolation: isolate; /* ⬅️ mencegah video numpuk */
+  isolation: isolate;
   overflow: hidden;
 }
 
-.section.methodology.video-section .section-bg {
+.section-bg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.95;
-  z-index: 0;
+  opacity: 0.9;
 }
 
-.section.methodology.video-section .section-overlay {
+.section-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
@@ -200,57 +223,32 @@ body {
     rgba(6,7,11,0.7),
     rgba(6,7,11,0.9)
   );
-  z-index: 1;
 }
 
-.section.methodology.video-section .section-content {
+.section-content {
   position: relative;
   z-index: 2;
 }
 
 /* ======================================================
-   PRICING (PAGE 4 — ISOLATED)
+   PRICING
 ====================================================== */
-
-.section.pricing {
-  position: relative;
-  isolation: isolate;
-  overflow: visible;
-}
-
-/* jangan warisi transform dari section lain */
-.section.pricing * {
-  transform: none !important;
-}
-
-.pricing h2 {
-  font-size: clamp(28px, 4vw, 40px);
-  margin-bottom: 8px;
-}
-
-.pricing .subtitle {
-  margin-bottom: 32px;
-}
 
 .pricing-card {
   position: relative;
   max-width: 420px;
   margin: 0 auto;
   padding: 48px 32px;
-
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(124,124,255,0.35);
   border-radius: 24px;
 }
 
-/* BADGE */
 .badge-popular {
   position: absolute;
   top: -14px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 2;
-
   background: linear-gradient(135deg, #7c7cff, #4f46e5);
   color: #fff;
   padding: 6px 14px;
@@ -259,7 +257,6 @@ body {
   font-weight: 600;
 }
 
-/* PRICE */
 .price {
   margin-bottom: 24px;
 }
@@ -274,7 +271,6 @@ body {
   color: var(--muted);
 }
 
-/* FEATURES */
 .feature-list {
   list-style: none;
   margin: 32px 0;
@@ -283,18 +279,15 @@ body {
 }
 
 .feature-list li {
-  font-size: 14px;
   margin-bottom: 10px;
 }
 
-/* CTA */
 .pricing-cta {
+  display: block;
   width: 100%;
-  display: inline-block;
   margin-top: 16px;
 }
 
-/* TRUST */
 .trust-line {
   margin-top: 24px;
   font-size: 13px;
@@ -302,164 +295,29 @@ body {
 }
 
 /* ======================================================
-   MOBILE & TABLET TUNING
-====================================================== */
-
-@media (max-width: 1024px) {
-  .methodology .section-content h2 {
-    margin-bottom: 16px;
-  }
-
-  .methodology .section-content .subtitle {
-    margin-bottom: 40px;
-  }
-
-  .methodology .methodology-grid {
-    margin-top: 16px;
-  }
-}
-
-  .pricing-card {
-    padding: 32px 24px;
-  }
-
-  .amount {
-    font-size: 28px;
-  }
-
-  .methodology .section-content .subtitle {
-    margin-bottom: 48px;
-  }
-}
-
-/* ======================================================
-   SUBTLE ENTRANCE ANIMATION (APPLE-STYLE)
+   SUBTLE ENTRANCE ANIMATION
 ====================================================== */
 
 .animate {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(14px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
+
+.animate.delay-1 { transition-delay: 0.05s; }
+.animate.delay-2 { transition-delay: 0.12s; }
+.animate.delay-3 { transition-delay: 0.18s; }
+.animate.delay-4 { transition-delay: 0.24s; }
 
 .animate.is-visible {
   opacity: 1;
   transform: translateY(0);
-  transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
 }
 
-/* staggered delay */
-.animate.delay-1 { transition-delay: .05s; }
-.animate.delay-2 { transition-delay: .12s; }
-.animate.delay-3 { transition-delay: .18s; }
-.animate.delay-4 { transition-delay: .24s; }
-
-/* accessibility */
 @media (prefers-reduced-motion: reduce) {
-  .animate,
-  .animate.is-visible {
+  .animate {
     opacity: 1;
     transform: none;
     transition: none;
   }
-}
-
-/* ================= HERO TRUE CENTER (FINAL FIX) ================= */
-
-.hero-center-wrapper {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: none; /* biar header tetap clickable */
-}
-
-.hero-center {
-  text-align: center;
-  pointer-events: auto;
-  max-width: 900px;
-  padding: 0 24px;
-}
-
-/* ================= HERO FINAL (TRUE CENTER) ================= */
-
-.hero {
-  position: relative;
-  min-height: 100vh;
-  overflow: hidden;
-}
-
-/* background */
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(6,7,11,0.45),
-    rgba(6,7,11,0.85)
-  );
-}
-
-/* header OUT OF FLOW */
-.hero-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-
-  z-index: 3;
-
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 32px 24px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* CENTER CONTENT */
-.hero-center {
-  position: relative;
-  z-index: 2;
-
-  min-height: 100vh;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  text-align: center;
-  padding: 0 24px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.hero-center h1 {
-  font-size: clamp(36px, 6vw, 72px);
-  font-weight: 900;
-}
-
-.hero-center span {
-  color: var(--accent);
-}
-
-.hero-center p {
-  margin-top: 20px;
-  color: var(--muted);
-}
-
-.hero-cta {
-  margin-top: 28px;
 }
