@@ -295,6 +295,48 @@ body {
 }
 
 /* ======================================================
+   PRICING GRID (2 BOX)
+====================================================== */
+
+.pricing-grid {
+  display: grid;
+  gap: 32px;
+  margin-top: 48px;
+}
+
+@media (min-width: 768px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* FEATURED (YEARLY) */
+.pricing-card.featured {
+  border: 1px solid rgba(124,124,255,0.6);
+  box-shadow: 0 30px 80px rgba(124,124,255,0.25);
+}
+
+/* STRIKETHROUGH PRICE */
+.price-old {
+  display: block;
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: line-through;
+  margin-bottom: 4px;
+}
+
+/* BADGE */
+.pricing-card.featured .badge-popular {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ======================================================
    SUBTLE ENTRANCE ANIMATION
 ====================================================== */
 
