@@ -555,3 +555,55 @@ body {
   }
 }
 
+/* ======================================================
+   GLOBAL SPACING FIX (MOBILE & TABLET)
+====================================================== */
+
+/* jarak judul ke card */
+.section h2 + .subtitle {
+  margin-bottom: 48px;
+}
+
+/* jarak antar card */
+.grid {
+  gap: 28px;
+}
+
+/* khusus mobile */
+@media (max-width: 640px) {
+  .grid {
+    gap: 32px;
+  }
+
+  .card {
+    margin-bottom: 8px;
+  }
+}
+
+/* ======================================================
+   PAGE 6 FIX — REQUEST INVITE
+====================================================== */
+
+.invite h2 {
+  margin-bottom: 12px;
+}
+
+.invite .subtitle {
+  margin-bottom: 32px;
+}
+
+.payment-box {
+  margin-top: 24px;
+}
+
+.market-btn {
+  border-width: 1px; /* force visible outline */
+}
+
+/* mobile safety */
+@media (max-width: 640px) {
+  .market-btn {
+    background: rgba(255,255,255,0.08);
+  }
+}
+
