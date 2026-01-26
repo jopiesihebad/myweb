@@ -607,3 +607,9 @@ body {
     font-size: 13px;
   }
 }
+
+.testimonial-avatar {
+  user-select: none;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
