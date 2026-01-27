@@ -202,4 +202,9 @@ if (params.has('invoice')) {
   document.getElementById('userInvoice').textContent = params.get('invoice');
 }
 
+// ================= ACTIVATION STATUS =================
+const statusTime = document.getElementById('statusTime');
+if (statusTime) {
+  statusTime.textContent = new Date().toLocaleString();
+}
 
