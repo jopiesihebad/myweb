@@ -1210,3 +1210,53 @@ body {
   margin-top: 56px;
   text-align: center;
 }
+
+/* ================= ACTIVATION ================= */
+
+.activation-container {
+  max-width: 520px;
+}
+
+.activation-form {
+  margin-top: 32px;
+  display: grid;
+  gap: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+}
+
+.form-submit {
+  margin-top: 12px;
+}
+
+.form-note {
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.activation-success {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.activation-success h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
