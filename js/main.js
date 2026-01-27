@@ -187,5 +187,19 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   });
 });
 
+// ================= ACTIVATION SUCCESS PREFILL =================
+const params = new URLSearchParams(window.location.search);
+
+if (params.has('email')) {
+  document.getElementById('userEmail').textContent = params.get('email');
+}
+
+if (params.has('name')) {
+  document.getElementById('userName').textContent = params.get('name');
+}
+
+if (params.has('invoice')) {
+  document.getElementById('userInvoice').textContent = params.get('invoice');
+}
 
 
