@@ -164,6 +164,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   if (demoClose) {
+
+     // ================= ACTIVATION FORM =================
+
+const activationForm = document.getElementById('activationForm');
+const activationSuccess = document.getElementById('activationSuccess');
+
+if (activationForm) {
+  activationForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    activationForm.style.display = 'none';
+    activationSuccess.hidden = false;
+
+    // TODO: kirim data ke backend / webhook / Google Sheet
+  });
+}
+
     demoClose.addEventListener('click', closeDemo);
   }
 
