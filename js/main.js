@@ -180,10 +180,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
      // ================= FAQ ACCORDION =================
-document.querySelectorAll('.faq-question').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.closest('.faq-item');
+
+document.querySelectorAll('.faq-question').forEach(question => {
+  question.addEventListener('click', () => {
+    const item = question.closest('.faq-item');
     item.classList.toggle('is-open');
   });
 });
+
 
