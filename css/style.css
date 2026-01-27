@@ -1082,3 +1082,99 @@ body {
 .card {
   border-color: rgba(124,124,255,0.22); /* lebih soft */
 }
+
+/* ======================================================
+   DEMO MODAL
+====================================================== */
+
+.demo-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+}
+
+.demo-modal.is-open {
+  display: block;
+}
+
+/* BACKDROP */
+.demo-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(6,7,11,0.85);
+  backdrop-filter: blur(6px);
+}
+
+/* DIALOG */
+.demo-dialog {
+  position: relative;
+  max-width: 900px;
+  width: calc(100% - 32px);
+  margin: 6vh auto;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 40px 120px rgba(0,0,0,.6);
+}
+
+/* CLOSE */
+.demo-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  z-index: 2;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #fff;
+  cursor: pointer;
+  opacity: .6;
+}
+
+.demo-close:hover {
+  opacity: 1;
+}
+
+/* VIDEO */
+.demo-video-wrap video {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #000;
+}
+
+/* FOOTER */
+.demo-footer {
+  padding: 20px 24px 24px;
+  text-align: center;
+}
+
+.demo-caption {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+/* SECONDARY CTA STYLE */
+.btn.ghost {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+}
+
+.btn.ghost:hover {
+  border-color: var(--accent);
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  .demo-dialog {
+    margin: 8vh auto;
+  }
+
+  .demo-footer {
+    padding: 16px 16px 20px;
+  }
+}
