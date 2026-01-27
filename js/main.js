@@ -122,3 +122,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+// ================= DEMO MODAL =================
+
+const demoModal = document.getElementById('demoModal');
+const demoVideo = document.getElementById('demoVideo');
+const demoTriggers = document.querySelectorAll('.demo-trigger');
+const demoClose = document.querySelector('.demo-close');
+const demoBackdrop = document.querySelector('.demo-backdrop');
+
+function openDemo() {
+  demoModal.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+
+  if (demoVideo) {
+    demoVideo.currentTime = 0;
+    demoVideo.play().catch(() => {});
+  }
+}
+
+function closeDemo() {
+  demoModal.classList.remove('is-open');
+  document.body.style.overflow = '';
+
+  if (demoVideo) {
+    demoVideo.pause();
+  }
+}
+
+demoTriggers.forEach(btn =>
+  btn.addEventListener('click', openDemo)
+);
+
+demoClose.addEventListener('click', closeDemo);
+demoBackdrop.addEventListener('click', closeDemo);
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && demoModal.classList.contains('is-open')) {
+    closeDemo();
+  }
+});
+
+
