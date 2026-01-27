@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Activation Status — StockIndexer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+
+<section class="section activation-status">
+  <div class="container status-container">
+
+    <!-- LOGO -->
+    <div class="section-logo">
+      <img src="/assets/logo.svg" alt="StockIndexer">
+    </div>
+
+    <h1 class="animate">Activation Status</h1>
+    <p class="subtitle animate delay-1">
+      Track the progress of your activation request.
+    </p>
+
+    <!-- TIMELINE -->
+    <div class="status-timeline animate delay-2">
+
+      <div class="status-step completed">
+        <span class="dot"></span>
+        <p>Submitted</p>
+      </div>
+
+      <div class="status-step active">
+        <span class="dot"></span>
+        <p>Under Review</p>
+      </div>
+
+      <div class="status-step">
+        <span class="dot"></span>
+        <p>Approved</p>
+      </div>
+
+      <div class="status-step">
+        <span class="dot"></span>
+        <p>Access Sent</p>
+      </div>
+
+    </div>
+
+    <!-- STATUS CARD -->
+    <div class="card status-info animate delay-3">
+
+      <h3>Current Status</h3>
+
+      <p class="status-message">
+        Your payment and details are being verified by our team.
+        This step ensures accuracy and controlled access.
+      </p>
+
+      <div class="status-meta">
+        <span>Last updated</span>
+        <strong id="statusTime">—</strong>
+      </div>
+
+    </div>
+
+    <!-- NOTE -->
+    <p class="status-note animate delay-4">
+      Reviews are handled manually.<br>
+      Most activations are completed within 24 hours.
+    </p>
+
+  </div>
+</section>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
