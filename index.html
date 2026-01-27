@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="icon" href="assets/favicon.png" />
-  <link rel="stylesheet" href="css/style.css?v=1.5.0" />
+  <link rel="stylesheet" href="css/style.css?v=1.5.1" />
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
@@ -338,13 +338,75 @@
     <div class="faq-cta animate delay-4">
       <a href="#activation" class="btn primary">
         Proceed to Activation
-      </a>
+        </a>
+    </div>
+
+  </div>
+</section>
+  
+      <!-- ================= PAGE 8 : ACTIVATION ================= -->
+<section class="section activation" id="activation">
+
+  <div class="container activation-container">
+
+    <h2 class="animate delay-1">
+      Activation Confirmation
+    </h2>
+
+    <p class="subtitle animate delay-2">
+      Submit your payment details to activate your access.
+    </p>
+
+    <form class="activation-form animate delay-3" id="activationForm">
+
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" required />
+      </div>
+
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" required />
+      </div>
+
+      <div class="form-group">
+        <label>Invoice / Order ID</label>
+        <input type="text" required />
+      </div>
+
+      <div class="form-group">
+        <label>Notes (optional)</label>
+        <textarea rows="3"></textarea>
+      </div>
+
+      <button type="submit" class="btn primary form-submit">
+        Confirm & Start Activation
+      </button>
+
+      <p class="form-note">
+        Activation usually takes 24–48 hours after verification.
+      </p>
+
+    </form>
+
+    <div class="activation-success" id="activationSuccess" hidden>
+      <h3>Confirmation Received</h3>
+      <p>
+        Our team is reviewing your payment.
+        You’ll receive activation instructions via email.
+      </p>
+    </div>
+
+  </div>
+</section>
+
     </div>
 
   </div>
 </section>
 
 
+  
 <!-- ================= PAGE 5 : AUDIENCE ================= -->
 <section class="section audience">
   <div class="container">
