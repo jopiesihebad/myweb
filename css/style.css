@@ -1346,3 +1346,106 @@ body {
   font-size: 13px;
   color: var(--muted);
 }
+
+/* ======================================================
+   ACTIVATION STATUS
+====================================================== */
+
+.activation-status {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.status-container {
+  max-width: 640px;
+}
+
+/* TIMELINE */
+.status-timeline {
+  display: flex;
+  justify-content: space-between;
+  margin: 48px 0;
+}
+
+.status-step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+.status-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 14px;
+  right: -50%;
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+}
+
+/* DOT */
+.status-step .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  margin: 0 auto 8px;
+}
+
+/* TEXT */
+.status-step p {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* STATES */
+.status-step.completed .dot,
+.status-step.active .dot {
+  background: var(--accent);
+}
+
+.status-step.active p {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* CARD */
+.status-info h3 {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.status-message {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.status-meta {
+  margin-top: 16px;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+}
+
+/* NOTE */
+.status-note {
+  margin-top: 32px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  .status-timeline {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .status-step:not(:last-child)::after {
+    display: none;
+  }
+}
+
