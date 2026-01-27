@@ -161,5 +161,10 @@ document.addEventListener('keydown', (e) => {
     closeDemo();
   }
 });
-
+demoTriggers.forEach(btn =>
+  btn.addEventListener('click', () => {
+    console.log('DEMO CLICKED');
+    openDemo();
+  })
+);
 
