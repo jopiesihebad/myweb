@@ -164,6 +164,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   if (demoClose) {
+    demoClose.addEventListener('click', closeDemo);
+  }
+
+  if (demoBackdrop) {
+    demoBackdrop.addEventListener('click', closeDemo);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && demoModal.classList.contains('is-open')) {
+      closeDemo();
+    }
+  });
+
+});
 
      // ================= FAQ ACCORDION =================
 document.querySelectorAll('.faq-question').forEach(btn => {
