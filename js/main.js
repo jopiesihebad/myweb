@@ -164,3 +164,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   if (demoClose) {
+
+     // ================= FAQ ACCORDION =================
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    item.classList.toggle('is-open');
+  });
+});
+
