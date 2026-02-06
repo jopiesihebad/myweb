@@ -1,15 +1,66 @@
 <!DOCTYPE html>
 <html lang="id" translate="no">
 <head>
-  <meta charset="UTF-8" />
-  <title>StockIndexer — Institutional Market Intelligence</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="google" content="notranslate">
 
-  <link rel="icon" href="assets/favicon.png" />
-  <link rel="stylesheet" href="css/style.css?v=2.1.0" />
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="google" content="notranslate">
+<link rel="stylesheet" href="css/style.css?v=2.1.0" />
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
+<title>SS BlackBox Phantom Edition v6.1 + HFT: Institutional Edge | StockIndexer</title>
+<meta name="description" content="Gunakan teknologi HFT untuk deteksi pergerakan Smart Money. Panduan lengkap SS BlackBox Phantom Edition v6.1: Sistem trading adaptif untuk Forex, Crypto, & Saham. Dapatkan edge lo!">
+<meta name="keywords" content="SS BlackBox, HFT Trading, Smart Money Concepts, TradingView Indicator, StockIndexer, Forex Strategy, Crypto Trading, Institutional Trading">
+<meta name="author" content="StockIndexer">
+<link rel="canonical" href="https://stockindexer.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://stockindexer.com/">
+<meta property="og:title" content="SS BlackBox Phantom Edition v6.1 + HFT: Institutional Edge">
+<meta property="og:description" content="Bongkar manipulasi pasar dengan 7 Fitur HFT. Trading tenang dengan strategi Smart Money.">
+<meta property="og:image" content="https://stockindexer.com/assets/img/og-preview.jpg"> <meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://stockindexer.com/">
+<meta property="twitter:title" content="SS BlackBox Phantom Edition v6.1 + HFT: Institutional Edge">
+<meta property="twitter:description" content="Stop being exit liquidity. Trading pakai senjata Institusi sekarang.">
+<meta property="twitter:image" content="https://stockindexer.com/assets/img/og-preview.jpg">
+
+<link rel="icon" type="image/png" href="/favicon.png">
+<meta name="theme-color" content="#0f172a"> <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 1. Deteksi kedatangan dari UTAS (Auto Unlock)
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // Cek jika ada parameter sukses atau referrer dari Utas
+        if (urlParams.get('status') === 'success' || document.referrer.includes('utas.co')) {
+            localStorage.setItem('ss_blackbox_premium', 'true');
+            console.log("Access Granted: Premium Token Activated via Payment.");
+            
+            // Opsional: Hilangkan parameter URL agar terlihat bersih
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+
+        // 2. Simple Analytics (Optional: Cek berapa kali user Premium balik lagi)
+        if (localStorage.getItem('ss_blackbox_premium') === 'true') {
+            console.log("Welcome back, Premium Member!");
+            // Lo bisa tambahkan logika ganti teks tombol di Landing Page dari "Beli" jadi "Akses Panduan"
+            const ctaBtn = document.querySelector('.btn-unlock');
+            if(ctaBtn) {
+                ctaBtn.innerText = "🔓 Akses Panduan Premium Lo";
+                ctaBtn.href = "complete-guide-premium.html";
+            }
+        }
+    });
+</script>
+
+<script>
+    if (window.location.pathname.includes('complete-guide-premium')) {
+        var meta = document.createElement('meta');
+        meta.name = "robots";
+        meta.content = "noindex, nofollow";
+        document.getElementsByTagName('head')[0].appendChild(meta);
+    }
+</script>
 </head>
 
 <body>
