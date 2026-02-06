@@ -728,24 +728,6 @@ Result: BTC pump ke $45,000 (profit $2,400)</code></pre>
 
 <p>Jadi mereka "sweep" area itu (dorong harga sebentar), trigger stop loss retail (dapat likuiditas), terus reverse balik.</p>
 
-<h3>Gimana cara kerjanya (dalam Tool)?</h3>
-
-<p><strong>Bearish Sweep (Fake Breakout ke Atas):</strong></p>
-<pre><code>High candle ini > High tertinggi 15 candle sebelumnya
-TAPI
-Close candle ini < High tertinggi 15 candle sebelumnya
-
-Artinya: Harga "nyentuh" area di atas (grab stop loss long), 
-tapi close di bawah lagi (fake breakout)</code></pre>
-
-<p><strong>Bullish Sweep (Fake Breakdown ke Bawah):</strong></p>
-<pre><code>Low candle ini < Low terendah 15 candle sebelumnya
-TAPI
-Close candle ini > Low terendah 15 candle sebelumnya
-
-Artinya: Harga "nyentuh" area di bawah (grab stop loss short),
-tapi close di atas lagi (fake breakdown)</code></pre>
-
 <h3>Visual di Chart:</h3>
 <ul>
 <li><strong>▼ LIQUIDITY GRAB</strong> (label merah di atas) = Bearish sweep (grab stop loss long)</li>
@@ -813,13 +795,7 @@ Result: Hit target dalam 6 jam</code></pre>
 
 <h3>Apa itu HFT (High-Frequency Trading)?</h3>
 <p>Algoritma komputer yang bisa execute ribuan order per detik. Mereka yang bikin harga "loncat" tiba-tiba. Retail trader ga bisa compete sama mereka, tapi lo bisa "ikut kereta" mereka.</p>
-
-<h3>Gimana cara kerjanya?</h3>
-<p>Tool ngukur "kecepatan" volume:</p>
-<pre><code>Kalau hasilnya >150% = PREDATOR aktif
-Kalau hasilnya >100% = Momentum normal-tinggi
-Kalau hasilnya <100% = Market lagi stagnant</code></pre>
-
+    
 <h3>Dashboard menunjukkan:</h3>
 <ul>
 <li><strong>PREDATOR (HFT)</strong> (merah) = Algoritma HFT lagi aktif, pergerakan SANGAT cepat dan kuat</li>
