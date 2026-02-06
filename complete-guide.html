@@ -3,671 +3,847 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SS BlackBox Monster Edition v6.1 + HFT - Panduan Lengkap | StockIndexer</title>
+    <meta name="description" content="Panduan Lengkap SS BlackBox Monster Edition v6.1 + HFT - 7 Senjata Rahasia Institusi untuk Trading Profesional">
+    <meta name="keywords" content="SS BlackBox, trading guide, HFT modules, forex, crypto, saham, komoditas, trading Indonesia">
+    <title>Complete Guide - SS BlackBox Monster Edition v6.1 + HFT | StockIndexer</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <style>
-        :root {
-            /* StockIndexer Theme Colors */
-            --bg-body: #0f172a;
-            --bg-card: #1e293b;
-            --bg-code: #0f1115;
-            --text-main: #e2e8f0;
-            --text-muted: #94a3b8;
-            --accent-primary: #38bdf8; /* Sky Blue */
-            --accent-success: #4ade80; /* Lime/Green */
-            --accent-warning: #facc15; /* Yellow */
-            --accent-danger: #f87171; /* Red */
-            --accent-fuchsia: #e879f9; /* Absorption Color */
-            --border-color: #334155;
-            --font-main: 'Inter', sans-serif;
-        }
-
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-
+        
+        :root {
+            --primary: #00c3ff;
+            --secondary: #ff0062;
+            --dark-bg: #0a0a0f;
+            --card-bg: #1a1a2e;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8d4;
+            --accent-yellow: #ffeb3b;
+            --success: #00ff88;
+            --warning: #ff9800;
+            --border: rgba(0, 195, 255, 0.1);
+        }
+        
         body {
-            font-family: var(--font-main);
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            line-height: 1.7;
-            font-size: 16px;
-            scroll-behavior: smooth;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
-
-        /* --- Layout --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            z-index: 10000;
+            transition: width 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        @media (min-width: 1024px) {
-            .container {
-                grid-template-columns: 3fr 1fr; /* Content vs Sidebar */
-            }
-        }
-
-        /* --- Header --- */
+        
         header {
-            background-color: rgba(15, 23, 42, 0.95);
-            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
-            z-index: 100;
-            padding: 15px 0;
-            backdrop-filter: blur(10px);
+            background: rgba(26, 26, 46, 0.98);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
         }
-
-        .header-inner {
+        
+        .header-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
+        
         .logo {
+            font-size: 1.5rem;
             font-weight: 800;
-            font-size: 1.25rem;
-            color: var(--accent-primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header-cta {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.625rem 1.5rem;
+            border-radius: 30px;
             text-decoration: none;
-            letter-spacing: -0.5px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 12px rgba(0, 195, 255, 0.25);
         }
-
-        .logo span { color: #fff; }
-
-        /* --- Typography --- */
-        h1, h2, h3, h4 {
-            color: #fff;
-            margin-bottom: 1rem;
-            line-height: 1.3;
+        
+        .header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 195, 255, 0.4);
         }
-
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2.5rem 2rem 5rem;
+        }
+        
         h1 {
             font-size: 2.5rem;
             font-weight: 800;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(to right, #fff, var(--accent-primary));
+            line-height: 1.25;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+        
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin: 3rem 0 1.25rem;
+            color: var(--text-primary);
+            border-left: 4px solid var(--primary);
+            padding-left: 1.25rem;
+            letter-spacing: -0.01em;
+        }
+        
+        h2:first-of-type {
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            margin: 2.25rem 0 1rem;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+        
+        p {
+            margin-bottom: 1.125rem;
+            color: var(--text-secondary);
+            font-size: 1.0625rem;
+            text-align: justify;
+        }
+        
+        p:last-child {
+            margin-bottom: 0;
+        }
+        
+        strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        ul {
+            margin: 1.25rem 0;
+            padding-left: 0;
+            list-style: none;
+        }
+        
+        li {
+            margin-bottom: 0.875rem;
+            line-height: 1.75;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: 2rem;
+            text-align: justify;
+        }
+        
+        li::before {
+            content: "•";
+            position: absolute;
+            left: 0.5rem;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.25em;
+        }
+        
+        li strong {
+            color: var(--primary);
+        }
+        
+        code {
+            background: rgba(0, 195, 255, 0.08);
+            padding: 0.25rem 0.625rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: var(--primary);
+            border: 1px solid rgba(0, 195, 255, 0.15);
+        }
+        
+        pre {
+            background: var(--card-bg);
+            padding: 1.75rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 1.75rem 0;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: var(--text-secondary);
+            font-size: 0.925rem;
+            border: none;
+            display: block;
+            line-height: 1.6;
+        }
+        
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 3.5rem 0;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, rgba(0, 195, 255, 0.04), rgba(255, 0, 98, 0.04));
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            margin: 4rem 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+        
+        .cta-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: 0.875rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.01em;
+        }
+        
+        .cta-text {
+            font-size: 1.0625rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.65;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2.75rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.0625rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 24px rgba(0, 195, 255, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 32px rgba(0, 195, 255, 0.5);
+        }
+        
+        /* PREMIUM LOCK STYLES */
+        .premium-content {
+            position: relative;
+        }
+        
+        .premium-content.locked::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -2rem;
+            right: -2rem;
+            bottom: 0;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                rgba(10, 10, 15, 0.5) 10%,
+                rgba(10, 10, 15, 0.85) 30%,
+                rgba(10, 10, 15, 0.95) 50%,
+                rgba(10, 10, 15, 1) 70%
+            );
+            backdrop-filter: blur(8px);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .premium-content.locked {
+            filter: blur(3px);
+            user-select: none;
+            pointer-events: none;
+        }
+        
+        .premium-barrier {
+            position: relative;
+            z-index: 2;
+            margin: -15rem 0 4rem;
+            padding: 4rem 2.5rem;
+            background: linear-gradient(135deg, rgba(0, 195, 255, 0.08), rgba(255, 0, 98, 0.08));
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 12px 48px rgba(0, 195, 255, 0.25);
+        }
+        
+        .premium-barrier-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
+        .premium-barrier h3 {
+            font-size: 2.25rem;
+            margin: 0 0 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent-yellow));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
-        h2 {
-            font-size: 1.8rem;
-            margin-top: 3rem;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        h3 {
-            font-size: 1.3rem;
-            margin-top: 2rem;
-            color: var(--accent-primary);
-        }
-
-        p { margin-bottom: 1.5rem; }
-
-        strong { color: #fff; font-weight: 700; }
-
-        ul { margin-bottom: 1.5rem; padding-left: 1.5rem; }
-        li { margin-bottom: 0.5rem; }
-
-        /* --- Code Blocks --- */
-        pre {
-            background-color: var(--bg-code);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            overflow-x: auto;
-            margin-bottom: 1.5rem;
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 0.9rem;
-            color: var(--accent-success);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-        }
-
-        code {
-            font-family: 'Consolas', 'Monaco', monospace;
-        }
-
-        /* --- Components --- */
-        .badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        .bg-aqua { background: rgba(56, 189, 248, 0.2); color: var(--accent-primary); }
-        .bg-lime { background: rgba(74, 222, 128, 0.2); color: var(--accent-success); }
-        .bg-yellow { background: rgba(250, 204, 21, 0.2); color: var(--accent-warning); }
-        .bg-red { background: rgba(248, 113, 113, 0.2); color: var(--accent-danger); }
-
-        /* --- CTA Buttons --- */
-        .cta-container {
-            margin: 40px 0;
+        
+        .premium-barrier p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
             text-align: center;
-            padding: 30px;
-            background: linear-gradient(145deg, var(--bg-card), #162032);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
         }
-
-        .btn-cta {
-            display: inline-block;
-            background-color: var(--accent-primary);
-            color: #000;
-            font-weight: 700;
-            padding: 16px 32px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
-        }
-
-        .btn-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
-            background-color: #7dd3fc;
-        }
-
-        /* --- Sidebar / TOC --- */
-        .sidebar {
-            display: none;
-        }
-
-        .toc-sticky {
-            position: sticky;
-            top: 100px;
-            background-color: var(--bg-card);
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .toc-title {
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: #fff;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .toc-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .toc-list li {
-            margin-bottom: 8px;
-        }
-
-        .toc-list a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-            display: block;
-            padding: 4px 0;
-        }
-
-        .toc-list a:hover, .toc-list a.active {
-            color: var(--accent-primary);
-            padding-left: 5px;
-        }
-
-        /* Mobile TOC Toggle */
-        .mobile-toc-toggle {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: white;
+        
+        .premium-barrier-features {
             text-align: left;
-            margin-bottom: 20px;
-            border-radius: 8px;
+            max-width: 500px;
+            margin: 2rem auto 2.5rem;
+            background: rgba(26, 26, 46, 0.5);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        
+        .premium-barrier-features ul {
+            margin: 0;
+        }
+        
+        .premium-barrier-features li {
+            padding-left: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+        
+        .premium-barrier-features li::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: 800;
+            font-size: 1.5em;
+        }
+        
+        .premium-unlock-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--success), var(--primary));
+            color: white;
+            padding: 1.25rem 3.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.25rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 6px 32px rgba(0, 255, 136, 0.4);
+        }
+        
+        .premium-unlock-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 40px rgba(0, 255, 136, 0.6);
+        }
+        
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            font-weight: 600;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 24px rgba(0, 195, 255, 0.35);
+            z-index: 999;
         }
-
-        @media (min-width: 1024px) {
-            .sidebar { display: block; }
-            .mobile-toc-toggle { display: none; }
+        
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
         }
-
-        /* --- Footer --- */
-        footer {
-            margin-top: 60px;
-            padding: 40px 0;
-            border-top: 1px solid var(--border-color);
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
+        
+        .scroll-top:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 6px 32px rgba(0, 195, 255, 0.5);
         }
-
-        /* --- Specific Content Styling --- */
-        .highlight-box {
-            background-color: rgba(255, 255, 255, 0.03);
-            border-left: 4px solid var(--accent-warning);
-            padding: 15px 20px;
-            margin-bottom: 1.5rem;
-            border-radius: 0 8px 8px 0;
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem 4rem;
+            }
+            
+            h1 {
+                font-size: 1.875rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+                margin: 2.5rem 0 1rem;
+                padding-left: 1rem;
+            }
+            
+            h3 {
+                font-size: 1.25rem;
+            }
+            
+            p, li {
+                font-size: 1rem;
+                text-align: left;
+            }
+            
+            .cta-section {
+                padding: 2.25rem 1.75rem;
+            }
+            
+            .cta-title {
+                font-size: 1.5rem;
+            }
+            
+            .cta-text {
+                font-size: 1rem;
+            }
+            
+            .cta-button {
+                padding: 0.875rem 2.25rem;
+                font-size: 1rem;
+            }
+            
+            .header-cta {
+                padding: 0.5rem 1.25rem;
+                font-size: 0.85rem;
+            }
+            
+            .premium-barrier {
+                margin: -10rem 0 3rem;
+                padding: 3rem 1.75rem;
+            }
+            
+            .premium-barrier h3 {
+                font-size: 1.75rem;
+            }
+            
+            .premium-barrier p {
+                font-size: 1rem;
+            }
+            
+            .premium-unlock-btn {
+                padding: 1rem 2.5rem;
+                font-size: 1.125rem;
+            }
+            
+            .scroll-top {
+                bottom: 1.25rem;
+                right: 1.25rem;
+                width: 48px;
+                height: 48px;
+            }
         }
-
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-body); }
-        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #475569; }
-
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.75rem 1.25rem 3.5rem;
+            }
+            
+            h1 {
+                font-size: 1.625rem;
+            }
+            
+            h2 {
+                font-size: 1.375rem;
+            }
+            
+            .cta-title {
+                font-size: 1.375rem;
+            }
+            
+            .header-container {
+                padding: 0 1.25rem;
+            }
+            
+            .logo {
+                font-size: 1.25rem;
+            }
+            
+            .premium-barrier {
+                margin: -8rem 0 2rem;
+                padding: 2.5rem 1.5rem;
+            }
+            
+            .premium-barrier-icon {
+                font-size: 3rem;
+            }
+            
+            .premium-barrier h3 {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
-
+    <div class="progress-bar" id="progressBar"></div>
+    
     <header>
-        <div class="header-inner">
-            <a href="/" class="logo">Stock<span>Indexer</span></a>
-            <a href="/" style="color: var(--text-main); text-decoration: none; font-size: 0.9rem;">&larr; Kembali ke Home</a>
+        <div class="header-container">
+            <div class="logo">StockIndexer</div>
+            <a href="index.html#pricing" class="header-cta">Dapatkan Akses</a>
         </div>
     </header>
+    
+    <main class="container">
+        <!-- FREE CONTENT AREA (30-35%) -->
+        <div id="freeContent">
+<h1>SS BlackBox Monster Edition v6.1 + HFT - Panduan Lengkap Ultimate</h1>
+<h2>🔥 Manual Trading Santai Tapi Profit + 7 Senjata Rahasia Institusi</h2>
 
-    <div class="container" style="margin-top: 40px;">
-        
-        <main>
-            <div style="margin-bottom: 40px;">
-                <h1>SS BlackBox Monster Edition v6.1 + HFT</h1>
-                <p style="font-size: 1.2rem; color: var(--text-muted);">Panduan Lengkap Ultimate: Manual Trading Santai Tapi Profit + 7 Senjata Rahasia Institusi</p>
-                <hr style="border-color: var(--border-color); margin-top: 20px;">
-            </div>
+<hr>
 
-            <button class="mobile-toc-toggle" onclick="toggleToc()">☰ Daftar Isi</button>
-            <div id="mobile-toc-content" style="display: none; margin-bottom: 30px; background: var(--bg-card); padding: 15px; border-radius: 8px;">
-                </div>
+<h2>📚 GLOSARIUM (ISTILAH PENTING)</h2>
 
-            <section id="glosarium">
-                <h2>📚 GLOSARIUM (ISTILAH PENTING)</h2>
-                <p><strong>Sebelum mulai, kenalan dulu sama istilah-istilah yang bakal sering muncul:</strong></p>
+<p><strong>Sebelum mulai, kenalan dulu sama istilah-istilah yang bakal sering muncul:</strong></p>
 
-                <h3><strong>Istilah Umum Trading</strong></h3>
-                <ul>
-                    <li><strong>Long</strong> = Beli / Posisi Buy. Lo expect harga naik, lo untung kalau harga naik.</li>
-                    <li><strong>Short</strong> = Jual / Posisi Sell. Lo expect harga turun, lo untung kalau harga turun.</li>
-                    <li><strong>Entry</strong> = Titik masuk / saat lo buka posisi (buy atau sell).</li>
-                    <li><strong>Exit</strong> = Titik keluar / saat lo tutup posisi (close/cut position).</li>
-                    <li><strong>Stop Loss (SL)</strong> = Titik "potong rugi". Kalau harga nyentuh level ini, posisi otomatis close biar loss ga membesar.</li>
-                    <li><strong>Take Profit (TP)</strong> = Titik "ambil untung". Target profit lo. Kalau nyampe, posisi otomatis close dengan profit.</li>
-                    <li><strong>R:R (Risk:Reward)</strong> = Perbandingan risiko vs reward. Misal R:R 1:2 artinya risiko 10, target profit 20.</li>
-                    <li><strong>Size / Lot</strong> = Ukuran posisi lo. Berapa banyak modal yang lo taruh di 1 trade.</li>
-                </ul>
+<h3>Istilah Umum Trading</h3>
+<ul>
+<li><strong>Long</strong> = Beli / Posisi Buy. Lo expect harga naik, lo untung kalau harga naik.</li>
+<li><strong>Short</strong> = Jual / Posisi Sell. Lo expect harga turun, lo untung kalau harga turun.</li>
+<li><strong>Entry</strong> = Titik masuk / saat lo buka posisi (buy atau sell).</li>
+<li><strong>Exit</strong> = Titik keluar / saat lo tutup posisi (close/cut position).</li>
+<li><strong>Stop Loss (SL)</strong> = Titik "potong rugi". Kalau harga nyentuh level ini, posisi otomatis close biar loss ga membesar.</li>
+<li><strong>Take Profit (TP)</strong> = Titik "ambil untung". Target profit lo. Kalau nyampe, posisi otomatis close dengan profit.</li>
+<li><strong>R:R (Risk:Reward)</strong> = Perbandingan risiko vs reward. Misal R:R 1:2 artinya risiko 10, target profit 20.</li>
+<li><strong>Size / Lot</strong> = Ukuran posisi lo. Berapa banyak modal yang lo taruh di 1 trade.</li>
+<h3>Istilah Khusus Forex</h3>
+<li><strong>Pip</strong> = Point In Percentage. Satuan pergerakan harga terkecil di forex. Contoh: EUR/USD dari 1.1000 ke 1.1001 = naik 1 pip.</li>
+<li><strong>Spread</strong> = Selisih harga bid dan ask. Ini "biaya" trading forex.</li>
+<li><strong>Leverage</strong> = Daya ungkit. Misal leverage 1:100 artinya modal $100 bisa buka posisi $10,000.</li>
+<li><strong>Margin</strong> = Jaminan yang harus lo punya buat buka posisi. Tergantung leverage.</li>
+<li><strong>Pair</strong> = Pasangan mata uang. Contoh: EUR/USD, GBP/JPY, XAU/USD (emas).</li>
+<h3>Istilah Khusus Crypto</h3>
+<li><strong>Satoshi</strong> = Satuan terkecil Bitcoin (0.00000001 BTC).</li>
+<li><strong>Altcoin</strong> = Semua crypto selain Bitcoin.</li>
+<li><strong>Pump</strong> = Harga naik tajam dalam waktu singkat.</li>
+<li><strong>Dump</strong> = Harga turun tajam dalam waktu singkat.</li>
+<li><strong>HODL</strong> = Hold for long term (pegang jangka panjang).</li>
+<li><strong>Whale</strong> = Pemain besar crypto yang punya holding gede banget.</li>
+<h3>Istilah Khusus Saham</h3>
+<li><strong>Tick</strong> = Pergerakan harga terkecil di saham. Tergantung aturan bursa masing-masing.</li>
+<li><strong>Lot</strong> = Satuan perdagangan saham. Di Indonesia 1 lot = 100 lembar saham.</li>
+<li><strong>Dividen</strong> = Pembagian keuntungan perusahaan ke pemegang saham.</li>
+<li><strong>IPO</strong> = Initial Public Offering. Saham baru yang pertama kali listing di bursa.</li>
+<li><strong>Blue Chip</strong> = Saham perusahaan besar, mapan, likuid.</li>
+<h3>Istilah Khusus Komoditas</h3>
+<li><strong>Contract Size</strong> = Ukuran kontrak standar. Misal Gold 1 lot = 100 troy ounce.</li>
+<li><strong>Delivery</strong> = Penyerahan fisik komoditas (jarang dipake trader).</li>
+<li><strong>Rollover</strong> = Perpanjangan kontrak futures sebelum expiry.</li>
+<li><strong>Contango</strong> = Harga futures lebih mahal dari spot.</li>
+<li><strong>Backwardation</strong> = Harga futures lebih murah dari spot.</li>
+<h3>Istilah Teknikal Analisis</h3>
+<li><strong>Trend</strong> = Arah pergerakan harga dominan (uptrend = naik, downtrend = turun, sideways = datar).</li>
+<li><strong>Support</strong> = Level di mana harga cenderung "mantul" naik (banyak buyer).</li>
+<li><strong>Resistance</strong> = Level di mana harga cenderung "mentok" turun (banyak seller).</li>
+<li><strong>Breakout</strong> = Harga tembus level support/resistance dengan volume tinggi.</li>
+<li><strong>Retest</strong> = Harga kembali "ngetes" level yang udah ditembus.</li>
+<li><strong>Pullback</strong> = Koreksi sementara di tengah tren (harga turun sebentar di uptrend).</li>
+<li><strong>Rally</strong> = Kenaikan harga kuat dalam waktu singkat.</li>
+<li><strong>Consolidation / Ranging</strong> = Harga bergerak datar di range sempit.</li>
+<li><strong>Volatility</strong> = Ukuran seberapa "liar" pergerakan harga. Tinggi = harga loncat-loncat, rendah = harga stabil.</li>
+<li><strong>Volume</strong> = Jumlah transaksi / aktivitas trading dalam periode tertentu.</li>
+<h3>Istilah Indikator (yang dipake di Script)</h3>
+<li><strong>EMA (Exponential Moving Average)</strong> = Rata-rata pergerakan harga yang lebih sensitif ke harga terbaru.</li>
+<li><strong>HMA (Hull Moving Average)</strong> = Moving average yang lebih smooth dan responsif.</li>
+<li><strong>ATR (Average True Range)</strong> = Ukuran volatilitas rata-rata.</li>
+<li><strong>RSI (Relative Strength Index)</strong> = Osilator momentum untuk ukur overbought/oversold.</li>
+<li><strong>VWAP (Volume Weighted Average Price)</strong> = Harga rata-rata tertimbang volume. "Harga wajar" menurut institusi.</li>
+<li><strong>Bollinger Bands (BB)</strong> = Indikator volatilitas dengan 3 garis (upper, middle, lower band).</li>
+<li><strong>Keltner Channel (KC)</strong> = Mirip BB tapi pakai ATR sebagai basis.</li>
+<h3>Istilah Pasar</h3>
+<li><strong>Institutional Money / Big Money</strong> = Dana besar dari institusi (bank, hedge fund, dll). Mereka yang "gerakkan" pasar.</li>
+<li><strong>Retail Trader</strong> = Trader perorangan (kita-kita ini).</li>
+<li><strong>Market Maker</strong> = Pihak yang sediakan likuiditas di pasar. Kadang "berburu" stop loss retail.</li>
+<li><strong>Liquidity</strong> = Seberapa mudah lo bisa beli/jual tanpa affect harga banyak.</li>
+<li><strong>Session</strong> = Waktu trading aktif. Forex punya sesi Asia, London, New York.</li>
+<li><strong>Spread Widening</strong> = Spread melebar. Biasanya terjadi saat berita penting atau sesi sepi.</li>
+<li><strong>Dark Pool</strong> = Tempat institusi transaksi besar tanpa show activity ke publik. Kayak "pasar gelap" tapi legal.</li>
+<li><strong>HFT (High-Frequency Trading)</strong> = Trading menggunakan algoritma super cepat (ribuan order per detik).</li>
+<h3>Istilah Psikologi Trading</h3>
+<li><strong>FOMO (Fear Of Missing Out)</strong> = Takut ketinggalan. Bikin lo entry terburu-buru.</li>
+<li><strong>Revenge Trading</strong> = Trading balas dendam setelah loss. Bahaya banget.</li>
+<li><strong>Overtrading</strong> = Trading terlalu sering. Biasanya karena ga sabar atau FOMO.</li>
+<li><strong>Drawdown</strong> = Penurunan modal dari peak tertinggi. Misal modal peak 100jt, turun ke 80jt = drawdown 20%.</li>
+<li><strong>Tilt</strong> = Kondisi emosi ga stabil, bikin keputusan irasional.</li>
+<hr>
+<h2>🎯 FITUR BARU: SINGULARITY (DYNAMIC PRESET ENGINE)</h2>
+<h3>Apa ini?</h3>
+</ul>
+<p>Bayangin lo punya remote control yang bisa langsung nyetel TV, AC, dan lampu sekaligus cuma dengan 1 tombol. Nah, Singularity ini kayak gitu—lo pilih gaya trading lo (Scalping, Intraday, atau Swing), semua setting indikator otomatis nyesuaikan.</p>
 
-                <h3><strong>Istilah Khusus Forex</strong></h3>
-                <ul>
-                    <li><strong>Pip</strong> = Point In Percentage. Satuan pergerakan harga terkecil di forex. Contoh: EUR/USD dari 1.1000 ke 1.1001 = naik 1 pip.</li>
-                    <li><strong>Spread</strong> = Selisih harga bid dan ask. Ini "biaya" trading forex.</li>
-                    <li><strong>Leverage</strong> = Daya ungkit. Misal leverage 1:100 artinya modal $100 bisa buka posisi $10,000.</li>
-                    <li><strong>Margin</strong> = Jaminan yang harus lo punya buat buka posisi. Tergantung leverage.</li>
-                    <li><strong>Pair</strong> = Pasangan mata uang. Contoh: EUR/USD, GBP/JPY, XAU/USD (emas).</li>
-                </ul>
+<h3>Cara kerjanya:</h3>
+<p>Script ini punya 3 preset yang udah di-optimize:</p>
 
-                <h3><strong>Istilah Khusus Crypto</strong></h3>
-                <ul>
-                    <li><strong>Satoshi</strong> = Satuan terkecil Bitcoin (0.00000001 BTC).</li>
-                    <li><strong>Altcoin</strong> = Semua crypto selain Bitcoin.</li>
-                    <li><strong>Pump</strong> = Harga naik tajam dalam waktu singkat.</li>
-                    <li><strong>Dump</strong> = Harga turun tajam dalam waktu singkat.</li>
-                    <li><strong>HODL</strong> = Hold for long term (pegang jangka panjang).</li>
-                    <li><strong>Whale</strong> = Pemain besar crypto yang punya holding gede banget.</li>
-                </ul>
+<p><strong>1. Mode SCALPING (Aqua):</strong></p>
+<ul>
+<li>Setting: RSI = 7, ATR = 10, Dynamic Floor = 1.5x</li>
+<li>Artinya: Indikator jadi <strong>SUPER SENSITIF</strong>. React cepet ke perubahan harga.</li>
+<li>Cocok buat: Lo yang main cepet-cepetan (1-5 menit chart), masuk-keluar dalam hitungan menit.</li>
+<li>Analogi: Kayak mobil sport—cepet, responsif, tapi butuh skill.</li>
+</ul>
+<p><strong>2. Mode INTRADAY (Lime):</strong></p>
+<ul>
+<li>Setting: RSI = 14, ATR = 14, Dynamic Floor = 2.5x</li>
+<li>Artinya: Indikator <strong>BALANCE</strong>. Ga terlalu cepet, ga terlalu lambat.</li>
+<li>Cocok buat: Lo yang trading harian (15 menit - 1 jam chart), hold beberapa jam.</li>
+<li>Analogi: Kayak sedan—nyaman, reliable, cocok buat sehari-hari.</li>
+</ul>
+<p><strong>3. Mode SWING (Yellow):</strong></p>
+<ul>
+<li>Setting: RSI = 21, ATR = 21, Dynamic Floor = 3.5x</li>
+<li>Artinya: Indikator <strong>SMOOTH & LEBAR</strong>. Ga gampang keganggu noise kecil.</li>
+<li>Cocok buat: Lo yang pegang posisi beberapa hari (4H - Daily chart).</li>
+<li>Analogi: Kayak SUV—stabil, ga gampang goyang, tapi lambat react.</li>
+<h3>Manual Override (Mode MANUAL - Orange):</h3>
+</ul>
+<p><strong>Buat apa?</strong></p>
+<p>Kalau lo udah advanced, mau custom sendiri setting-nya, bisa pakai Manual Override.</p>
 
-                <h3><strong>Istilah Khusus Saham</strong></h3>
-                <ul>
-                    <li><strong>Tick</strong> = Pergerakan harga terkecil di saham. Tergantung aturan bursa masing-masing.</li>
-                    <li><strong>Lot</strong> = Satuan perdagangan saham. Di Indonesia 1 lot = 100 lembar saham.</li>
-                    <li><strong>Dividen</strong> = Pembagian keuntungan perusahaan ke pemegang saham.</li>
-                    <li><strong>IPO</strong> = Initial Public Offering. Saham baru yang pertama kali listing di bursa.</li>
-                    <li><strong>Blue Chip</strong> = Saham perusahaan besar, mapan, likuid.</li>
-                </ul>
-
-                <h3><strong>Istilah Khusus Komoditas</strong></h3>
-                <ul>
-                    <li><strong>Contract Size</strong> = Ukuran kontrak standar. Misal Gold 1 lot = 100 troy ounce.</li>
-                    <li><strong>Delivery</strong> = Penyerahan fisik komoditas (jarang dipake trader).</li>
-                    <li><strong>Rollover</strong> = Perpanjangan kontrak futures sebelum expiry.</li>
-                    <li><strong>Contango</strong> = Harga futures lebih mahal dari spot.</li>
-                    <li><strong>Backwardation</strong> = Harga futures lebih murah dari spot.</li>
-                </ul>
-
-                <h3><strong>Istilah Teknikal Analisis</strong></h3>
-                <ul>
-                    <li><strong>Trend</strong> = Arah pergerakan harga dominan (uptrend = naik, downtrend = turun, sideways = datar).</li>
-                    <li><strong>Support</strong> = Level di mana harga cenderung "mantul" naik (banyak buyer).</li>
-                    <li><strong>Resistance</strong> = Level di mana harga cenderung "mentok" turun (banyak seller).</li>
-                    <li><strong>Breakout</strong> = Harga tembus level support/resistance dengan volume tinggi.</li>
-                    <li><strong>Retest</strong> = Harga kembali "ngetes" level yang udah ditembus.</li>
-                    <li><strong>Pullback</strong> = Koreksi sementara di tengah tren (harga turun sebentar di uptrend).</li>
-                    <li><strong>Rally</strong> = Kenaikan harga kuat dalam waktu singkat.</li>
-                    <li><strong>Consolidation / Ranging</strong> = Harga bergerak datar di range sempit.</li>
-                    <li><strong>Volatility</strong> = Ukuran seberapa "liar" pergerakan harga. Tinggi = harga loncat-loncat, rendah = harga stabil.</li>
-                    <li><strong>Volume</strong> = Jumlah transaksi / aktivitas trading dalam periode tertentu.</li>
-                </ul>
-
-                <h3><strong>Istilah Indikator (yang dipake di Script)</strong></h3>
-                <ul>
-                    <li><strong>EMA (Exponential Moving Average)</strong> = Rata-rata pergerakan harga yang lebih sensitif ke harga terbaru.</li>
-                    <li><strong>HMA (Hull Moving Average)</strong> = Moving average yang lebih smooth dan responsif.</li>
-                    <li><strong>ATR (Average True Range)</strong> = Ukuran volatilitas rata-rata.</li>
-                    <li><strong>RSI (Relative Strength Index)</strong> = Osilator momentum untuk ukur overbought/oversold.</li>
-                    <li><strong>VWAP (Volume Weighted Average Price)</strong> = Harga rata-rata tertimbang volume. "Harga wajar" menurut institusi.</li>
-                    <li><strong>Bollinger Bands (BB)</strong> = Indikator volatilitas dengan 3 garis (upper, middle, lower band).</li>
-                    <li><strong>Keltner Channel (KC)</strong> = Mirip BB tapi pakai ATR sebagai basis.</li>
-                </ul>
-
-                <h3><strong>Istilah Pasar</strong></h3>
-                <ul>
-                    <li><strong>Institutional Money / Big Money</strong> = Dana besar dari institusi (bank, hedge fund, dll). Mereka yang "gerakkan" pasar.</li>
-                    <li><strong>Retail Trader</strong> = Trader perorangan (kita-kita ini).</li>
-                    <li><strong>Market Maker</strong> = Pihak yang sediakan likuiditas di pasar. Kadang "berburu" stop loss retail.</li>
-                    <li><strong>Liquidity</strong> = Seberapa mudah lo bisa beli/jual tanpa affect harga banyak.</li>
-                    <li><strong>Session</strong> = Waktu trading aktif. Forex punya sesi Asia, London, New York.</li>
-                    <li><strong>Spread Widening</strong> = Spread melebar. Biasanya terjadi saat berita penting atau sesi sepi.</li>
-                    <li><strong>Dark Pool</strong> = Tempat institusi transaksi besar tanpa show activity ke publik. Kayak "pasar gelap" tapi legal.</li>
-                    <li><strong>HFT (High-Frequency Trading)</strong> = Trading menggunakan algoritma super cepat (ribuan order per detik).</li>
-                </ul>
-
-                <h3><strong>Istilah Psikologi Trading</strong></h3>
-                <ul>
-                    <li><strong>FOMO (Fear Of Missing Out)</strong> = Takut ketinggalan. Bikin lo entry terburu-buru.</li>
-                    <li><strong>Revenge Trading</strong> = Trading balas dendam setelah loss. Bahaya banget.</li>
-                    <li><strong>Overtrading</strong> = Trading terlalu sering. Biasanya karena ga sabar atau FOMO.</li>
-                    <li><strong>Drawdown</strong> = Penurunan modal dari peak tertinggi. Misal modal peak 100jt, turun ke 80jt = drawdown 20%.</li>
-                    <li><strong>Tilt</strong> = Kondisi emosi ga stabil, bikin keputusan irasional.</li>
-                </ul>
-            </section>
-
-            <hr style="border-color: var(--border-color); margin: 40px 0;">
-
-            <div class="cta-container">
-                <h3 style="margin-top:0; color: #fff;">Siap Trading dengan Alat Institusi?</h3>
-                <p>Mulai gunakan fitur Singularity dan atur gaya trading lo sekarang.</p>
-                <a href="#" class="btn-cta">Aktifkan BlackBox v6.1 Sekarang</a>
-            </div>
-
-            <section id="singularity">
-                <h2>🎯 FITUR BARU: SINGULARITY (DYNAMIC PRESET ENGINE)</h2>
-
-                <h3><strong>Apa ini?</strong></h3>
-                <p>Bayangin lo punya remote control yang bisa langsung nyetel TV, AC, dan lampu sekaligus cuma dengan 1 tombol. Nah, Singularity ini kayak gitu—lo pilih gaya trading lo (Scalping, Intraday, atau Swing), semua setting indikator otomatis nyesuaikan.</p>
-
-                <h3><strong>Cara kerjanya:</strong></h3>
-                <p>Script ini punya 3 preset yang udah di-optimize:</p>
-
-                <div class="highlight-box">
-                    <p><strong>1. Mode SCALPING (Aqua):</strong></p>
-                    <ul>
-                        <li>Setting: RSI = 7, ATR = 10, Dynamic Floor = 1.5x</li>
-                        <li>Artinya: Indikator jadi <strong>SUPER SENSITIF</strong>. React cepet ke perubahan harga.</li>
-                        <li>Cocok buat: Lo yang main cepet-cepetan (1-5 menit chart), masuk-keluar dalam hitungan menit.</li>
-                        <li>Analogi: Kayak mobil sport—cepet, responsif, tapi butuh skill.</li>
-                    </ul>
-                </div>
-
-                <div class="highlight-box">
-                    <p><strong>2. Mode INTRADAY (Lime):</strong></p>
-                    <ul>
-                        <li>Setting: RSI = 14, ATR = 14, Dynamic Floor = 2.5x</li>
-                        <li>Artinya: Indikator <strong>BALANCE</strong>. Ga terlalu cepet, ga terlalu lambat.</li>
-                        <li>Cocok buat: Lo yang trading harian (15 menit - 1 jam chart), hold beberapa jam.</li>
-                        <li>Analogi: Kayak sedan—nyaman, reliable, cocok buat sehari-hari.</li>
-                    </ul>
-                </div>
-
-                <div class="highlight-box">
-                    <p><strong>3. Mode SWING (Yellow):</strong></p>
-                    <ul>
-                        <li>Setting: RSI = 21, ATR = 21, Dynamic Floor = 3.5x</li>
-                        <li>Artinya: Indikator <strong>SMOOTH & LEBAR</strong>. Ga gampang keganggu noise kecil.</li>
-                        <li>Cocok buat: Lo yang pegang posisi beberapa hari (4H - Daily chart).</li>
-                        <li>Analogi: Kayak SUV—stabil, ga gampang goyang, tapi lambat react.</li>
-                    </ul>
-                </div>
-
-                <h3><strong>Manual Override (Mode MANUAL - Orange):</strong></h3>
-                <p><strong>Buat apa?</strong><br>
-                Kalau lo udah advanced, mau custom sendiri setting-nya, bisa pakai Manual Override.</p>
-
-                <p><strong>Cara pakai:</strong><br>
-                Ada 3 input manual di bawah dropdown:</p>
-                <ul>
-                    <li>Manual RSI Length (isi angka, default 0)</li>
-                    <li>Manual ATR Period (isi angka, default 0)</li>
-                    <li>Manual Floor Multiplier (isi angka, default 0)</li>
-                </ul>
-
-                <p><strong>Aturan:</strong></p>
-                <ul>
-                    <li>Kalau lo isi angka selain 0, preset DIABAIKAN, pakai nilai manual lo.</li>
-                    <li>Contoh: Lo pilih "Intraday" (RSI 14) tapi isi Manual RSI = 9, yang dipake RSI 9.</li>
-                </ul>
-
-                <h3><strong>Kapan pakai Preset vs Manual?</strong></h3>
-                <p><strong>Pakai Preset kalau:</strong></p>
-                <ul>
-                    <li>Lo baru mulai, ga tau mau setting apa</li>
-                    <li>Lo mau "plug-and-play" langsung trading</li>
-                    <li>Lo percaya parameter yang udah di-test</li>
-                </ul>
-                <p><strong>Pakai Manual kalau:</strong></p>
-                <ul>
-                    <li>Lo udah pro, tau pair/coin lo butuh setting spesial</li>
-                    <li>Lo mau eksperimen A/B testing</li>
-                    <li>Crypto volatilitas ekstrem (butuh Floor 4.0x)</li>
-                </ul>
-
-                <h3><strong>Contoh Real:</strong></h3>
-                
-                <p><strong>Scenario 1: Scalper Forex EUR/USD</strong></p>
-<pre>
-Pilih: "Scalping"
+<p><strong>Cara pakai:</strong></p>
+<p>Ada 3 input manual di bawah dropdown:</p>
+<ul>
+<li>Manual RSI Length (isi angka, default 0)</li>
+<li>Manual ATR Period (isi angka, default 0)</li>
+<li>Manual Floor Multiplier (isi angka, default 0)</li>
+</ul>
+<p><strong>Aturan:</strong></p>
+<ul>
+<li>Kalau lo isi angka selain 0, preset DIABAIKAN, pakai nilai manual lo.</li>
+<li>Contoh: Lo pilih "Intraday" (RSI 14) tapi isi Manual RSI = 9, yang dipake RSI 9.</li>
+<h3>Kapan pakai Preset vs Manual?</h3>
+</ul>
+<p><strong>Pakai Preset kalau:</strong></p>
+<ul>
+<li>Lo baru mulai, ga tau mau setting apa</li>
+<li>Lo mau "plug-and-play" langsung trading</li>
+<li>Lo percaya parameter yang udah di-test</li>
+</ul>
+<p><strong>Pakai Manual kalau:</strong></p>
+<ul>
+<li>Lo udah pro, tau pair/coin lo butuh setting spesial</li>
+<li>Lo mau eksperimen A/B testing</li>
+<li>Crypto volatilitas ekstrem (butuh Floor 4.0x)</li>
+<h3>Contoh Real:</h3>
+</ul>
+<p><strong>Scenario 1: Scalper Forex EUR/USD</strong></p>
+<pre><code>Pilih: "Scalping"
 Manual: Semua 0 (biarkan default)
 Result: RSI 7, ATR 10, Floor 1.5x
-Kenapa: EUR/USD gerak cepet, butuh indikator sensitif
-</pre>
+Kenapa: EUR/USD gerak cepet, butuh indikator sensitif</code></pre>
 
-                <p><strong>Scenario 2: Swing Trader Crypto BTC</strong></p>
-<pre>
-Pilih: "Swing"
+<p><strong>Scenario 2: Swing Trader Crypto BTC</strong></p>
+<pre><code>Pilih: "Swing"
 Manual Override: Floor Mult = 4.0
 Result: RSI 21, ATR 21, Floor 4.0x
-Kenapa: BTC volatilitas gila, butuh stop lebih lebar biar ga kena whipsaw
-</pre>
+Kenapa: BTC volatilitas gila, butuh stop lebih lebar biar ga kena whipsaw</code></pre>
 
-                <p><strong>Scenario 3: Intraday Saham BBCA</strong></p>
-<pre>
-Pilih: "Intraday"
+<p><strong>Scenario 3: Intraday Saham BBCA</strong></p>
+<pre><code>Pilih: "Intraday"
 Manual: Semua 0
 Result: RSI 14, ATR 14, Floor 2.5x
-Kenapa: Saham Indonesia cocok banget sama setting balance
-</pre>
+Kenapa: Saham Indonesia cocok banget sama setting balance</code></pre>
 
-                <h3><strong>Dashboard Display (Row 0):</strong></h3>
-                <p>Di tabel kanan atas, row paling atas (SINGULARITY) akan show:</p>
-                <ul>
-                    <li><strong>"SCALPING"</strong> (warna aqua) = Mode scalping aktif</li>
-                    <li><strong>"INTRADAY"</strong> (warna lime) = Mode intraday aktif</li>
-                    <li><strong>"SWING"</strong> (warna kuning) = Mode swing aktif</li>
-                    <li><strong>"MANUAL"</strong> (warna orange) = Lo lagi pakai custom manual</li>
-                </ul>
+<h3>Dashboard Display (Row 0):</h3>
+<p>Di tabel kanan atas, row paling atas (SINGULARITY) akan show:</p>
+<ul>
+<li><strong>"SCALPING"</strong> (warna aqua) = Mode scalping aktif</li>
+<li><strong>"INTRADAY"</strong> (warna lime) = Mode intraday aktif</li>
+<li><strong>"SWING"</strong> (warna kuning) = Mode swing aktif</li>
+<li><strong>"MANUAL"</strong> (warna orange) = Lo lagi pakai custom manual</li>
+</ul>
+<p><strong>Real talk:</strong> Kalau lo bingung, pakai Intraday dulu. Ini setting paling versatile, cocok 80% situasi.</p>
 
-                <p><strong>Real talk:</strong> Kalau lo bingung, pakai Intraday dulu. Ini setting paling versatile, cocok 80% situasi.</p>
-            </section>
+<hr>
 
-            <hr style="border-color: var(--border-color); margin: 40px 0;">
+<h2>📊 PENJELASAN KOMPONEN DASHBOARD (YANG DI KANAN ATAS)</h2>
 
-            <section id="dashboard-components">
-                <h2>📊 PENJELASAN KOMPONEN DASHBOARD (YANG DI KANAN ATAS)</h2>
+<h3>SQZ-STATUS: Compressed/Released</h3>
+<p><strong>Gampangnya gini:</strong> Bayangin pasar lagi kayak per yang lagi ditekan. Semakin lama ditekan, semakin kenceng nanti meloncat.</p>
 
-                <h3><strong>SQZ-STATUS: Compressed/Released</strong></h3>
-                <p><strong>Gampangnya gini:</strong> Bayangin pasar lagi kayak per yang lagi ditekan. Semakin lama ditekan, semakin kenceng nanti meloncat.</p>
-                <p><strong>Cara kerjanya:</strong> Indikator ini ngeliat apakah harga lagi "dikunci" dalam range sempit (Compressed) atau udah "lepas" dan mulai gerak kenceng (Released).</p>
-                <ul>
-                    <li><strong>COMPRESSED</strong> 🟧 = Harga lagi macet di satu area, kayak mobil lagi macet. Belum ada yang tau mau ke mana, tapi pasti ada pergerakan besar bentar lagi. <strong>Jangan masuk dulu!</strong></li>
-                    <li><strong>RELEASED</strong> 🟢 = Nah ini dia! Harga udah mulai explode, pergerakan besar lagi terjadi. <strong>Ini waktu yang tepat!</strong></li>
-                </ul>
-                <p><strong>Kenapa penting?</strong><br>
-                Bayangin lo lagi di lampu merah. Compressed = lampu masih merah, Released = lampu hijau, GAS!</p>
-                <p>Kebanyakan trader pemula masuk saat masih compressed (macet), terus bingung kok ga gerak-gerak. Padahal harusnya tunggu sampai released dulu, baru ikut gerakannya.</p>
-                <p><strong>Penggunaan terbaik:</strong></p>
-                <ul>
-                    <li><strong>Scalping:</strong> Hindari banget zona compressed. Lo cuma bakal bolak-balik rugi di sana.</li>
-                    <li><strong>Swing:</strong> Justru ini kesempatan. Tandai zona compressed, siap-siap entry pas udah released.</li>
-                    <li><strong>Intraday:</strong> Trading-nya pas released aja, jangan pas lagi squeeze (macet).</li>
-                </ul>
-                <p><strong>Real talk:</strong> 9 dari 10 pergerakan gede terjadi setelah fase compression. Jadi sabar ya, jangan buru-buru.</p>
+<p><strong>Cara kerjanya:</strong> Indikator ini ngeliat apakah harga lagi "dikunci" dalam range sempit (Compressed) atau udah "lepas" dan mulai gerak kenceng (Released).</p>
 
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
+<ul>
+<li><strong>COMPRESSED</strong> 🟧 = Harga lagi macet di satu area, kayak mobil lagi macet. Belum ada yang tau mau ke mana, tapi pasti ada pergerakan besar bentar lagi. <strong>Jangan masuk dulu!</strong></li>
+<li><strong>RELEASED</strong> 🟢 = Nah ini dia! Harga udah mulai explode, pergerakan besar lagi terjadi. <strong>Ini waktu yang tepat!</strong></li>
+</ul>
+<p><strong>Kenapa penting?</strong></p>
+<p>Bayangin lo lagi di lampu merah. Compressed = lampu masih merah, Released = lampu hijau, GAS!</p>
 
-                <h3><strong>GAP-ZONE: Bull/Bear GAP</strong></h3>
-                <p><strong>Gampangnya gini:</strong> Ini kayak ada "lubang" di harga. Misalnya harga tadi di 100, tiba-tiba loncat ke 110 tanpa ada yang transaksi di 101-109. Nah, itu namanya gap.</p>
-                <p><strong>Cara kerjanya:</strong></p>
-                <ul>
-                    <li><strong>BULL GAP</strong> 🟡 = Harga loncat ke atas terlalu cepat, ninggalin ruang kosong di bawah. Kayak lo lagi lari kenceng banget sampai sepatu lo ketinggalan.</li>
-                    <li><strong>BEAR GAP</strong> 🟡 = Harga jatuh terlalu cepat ke bawah, ninggalin ruang kosong di atas.</li>
-                    <li><strong>CLEAR</strong> ⚪ = Tidak ada gap, aman.</li>
-                </ul>
-                <p><strong>Kenapa penting?</strong><br>
-                Gap itu kayak magnet. <strong>Harga hampir selalu balik lagi untuk "ngisi" gap tersebut.</strong> Ini fakta pasar yang udah terbukti 90% terjadi dalam waktu dekat (5-20 candle).</p>
-                <p><strong>Analogi simpel:</strong><br>
-                Bayangin lo jalan, terus ada lubang di jalan. Suatu saat pasti ada yang datang nutup lubang itu kan? Nah, harga juga gitu. Dia bakal balik nutup "lubang" yang dia tinggalin.</p>
-                <p><strong>Cara pakainya:</strong></p>
-                <ol>
-                    <li><strong>Sebagai target:</strong> Kalau ada bull gap di 100-110, dan sekarang harga 120, kemungkinan besar harga bakal turun dulu ke 110-100 buat "ngisi gap". Itu bisa jadi target short lo.</li>
-                    <li><strong>Sebagai support/resistance:</strong> Kalau gap udah "diisi" (harga udah balik ke sana), biasanya area itu jadi support (kalau bull gap) atau resistance (kalau bear gap).</li>
-                    <li><strong>Konfirmasi tren:</strong> Kalau harga tetep respect sama gap (misal bull gap jadi support kuat), berarti tren masih kuat.</li>
-                </ol>
-                <p><strong>Tips penting:</strong> Kalau gap "dilanggar" (maksudnya harga udah lewat gap dan ga balik-balik lagi), biasanya itu tanda tren mau berbalik arah.</p>
+<p>Kebanyakan trader pemula masuk saat masih compressed (macet), terus bingung kok ga gerak-gerak. Padahal harusnya tunggu sampai released dulu, baru ikut gerakannya.</p>
 
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
+<p><strong>Penggunaan terbaik:</strong></p>
+<ul>
+<li><strong>Scalping:</strong> Hindari banget zona compressed. Lo cuma bakal bolak-balik rugi di sana.</li>
+<li><strong>Swing:</strong> Justru ini kesempatan. Tandai zona compressed, siap-siap entry pas udah released.</li>
+<li><strong>Intraday:</strong> Trading-nya pas released aja, jangan pas lagi squeeze (macet).</li>
+</ul>
+<p><strong>Real talk:</strong> 9 dari 10 pergerakan gede terjadi setelah fase compression. Jadi sabar ya, jangan buru-buru.</p>
 
-                <h3><strong>Weekly Trend: Bullish/Bearish</strong></h3>
-                <p><strong>Gampangnya gini:</strong> Ini kayak lo ngeliat arah arus sungai. Kalau lo mau berenang, lebih gampang ikut arus kan? Daripada melawan arus.</p>
-                <p><strong>Cara kerjanya:</strong><br>
-                Indikator ini ngecek: "Secara gede-gedean (weekly), pasar ini lagi naik atau turun sih?"</p>
-                <ul>
-                    <li><strong>BULLISH</strong> 🟢 = Secara weekly, pasar lagi naik. Arus ke atas.</li>
-                    <li><strong>BEARISH</strong> 🔴 = Secara weekly, pasar lagi turun. Arus ke bawah.</li>
-                </ul>
-                <p><strong>Kenapa SUPER penting?</strong><br>
-                Ini statistik kejam: <strong>80% trader ritel yang rugi itu karena mereka trading MELAWAN tren weekly.</strong></p>
-                <p>Bayangin lo berenang melawan arus. Capek? Pasti. Ujung-ujungnya malah keseret. Sama kayak trading—kalau weekly bearish tapi lo tetep long (beli), ya... selamat datang di klub loss.</p>
-                <p><strong>Aturan ketat:</strong></p>
-                <ul>
-                    <li>Weekly BULLISH = Lo boleh long (beli). Jangan short (jual) kecuali lo bener-bener master.</li>
-                    <li>Weekly BEARISH = Lo boleh short (jual). Jangan long (beli) sama sekali.</li>
-                </ul>
-                <p><strong>Ini bukan saran, ini HUKUM BERTAHAN HIDUP.</strong></p>
+<hr>
 
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
+<h3>GAP-ZONE: Bull/Bear GAP</h3>
+<p><strong>Gampangnya gini:</strong> Ini kayak ada "lubang" di harga. Misalnya harga tadi di 100, tiba-tiba loncat ke 110 tanpa ada yang transaksi di 101-109. Nah, itu namanya gap.</p>
 
-                <h3><strong>Dynamic Floor</strong></h3>
-                <p><strong>Gampangnya gini:</strong> Ini kayak "lantai" yang bergerak ngikutin harga lo. Fungsinya buat jaga-jaga kalau harga tiba-tiba turun—lantai ini yang nahan lo biar ga jatuh terlalu dalem.</p>
-                <p><strong>Cara kerjanya:</strong><br>
-                Garis ini otomatis naik kalau harga naik (melindungi profit lo yang udah jalan), dan turun kalau harga turun (kalau lo lagi short). Jaraknya dari harga sekitar 2.5x ATR (volatilitas).</p>
-                <p><strong>📌 NOTE KHUSUS PER MARKET:</strong></p>
-                <ul>
-                    <li><strong>FOREX:</strong> 2.5x ATR biasanya = 15-50 pip tergantung pair dan timeframe. Major pair (EUR/USD, GBP/USD) biasanya lebih kecil, exotic pair lebih lebar.</li>
-                    <li><strong>CRYPTO:</strong> ATR bisa sangat liar. BTC bisa 200-1000 USD, altcoin bisa 5-20%. Pakai setting lebih lebar (3.0-3.5x ATR) buat avoid whipsaw.</li>
-                    <li><strong>SAHAM:</strong> Tergantung harga saham. Saham 100rb mungkin ATR 2-5rb, saham 50rb mungkin ATR 500-2000. Cek historical movement.</li>
-                    <li><strong>KOMODITAS:</strong> Gold/Oil ATR biasanya stabil. Gold ~$5-15, Oil ~$0.5-2.0 per kontrak tergantung volatilitas.</li>
-                </ul>
-                <p><strong>Kenapa lebih bagus dari stop loss biasa?</strong><br>
-                Stop loss biasa itu "mati". Misal lo pasang di 100, ya selama-lamanya di 100. Masalahnya, bandar atau market maker sering "berburu" stop loss yang keliatan jelas. Mereka tau banyak orang pasang stop di 100, jadi mereka dorong harga sebentar ke 99.9, terus balik lagi. Lo kena stop, mereka dapat untung.</p>
-                <p><strong>Dynamic Floor beda.</strong> Dia bergerak terus, jadi market maker ga bisa nebak. Ini cara trader pro main.</p>
-            </section>
+<p><strong>Cara kerjanya:</strong></p>
+<ul>
+<li><strong>BULL GAP</strong> 🟡 = Harga loncat ke atas terlalu cepat, ninggalin ruang kosong di bawah. Kayak lo lagi lari kenceng banget sampai sepatu lo ketinggalan.</li>
+<li><strong>BEAR GAP</strong> 🟡 = Harga jatuh terlalu cepat ke bawah, ninggalin ruang kosong di atas.</li>
+<li><strong>CLEAR</strong> ⚪ = Tidak ada gap, aman.</li>
+</ul>
+<p><strong>Kenapa penting?</strong></p>
+<p>Gap itu kayak magnet. <strong>Harga hampir selalu balik lagi untuk "ngisi" gap tersebut.</strong> Ini fakta pasar yang udah terbukti 90% terjadi dalam waktu dekat (5-20 candle).</p>
 
-            <hr style="border-color: var(--border-color); margin: 40px 0;">
+<p><strong>Analogi simpel:</strong></p>
+<p>Bayangin lo jalan, terus ada lubang di jalan. Suatu saat pasti ada yang datang nutup lubang itu kan? Nah, harga juga gitu. Dia bakal balik nutup "lubang" yang dia tinggalin.</p>
 
-            <section id="hft-modules">
-                <h2>🔥 MODUL HFT #1: SHADOW-FLOW (Deteksi Aktivitas "Gelap" Institusi)</h2>
+<p><strong>Cara pakainya:</strong></p>
+<p>1. <strong>Sebagai target:</strong> Kalau ada bull gap di 100-110, dan sekarang harga 120, kemungkinan besar harga bakal turun dulu ke 110-100 buat "ngisi gap". Itu bisa jadi target short lo.</p>
+<p>2. <strong>Sebagai support/resistance:</strong> Kalau gap udah "diisi" (harga udah balik ke sana), biasanya area itu jadi support (kalau bull gap) atau resistance (kalau bear gap).</p>
+<p>3. <strong>Konfirmasi tren:</strong> Kalau harga tetep respect sama gap (misal bull gap jadi support kuat), berarti tren masih kuat.</p>
 
-                <h3><strong>Apa ini dalam bahasa sederhana?</strong></h3>
-                <p>Bayangin lo lagi di pasar tradisional. Ada pedagang besar yang beli banyak banget, tapi dia beli dikit-dikit biar harga ga naik. Kalau harga naik, dia rugi dong karena harus beli lebih mahal. Nah, Shadow-Flow ini deteksi "pembelian diam-diam" kayak gitu.</p>
-                <p>Di dunia trading, ini disebut "Dark Pool"—tempat institusi besar (bank, hedge fund) transaksi tanpa orang lain tau. Mereka ga mau retail trader ikut-ikutan beli, soalnya bakal bikin harga naik.</p>
+<p><strong>Tips penting:</strong> Kalau gap "dilanggar" (maksudnya harga udah lewat gap dan ga balik-balik lagi), biasanya itu tanda tren mau berbalik arah.</p>
 
-                <h3><strong>Gimana cara kerjanya?</strong></h3>
-                <p>Script ini ngitung: "Volume dibagi range harga".</p>
-                <p>Kalau <strong>volume tinggi tapi harga ga kemana-mana</strong> (range kecil), artinya ada yang "menyerap" supply atau demand secara diam-diam.</p>
+<hr>
 
-                <h3><strong>Dashboard menunjukkan:</strong></h3>
-                <ul>
-                    <li><strong>ABSORPTION</strong> (warna fuchsia/pink) = Ada institusi lagi akumulasi atau distribusi diam-diam</li>
-                    <li><strong>NEUTRAL</strong> (warna abu-abu) = Ga ada aktivitas mencurigakan</li>
-                </ul>
+<h3>Weekly Trend: Bullish/Bearish</h3>
+<p><strong>Gampangnya gini:</strong> Ini kayak lo ngeliat arah arus sungai. Kalau lo mau berenang, lebih gampang ikut arus kan? Daripada melawan arus.</p>
 
-                <h3><strong>Cara bacanya seperti detektif:</strong></h3>
-                
-                <p><strong>Skenario 1: ABSORPTION di Support (BULLISH)</strong></p>
-<pre>
-Harga: $43,000 (support kuat)
+<p><strong>Cara kerjanya:</strong></p>
+<p>Indikator ini ngecek: "Secara gede-gedean (weekly), pasar ini lagi naik atau turun sih?"</p>
+<ul>
+<li><strong>BULLISH</strong> 🟢 = Secara weekly, pasar lagi naik. Arus ke atas.</li>
+<li><strong>BEARISH</strong> 🔴 = Secara weekly, pasar lagi turun. Arus ke bawah.</li>
+</ul>
+<p><strong>Kenapa SUPER penting?</strong></p>
+<p>Ini statistik kejam: <strong>80% trader ritel yang rugi itu karena mereka trading MELAWAN tren weekly.</strong></p>
+
+<p>Bayangin lo berenang melawan arus. Capek? Pasti. Ujung-ujungnya malah keseret. Sama kayak trading—kalau weekly bearish tapi lo tetep long (beli), ya... selamat datang di klub loss.</p>
+
+<p><strong>Aturan ketat:</strong></p>
+<ul>
+<li>Weekly BULLISH = Lo boleh long (beli). Jangan short (jual) kecuali lo bener-bener master.</li>
+<li>Weekly BEARISH = Lo boleh short (jual). Jangan long (beli) sama sekali.</li>
+</ul>
+<p><strong>Ini bukan saran, ini HUKUM BERTAHAN HIDUP.</strong></p>
+
+<hr>
+
+<h3>Dynamic Floor</h3>
+<p><strong>Gampangnya gini:</strong> Ini kayak "lantai" yang bergerak ngikutin harga lo. Fungsinya buat jaga-jaga kalau harga tiba-tiba turun—lantai ini yang nahan lo biar ga jatuh terlalu dalem.</p>
+
+<p><strong>Cara kerjanya:</strong></p>
+<p>Garis ini otomatis naik kalau harga naik (melindungi profit lo yang udah jalan), dan turun kalau harga turun (kalau lo lagi short). Jaraknya dari harga sekitar 2.5x ATR (volatilitas).</p>
+
+<p><strong>📌 NOTE KHUSUS PER MARKET:</strong></p>
+<ul>
+<li><strong>FOREX:</strong> 2.5x ATR biasanya = 15-50 pip tergantung pair dan timeframe. Major pair (EUR/USD, GBP/USD) biasanya lebih kecil, exotic pair lebih lebar.</li>
+<li><strong>CRYPTO:</strong> ATR bisa sangat liar. BTC bisa 200-1000 USD, altcoin bisa 5-20%. Pakai setting lebih lebar (3.0-3.5x ATR) buat avoid whipsaw.</li>
+<li><strong>SAHAM:</strong> Tergantung harga saham. Saham 100rb mungkin ATR 2-5rb, saham 50rb mungkin ATR 500-2000. Cek historical movement.</li>
+<li><strong>KOMODITAS:</strong> Gold/Oil ATR biasanya stabil. Gold ~$5-15, Oil ~$0.5-2.0 per kontrak tergantung volatilitas.</li>
+</ul>
+<p><strong>Kenapa lebih bagus dari stop loss biasa?</strong></p>
+<p>Stop loss biasa itu "mati". Misal lo pasang di 100, ya selama-lamanya di 100. Masalahnya, bandar atau market maker sering "berburu" stop loss yang keliatan jelas. Mereka tau banyak orang pasang stop di 100, jadi mereka dorong harga sebentar ke 99.9, terus balik lagi. Lo kena stop, mereka dapat untung.</p>
+
+<p><strong>Dynamic Floor beda.</strong> Dia bergerak terus, jadi market maker ga bisa nebak. Ini cara trader pro main.</p>
+
+<hr>
+
+<h2>🔥 MODUL HFT #1: SHADOW-FLOW (Deteksi Aktivitas "Gelap" Institusi)</h2>
+
+<h3>Apa ini dalam bahasa sederhana?</h3>
+<p>Bayangin lo lagi di pasar tradisional. Ada pedagang besar yang beli banyak banget, tapi dia beli dikit-dikit biar harga ga naik. Kalau harga naik, dia rugi dong karena harus beli lebih mahal. Nah, Shadow-Flow ini deteksi "pembelian diam-diam" kayak gitu.</p>
+
+<p>Di dunia trading, ini disebut "Dark Pool"—tempat institusi besar (bank, hedge fund) transaksi tanpa orang lain tau. Mereka ga mau retail trader ikut-ikutan beli, soalnya bakal bikin harga naik.</p>
+
+<h3>Gimana cara kerjanya?</h3>
+<p>Script ini ngitung: "Volume dibagi range harga".</p>
+
+<p>Kalau <strong>volume tinggi tapi harga ga kemana-mana</strong> (range kecil), artinya ada yang "menyerap" supply atau demand secara diam-diam.</p>
+
+<h3>Dashboard menunjukkan:</h3>
+<ul>
+<li><strong>ABSORPTION</strong> (warna fuchsia/pink) = Ada institusi lagi akumulasi atau distribusi diam-diam</li>
+<li><strong>NEUTRAL</strong> (warna abu-abu) = Ga ada aktivitas mencurigakan</li>
+<h3>Cara bacanya seperti detektif:</h3>
+</ul>
+<p><strong>Skenario 1: ABSORPTION di Support (BULLISH)</strong></p>
+<pre><code>Harga: $43,000 (support kuat)
 Volume: Tinggi banget
 Range: Kecil (harga cuma goyang $50-100)
 Shadow-Flow: ABSORPTION (pink)
 
 Analogi: Pedagang besar lagi borong barang murah di support
 Artinya: Smart money lagi beli diam-diam
-Action: Siap-siap long, tunggu GOLD BUY muncul
-</pre>
+Action: Siap-siap long, tunggu GOLD BUY muncul</code></pre>
 
-                <p><strong>Skenario 2: ABSORPTION di Resistance (BEARISH)</strong></p>
-<pre>
-Harga: $48,000 (resistance kuat)
+<p><strong>Skenario 2: ABSORPTION di Resistance (BEARISH)</strong></p>
+<pre><code>Harga: $48,000 (resistance kuat)
 Volume: Tinggi banget
 Range: Kecil
 Shadow-Flow: ABSORPTION (pink)
 
 Analogi: Pedagang besar lagi jual barangnya pelan-pelan di harga tinggi
 Artinya: Smart money lagi distribute (jual)
-Action: Siap-siap short, tunggu DOOM SELL
-</pre>
+Action: Siap-siap short, tunggu DOOM SELL</code></pre>
 
-                <h3><strong>Strategi Trading Real:</strong></h3>
-                <p><strong>Setup Bullish:</strong></p>
-                <ol>
-                    <li>Cek: Harga lagi di support</li>
-                    <li>Shadow-Flow: ABSORPTION muncul</li>
-                    <li>Tunggu: GOLD BUY signal</li>
-                    <li>Entry: Long dengan confident (institusi di pihak lo)</li>
-                    <li>Target: Resistance atau TP2</li>
-                </ol>
+<h3>Strategi Trading Real:</h3>
 
-                <p><strong>Setup Bearish:</strong></p>
-                <ol>
-                    <li>Cek: Harga lagi di resistance</li>
-                    <li>Shadow-Flow: ABSORPTION muncul</li>
-                    <li>Tunggu: DOOM SELL signal</li>
-                    <li>Entry: Short dengan confident</li>
-                    <li>Target: Support atau TP2</li>
-                </ol>
+<p><strong>Setup Bullish:</strong></p>
+<p>1. Cek: Harga lagi di support</p>
+<p>2. Shadow-Flow: ABSORPTION muncul</p>
+<p>3. Tunggu: GOLD BUY signal</p>
+<p>4. Entry: Long dengan confident (institusi di pihak lo)</p>
+<p>5. Target: Resistance atau TP2</p>
 
-                <h3><strong>Real Example:</strong></h3>
-<pre>
-BTC di $42,500
+<p><strong>Setup Bearish:</strong></p>
+<p>1. Cek: Harga lagi di resistance</p>
+<p>2. Shadow-Flow: ABSORPTION muncul</p>
+<p>3. Tunggu: DOOM SELL signal</p>
+<p>4. Entry: Short dengan confident</p>
+<p>5. Target: Support atau TP2</p>
+
+<h3>Real Example:</h3>
+<pre><code>BTC di $42,500
 Support: $42,000
 Volume 1 jam: 800 BTC (tinggi!)
 High: $42,580
@@ -682,72 +858,62 @@ Ada whale lagi borong BTC di area $42k tanpa push harga naik.
 Action: Mark this level, prepare long
 2 jam kemudian: GOLD BUY muncul
 Entry: $42,600
-Result: BTC pump ke $45,000 (profit $2,400)
-</pre>
-                <p><strong>Real talk:</strong> Shadow-Flow ini kayak "night vision goggle" lo. Retail trader ga bisa liat, tapi lo bisa liat institusi lagi ngapain.</p>
+Result: BTC pump ke $45,000 (profit $2,400)</code></pre>
 
-                <hr style="border-color: var(--border-color); margin: 40px 0;">
+<p><strong>Real talk:</strong> Shadow-Flow ini kayak "night vision goggle" lo. Retail trader ga bisa liat, tapi lo bisa liat institusi lagi ngapain.</p>
 
-                <h2>🎯 MODUL HFT #2: LIQUIDITY-GRAB (Stop Loss Hunter)</h2>
+<hr>
 
-                <h3><strong>Apa ini dalam bahasa sederhana?</strong></h3>
-                <p>Pernah ga lo pasang stop loss, terus harga nyentuh stop lo (kena cut), tapi abis itu harga balik lagi searah posisi lo? Kesel kan?</p>
-                <p>Nah, itu bukan kebetulan. Itu <strong>SENGAJA</strong> dilakukan market maker. Nama tekniknya: <strong>Liquidity Grab</strong> atau "berburu stop loss".</p>
+<h2>🎯 MODUL HFT #2: LIQUIDITY-GRAB (Stop Loss Hunter)</h2>
 
-                <h3><strong>Kenapa mereka lakukan ini?</strong></h3>
-                <p>Market maker butuh likuiditas (orang yang mau jual/beli) buat isi order besar mereka. Mereka tau banyak retail trader pasang stop loss di tempat yang "obvious"—misal di atas swing high atau di bawah swing low.</p>
-                <p>Jadi mereka "sweep" area itu (dorong harga sebentar), trigger stop loss retail (dapat likuiditas), terus reverse balik.</p>
+<h3>Apa ini dalam bahasa sederhana?</h3>
+<p>Pernah ga lo pasang stop loss, terus harga nyentuh stop lo (kena cut), tapi abis itu harga balik lagi searah posisi lo? Kesel kan?</p>
 
-                <h3><strong>Gimana cara kerjanya (dalam script)?</strong></h3>
+<p>Nah, itu bukan kebetulan. Itu <strong>SENGAJA</strong> dilakukan market maker. Nama tekniknya: <strong>Liquidity Grab</strong> atau "berburu stop loss".</p>
 
-                <p><strong>Bearish Sweep (Fake Breakout ke Atas):</strong></p>
-<pre>
-High candle ini > High tertinggi 15 candle sebelumnya
+<h3>Kenapa mereka lakukan ini?</h3>
+<p>Market maker butuh likuiditas (orang yang mau jual/beli) buat isi order besar mereka. Mereka tau banyak retail trader pasang stop loss di tempat yang "obvious"—misal di atas swing high atau di bawah swing low.</p>
+
+<p>Jadi mereka "sweep" area itu (dorong harga sebentar), trigger stop loss retail (dapat likuiditas), terus reverse balik.</p>
+
+<h3>Gimana cara kerjanya (dalam script)?</h3>
+
+<p><strong>Bearish Sweep (Fake Breakout ke Atas):</strong></p>
+<pre><code>High candle ini > High tertinggi 15 candle sebelumnya
 TAPI
 Close candle ini < High tertinggi 15 candle sebelumnya
 
 Artinya: Harga "nyentuh" area di atas (grab stop loss long), 
-tapi close di bawah lagi (fake breakout)
-</pre>
+tapi close di bawah lagi (fake breakout)</code></pre>
 
-                <p><strong>Bullish Sweep (Fake Breakdown ke Bawah):</strong></p>
-<pre>
-Low candle ini < Low terendah 15 candle sebelumnya
+<p><strong>Bullish Sweep (Fake Breakdown ke Bawah):</strong></p>
+<pre><code>Low candle ini < Low terendah 15 candle sebelumnya
 TAPI
 Close candle ini > Low terendah 15 candle sebelumnya
 
 Artinya: Harga "nyentuh" area di bawah (grab stop loss short),
-tapi close di atas lagi (fake breakdown)
-</pre>
+tapi close di atas lagi (fake breakdown)</code></pre>
 
-                <h3><strong>Visual di Chart:</strong></h3>
-                <ul>
-                    <li><strong>▼ LIQUIDITY GRAB</strong> (label merah di atas) = Bearish sweep (grab stop loss long)</li>
-                    <li><strong>▲ LIQUIDITY GRAB</strong> (label hijau di bawah) = Bullish sweep (grab stop loss short)</li>
-                </ul>
-
-                <h3><strong>Dashboard:</strong></h3>
-                <ul>
-                    <li><strong>ACTIVE</strong> (merah) = Lagi terjadi sweep</li>
-                    <li><strong>CLEAR</strong> (abu-abu) = Ga ada sweep</li>
-                </ul>
-
-                <h3><strong>Cara Pakainya (2 Strategi):</strong></h3>
-                
-                <p><strong>Strategi 1: HINDARI JEBAKAN (Beginner)</strong></p>
-<pre>
-Scenario: Lo mau long di breakout resistance
+<h3>Visual di Chart:</h3>
+<ul>
+<li><strong>▼ LIQUIDITY GRAB</strong> (label merah di atas) = Bearish sweep (grab stop loss long)</li>
+<li><strong>▲ LIQUIDITY GRAB</strong> (label hijau di bawah) = Bullish sweep (grab stop loss short)</li>
+<h3>Dashboard:</h3>
+<li><strong>ACTIVE</strong> (merah) = Lagi terjadi sweep</li>
+<li><strong>CLEAR</strong> (abu-abu) = Ga ada sweep</li>
+<h3>Cara Pakainya (2 Strategi):</h3>
+</ul>
+<p><strong>Strategi 1: HINDARI JEBAKAN (Beginner)</strong></p>
+<pre><code>Scenario: Lo mau long di breakout resistance
 Tiba-tiba: ▼ LIQUIDITY GRAB muncul (bearish sweep)
 Dashboard: ACTIVE
 
 Action: JANGAN long dulu!
 Reason: Ini fake breakout, harga bakal turun
-Wait: Sampai sweep selesai dan konfirmasi real breakout
-</pre>
+Wait: Sampai sweep selesai dan konfirmasi real breakout</code></pre>
 
-                <p><strong>Strategi 2: COUNTER-TREND ENTRY (Advanced)</strong></p>
-<pre>
-Scenario: Harga rally kuat
+<p><strong>Strategi 2: COUNTER-TREND ENTRY (Advanced)</strong></p>
+<pre><code>Scenario: Harga rally kuat
 Tiba-tiba: ▼ LIQUIDITY GRAB (sweep di atas)
 Close candle: Di bawah sweep level
 
@@ -755,12 +921,10 @@ Action: Entry SHORT
 Reason: Sweep = reversal signal
 Stop: Di atas sweep high
 Target: Support atau TP2
-Win rate: 70-75%
-</pre>
+Win rate: 70-75%</code></pre>
 
-                <h3><strong>Real Example:</strong></h3>
-<pre>
-EUR/USD
+<h3>Real Example:</h3>
+<pre><code>EUR/USD
 Swing High: 1.1050 (banyak orang pasang stop di atas sini)
 Price action: Rally ke 1.1058 (tembus 8 pip)
 Close: 1.1042 (di bawah swing high!)
@@ -776,77 +940,65 @@ Sekarang mereka reverse turun
 Action: Short entry 1.1040
 Stop: 1.1060 (di atas sweep)
 Target: 1.0980 (70 pip)
-Result: Hit target dalam 6 jam
-</pre>
+Result: Hit target dalam 6 jam</code></pre>
 
-                <h3><strong>Kombinasi DEADLY dengan Module Lain:</strong></h3>
-<pre>
-LIQUIDITY GRAB (sweep)
+<h3>Kombinasi DEADLY dengan Module Lain:</h3>
+<pre><code>LIQUIDITY GRAB (sweep)
 + SHADOW-FLOW (absorption)
 + DOOM SELL signal
-= WIN RATE 80%+ (ini setup institutional-grade)
-</pre>
-                <p><strong>Real talk:</strong> Liquidity grab ini seperti "radar" lo buat deteksi manipulasi. Kalau lo bisa recognize pola ini, lo ga bakal jadi korban lagi.</p>
+= WIN RATE 80%+ (ini setup institutional-grade)</code></pre>
 
-                <hr style="border-color: var(--border-color); margin: 40px 0;">
+<p><strong>Real talk:</strong> Liquidity grab ini seperti "radar" lo buat deteksi manipulasi. Kalau lo bisa recognize pola ini, lo ga bakal jadi korban lagi.</p>
 
-                <h2>⚡ MODUL HFT #3: THE PREDATOR METER (Deteksi Algoritma & HFT)</h2>
+<hr>
 
-                <h3><strong>Apa ini dalam bahasa sederhana?</strong></h3>
-                <p>Bayangin lo lagi di jalan tol. Tiba-tiba ada Lamborghini ngebut 300 km/jam lewat. Lo tau kan itu bukan mobil biasa?</p>
-                <p>Nah, Predator Meter ini sama—dia deteksi kalau ada "beast" (algoritma HFT atau institusi besar) yang lagi aktif di market.</p>
+<h2>⚡ MODUL HFT #3: THE PREDATOR METER (Deteksi Algoritma & HFT)</h2>
 
-                <h3><strong>Apa itu HFT (High-Frequency Trading)?</strong></h3>
-                <p>Algoritma komputer yang bisa execute ribuan order per detik. Mereka yang bikin harga "loncat" tiba-tiba. Retail trader ga bisa compete sama mereka, tapi lo bisa "ikut kereta" mereka.</p>
+<h3>Apa ini dalam bahasa sederhana?</h3>
+<p>Bayangin lo lagi di jalan tol. Tiba-tiba ada Lamborghini ngebut 300 km/jam lewat. Lo tau kan itu bukan mobil biasa?</p>
 
-                <h3><strong>Gimana cara kerjanya?</strong></h3>
-                <p>Script ngukur "kecepatan" volume:</p>
-<pre>
-Volume Fast (EMA 5) / Volume Slow (EMA 20) * 100
+<p>Nah, Predator Meter ini sama—dia deteksi kalau ada "beast" (algoritma HFT atau institusi besar) yang lagi aktif di market.</p>
+
+<h3>Apa itu HFT (High-Frequency Trading)?</h3>
+<p>Algoritma komputer yang bisa execute ribuan order per detik. Mereka yang bikin harga "loncat" tiba-tiba. Retail trader ga bisa compete sama mereka, tapi lo bisa "ikut kereta" mereka.</p>
+
+<h3>Gimana cara kerjanya?</h3>
+<p>Script ngukur "kecepatan" volume:</p>
+<pre><code>Volume Fast (EMA 5) / Volume Slow (EMA 20) * 100
 
 Kalau hasilnya >150% = PREDATOR aktif
 Kalau hasilnya >100% = Momentum normal-tinggi
-Kalau hasilnya <100% = Market lagi stagnant
-</pre>
+Kalau hasilnya <100% = Market lagi stagnant</code></pre>
 
-                <h3><strong>Dashboard menunjukkan:</strong></h3>
-                <ul>
-                    <li><strong>PREDATOR (HFT)</strong> (merah) = Algoritma HFT lagi aktif, pergerakan SANGAT cepat dan kuat</li>
-                    <li><strong>ACTIVE</strong> (lime) = Momentum tinggi, good for trading</li>
-                    <li><strong>STAGNANT</strong> (abu-abu) = Market boring, avoid</li>
-                </ul>
-
-                <h3><strong>Cara bacanya:</strong></h3>
-
-                <p><strong>PREDATOR (Merah) - Beast Mode:</strong></p>
-<pre>
-Artinya: Volume acceleration >150% dari normal
+<h3>Dashboard menunjukkan:</h3>
+<ul>
+<li><strong>PREDATOR (HFT)</strong> (merah) = Algoritma HFT lagi aktif, pergerakan SANGAT cepat dan kuat</li>
+<li><strong>ACTIVE</strong> (lime) = Momentum tinggi, good for trading</li>
+<li><strong>STAGNANT</strong> (abu-abu) = Market boring, avoid</li>
+<h3>Cara bacanya:</h3>
+</ul>
+<p><strong>PREDATOR (Merah) - Beast Mode:</strong></p>
+<pre><code>Artinya: Volume acceleration >150% dari normal
 Analogi: Kayak tsunami lagi datang
 What happens: Harga bakal gerak SANGAT cepat (puluhan pip/persen dalam menit)
-Who's moving: HFT algorithms atau whale besar
-</pre>
+Who's moving: HFT algorithms atau whale besar</code></pre>
 
-                <p><strong>ACTIVE (Lime) - Normal High:</strong></p>
-<pre>
-Artinya: Volume acceleration >100%
+<p><strong>ACTIVE (Lime) - Normal High:</strong></p>
+<pre><code>Artinya: Volume acceleration >100%
 Analogi: Kayak ombak laut normal
 What happens: Pergerakan normal-tinggi, predictable
-Safe for: Trading normal
-</pre>
+Safe for: Trading normal</code></pre>
 
-                <p><strong>STAGNANT (Abu-abu) - Dead Zone:</strong></p>
-<pre>
-Artinya: Volume flat/menurun
+<p><strong>STAGNANT (Abu-abu) - Dead Zone:</strong></p>
+<pre><code>Artinya: Volume flat/menurun
 Analogi: Kayak danau tenang
 What happens: Harga ga kemana-mana, whipsaw tinggi
-Action: JANGAN trade (waste of time)
-</pre>
+Action: JANGAN trade (waste of time)</code></pre>
 
-                <h3><strong>Strategi Trading:</strong></h3>
+<h3>Strategi Trading:</h3>
 
-                <p><strong>Ride The Predator (Ikut Tsunami):</strong></p>
-<pre>
-1. PREDATOR muncul (merah)
+<p><strong>Ride The Predator (Ikut Tsunami):</strong></p>
+<pre><code>1. PREDATOR muncul (merah)
 2. Cek direction:
    - Price > EMA20 = Bullish beast
    - Price < EMA20 = Bearish beast
@@ -857,20 +1009,16 @@ Action: JANGAN trade (waste of time)
 
 Risk: Medium-high (fast movement)
 Reward: High (big move)
-Win rate: 65-70%
-</pre>
+Win rate: 65-70%</code></pre>
 
-                <p><strong>Avoid Stagnant (Jauhi Danau Mati):</strong></p>
-<pre>
-1. STAGNANT muncul
+<p><strong>Avoid Stagnant (Jauhi Danau Mati):</strong></p>
+<pre><code>1. STAGNANT muncul
 2. Action: JANGAN entry trade baru
 3. Kalau lagi hold: Trailing stop atau close
-4. Wait: Sampai ACTIVE atau PREDATOR
-</pre>
+4. Wait: Sampai ACTIVE atau PREDATOR</code></pre>
 
-                <h3><strong>Real Example:</strong></h3>
-<pre>
-BTC/USDT 1H Chart
+<h3>Real Example:</h3>
+<pre><code>BTC/USDT 1H Chart
 Time: 20:00 WIB (NY session open)
 
 Volume Fast EMA: 2,000 BTC
@@ -879,6 +1027,30 @@ Calculation: (2000 / 900) * 100 = 222%
 
 Dashboard: PREDATOR (HFT) - Merah
 
+        </div>
+        
+        <!-- PREMIUM BARRIER -->
+        <div class="premium-barrier">
+            <span class="premium-barrier-icon">🔒</span>
+            <h3>Konten Premium Terkunci</h3>
+            <p>Akses panduan lengkap dengan 7 HFT Modules + Strategi Advanced untuk unlock full potential trading lo!</p>
+            
+            <div class="premium-barrier-features">
+                <ul>
+                    <li><strong>60+ Halaman Panduan Lengkap</strong></li>
+                    <li><strong>7 HFT Modules Explained</strong></li>
+                    <li><strong>Strategi Per Market</strong> (Forex, Crypto, Saham, Komoditas)</li>
+                    <li><strong>Real Examples</strong> dengan perhitungan detail</li>
+                    <li><strong>Kombinasi Deadly Setup</strong> (80-90% win rate)</li>
+                    <li><strong>Settings Optimization</strong> per gaya trading</li>
+                </ul>
+            </div>
+            
+            <a href="index.html#pricing" class="premium-unlock-btn">🔓 Unlock Full Guide Sekarang</a>
+        </div>
+        
+        <!-- PREMIUM CONTENT AREA (LOCKED) -->
+        <div id="premiumContent" class="premium-content locked">
 What happened:
 - BTC loncat dari $44,000 ke $44,800 dalam 30 menit ($800!)
 - Volume spike gila-gilaan
@@ -888,93 +1060,79 @@ Action taken:
 Entry: Long $44,200
 Stop: $43,900 (tight, 1.5x ATR)
 Target: $45,000
-Result: Hit dalam 2 jam, profit $800
-</pre>
+Result: Hit dalam 2 jam, profit $800</code></pre>
 
-                <h3><strong>Kombinasi Powerful:</strong></h3>
-<pre>
-PREDATOR (merah)
+<h3>Kombinasi Powerful:</h3>
+<pre><code>PREDATOR (merah)
 + SHADOW-FLOW (absorption di support)
 + GOLD BUY
-= SUPER BULLISH, all-in setup
-</pre>
-<pre>
-PREDATOR (merah)
+= SUPER BULLISH, all-in setup</code></pre>
+
+<pre><code>PREDATOR (merah)
 + ALPHA-EXIT (dump risk)
 + DOOM SELL
-= SUPER BEARISH, massive dump incoming
-</pre>
-                <p><strong>Real talk:</strong> Predator Meter ini kayak "speedometer" market. Kalau lagi STAGNANT, jangan gas. Kalau lagi PREDATOR, siap-siap roller coaster.</p>
+= SUPER BEARISH, massive dump incoming</code></pre>
 
-                <hr style="border-color: var(--border-color); margin: 40px 0;">
+<p><strong>Real talk:</strong> Predator Meter ini kayak "speedometer" market. Kalau lagi STAGNANT, jangan gas. Kalau lagi PREDATOR, siap-siap roller coaster.</p>
 
-                <h2>💧 MODUL HFT #4: V-WAVE (Fuel Check - Apakah Rally/Dump Genuine?)</h2>
+<hr>
 
-                <h3><strong>Apa ini dalam bahasa sederhana?</strong></h3>
-                <p>Bayangin lo lagi nonton mobil balap. Ada mobil yang ngebut 200 km/jam. Tapi bensin-nya tinggal 10%? Pasti ga lama lagi dia harus pit stop kan?</p>
-                <p>Nah, V-Wave ini ngecek "bensin" pergerakan harga. Apakah rally/dump ini punya "fuel" (volume) yang cukup, atau cuma "FOMO" yang bakal habis bentar lagi?</p>
+<h2>💧 MODUL HFT #4: V-WAVE (Fuel Check - Apakah Rally/Dump Genuine?)</h2>
 
-                <h3><strong>Problem yang dipecahkan:</strong></h3>
-                <p>Sering ga lo liat harga naik terus, lo ikut beli (FOMO), eh tiba-tiba reverse turun? Atau harga turun (panic selling), lo ikut jual, eh malah bounce naik?</p>
-                <p>Itu karena rally/dump tersebut GA ADA FUEL (volume support). V-Wave kasih tau lo sebelum terjebak.</p>
+<h3>Apa ini dalam bahasa sederhana?</h3>
+<p>Bayangin lo lagi nonton mobil balap. Ada mobil yang ngebut 200 km/jam. Tapi bensin-nya tinggal 10%? Pasti ga lama lagi dia harus pit stop kan?</p>
 
-                <h3><strong>Gimana cara kerjanya?</strong></h3>
-                <p>Script ngukur korelasi antara pergerakan harga dan volume:</p>
-<pre>
-V_Fuel = ((Close - Open) / (High - Low)) * Volume
+<p>Nah, V-Wave ini ngecek "bensin" pergerakan harga. Apakah rally/dump ini punya "fuel" (volume) yang cukup, atau cuma "FOMO" yang bakal habis bentar lagi?</p>
 
-Terus dibanding sama V_Fuel candle sebelumnya
-</pre>
+<h3>Problem yang dipecahkan:</h3>
+<p>Sering ga lo liat harga naik terus, lo ikut beli (FOMO), eh tiba-tiba reverse turun? Atau harga turun (panic selling), lo ikut jual, eh malah bounce naik?</p>
 
-                <h3><strong>Dashboard menunjukkan:</strong></h3>
-                <ul>
-                    <li><strong>HEAVY FUEL</strong> (lime) = Pergerakan genuine, ada volume support kuat</li>
-                    <li><strong>FOMO TRAP</strong> (orange) = Pergerakan palsu, ga ada support, bakal reversal</li>
-                </ul>
+<p>Itu karena rally/dump tersebut GA ADA FUEL (volume support). V-Wave kasih tau lo sebelum terjebak.</p>
 
-                <h3><strong>Cara bacanya (4 Scenario):</strong></h3>
+<h3>Gimana cara kerjanya?</h3>
+<p>Script ngukur korelasi antara pergerakan harga dan volume:</p>
+<pre><code>V_Fuel = ((Close - Open) / (High - Low)) * Volume
 
-                <p><strong>Scenario 1: HEAVY FUEL (Bullish Genuine)</strong></p>
-<pre>
-Price: Naik (close > open)
+Terus dibanding sama V_Fuel candle sebelumnya</code></pre>
+
+<h3>Dashboard menunjukkan:</h3>
+<ul>
+<li><strong>HEAVY FUEL</strong> (lime) = Pergerakan genuine, ada volume support kuat</li>
+<li><strong>FOMO TRAP</strong> (orange) = Pergerakan palsu, ga ada support, bakal reversal</li>
+<h3>Cara bacanya (4 Scenario):</h3>
+</ul>
+<p><strong>Scenario 1: HEAVY FUEL (Bullish Genuine)</strong></p>
+<pre><code>Price: Naik (close > open)
 V_Fuel: Naik (lebih tinggi dari sebelumnya)
 Artinya: Rally GENUINE, volume support kuat
 Analogi: Mobil ngebut + tangki penuh bensin
-Action: Safe untuk long, continuation likely
-</pre>
+Action: Safe untuk long, continuation likely</code></pre>
 
-                <p><strong>Scenario 2: FOMO TRAP (Bullish Palsu)</strong></p>
-<pre>
-Price: Naik (close > open)
+<p><strong>Scenario 2: FOMO TRAP (Bullish Palsu)</strong></p>
+<pre><code>Price: Naik (close > open)
 V_Fuel: Turun (lebih rendah dari sebelumnya)
 Artinya: Rally FAKE, volume drop, exhaustion
 Analogi: Mobil ngebut tapi bensin mau habis
 Action: JANGAN long! Reversal coming
-Prepare: Short entry
-</pre>
+Prepare: Short entry</code></pre>
 
-                <p><strong>Scenario 3: HEAVY FUEL (Bearish Genuine)</strong></p>
-<pre>
-Price: Turun (close < open)
+<p><strong>Scenario 3: HEAVY FUEL (Bearish Genuine)</strong></p>
+<pre><code>Price: Turun (close < open)
 V_Fuel: Turun lebih rendah (genuine selling pressure)
 Artinya: Dump GENUINE, volume support strong selling
-Action: Safe untuk short, continuation likely
-</pre>
+Action: Safe untuk short, continuation likely</code></pre>
 
-                <p><strong>Scenario 4: FOMO TRAP (Bearish Palsu - Panic Exhausted)</strong></p>
-<pre>
-Price: Turun (close < open)
+<p><strong>Scenario 4: FOMO TRAP (Bearish Palsu - Panic Exhausted)</strong></p>
+<pre><code>Price: Turun (close < open)
 V_Fuel: Naik (volume ga support dump)
 Artinya: Panic selling exhausted, bounce coming
 Action: JANGAN short! Reversal up likely
-Prepare: Long entry
-</pre>
+Prepare: Long entry</code></pre>
 
-                <h3><strong>Strategi Trading:</strong></h3>
+<h3>Strategi Trading:</h3>
 
-                <p><strong>Trend Continuation (Ikut Yang Genuine):</strong></p>
-<pre>
-Setup Bullish:
+<p><strong>Trend Continuation (Ikut Yang Genuine):</strong></p>
+<pre><code>Setup Bullish:
 1. Price naik
 2. V-Wave: HEAVY FUEL (lime)
 3. Entry: Long continuation
@@ -986,12 +1144,10 @@ Setup Bearish:
 2. V-Wave: HEAVY FUEL (lime)
 3. Entry: Short continuation
 4. Stop: Above recent high
-5. Target: TP2 atau support
-</pre>
+5. Target: TP2 atau support</code></pre>
 
-                <p><strong>Reversal Setup (Manfaatin FOMO Trap):</strong></p>
-<pre>
-Setup Reversal Down:
+<p><strong>Reversal Setup (Manfaatin FOMO Trap):</strong></p>
+<pre><code>Setup Reversal Down:
 1. Price lagi rally (harga naik)
 2. V-Wave: FOMO TRAP (orange)
 3. Action: JANGAN long
@@ -1005,12 +1161,10 @@ Setup Reversal Up:
 3. Action: JANGAN short
 4. Wait: GOLD BUY signal
 5. Entry: Long (counter dump)
-6. Target: Resistance atau TP1
-</pre>
+6. Target: Resistance atau TP1</code></pre>
 
-                <h3><strong>Real Example 1: Genuine Rally</strong></h3>
-<pre>
-ETH/USDT
+<h3>Real Example 1: Genuine Rally</h3>
+<pre><code>ETH/USDT
 Candle 1:
 - Open: $2,000 | Close: $2,040 (naik $40)
 - High: $2,050 | Low: $1,995
@@ -1027,12 +1181,10 @@ V-Wave: HEAVY FUEL (7,273 > 5,818)
 
 Interpretation: Rally genuine, volume increasing
 Action: Long continuation
-Result: ETH rally ke $2,200 (profit $120)
-</pre>
+Result: ETH rally ke $2,200 (profit $120)</code></pre>
 
-                <h3><strong>Real Example 2: FOMO Trap</strong></h3>
-<pre>
-ETH/USDT (lanjutan rally)
+<h3>Real Example 2: FOMO Trap</h3>
+<pre><code>ETH/USDT (lanjutan rally)
 Candle 3:
 - Open: $2,080 | Close: $2,100 (naik $20)
 - High: $2,110 | Low: $2,075
@@ -1047,64 +1199,57 @@ Interpretation:
 - Rally exhausted
 
 Action: Close long, prepare short
-Result: ETH dump dari $2,100 ke $1,950 (saved $150 loss)
-</pre>
+Result: ETH dump dari $2,100 ke $1,950 (saved $150 loss)</code></pre>
 
-                <h3><strong>Kombinasi Deadly (Win Rate 85%):</strong></h3>
-<pre>
-FOMO TRAP (orange)
+<h3>Kombinasi Deadly (Win Rate 85%):</h3>
+<pre><code>FOMO TRAP (orange)
 + ALPHA-EXIT (dump risk)
 + BEARISH DIVERGENCE (div shield)
 + DOOM SELL
-= EXIT ALL LONGS + SHORT AGGRESSIVELY
-</pre>
-                <p><strong>Real talk:</strong> V-Wave ini seperti "fuel gauge" di mobil lo. Kalau gauge udah merah (FOMO TRAP), jangan maksain ngebut. Stop dulu.</p>
+= EXIT ALL LONGS + SHORT AGGRESSIVELY</code></pre>
 
-                <hr style="border-color: var(--border-color); margin: 40px 0;">
+<p><strong>Real talk:</strong> V-Wave ini seperti "fuel gauge" di mobil lo. Kalau gauge udah merah (FOMO TRAP), jangan maksain ngebut. Stop dulu.</p>
 
-                <h2>🛡️ MODUL HFT #5: DIVERGENCE SHIELD (Auto-Deteksi Pembalikan Tren)</h2>
+<hr>
 
-                <h3><strong>Apa ini dalam bahasa sederhana?</strong></h3>
-                <p>Pernah liat orang lagi jogging, makin lama makin lambat, akhirnya berhenti? Itu namanya "kehilangan tenaga".</p>
-                <p>Di trading, ada fenomena serupa: Harga masih naik, tapi "tenaga" (momentum)-nya udah lemah. Ini namanya <strong>Divergence</strong>—sinyal bahwa tren mau berbalik.</p>
+<h2>🛡️ MODUL HFT #5: DIVERGENCE SHIELD (Auto-Deteksi Pembalikan Tren)</h2>
 
-                <h3><strong>Kenapa ini SUPER penting?</strong></h3>
-                <p>Divergence adalah salah satu sinyal reversal paling powerful. <strong>70-80% divergence diikuti pembalikan tren dalam 5-20 bar.</strong></p>
-                <p>Masalahnya, deteksi divergence manual itu susah dan subjektif. Nah, Divergence Shield ini deteksi otomatis buat lo.</p>
+<h3>Apa ini dalam bahasa sederhana?</h3>
+<p>Pernah liat orang lagi jogging, makin lama makin lambat, akhirnya berhenti? Itu namanya "kehilangan tenaga".</p>
 
-                <h3><strong>2 Jenis Divergence:</strong></h3>
+<p>Di trading, ada fenomena serupa: Harga masih naik, tapi "tenaga" (momentum)-nya udah lemah. Ini namanya <strong>Divergence</strong>—sinyal bahwa tren mau berbalik.</p>
 
-                <p><strong>1. Bearish Divergence (Reversal dari Bull ke Bear):</strong></p>
-<pre>
-Price: Bikin Higher High (HH) - naik terus
+<h3>Kenapa ini SUPER penting?</h3>
+<p>Divergence adalah salah satu sinyal reversal paling powerful. <strong>70-80% divergence diikuti pembalikan tren dalam 5-20 bar.</strong></p>
+
+<p>Masalahnya, deteksi divergence manual itu susah dan subjektif. Nah, Divergence Shield ini deteksi otomatis buat lo.</p>
+
+<h3>2 Jenis Divergence:</h3>
+
+<p><strong>1. Bearish Divergence (Reversal dari Bull ke Bear):</strong></p>
+<pre><code>Price: Bikin Higher High (HH) - naik terus
 RSI: Bikin Lower High (LH) - momentum TURUN
 
 Analogi: Pelari masih maju, tapi makin lambat
 Artinya: Uptrend kehilangan tenaga
-Action: Reversal turun segera terjadi
-</pre>
+Action: Reversal turun segera terjadi</code></pre>
 
-                <p><strong>2. Bullish Divergence (Reversal dari Bear ke Bull):</strong></p>
-<pre>
-Price: Bikin Lower Low (LL) - turun terus
+<p><strong>2. Bullish Divergence (Reversal dari Bear ke Bull):</strong></p>
+<pre><code>Price: Bikin Lower Low (LL) - turun terus
 RSI: Bikin Higher Low (HL) - momentum NAIK
 
 Analogi: Orang jatuh makin pelan, ga sekenceng awal
 Artinya: Downtrend kehilangan tenaga
-Action: Reversal naik segera terjadi
-</pre>
+Action: Reversal naik segera terjadi</code></pre>
 
-                <h3><strong>Dashboard menunjukkan:</strong></h3>
-                <ul>
-                    <li><strong>DIVERGENCE RISK</strong> (merah) = Ada divergence terdeteksi, reversal warning!</li>
-                    <li><strong>SAFE</strong> (lime) = Ga ada divergence, tren masih sehat</li>
-                </ul>
-
-                <h3><strong>Cara pakainya:</strong></h3>
-
-                <p><strong>Exit Posisi (Defensive):</strong></p>
-<pre>
-Scenario: Lo lagi hold long dari $100, profit $500
+<h3>Dashboard menunjukkan:</h3>
+<ul>
+<li><strong>DIVERGENCE RISK</strong> (merah) = Ada divergence terdeteksi, reversal warning!</li>
+<li><strong>SAFE</strong> (lime) = Ga ada divergence, tren masih sehat</li>
+<h3>Cara pakainya:</h3>
+</ul>
+<p><strong>Exit Posisi (Defensive):</strong></p>
+<pre><code>Scenario: Lo lagi hold long dari $100, profit $500
 Dashboard: DIVERGENCE RISK (merah) muncul
 
 Action IMMEDIATELY:
@@ -1113,12 +1258,10 @@ Action IMMEDIATELY:
 3. Trailing stop ketat
 4. Bersiap reversal
 
-Why: 70-80% chance reversal dalam 5-20 bar
-</pre>
+Why: 70-80% chance reversal dalam 5-20 bar</code></pre>
 
-                <p><strong>Reversal Entry (Offensive):</strong></p>
-<pre>
-Setup Reversal Down (Bearish Divergence):
+<p><strong>Reversal Entry (Offensive):</strong></p>
+<pre><code>Setup Reversal Down (Bearish Divergence):
 1. Price bikin HH (higher high)
 2. RSI bikin LH (lower high)
 3. Divergence Shield: DIVERGENCE RISK (merah)
@@ -1134,12 +1277,10 @@ Setup Reversal Up (Bullish Divergence):
 4. Wait: GOLD BUY signal
 5. Entry: Long
 6. Stop: Di bawah LL
-7. Target: Resistance atau TP2
-</pre>
+7. Target: Resistance atau TP2</code></pre>
 
-                <h3><strong>Real Example (Bearish Divergence):</strong></h3>
-<pre>
-GBP/USD Uptrend:
+<h3>Real Example (Bearish Divergence):</h3>
+<pre><code>GBP/USD Uptrend:
 
 Week 1:
 High: 1.2500
@@ -1167,58 +1308,54 @@ Entry: Short 1.2615
 Stop: 1.2650
 Target: 1.2450
 
-Result: GBP/USD dump 165 pip dalam 1 minggu
-</pre>
+Result: GBP/USD dump 165 pip dalam 1 minggu</code></pre>
 
-                <h3><strong>Kombinasi PERFECT STORM (Win Rate 85%+):</strong></h3>
-<pre>
-BEARISH DIVERGENCE (div shield)
+<h3>Kombinasi PERFECT STORM (Win Rate 85%+):</h3>
+<pre><code>BEARISH DIVERGENCE (div shield)
 + FOMO TRAP (V-Wave)
 + ALPHA-EXIT (dump risk)
 + LIQUIDITY GRAB (sweep)
 + DOOM SELL signal
 = INI ADALAH "DUMP APOCALYPSE" SETUP
   EXIT ALL LONGS IMMEDIATELY
-  GO SHORT AGGRESSIVELY
-</pre>
-                <p><strong>Real talk:</strong> Divergence Shield ini kayak "early warning system" tsunami. Kalau alarm bunyi (DIVERGENCE RISK), lo punya waktu buat evakuasi sebelum gelombang datang.</p>
+  GO SHORT AGGRESSIVELY</code></pre>
 
-                <hr style="border-color: var(--border-color); margin: 40px 0;">
+<p><strong>Real talk:</strong> Divergence Shield ini kayak "early warning system" tsunami. Kalau alarm bunyi (DIVERGENCE RISK), lo punya waktu buat evakuasi sebelum gelombang datang.</p>
 
-                <h2>🚨 MODUL HFT #6: ALPHA-EXIT (Deteksi Whale Kabur)</h2>
+<hr>
 
-                <h3><strong>Apa ini dalam bahasa sederhana?</strong></h3>
-                <p>Bayangin lo lagi di konser. Tiba-tiba lo liat artis-nya kabur dari belakang panggung. Pertanda apa? Ada masalah!</p>
-                <p>Nah, Alpha-Exit ini deteksi saat "artis" pasar (whale, smart money, institusi) lagi kabur dari posisi mereka—sambil retail trader masih asik beli (FOMO).</p>
+<h2>🚨 MODUL HFT #6: ALPHA-EXIT (Deteksi Whale Kabur)</h2>
 
-                <h3><strong>Kenapa ini berbahaya buat retail?</strong></h3>
-                <p>Retail trader sering "masuk telat"—beli pas harga udah naik banyak. Padahal di saat yang sama, smart money udah exit (jual pelan-pelan ke retail yang FOMO).</p>
-                <p>Ujung-ujungnya? Retail "pegang kantong kosong" (bag holder) pas harga dump.</p>
+<h3>Apa ini dalam bahasa sederhana?</h3>
+<p>Bayangin lo lagi di konser. Tiba-tiba lo liat artis-nya kabur dari belakang panggung. Pertanda apa? Ada masalah!</p>
 
-                <h3><strong>Gimana cara kerjanya?</strong></h3>
-                <p>Script deteksi 3 kondisi yang SEMUA harus terpenuhi:</p>
-<pre>
-1. Price > EMA(20) - Rally mode (harga lagi naik)
+<p>Nah, Alpha-Exit ini deteksi saat "artis" pasar (whale, smart money, institusi) lagi kabur dari posisi mereka—sambil retail trader masih asik beli (FOMO).</p>
+
+<h3>Kenapa ini berbahaya buat retail?</h3>
+<p>Retail trader sering "masuk telat"—beli pas harga udah naik banyak. Padahal di saat yang sama, smart money udah exit (jual pelan-pelan ke retail yang FOMO).</p>
+
+<p>Ujung-ujungnya? Retail "pegang kantong kosong" (bag holder) pas harga dump.</p>
+
+<h3>Gimana cara kerjanya?</h3>
+<p>Script deteksi 3 kondisi yang SEMUA harus terpenuhi:</p>
+<pre><code>1. Price > EMA(20) - Rally mode (harga lagi naik)
 2. Volume Correlation < -0.5 - Negative correlation (harga naik, volume turun)
 3. Volume < SMA(Volume, 20) - Volume di bawah rata-rata
 
-Kalau SEMUA TRUE = DUMP RISK
-</pre>
+Kalau SEMUA TRUE = DUMP RISK</code></pre>
 
-                <h3><strong>Dashboard menunjukkan:</strong></h3>
-                <ul>
-                    <li><strong>DUMP RISK</strong> (merah) = Whale lagi exit, dump imminent!</li>
-                    <li><strong>STABLE</strong> (lime) = Aman, no cessation signal</li>
-                </ul>
+<h3>Dashboard menunjukkan:</h3>
+<ul>
+<li><strong>DUMP RISK</strong> (merah) = Whale lagi exit, dump imminent!</li>
+<li><strong>STABLE</strong> (lime) = Aman, no cessation signal</li>
+<h3>Kenapa ini powerful?</h3>
+</ul>
+<p>Ini adalah "inside information" legal. Lo bisa tau kalau smart money lagi distribute (jual pelan-pelan) ke retail yang FOMO.</p>
 
-                <h3><strong>Kenapa ini powerful?</strong></h3>
-                <p>Ini adalah "inside information" legal. Lo bisa tau kalau smart money lagi distribute (jual pelan-pelan) ke retail yang FOMO.</p>
+<h3>Cara bacanya:</h3>
 
-                <h3><strong>Cara bacanya:</strong></h3>
-
-                <p><strong>DUMP RISK (Merah) - BAHAYA!:</strong></p>
-<pre>
-What's happening:
+<p><strong>DUMP RISK (Merah) - BAHAYA!:</strong></p>
+<pre><code>What's happening:
 - Harga lagi rally (di atas EMA20)
 - Volume turun (negative correlation)
 - Volume di bawah rata-rata
@@ -1228,20 +1365,16 @@ Artinya:
 - Smart money: Lagi jual ke retail (distribute)
 - Rally: Akan segera berakhir
 
-Analogi: Musik masih keras, tapi artis udah kabur
-</pre>
+Analogi: Musik masih keras, tapi artis udah kabur</code></pre>
 
-                <p><strong>STABLE (Lime) - Aman:</strong></p>
-<pre>
-No cessation signal
-Safe untuk hold posisi
-</pre>
+<p><strong>STABLE (Lime) - Aman:</strong></p>
+<pre><code>No cessation signal
+Safe untuk hold posisi</code></pre>
 
-                <h3><strong>Strategi Trading:</strong></h3>
+<h3>Strategi Trading:</h3>
 
-                <p><strong>Exit Long (WAJIB - Defensive):</strong></p>
-<pre>
-Scenario: Lo hold long dari $40k, sekarang $45k (profit $5k)
+<p><strong>Exit Long (WAJIB - Defensive):</strong></p>
+<pre><code>Scenario: Lo hold long dari $40k, sekarang $45k (profit $5k)
 Alpha-Exit: DUMP RISK (merah) muncul
 
 ACTION IMMEDIATELY:
@@ -1255,12 +1388,10 @@ DO NOT:
 - "Ah masih naik kayaknya"
 - Mengabaikan warning ini
 
-Why: Whale ga peduli profit lo. Mereka dump, lo jadi korban.
-</pre>
+Why: Whale ga peduli profit lo. Mereka dump, lo jadi korban.</code></pre>
 
-                <p><strong>Avoid New Long (Preventive):</strong></p>
-<pre>
-Scenario: GOLD BUY muncul (sinyal long)
+<p><strong>Avoid New Long (Preventive):</strong></p>
+<pre><code>Scenario: GOLD BUY muncul (sinyal long)
 TAPI Alpha-Exit: DUMP RISK (merah)
 
 ACTION:
@@ -1268,12 +1399,10 @@ SKIP ENTRY!
 Jangan long meski sinyal bagus
 Wait: Sampai Alpha-Exit balik STABLE
 
-Why: Rally exhausted, dump risk tinggi
-</pre>
+Why: Rally exhausted, dump risk tinggi</code></pre>
 
-                <p><strong>Counter-Trend Short (Advanced - Offensive):</strong></p>
-<pre>
-Setup:
+<p><strong>Counter-Trend Short (Advanced - Offensive):</strong></p>
+<pre><code>Setup:
 1. Price rally kuat (retail FOMO)
 2. Alpha-Exit: DUMP RISK (merah)
 3. DOOM SELL signal muncul
@@ -1283,12 +1412,10 @@ Setup:
 
 Risk: Medium (counter-trend)
 Reward: High (big dump)
-Win rate: 70-75%
-</pre>
+Win rate: 70-75%</code></pre>
 
-                <h3><strong>Real Example:</strong></h3>
-<pre>
-BTC Rally from $40k to $46k:
+<h3>Real Example:</h3>
+<pre><code>BTC Rally from $40k to $46k:
 
 Current price: $46,200
 EMA(20): $44,500 (Price > EMA ✓)
@@ -1319,12 +1446,10 @@ Action taken:
 
 Result:
 BTC dump dari $46k ke $41k dalam 3 hari (profit $5,000)
-Retail yang FOMO: Trapped di $46k, loss -$5,000
-</pre>
+Retail yang FOMO: Trapped di $46k, loss -$5,000</code></pre>
 
-                <h3><strong>Kombinasi NUCLEAR (Paling Deadly):</strong></h3>
-<pre>
-ALPHA-EXIT (dump risk)
+<h3>Kombinasi NUCLEAR (Paling Deadly):</h3>
+<pre><code>ALPHA-EXIT (dump risk)
 + BEARISH DIVERGENCE (div shield)
 + FOMO TRAP (V-Wave)
 + LIQUIDITY GRAB (bearish sweep)
@@ -1333,215 +1458,175 @@ ALPHA-EXIT (dump risk)
 
 = THIS IS "MARKET CRASH" SETUP
   WIN RATE: 85-90%
-  EXIT ALL LONGS + SHORT WITH CONFIDENCE
-</pre>
-                <p><strong>Real talk:</strong> Alpha-Exit ini kayak "smoke detector" di rumah lo. Kalau alarm bunyi (DUMP RISK), jangan cari tau dulu asapnya dari mana. KELUAR DULU. Investigasi nanti.</p>
-            </section>
+  EXIT ALL LONGS + SHORT WITH CONFIDENCE</code></pre>
 
-            <hr style="border-color: var(--border-color); margin: 40px 0;">
+<p><strong>Real talk:</strong> Alpha-Exit ini kayak "smoke detector" di rumah lo. Kalau alarm bunyi (DUMP RISK), jangan cari tau dulu asapnya dari mana. KELUAR DULU. Investigasi nanti.</p>
 
-            <section id="dashboard-hierarchy">
-                <h2>📊 DASHBOARD HIERARCHY LENGKAP (19 ROWS)</h2>
-                <p>Ini adalah "control panel" lo. Semua info critical dalam 1 tabel di kanan atas chart.</p>
+<hr>
 
-                <h3><strong>Row 0: SINGULARITY/MODE</strong> 🆕</h3>
-                <p><strong>Apa yang ditampilkan:</strong> Preset mode atau manual override</p>
-                <ul>
-                    <li><strong>SCALPING</strong> (aqua) = RSI 7, ATR 10, Floor 1.5x</li>
-                    <li><strong>INTRADAY</strong> (lime) = RSI 14, ATR 14, Floor 2.5x</li>
-                    <li><strong>SWING</strong> (yellow) = RSI 21, ATR 21, Floor 3.5x</li>
-                    <li><strong>MANUAL</strong> (orange) = Lo custom sendiri</li>
-                </ul>
-                <p><strong>Fungsi:</strong> Kasih tau setting aktif sekarang</p>
+<h2>📊 DASHBOARD HIERARCHY LENGKAP (19 ROWS)</h2>
 
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
+<p>Ini adalah "control panel" lo. Semua info critical dalam 1 tabel di kanan atas chart.</p>
 
-                <h3><strong>Row 1: DYNAMICS</strong></h3>
-                <p><strong>Original indicator</strong></p>
-                <ul>
-                    <li><strong>CLEAR</strong> (bull color) = Kondisi optimal (Price > Baseline, PM bullish, Weekly bullish)</li>
-                    <li><strong>WAIT</strong> (bear color) = Kondisi belum optimal</li>
-                </ul>
+<h3>Row 0: SINGULARITY/MODE 🆕</h3>
+<p><strong>Apa yang ditampilkan:</strong> Preset mode atau manual override</p>
+<ul>
+<li><strong>SCALPING</strong> (aqua) = RSI 7, ATR 10, Floor 1.5x</li>
+<li><strong>INTRADAY</strong> (lime) = RSI 14, ATR 14, Floor 2.5x</li>
+<li><strong>SWING</strong> (yellow) = RSI 21, ATR 21, Floor 3.5x</li>
+<li><strong>MANUAL</strong> (orange) = Lo custom sendiri</li>
+</ul>
+<p><strong>Fungsi:</strong> Kasih tau setting aktif sekarang</p>
 
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
+<hr>
 
-                <h3><strong>Row 2: SQZ-STATUS</strong></h3>
-                <ul>
-                    <li><strong>COMPRESSED</strong> (orange) = Market lagi macet, tunggu release</li>
-                    <li><strong>RELEASED</strong> (lime) = Market udah explode, waktu yang tepat</li>
-                </ul>
+<h3>Row 1: DYNAMICS</h3>
+<p><strong>Original indicator</strong></p>
+<ul>
+<li><strong>CLEAR</strong> (bull color) = Kondisi optimal (Price > Baseline, PM bullish, Weekly bullish)</li>
+<li><strong>WAIT</strong> (bear color) = Kondisi belum optimal</li>
+<hr>
+<h3>Row 2: SQZ-STATUS</h3>
+<li><strong>COMPRESSED</strong> (orange) = Market lagi macet, tunggu release</li>
+<li><strong>RELEASED</strong> (lime) = Market udah explode, waktu yang tepat</li>
+<hr>
+<h3>Row 3: GAP-ZONE</h3>
+<li><strong>BULL GAP</strong> (yellow) = Ada gap bullish (magnet ke bawah)</li>
+<li><strong>BEAR GAP</strong> (yellow) = Ada gap bearish (magnet ke atas)</li>
+<li><strong>CLEAR</strong> (gray) = Ga ada gap</li>
+<hr>
+<h3>Row 4: WEEKLY TREND</h3>
+</ul>
+<p><strong>CRITICAL FILTER #1</strong></p>
+<ul>
+<li><strong>BULLISH</strong> (green) = Weekly uptrend, cari LONG</li>
+<li><strong>BEARISH</strong> (red) = Weekly downtrend, cari SHORT</li>
+<hr>
+<h3>Row 5: Q-RATING</h3>
+</ul>
+<p><strong>Volume confirmation</strong></p>
+<ul>
+<li><strong>READY</strong> (lime) = Volume >110% average, aman trade</li>
+<li><strong>THIN</strong> (gray) = Volume rendah, HINDARI</li>
+<hr>
+<h3>Row 6: MAP DELTA</h3>
+</ul>
+<p><strong>Jarak dari VWAP dalam %</strong></p>
+<ul>
+<li><strong>Positif</strong> (lime) = Harga di atas fair value</li>
+<li><strong>Negatif</strong> (red) = Harga di bawah fair value</li>
+<hr>
+<h3>Row 7: Q-THRUST (RSI)</h3>
+</ul>
+<p><strong>Momentum indicator</strong></p>
+<ul>
+<li><strong>>70</strong> (red) = Overbought</li>
+<li><strong><30</strong> (lime) = Oversold</li>
+<li><strong>50-70</strong> = Bullish healthy</li>
+<li><strong>30-50</strong> = Bearish healthy</li>
+<hr>
+<h3>Row 8: ALPHA-EXIT 🆕 **HFT MODULE**</h3>
+</ul>
+<p><strong>Whale exit detector</strong></p>
+<ul>
+<li><strong>DUMP RISK</strong> (red) = Whale kabur, exit longs NOW!</li>
+<li><strong>STABLE</strong> (lime) = Aman</li>
+</ul>
+<p><strong>Prioritas:</strong> HIGH - Exit signal, act immediately</p>
 
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
+<hr>
 
-                <h3><strong>Row 3: GAP-ZONE</strong></h3>
-                <ul>
-                    <li><strong>BULL GAP</strong> (yellow) = Ada gap bullish (magnet ke bawah)</li>
-                    <li><strong>BEAR GAP</strong> (yellow) = Ada gap bearish (magnet ke atas)</li>
-                    <li><strong>CLEAR</strong> (gray) = Ga ada gap</li>
-                </ul>
+<h3>Row 9: DIV-SHIELD 🆕 **HFT MODULE**</h3>
+<p><strong>Divergence detector</strong></p>
+<ul>
+<li><strong>DIVERGENCE RISK</strong> (red) = Reversal warning, close 50-75% posisi</li>
+<li><strong>SAFE</strong> (lime) = Tren masih sehat</li>
+</ul>
+<p><strong>Prioritas:</strong> HIGH - Early reversal warning</p>
 
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
+<hr>
 
-                <h3><strong>Row 4: WEEKLY TREND</strong></h3>
-                <p><strong>CRITICAL FILTER #1</strong></p>
-                <ul>
-                    <li><strong>BULLISH</strong> (green) = Weekly uptrend, cari LONG</li>
-                    <li><strong>BEARISH</strong> (red) = Weekly downtrend, cari SHORT</li>
-                </ul>
+<h3>Row 10: SHADOW-FLOW 🆕 **HFT MODULE**</h3>
+<p><strong>Dark pool activity</strong></p>
+<ul>
+<li><strong>ABSORPTION</strong> (fuchsia) = Institusi stealth accumulation/distribution</li>
+<li><strong>NEUTRAL</strong> (gray) = Normal</li>
+</ul>
+<p><strong>Prioritas:</strong> MEDIUM - Confluence signal</p>
 
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
+<hr>
 
-                <h3><strong>Row 5: Q-RATING</strong></h3>
-                <p><strong>Volume confirmation</strong></p>
-                <ul>
-                    <li><strong>READY</strong> (lime) = Volume >110% average, aman trade</li>
-                    <li><strong>THIN</strong> (gray) = Volume rendah, HINDARI</li>
-                </ul>
+<h3>Row 11: PREDATOR METER 🆕 **HFT MODULE**</h3>
+<p><strong>HFT algorithm detector</strong></p>
+<ul>
+<li><strong>PREDATOR (HFT)</strong> (red) = Algoritma aktif, fast movement</li>
+<li><strong>ACTIVE</strong> (lime) = Momentum tinggi</li>
+<li><strong>STAGNANT</strong> (gray) = Dead market, avoid</li>
+</ul>
+<p><strong>Prioritas:</strong> MEDIUM - Timing signal</p>
 
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
+<hr>
 
-                <h3><strong>Row 6: MAP DELTA</strong></h3>
-                <p><strong>Jarak dari VWAP dalam %</strong></p>
-                <ul>
-                    <li><strong>Positif</strong> (lime) = Harga di atas fair value</li>
-                    <li><strong>Negatif</strong> (red) = Harga di bawah fair value</li>
-                </ul>
+<h3>Row 12: V-WAVE 🆕 **HFT MODULE**</h3>
+<p><strong>Volume-price fuel check</strong></p>
+<ul>
+<li><strong>HEAVY FUEL</strong> (lime) = Genuine move, aman ikut</li>
+<li><strong>FOMO TRAP</strong> (orange) = Fake move, reversal coming</li>
+</ul>
+<p><strong>Prioritas:</strong> HIGH - Quality filter</p>
 
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
+<hr>
 
-                <h3><strong>Row 7: Q-THRUST (RSI)</strong></h3>
-                <p><strong>Momentum indicator</strong></p>
-                <ul>
-                    <li><strong>>70</strong> (red) = Overbought</li>
-                    <li><strong><30</strong> (lime) = Oversold</li>
-                    <li><strong>50-70</strong> = Bullish healthy</li>
-                    <li><strong>30-50</strong> = Bearish healthy</li>
-                </ul>
+<h3>Row 13: LIQUIDITY-GRAB 🆕 **HFT MODULE**</h3>
+<p><strong>Stop hunt detector</strong></p>
+<ul>
+<li><strong>ACTIVE</strong> (red) = Lagi terjadi sweep (+ label di chart)</li>
+<li><strong>CLEAR</strong> (gray) = No sweep</li>
+</ul>
+<p><strong>Prioritas:</strong> MEDIUM-HIGH - Manipulation detector</p>
 
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
+<hr>
 
-                <h3><strong>Row 8: ALPHA-EXIT</strong> 🆕 <strong>HFT MODULE</strong></h3>
-                <p><strong>Whale exit detector</strong></p>
-                <ul>
-                    <li><strong>DUMP RISK</strong> (red) = Whale kabur, exit longs NOW!</li>
-                    <li><strong>STABLE</strong> (lime) = Aman</li>
-                </ul>
-                <p><strong>Prioritas:</strong> HIGH - Exit signal, act immediately</p>
-
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
-
-                <h3><strong>Row 9: DIV-SHIELD</strong> 🆕 <strong>HFT MODULE</strong></h3>
-                <p><strong>Divergence detector</strong></p>
-                <ul>
-                    <li><strong>DIVERGENCE RISK</strong> (red) = Reversal warning, close 50-75% posisi</li>
-                    <li><strong>SAFE</strong> (lime) = Tren masih sehat</li>
-                </ul>
-                <p><strong>Prioritas:</strong> HIGH - Early reversal warning</p>
-
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
-
-                <h3><strong>Row 10: SHADOW-FLOW</strong> 🆕 <strong>HFT MODULE</strong></h3>
-                <p><strong>Dark pool activity</strong></p>
-                <ul>
-                    <li><strong>ABSORPTION</strong> (fuchsia) = Institusi stealth accumulation/distribution</li>
-                    <li><strong>NEUTRAL</strong> (gray) = Normal</li>
-                </ul>
-                <p><strong>Prioritas:</strong> MEDIUM - Confluence signal</p>
-
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
-
-                <h3><strong>Row 11: PREDATOR METER</strong> 🆕 <strong>HFT MODULE</strong></h3>
-                <p><strong>HFT algorithm detector</strong></p>
-                <ul>
-                    <li><strong>PREDATOR (HFT)</strong> (red) = Algoritma aktif, fast movement</li>
-                    <li><strong>ACTIVE</strong> (lime) = Momentum tinggi</li>
-                    <li><strong>STAGNANT</strong> (gray) = Dead market, avoid</li>
-                </ul>
-                <p><strong>Prioritas:</strong> MEDIUM - Timing signal</p>
-
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
-
-                <h3><strong>Row 12: V-WAVE</strong> 🆕 <strong>HFT MODULE</strong></h3>
-                <p><strong>Volume-price fuel check</strong></p>
-                <ul>
-                    <li><strong>HEAVY FUEL</strong> (lime) = Genuine move, aman ikut</li>
-                    <li><strong>FOMO TRAP</strong> (orange) = Fake move, reversal coming</li>
-                </ul>
-                <p><strong>Prioritas:</strong> HIGH - Quality filter</p>
-
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
-
-                <h3><strong>Row 13: LIQUIDITY-GRAB</strong> 🆕 <strong>HFT MODULE</strong></h3>
-                <p><strong>Stop hunt detector</strong></p>
-                <ul>
-                    <li><strong>ACTIVE</strong> (red) = Lagi terjadi sweep (+ label di chart)</li>
-                    <li><strong>CLEAR</strong> (gray) = No sweep</li>
-                </ul>
-                <p><strong>Prioritas:</strong> MEDIUM-HIGH - Manipulation detector</p>
-
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
-
-                <h3><strong>Row 14: V-STRESS</strong></h3>
-                <p><strong>Volatility percentile</strong></p>
-                <ul>
-                    <li><strong>>75%</strong> = Volatilitas ekstrem, widen stop</li>
-                    <li><strong><25%</strong> = Market dead</li>
-                    <li><strong>25-75%</strong> = Normal</li>
-                </ul>
-
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
-
-                <h3><strong>Row 15: DYNAMIC FLOOR</strong></h3>
-                <p><strong>Trailing stop reference</strong></p>
-                <ul>
-                    <li>Nilai harga level floor</li>
-                    <li>Pakai sebagai stop loss</li>
-                </ul>
-
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
-
-                <h3><strong>Row 16: RESISTANCE</strong></h3>
-                <p><strong>Structural resistance level</strong></p>
-                <ul>
-                    <li>Pivot high terakhir</li>
-                    <li>Target untuk long, obstacle untuk short</li>
-                </ul>
-
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
-
-                <h3><strong>Row 17: SUPPORT</strong></h3>
-                <p><strong>Structural support level</strong></p>
-                <ul>
-                    <li>Pivot low terakhir</li>
-                    <li>Target untuk short, entry untuk long</li>
-                </ul>
-
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
-
-                <h3><strong>Row 18: Q-TARGETS</strong></h3>
-                <p><strong>Auto take profit</strong></p>
-                <ul>
-                    <li>TP1 | TP2</li>
-                    <li>Based on ATR</li>
-                </ul>
-            </section>
-
-            <hr style="border-color: var(--border-color); margin: 40px 0;">
-
-            <div class="cta-container">
-                <h3 style="margin-top:0; color: #fff;">Strategi Trading Institutional-Grade</h3>
-                <p>Pilih strategi di bawah ini dan terapkan langsung di chart lo.</p>
-                <a href="#" class="btn-cta">Dapatkan Akses Full</a>
-            </div>
-
-            <section id="confluence-strategy">
-                <h2>🎯 CONFLUENCE STRATEGY MEGA GUIDE</h2>
-
-                <h3><strong>STRATEGY 1: THE PERFECT STORM (Bullish - Win Rate 80-85%)</strong></h3>
-
-                <p><strong>Setup Requirements (Semua harus TRUE):</strong></p>
-<pre>
-✅ SINGULARITY: Any mode (sesuai gaya lo)
+<h3>Row 14: V-STRESS</h3>
+<p><strong>Volatility percentile</strong></p>
+<ul>
+<li><strong>>75%</strong> = Volatilitas ekstrem, widen stop</li>
+<li><strong><25%</strong> = Market dead</li>
+<li><strong>25-75%</strong> = Normal</li>
+<hr>
+<h3>Row 15: DYNAMIC FLOOR</h3>
+</ul>
+<p><strong>Trailing stop reference</strong></p>
+<ul>
+<li>Nilai harga level floor</li>
+<li>Pakai sebagai stop loss</li>
+<hr>
+<h3>Row 16: RESISTANCE</h3>
+</ul>
+<p><strong>Structural resistance level</strong></p>
+<ul>
+<li>Pivot high terakhir</li>
+<li>Target untuk long, obstacle untuk short</li>
+<hr>
+<h3>Row 17: SUPPORT</h3>
+</ul>
+<p><strong>Structural support level</strong></p>
+<ul>
+<li>Pivot low terakhir</li>
+<li>Target untuk short, entry untuk long</li>
+<hr>
+<h3>Row 18: Q-TARGETS</h3>
+</ul>
+<p><strong>Auto take profit</strong></p>
+<ul>
+<li>TP1 | TP2</li>
+<li>Based on ATR</li>
+<hr>
+<h2>🎯 CONFLUENCE STRATEGY MEGA GUIDE</h2>
+<h3>STRATEGY 1: THE PERFECT STORM (Bullish - Win Rate 80-85%)</h3>
+</ul>
+<p><strong>Setup Requirements (Semua harus TRUE):</strong></p>
+<pre><code>✅ SINGULARITY: Any mode (sesuai gaya lo)
 ✅ WEEKLY TREND: BULLISH
 ✅ SQZ-STATUS: RELEASED
 ✅ SHADOW-FLOW: ABSORPTION (di support)
@@ -1550,21 +1635,18 @@ ALPHA-EXIT (dump risk)
 ✅ DIV-SHIELD: SAFE
 ✅ ALPHA-EXIT: STABLE
 ✅ Q-RATING: READY
-✅ GOLD BUY signal muncul
-</pre>
+✅ GOLD BUY signal muncul</code></pre>
 
-                <p><strong>Action:</strong></p>
-                <ul>
-                    <li><strong>Entry:</strong> Immediately on GOLD BUY</li>
-                    <li><strong>Size:</strong> 3-5% balance (high confidence)</li>
-                    <li><strong>Stop:</strong> Below Dynamic Floor</li>
-                    <li><strong>Target:</strong> TP2 + trailing with Exit Arrows</li>
-                    <li><strong>Expected:</strong> Big move, 100-300 pip/poin/$</li>
-                </ul>
-
-                <p><strong>Real Example:</strong></p>
-<pre>
-EUR/USD Setup:
+<p><strong>Action:</strong></p>
+<ul>
+<li><strong>Entry:</strong> Immediately on GOLD BUY</li>
+<li><strong>Size:</strong> 3-5% balance (high confidence)</li>
+<li><strong>Stop:</strong> Below Dynamic Floor</li>
+<li><strong>Target:</strong> TP2 + trailing with Exit Arrows</li>
+<li><strong>Expected:</strong> Big move, 100-300 pip/poin/$</li>
+</ul>
+<p><strong>Real Example:</strong></p>
+<pre><code>EUR/USD Setup:
 SINGULARITY: INTRADAY
 WEEKLY: BULLISH ✓
 SQZ: RELEASED ✓
@@ -1583,37 +1665,32 @@ Target: TP2 = 1.1040 (80 pip)
 
 Result: Hit TP2 in 6 hours
 Profit: 80 pip
-R:R: 1:2
-</pre>
+R:R: 1:2</code></pre>
 
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
+<hr>
 
-                <h3><strong>STRATEGY 2: THE DUMP APOCALYPSE (Bearish Reversal - Win Rate 85-90%)</strong></h3>
+<h3>STRATEGY 2: THE DUMP APOCALYPSE (Bearish Reversal - Win Rate 85-90%)</h3>
 
-                <p><strong>Setup Requirements (Catastrophic Dump Signal):</strong></p>
-<pre>
-✅ Price in rally (above EMA20)
+<p><strong>Setup Requirements (Catastrophic Dump Signal):</strong></p>
+<pre><code>✅ Price in rally (above EMA20)
 ✅ ALPHA-EXIT: DUMP RISK 🚨
 ✅ DIV-SHIELD: DIVERGENCE RISK 🚨
 ✅ V-WAVE: FOMO TRAP 🚨
 ✅ LIQUIDITY-GRAB: ACTIVE (bearish sweep) 🚨
 ✅ PREDATOR: ACTIVE (whale movement)
-✅ DOOM SELL signal muncul
-</pre>
+✅ DOOM SELL signal muncul</code></pre>
 
-                <p><strong>Action:</strong></p>
-                <ul>
-                    <li><strong>Close ALL longs immediately</strong> (100% posisi)</li>
-                    <li><strong>Entry:</strong> Short on DOOM SELL</li>
-                    <li><strong>Size:</strong> 2-4% (reversal trading, medium risk)</li>
-                    <li><strong>Stop:</strong> Above recent high / sweep level</li>
-                    <li><strong>Target:</strong> Support atau TP1 (quick profit)</li>
-                    <li><strong>Expected:</strong> Sharp dump, fast profit</li>
-                </ul>
-
-                <p><strong>Real Example:</strong></p>
-<pre>
-BTC Setup (Rally Exhaustion):
+<p><strong>Action:</strong></p>
+<ul>
+<li><strong>Close ALL longs immediately</strong> (100% posisi)</li>
+<li><strong>Entry:</strong> Short on DOOM SELL</li>
+<li><strong>Size:</strong> 2-4% (reversal trading, medium risk)</li>
+<li><strong>Stop:</strong> Above recent high / sweep level</li>
+<li><strong>Target:</strong> Support atau TP1 (quick profit)</li>
+<li><strong>Expected:</strong> Sharp dump, fast profit</li>
+</ul>
+<p><strong>Real Example:</strong></p>
+<pre><code>BTC Setup (Rally Exhaustion):
 Price: $47,500 (rally from $42k)
 EMA20: $45,000 (above ✓)
 
@@ -1633,39 +1710,34 @@ Action:
 
 Result: BTC dump to $43,200 in 2 days
 Profit: $4,200
-R:R: 1:7 (excellent!)
-</pre>
+R:R: 1:7 (excellent!)</code></pre>
 
-                <p><strong>Warning:</strong> Ini adalah "nuclear option" setup. Kalau 5+ HFT modules ngasih warning serentak, <strong>IT'S NOT A DRILL. ACT NOW.</strong></p>
+<p><strong>Warning:</strong> Ini adalah "nuclear option" setup. Kalau 5+ HFT modules ngasih warning serentak, <strong>IT'S NOT A DRILL. ACT NOW.</strong></p>
 
-                <hr style="border-color: var(--border-color); opacity: 0.3;">
+<hr>
 
-                <h3><strong>STRATEGY 3: THE STEALTH ACCUMULATION (Swing Entry - Win Rate 70-75%)</strong></h3>
+<h3>STRATEGY 3: THE STEALTH ACCUMULATION (Swing Entry - Win Rate 70-75%)</h3>
 
-                <p><strong>Setup Requirements:</strong></p>
-<pre>
-✅ SINGULARITY: SWING mode
+<p><strong>Setup Requirements:</strong></p>
+<pre><code>✅ SINGULARITY: SWING mode
 ✅ WEEKLY TREND: BULLISH
 ✅ Price pullback to support
 ✅ SHADOW-FLOW: ABSORPTION (smart money beli diam-diam)
 ✅ LIQUIDITY-GRAB: ACTIVE (bullish sweep - fake breakdown)
 ✅ DIV-SHIELD: SAFE
 ✅ V-WAVE: HEAVY FUEL (pas bounce)
-✅ Wait for GOLD BUY
-</pre>
+✅ Wait for GOLD BUY</code></pre>
 
-                <p><strong>Action:</strong></p>
-                <ul>
-                    <li><strong>Entry:</strong> On GOLD BUY after sweep</li>
-                    <li><strong>Size:</strong> 2-4% balance</li>
-                    <li><strong>Stop:</strong> Below sweep low (tight R:R)</li>
-                    <li><strong>Target:</strong> TP2 atau resistance (swing target 3-5x ATR)</li>
-                    <li><strong>Expected:</strong> Slow grind up, big profit</li>
-                </ul>
-
-                <p><strong>Real Example:</strong></p>
-<pre>
-GOLD (XAU/USD) Swing Setup:
+<p><strong>Action:</strong></p>
+<ul>
+<li><strong>Entry:</strong> On GOLD BUY after sweep</li>
+<li><strong>Size:</strong> 2-4% balance</li>
+<li><strong>Stop:</strong> Below sweep low (tight R:R)</li>
+<li><strong>Target:</strong> TP2 atau resistance (swing target 3-5x ATR)</li>
+<li><strong>Expected:</strong> Slow grind up, big profit</li>
+</ul>
+<p><strong>Real Example:</strong></p>
+<pre><code>GOLD (XAU/USD) Swing Setup:
 
 SINGULARITY: SWING (RSI 21, ATR 21, Floor 3.5x)
 WEEKLY: BULLISH ✓
@@ -1693,81 +1765,87 @@ Target: $2,050 (68 point, resistance)
 
 Result: Hit target in 10 days
 Profit: $68 per oz
-R:R: 1:5.6 (swing trading beauty)
-</pre>
-            </section>
+R:R: 1:5.6 (swing trading beauty)</code></pre>
 
-            <hr style="border-color: var(--border-color); margin: 40px 0;">
+<hr>
 
-            <section id="warnings-rules">
-                <h2>⚠️ CRITICAL WARNINGS & RULES</h2>
+<h2>⚠️ CRITICAL WARNINGS & RULES</h2>
 
-                <h3><strong>JANGAN PERNAH:</strong></h3>
-                <p><strong>1. ❌ Ignore Weekly Trend</strong><br>
-                Masih rule #1. 80% retail loss karena ini.</p>
-                <p><strong>2. ❌ Trade saat SQZ Compressed</strong><br>
-                Wait for RELEASED. Patience is profit.</p>
-                <p><strong>3. ❌ Trade saat Q-RATING THIN</strong><br>
-                Low volume = high whipsaw = kerugian pasti.</p>
-                <p><strong>4. ❌ Ignore ALPHA-EXIT "DUMP RISK"</strong><br>
-                Kalau muncul, exit longs IMMEDIATELY. Ga ada "tunggu dulu".</p>
-                <p><strong>5. ❌ Ignore DIVERGENCE RISK</strong><br>
-                Close minimum 50% posisi. Reversal coming 70-80% of the time.</p>
-                <p><strong>6. ❌ Trade FOMO TRAP (V-Wave orange)</strong><br>
-                Rally/dump palsu. Don't be the bag holder.</p>
-                <p><strong>7. ❌ Chase PREDATOR tanpa konfirmasi</strong><br>
-                HFT bisa reverse tiba-tiba. Wait for entry signal.</p>
-                <p><strong>8. ❌ Ignore LIQUIDITY GRAB</strong><br>
-                Sweep = manipulation. Jangan jadi korban.</p>
+<h3>JANGAN PERNAH:</h3>
 
-                <h3><strong>SELALU:</strong></h3>
-                <p><strong>1. ✅ Use Dynamic Floor for stop loss</strong><br>
-                Manual stop = diburu market maker.</p>
-                <p><strong>2. ✅ Check Multiple HFT Modules</strong><br>
-                1 module = clue, 3+ modules = conviction.</p>
-                <p><strong>3. ✅ Respect GOLD/DOOM signals</strong><br>
-                Udah ada confluence built-in.</p>
-                <p><strong>4. ✅ Adjust Floor Multiplier by market</strong><br>
-                Crypto volatile? Pakai 3.5-4.0x. Forex stable? 2.5x cukup.</p>
-                <p><strong>5. ✅ Use Preset Engine for quick setup</strong></p>
-                <ul>
-                    <li>Scalping: Chart 1-5M</li>
-                    <li>Intraday: Chart 15M-1H</li>
-                    <li>Swing: Chart 4H-Daily</li>
-                </ul>
-                <p><strong>6. ✅ Combine signals for confluence</strong><br>
-                Example deadly combo:</p>
-<pre>
-SHADOW-FLOW (absorption)
+<p><strong>1. ❌ Ignore Weekly Trend</strong></p>
+<p>Masih rule #1. 80% retail loss karena ini.</p>
+
+<p><strong>2. ❌ Trade saat SQZ Compressed</strong></p>
+<p>Wait for RELEASED. Patience is profit.</p>
+
+<p><strong>3. ❌ Trade saat Q-RATING THIN</strong></p>
+<p>Low volume = high whipsaw = kerugian pasti.</p>
+
+<p><strong>4. ❌ Ignore ALPHA-EXIT "DUMP RISK"</strong></p>
+<p>Kalau muncul, exit longs IMMEDIATELY. Ga ada "tunggu dulu".</p>
+
+<p><strong>5. ❌ Ignore DIVERGENCE RISK</strong></p>
+<p>Close minimum 50% posisi. Reversal coming 70-80% of the time.</p>
+
+<p><strong>6. ❌ Trade FOMO TRAP (V-Wave orange)</strong></p>
+<p>Rally/dump palsu. Don't be the bag holder.</p>
+
+<p><strong>7. ❌ Chase PREDATOR tanpa konfirmasi</strong></p>
+<p>HFT bisa reverse tiba-tiba. Wait for entry signal.</p>
+
+<p><strong>8. ❌ Ignore LIQUIDITY GRAB</strong></p>
+<p>Sweep = manipulation. Jangan jadi korban.</p>
+
+<hr>
+
+<h3>SELALU:</h3>
+
+<p><strong>1. ✅ Use Dynamic Floor for stop loss</strong></p>
+<p>Manual stop = diburu market maker.</p>
+
+<p><strong>2. ✅ Check Multiple HFT Modules</strong></p>
+<p>1 module = clue, 3+ modules = conviction.</p>
+
+<p><strong>3. ✅ Respect GOLD/DOOM signals</strong></p>
+<p>Udah ada confluence built-in.</p>
+
+<p><strong>4. ✅ Adjust Floor Multiplier by market</strong></p>
+<p>Crypto volatile? Pakai 3.5-4.0x. Forex stable? 2.5x cukup.</p>
+
+<p><strong>5. ✅ Use Preset Engine for quick setup</strong></p>
+<ul>
+<li>Scalping: Chart 1-5M</li>
+<li>Intraday: Chart 15M-1H</li>
+<li>Swing: Chart 4H-Daily</li>
+</ul>
+<p><strong>6. ✅ Combine signals for confluence</strong></p>
+<p>Example deadly combo:</p>
+<pre><code>SHADOW-FLOW (absorption)
 + LIQUIDITY-GRAB (sweep)
 + V-WAVE (heavy fuel)
 + GOLD BUY
-= 85%+ win rate setup
-</pre>
-                <p><strong>7. ✅ Act on HFT warnings immediately</strong><br>
-                ALPHA-EXIT + DIV-SHIELD red? Exit NOW, investigate later.</p>
-            </section>
+= 85%+ win rate setup</code></pre>
 
-            <hr style="border-color: var(--border-color); margin: 40px 0;">
+<p><strong>7. ✅ Act on HFT warnings immediately</strong></p>
+<p>ALPHA-EXIT + DIV-SHIELD red? Exit NOW, investigate later.</p>
 
-            <section id="recommended-settings">
-                <h2>📈 RECOMMENDED SETTINGS PER MARKET</h2>
+<hr>
 
-                <h3><strong>FOREX (Major Pairs)</strong></h3>
-<pre>
-Preset: INTRADAY
+<h2>📈 RECOMMENDED SETTINGS PER MARKET</h2>
+
+<h3>FOREX (Major Pairs)</h3>
+<pre><code>Preset: INTRADAY
 Timeframe: 15M, 1H
 Focus Modules:
 - SHADOW-FLOW (institutional activity)
 - LIQUIDITY-GRAB (common di forex)
 - V-WAVE (volume reliability)
 
-Why: Forex likuid, institutional footprint jelas, liquidity grab sering terjadi
-</pre>
+Why: Forex likuid, institutional footprint jelas, liquidity grab sering terjadi</code></pre>
 
-                <h3><strong>CRYPTO (BTC, ETH)</strong></h3>
-<pre>
-Preset: SWING (hold days) atau SCALPING (day trade)
+<h3>CRYPTO (BTC, ETH)</h3>
+<pre><code>Preset: SWING (hold days) atau SCALPING (day trade)
 Manual Override: Floor Mult 3.5-4.0 (volatilitas tinggi)
 Timeframe: 1H, 4H (swing) atau 5M, 15M (scalping)
 Focus Modules:
@@ -1775,24 +1853,20 @@ Focus Modules:
 - ALPHA-EXIT (whale exit)
 - DIV-SHIELD (reversal warning)
 
-Why: Crypto volatile, whale manipulation, HFT dominant
-</pre>
+Why: Crypto volatile, whale manipulation, HFT dominant</code></pre>
 
-                <h3><strong>SAHAM (Blue Chip Indonesia)</strong></h3>
-<pre>
-Preset: INTRADAY
+<h3>SAHAM (Blue Chip Indonesia)</h3>
+<pre><code>Preset: INTRADAY
 Timeframe: 15M, 30M
 Focus Modules:
 - V-WAVE (genuine vs FOMO)
 - Q-RATING (volume critical di saham)
 - SHADOW-FLOW (smart money accumulation)
 
-Why: Market hours terbatas (3.5 jam), volume penting, smart money clear
-</pre>
+Why: Market hours terbatas (3.5 jam), volume penting, smart money clear</code></pre>
 
-                <h3><strong>KOMODITAS (Gold, Oil)</strong></h3>
-<pre>
-Preset: SWING
+<h3>KOMODITAS (Gold, Oil)</h3>
+<pre><code>Preset: SWING
 Manual Override: ATR 21-25 (smooth trending)
 Timeframe: 1H, 4H
 Focus Modules:
@@ -1800,135 +1874,132 @@ Focus Modules:
 - ALPHA-EXIT (trend exhaustion)
 - V-WAVE (genuine moves)
 
-Why: Komoditas trend following, reversal warnings critical
-</pre>
-            </section>
+Why: Komoditas trend following, reversal warnings critical</code></pre>
 
-            <hr style="border-color: var(--border-color); margin: 40px 0;">
+<hr>
 
-            <section id="final-wisdom">
-                <h2>🏆 FINAL WISDOM</h2>
+<h2>🏆 FINAL WISDOM</h2>
 
-                <p><strong>Script ini adalah institutional-grade trading system</strong> yang menggabungkan:</p>
-                <ul>
-                    <li>✅ 7 HFT modules (teknologi institusi)</li>
-                    <li>✅ Dynamic Preset Engine (adaptif)</li>
-                    <li>✅ Clean UI (fokus ke signal penting)</li>
-                    <li>✅ 19-row dashboard (all info in one place)</li>
-                </ul>
+<p><strong>Script ini adalah institutional-grade trading system</strong> yang menggabungkan:</p>
+<ul>
+<li>✅ 7 HFT modules (teknologi institusi)</li>
+<li>✅ Dynamic Preset Engine (adaptif)</li>
+<li>✅ Clean UI (fokus ke signal penting)</li>
+<li>✅ 19-row dashboard (all info in one place)</li>
+</ul>
+<p><strong>HFT Modules memberikan lo "x-ray vision":</strong></p>
+<ul>
+<li><strong>SHADOW-FLOW</strong> = Liat smart money</li>
+<li><strong>LIQUIDITY-GRAB</strong> = Deteksi manipulation</li>
+<li><strong>PREDATOR METER</strong> = Tau kapan HFT aktif</li>
+<li><strong>V-WAVE</strong> = Bedain genuine vs fake</li>
+<li><strong>DIV-SHIELD</strong> = Early reversal warning</li>
+<li><strong>ALPHA-EXIT</strong> = Tau kapan whale kabur</li>
+</ul>
+<p><strong>Remember:</strong></p>
+<p>1. <strong>Quality over quantity</strong> - Tunggu confluence perfect</p>
+<p>2. <strong>Risk management</strong> - Always use Dynamic Floor</p>
+<p>3. <strong>Patience</strong> - Market rewards patient trader</p>
+<p>4. <strong>Discipline</strong> - Follow signals, trust system</p>
+<p>5. <strong>Act on warnings</strong> - HFT modules kasih early warning, jangan ignore</p>
 
-                <p><strong>HFT Modules memberikan lo "x-ray vision":</strong></p>
-                <ul>
-                    <li><strong>SHADOW-FLOW</strong> = Liat smart money</li>
-                    <li><strong>LIQUIDITY-GRAB</strong> = Deteksi manipulation</li>
-                    <li><strong>PREDATOR METER</strong> = Tau kapan HFT aktif</li>
-                    <li><strong>V-WAVE</strong> = Bedain genuine vs fake</li>
-                    <li><strong>DIV-SHIELD</strong> = Early reversal warning</li>
-                    <li><strong>ALPHA-EXIT</strong> = Tau kapan whale kabur</li>
-                </ul>
+<p><strong>Ini adalah senjata yang sama yang dipakai prop firm dan institutional trader.</strong></p>
 
-                <p><strong>Remember:</strong></p>
-                <ol>
-                    <li><strong>Quality over quantity</strong> - Tunggu confluence perfect</li>
-                    <li><strong>Risk management</strong> - Always use Dynamic Floor</li>
-                    <li><strong>Patience</strong> - Market rewards patient trader</li>
-                    <li><strong>Discipline</strong> - Follow signals, trust system</li>
-                    <li><strong>Act on warnings</strong> - HFT modules kasih early warning, jangan ignore</li>
-                </ol>
+<p>Sekarang lo punya akses yang sama.</p>
 
-                <p><strong>Ini adalah senjata yang sama yang dipakai prop firm dan institutional trader.</strong></p>
-                <p>Sekarang lo punya akses yang sama.</p>
-                <p>Good luck, trade safe, dan semoga profit lo selalu <strong>GOLD</strong>! 🚀</p>
+<p>Good luck, trade safe, dan semoga profit lo selalu <strong>GOLD</strong>! 🚀</p>
 
-                <hr style="border-color: var(--border-color); margin: 20px 0;">
-                <p style="font-style: italic; color: var(--text-muted);">Edge terlindungi. Eksekusi di tangan lo. Sekarang lo punya radar institusi—tinggal ACTION.</p>
-                <p><strong>— SS BlackBox Monster Edition v6.1 + HFT INJECTION —</strong><br>
-                <strong>— The Ultimate Retail Weapon Against The Market —</strong></p>
-            </section>
+<hr>
 
-        </main>
+<p>*Edge terlindungi. Eksekusi di tangan lo. Sekarang lo punya radar institusi—tinggal ACTION.*</p>
 
-        <aside class="sidebar">
-            <div class="toc-sticky">
-                <div class="toc-title">DAFTAR ISI</div>
-                <ul class="toc-list" id="toc-list">
-                    </ul>
-                <div style="margin-top: 20px; text-align: center;">
-                    <a href="#" class="btn-cta" style="width: 100%; padding: 12px; font-size: 0.9rem;">Join Community</a>
-                </div>
-            </div>
-        </aside>
+<p><strong>— SS BlackBox Monster Edition v6.1 + HFT INJECTION —</strong></p>
+<p><strong>— The Ultimate Retail Weapon Against The Market —</strong></p>
 
-    </div>
-
-    <div style="background-color: var(--bg-card); padding: 50px 20px; text-align: center; margin-top: 60px; border-top: 1px solid var(--border-color);">
-        <h2 style="border: none; margin-top: 0;">Siap Jadi Institutional Trader?</h2>
-        <p style="max-width: 600px; margin: 0 auto 30px auto;">Jangan biarkan HFT dan Whale mengambil profit lo. Lawan balik dengan senjata mereka sendiri.</p>
-        <a href="#" class="btn-cta">Dapatkan SS BlackBox v6.1 Sekarang</a>
-    </div>
-
-    <footer>
-        <div class="container" style="display: block;">
-            <p>&copy; 2024 StockIndexer. All rights reserved.</p>
+<div class="cta-section">
+    <h3 class="cta-title">Ready to Transform Your Trading?</h3>
+    <p class="cta-text">Mulai journey trading profesional lo dengan SS BlackBox Monster Edition + HFT Modules!</p>
+    <a href="index.html#pricing" class="cta-button">Mulai Sekarang →</a>
+</div>
         </div>
-    </footer>
-
+    </main>
+    
+    <div class="scroll-top" id="scrollTop">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
+    
     <script>
-        // Generate TOC automatically
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('main section');
-            const tocList = document.getElementById('toc-list');
-            const mobileTocContent = document.getElementById('mobile-toc-content');
-
-            sections.forEach(section => {
-                const title = section.querySelector('h2').innerText.split('(')[0]; // Simplifies title
-                const id = section.id;
-                
-                // Add to Desktop TOC
-                const li = document.createElement('li');
-                li.innerHTML = `<a href="#${id}">${title}</a>`;
-                tocList.appendChild(li);
-
-                // Add to Mobile TOC
-                const mobileLink = document.createElement('a');
-                mobileLink.href = `#${id}`;
-                mobileLink.innerText = title;
-                mobileLink.style.display = 'block';
-                mobileLink.style.padding = '8px 0';
-                mobileLink.style.color = 'var(--text-main)';
-                mobileLink.style.textDecoration = 'none';
-                mobileLink.style.borderBottom = '1px solid var(--border-color)';
-                mobileTocContent.appendChild(mobileLink);
-            });
-
-            // Highlight active TOC item on scroll
-            window.addEventListener('scroll', () => {
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (pageYOffset >= (sectionTop - 150)) {
-                        current = section.getAttribute('id');
-                    }
-                });
-
-                document.querySelectorAll('.toc-list a').forEach(a => {
-                    a.classList.remove('active');
-                    if (a.getAttribute('href').includes(current)) {
-                        a.classList.add('active');
-                    }
-                });
-            });
-        });
-
-        function toggleToc() {
-            const toc = document.getElementById('mobile-toc-content');
-            if (toc.style.display === 'none') {
-                toc.style.display = 'block';
-            } else {
-                toc.style.display = 'none';
+        // Check if user has premium access
+        function checkPremiumAccess() {
+            var hasPremium = localStorage.getItem('ss_blackbox_premium');
+            
+            if (hasPremium === 'true') {
+                unlockPremiumContent();
             }
         }
+        
+        // Unlock premium content
+        function unlockPremiumContent() {
+            var premiumContent = document.getElementById('premiumContent');
+            var barrier = document.querySelector('.premium-barrier');
+            
+            if (premiumContent) {
+                premiumContent.classList.remove('locked');
+            }
+            
+            if (barrier) {
+                barrier.style.display = 'none';
+            }
+        }
+        
+        // Progress bar
+        window.addEventListener('scroll', function() {
+            var scrollPosition = window.pageYOffset;
+            var windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+            var scrollPercentage = (scrollPosition / windowHeight) * 100;
+            
+            document.getElementById('progressBar').style.width = scrollPercentage + '%';
+            
+            var scrollButton = document.getElementById('scrollTop');
+            if (scrollPosition > 400) {
+                scrollButton.classList.add('visible');
+            } else {
+                scrollButton.classList.remove('visible');
+            }
+        });
+        
+        // Scroll to top
+        document.getElementById('scrollTop').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth scroll for anchor links
+        var anchorLinks = document.querySelectorAll('a[href^="#"]');
+        anchorLinks.forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                var targetId = this.getAttribute('href');
+                var targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Check premium access on load
+        checkPremiumAccess();
+        
+        // DEVELOPER NOTE: To unlock premium content for testing, open console and run:
+        // localStorage.setItem('ss_blackbox_premium', 'true'); location.reload();
+        // To lock again: localStorage.removeItem('ss_blackbox_premium'); location.reload();
     </script>
 </body>
 </html>
