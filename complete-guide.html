@@ -469,7 +469,7 @@
 <p>Bayangin lo punya remote control yang bisa langsung nyetel TV, AC, dan lampu sekaligus cuma dengan 1 tombol. Nah, Singularity ini kayak gitu—lo pilih gaya trading lo (Scalping, Intraday, atau Swing), semua setting indikator otomatis nyesuaikan.</p>
 
 <h3>Cara kerjanya:</h3>
-<p>Script ini punya 3 preset yang udah di-optimize:</p>
+<p>Tool ini punya 3 preset yang udah di-optimize:</p>
 
 <p><strong>1. Mode SCALPING (Aqua):</strong></p>
 <ul>
@@ -653,7 +653,7 @@ Kenapa: Saham Indonesia cocok banget sama setting balance</code></pre>
 <p>Di dunia trading, ini disebut "Dark Pool"—tempat institusi besar (bank, hedge fund) transaksi tanpa orang lain tau. Mereka ga mau retail trader ikut-ikutan beli, soalnya bakal bikin harga naik.</p>
 
 <h3>Gimana cara kerjanya?</h3>
-<p>Script ini ngitung: "Volume dibagi range harga".</p>
+<p>Tool ini ngitung: "Volume dibagi range harga".</p>
 
 <p>Kalau <strong>volume tinggi tapi harga ga kemana-mana</strong> (range kecil), artinya ada yang "menyerap" supply atau demand secara diam-diam.</p>
 
@@ -733,7 +733,7 @@ Result: BTC pump ke $45,000 (profit $2,400)</code></pre>
 
 <p>Jadi mereka "sweep" area itu (dorong harga sebentar), trigger stop loss retail (dapat likuiditas), terus reverse balik.</p>
 
-<h3>Gimana cara kerjanya (dalam script)?</h3>
+<h3>Gimana cara kerjanya (dalam Tool)?</h3>
 
 <p><strong>Bearish Sweep (Fake Breakout ke Atas):</strong></p>
 <pre><code>High candle ini > High tertinggi 15 candle sebelumnya
@@ -809,7 +809,7 @@ Result: Hit target dalam 6 jam</code></pre>
 
 <hr>
 
-<h2>⏱ FITUR HFT #3: THE PREDATOR METER (Deteksi Algoritma & HFT)</h2>
+<h2>🦅 FITUR HFT #3: THE PREDATOR METER (Deteksi Algoritma & HFT)</h2>
 
 <h3>Apa ini dalam bahasa sederhana?</h3>
 <p>Bayangin lo lagi di jalan tol. Tiba-tiba ada Lamborghini ngebut 300 km/jam lewat. Lo tau kan itu bukan mobil biasa?</p>
@@ -820,9 +820,8 @@ Result: Hit target dalam 6 jam</code></pre>
 <p>Algoritma komputer yang bisa execute ribuan order per detik. Mereka yang bikin harga "loncat" tiba-tiba. Retail trader ga bisa compete sama mereka, tapi lo bisa "ikut kereta" mereka.</p>
 
 <h3>Gimana cara kerjanya?</h3>
-<p>Script ngukur "kecepatan" volume:</p>
-<pre><code>Volume Fast (EMA 5) / Volume Slow (EMA 20) * 100
-
+<p>Tool ngukur "kecepatan" volume:</p>
+<pre><code>
 Kalau hasilnya >150% = PREDATOR aktif
 Kalau hasilnya >100% = Momentum normal-tinggi
 Kalau hasilnya <100% = Market lagi stagnant</code></pre>
@@ -923,7 +922,7 @@ Result: Hit dalam 2 jam, profit $800</code></pre>
 <p>Itu karena rally/dump tersebut GA ADA FUEL (volume support). V-Wave kasih tau lo sebelum terjebak.</p>
 
 <h3>Gimana cara kerjanya?</h3>
-<p>Script ngukur korelasi antara pergerakan harga dan volume:</p>
+<p>Tool ngukur korelasi antara pergerakan harga dan volume:</p>
 <pre><code>V_Fuel = ((Close - Open) / (High - Low)) * Volume
 
 Terus dibanding sama V_Fuel candle sebelumnya</code></pre>
@@ -1170,7 +1169,7 @@ Result: GBP/USD dump 165 pip dalam 1 minggu</code></pre>
 <p>Ujung-ujungnya? Retail "pegang kantong kosong" (bag holder) pas harga dump.</p>
 
 <h3>Gimana cara kerjanya?</h3>
-<p>Script deteksi 3 kondisi yang SEMUA harus terpenuhi:</p>
+<p>Tool deteksi 3 kondisi yang SEMUA harus terpenuhi:</p>
 <pre><code>1. Price > EMA(20) - Rally mode (harga lagi naik)
 2. Volume Correlation < -0.5 - Negative correlation (harga naik, volume turun)
 3. Volume < SMA(Volume, 20) - Volume di bawah rata-rata
@@ -1713,7 +1712,7 @@ Why: Komoditas trend following, reversal warnings critical</code></pre>
 
 <h2>🏆 FINAL WISDOM</h2>
 
-<p><strong>Script ini adalah institutional-grade trading system</strong> yang menggabungkan:</p>
+<p><strong>Tool ini adalah institutional-grade trading system</strong> yang menggabungkan:</p>
 <ul>
 <li>✅ 7 HFT FITURes (teknologi institusi)</li>
 <li>✅ Dynamic Preset Engine (adaptif)</li>
