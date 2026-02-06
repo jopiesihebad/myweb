@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Panduan Lengkap SS BlackBox TITAN Edition v6.1 + HFT - 7 Senjata Rahasia Institusi untuk Trading Profesional">
-    <meta name="keywords" content="SS BlackBox, trading guide, HFT Features, forex, crypto, saham, komoditas, trading Indonesia">
-    <title>Complete Guide - SS BlackBox TITAN Edition v6.1 + HFT | StockIndexer</title>
+    <meta name="description" content="Panduan Lengkap SS BlackBox Monster Edition v6.1 + HFT - 7 Senjata Rahasia Institusi untuk Trading Profesional">
+    <meta name="keywords" content="SS BlackBox, trading guide, HFT modules, forex, crypto, saham, komoditas, trading Indonesia">
+    <title>Complete Guide - SS BlackBox Monster Edition v6.1 + HFT | StockIndexer</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,9 +35,8 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: var(--dark-bg);
             color: var(--text-primary);
-            line-height: 1.7;
+            line-height: 1.8;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
         }
         
@@ -49,14 +48,14 @@
             height: 3px;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             z-index: 10000;
-            transition: width 0.1s ease;
+            transition: width 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         header {
             position: sticky;
             top: 0;
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(26, 26, 46, 0.98);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
             z-index: 1000;
             padding: 1rem 0;
@@ -80,54 +79,73 @@
             background-clip: text;
         }
         
-        .back-link {
-            color: var(--text-secondary);
+        .header-cta {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.625rem 1.5rem;
+            border-radius: 30px;
             text-decoration: none;
-            transition: color 0.3s ease;
-            font-size: 0.95rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 12px rgba(0, 195, 255, 0.25);
         }
         
-        .back-link:hover {
-            color: var(--primary);
+        .header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 195, 255, 0.4);
         }
         
         .container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 3rem 2rem 5rem;
+            padding: 2.5rem 2rem 5rem;
         }
         
         h1 {
-            font-size: 2.75rem;
+            font-size: 2.5rem;
             font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 0.5rem;
+            line-height: 1.25;
+            margin-bottom: 0.75rem;
             background: linear-gradient(135deg, var(--primary), var(--accent-yellow));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: -0.02em;
         }
         
         h2 {
-            font-size: 2rem;
+            font-size: 1.875rem;
             font-weight: 700;
-            margin: 3.5rem 0 1.5rem;
+            margin: 3rem 0 1.25rem;
             color: var(--text-primary);
             border-left: 4px solid var(--primary);
-            padding-left: 1rem;
+            padding-left: 1.25rem;
+            letter-spacing: -0.01em;
+        }
+        
+        h2:first-of-type {
+            margin-top: 2rem;
         }
         
         h3 {
-            font-size: 1.5rem;
+            font-size: 1.375rem;
             font-weight: 600;
-            margin: 2.5rem 0 1rem;
+            margin: 2.25rem 0 1rem;
             color: var(--text-primary);
+            letter-spacing: -0.01em;
         }
         
         p {
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.125rem;
             color: var(--text-secondary);
-            font-size: 1rem;
+            font-size: 1.0625rem;
+            text-align: justify;
+        }
+        
+        p:last-child {
+            margin-bottom: 0;
         }
         
         strong {
@@ -136,24 +154,27 @@
         }
         
         ul {
-            margin: 1.5rem 0 1.5rem 2rem;
+            margin: 1.25rem 0;
+            padding-left: 0;
             list-style: none;
         }
         
         li {
-            margin-bottom: 0.75rem;
-            line-height: 1.7;
+            margin-bottom: 0.875rem;
+            line-height: 1.75;
             color: var(--text-secondary);
             position: relative;
-            padding-left: 1.5rem;
+            padding-left: 2rem;
+            text-align: justify;
         }
         
         li::before {
-            content: "→";
+            content: "•";
             position: absolute;
-            left: 0;
+            left: 0.5rem;
             color: var(--primary);
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 1.25em;
         }
         
         li strong {
@@ -161,80 +182,86 @@
         }
         
         code {
-            background: rgba(0, 195, 255, 0.1);
-            padding: 0.2rem 0.6rem;
+            background: rgba(0, 195, 255, 0.08);
+            padding: 0.25rem 0.625rem;
             border-radius: 4px;
             font-family: 'Courier New', monospace;
             font-size: 0.9em;
             color: var(--primary);
+            border: 1px solid rgba(0, 195, 255, 0.15);
         }
         
         pre {
             background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
+            padding: 1.75rem;
+            border-radius: 10px;
             overflow-x: auto;
-            margin: 2rem 0;
+            margin: 1.75rem 0;
             border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
         
         pre code {
             background: none;
             padding: 0;
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            white-space: pre-wrap;
+            font-size: 0.925rem;
+            border: none;
+            display: block;
+            line-height: 1.6;
         }
         
         hr {
             border: none;
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--border), transparent);
-            margin: 3rem 0;
+            margin: 3.5rem 0;
         }
         
         .cta-section {
-            background: linear-gradient(135deg, rgba(0, 195, 255, 0.05), rgba(255, 0, 98, 0.05));
+            background: linear-gradient(135deg, rgba(0, 195, 255, 0.04), rgba(255, 0, 98, 0.04));
             border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 3rem 2rem;
+            padding: 3rem 2.5rem;
             text-align: center;
             margin: 4rem 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
         }
         
         .cta-title {
-            font-size: 2rem;
+            font-size: 1.875rem;
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 0.875rem;
             background: linear-gradient(135deg, var(--primary), var(--accent-yellow));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: -0.01em;
         }
         
         .cta-text {
-            font-size: 1.1rem;
+            font-size: 1.0625rem;
             color: var(--text-secondary);
             margin-bottom: 2rem;
-            line-height: 1.6;
+            line-height: 1.65;
         }
         
         .cta-button {
             display: inline-block;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 1rem 3rem;
+            padding: 1rem 2.75rem;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 195, 255, 0.3);
+            font-size: 1.0625rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 24px rgba(0, 195, 255, 0.3);
         }
         
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 30px rgba(0, 195, 255, 0.5);
+            box-shadow: 0 6px 32px rgba(0, 195, 255, 0.5);
         }
         
         .scroll-top {
@@ -242,8 +269,8 @@
             bottom: 2rem;
             right: 2rem;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            width: 50px;
-            height: 50px;
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -251,8 +278,8 @@
             cursor: pointer;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 195, 255, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 24px rgba(0, 195, 255, 0.35);
             z-index: 999;
         }
         
@@ -262,64 +289,87 @@
         }
         
         .scroll-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 30px rgba(0, 195, 255, 0.5);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 6px 32px rgba(0, 195, 255, 0.5);
         }
         
         @media (max-width: 768px) {
             .container {
-                padding: 2rem 1.5rem 3rem;
+                padding: 2rem 1.5rem 4rem;
             }
             
             h1 {
-                font-size: 2rem;
+                font-size: 1.875rem;
             }
             
             h2 {
                 font-size: 1.5rem;
                 margin: 2.5rem 0 1rem;
+                padding-left: 1rem;
             }
             
             h3 {
                 font-size: 1.25rem;
             }
             
+            p, li {
+                font-size: 1rem;
+                text-align: left;
+            }
+            
             .cta-section {
-                padding: 2rem 1.5rem;
+                padding: 2.25rem 1.75rem;
             }
             
             .cta-title {
                 font-size: 1.5rem;
             }
             
-            .cta-button {
-                padding: 0.875rem 2rem;
+            .cta-text {
                 font-size: 1rem;
             }
             
+            .cta-button {
+                padding: 0.875rem 2.25rem;
+                font-size: 1rem;
+            }
+            
+            .header-cta {
+                padding: 0.5rem 1.25rem;
+                font-size: 0.85rem;
+            }
+            
             .scroll-top {
-                bottom: 1rem;
-                right: 1rem;
-                width: 45px;
-                height: 45px;
+                bottom: 1.25rem;
+                right: 1.25rem;
+                width: 48px;
+                height: 48px;
             }
         }
         
         @media (max-width: 480px) {
+            .container {
+                padding: 1.75rem 1.25rem 3.5rem;
+            }
+            
             h1 {
-                font-size: 1.75rem;
+                font-size: 1.625rem;
             }
             
             h2 {
-                font-size: 1.25rem;
+                font-size: 1.375rem;
             }
             
             .cta-title {
-                font-size: 1.25rem;
+                font-size: 1.375rem;
             }
             
-            .cta-text {
-                font-size: 1rem;
+            .header-container {
+                padding: 0 1.25rem;
+            }
+            
+            .logo {
+                font-size: 1.25rem;
             }
         }
     </style>
@@ -330,13 +380,13 @@
     <header>
         <div class="header-container">
             <div class="logo">StockIndexer</div>
-            <a href="index.html" class="back-link">← Kembali ke Beranda</a>
+            <a href="index.html#pricing" class="header-cta">Dapatkan Akses</a>
         </div>
     </header>
     
     <main class="container">
-<h1>SS BlackBox TITAN Edition v6.1 + HFT - Panduan Lengkap Ultimate</h1>
-<h2>🔥 Senjata Rahasia Institusi Seharga Ribuan Dollar Sekarang di Tangan LO!</h2>
+<h1>SS BlackBox Monster Edition v6.1 + HFT - Panduan Lengkap Ultimate</h1>
+<h2>🔥 Manual Trading Santai Tapi Profit + 7 Senjata Rahasia Institusi</h2>
 
 <hr>
 
@@ -390,7 +440,7 @@
 <li><strong>Consolidation / Ranging</strong> = Harga bergerak datar di range sempit.</li>
 <li><strong>Volatility</strong> = Ukuran seberapa "liar" pergerakan harga. Tinggi = harga loncat-loncat, rendah = harga stabil.</li>
 <li><strong>Volume</strong> = Jumlah transaksi / aktivitas trading dalam periode tertentu.</li>
-<h3>Istilah Indikator Umum</h3>
+<h3>Istilah Indikator (yang dipake di Script)</h3>
 <li><strong>EMA (Exponential Moving Average)</strong> = Rata-rata pergerakan harga yang lebih sensitif ke harga terbaru.</li>
 <li><strong>HMA (Hull Moving Average)</strong> = Moving average yang lebih smooth dan responsif.</li>
 <li><strong>ATR (Average True Range)</strong> = Ukuran volatilitas rata-rata.</li>
@@ -420,7 +470,7 @@
 <p>Bayangin lo punya remote control yang bisa langsung nyetel TV, AC, dan lampu sekaligus cuma dengan 1 tombol. Nah, Singularity ini kayak gitu—lo pilih gaya trading lo (Scalping, Intraday, atau Swing), semua setting indikator otomatis nyesuaikan.</p>
 
 <h3>Cara kerjanya:</h3>
-<p>Tools ini punya 3 preset yang udah di-optimize:</p>
+<p>Script ini punya 3 preset yang udah di-optimize:</p>
 
 <p><strong>1. Mode SCALPING (Aqua):</strong></p>
 <ul>
@@ -499,7 +549,7 @@ Kenapa: Saham Indonesia cocok banget sama setting balance</code></pre>
 <li><strong>"SWING"</strong> (warna kuning) = Mode swing aktif</li>
 <li><strong>"MANUAL"</strong> (warna orange) = Lo lagi pakai custom manual</li>
 </ul>
-<p><strong>To the point:</strong> Kalau lo bingung, pakai Intraday dulu. Ini setting paling versatile, cocok 80% situasi.</p>
+<p><strong>Real talk:</strong> Kalau lo bingung, pakai Intraday dulu. Ini setting paling versatile, cocok 80% situasi.</p>
 
 <hr>
 
@@ -525,7 +575,7 @@ Kenapa: Saham Indonesia cocok banget sama setting balance</code></pre>
 <li><strong>Swing:</strong> Justru ini kesempatan. Tandai zona compressed, siap-siap entry pas udah released.</li>
 <li><strong>Intraday:</strong> Trading-nya pas released aja, jangan pas lagi squeeze (macet).</li>
 </ul>
-<p><strong>To the point:</strong> 9 dari 10 pergerakan gede terjadi setelah fase compression. Jadi sabar ya, jangan buru-buru.</p>
+<p><strong>Real talk:</strong> 9 dari 10 pergerakan gede terjadi setelah fase compression. Jadi sabar ya, jangan buru-buru.</p>
 
 <hr>
 
@@ -596,7 +646,7 @@ Kenapa: Saham Indonesia cocok banget sama setting balance</code></pre>
 
 <hr>
 
-<h2>🔥 FITUR HFT #1: SHADOW-FLOW (Deteksi Aktivitas "Gelap" Institusi)</h2>
+<h2>🔥 MODUL HFT #1: SHADOW-FLOW (Deteksi Aktivitas "Gelap" Institusi)</h2>
 
 <h3>Apa ini dalam bahasa sederhana?</h3>
 <p>Bayangin lo lagi di pasar tradisional. Ada pedagang besar yang beli banyak banget, tapi dia beli dikit-dikit biar harga ga naik. Kalau harga naik, dia rugi dong karena harus beli lebih mahal. Nah, Shadow-Flow ini deteksi "pembelian diam-diam" kayak gitu.</p>
@@ -604,7 +654,7 @@ Kenapa: Saham Indonesia cocok banget sama setting balance</code></pre>
 <p>Di dunia trading, ini disebut "Dark Pool"—tempat institusi besar (bank, hedge fund) transaksi tanpa orang lain tau. Mereka ga mau retail trader ikut-ikutan beli, soalnya bakal bikin harga naik.</p>
 
 <h3>Gimana cara kerjanya?</h3>
-<p>Tools ini ngitung: "Volume dibagi range harga".</p>
+<p>Script ini ngitung: "Volume dibagi range harga".</p>
 
 <p>Kalau <strong>volume tinggi tapi harga ga kemana-mana</strong> (range kecil), artinya ada yang "menyerap" supply atau demand secara diam-diam.</p>
 
@@ -668,11 +718,11 @@ Action: Mark this level, prepare long
 Entry: $42,600
 Result: BTC pump ke $45,000 (profit $2,400)</code></pre>
 
-<p><strong>To the point:</strong> Shadow-Flow ini kayak "night vision goggle" lo. Retail trader ga bisa liat, tapi lo bisa liat institusi lagi ngapain.</p>
+<p><strong>Real talk:</strong> Shadow-Flow ini kayak "night vision goggle" lo. Retail trader ga bisa liat, tapi lo bisa liat institusi lagi ngapain.</p>
 
 <hr>
 
-<h2>🎯 FITUR HFT #2: LIQUIDITY-GRAB (Stop Loss Hunter)</h2>
+<h2>🎯 MODUL HFT #2: LIQUIDITY-GRAB (Stop Loss Hunter)</h2>
 
 <h3>Apa ini dalam bahasa sederhana?</h3>
 <p>Pernah ga lo pasang stop loss, terus harga nyentuh stop lo (kena cut), tapi abis itu harga balik lagi searah posisi lo? Kesel kan?</p>
@@ -684,7 +734,7 @@ Result: BTC pump ke $45,000 (profit $2,400)</code></pre>
 
 <p>Jadi mereka "sweep" area itu (dorong harga sebentar), trigger stop loss retail (dapat likuiditas), terus reverse balik.</p>
 
-<h3>Gimana cara kerjanya (dalam tools)?</h3>
+<h3>Gimana cara kerjanya (dalam script)?</h3>
 
 <p><strong>Bearish Sweep (Fake Breakout ke Atas):</strong></p>
 <pre><code>High candle ini > High tertinggi 15 candle sebelumnya
@@ -750,17 +800,17 @@ Stop: 1.1060 (di atas sweep)
 Target: 1.0980 (70 pip)
 Result: Hit target dalam 6 jam</code></pre>
 
-<h3>Kombinasi DEADLY dengan FITURe Lain:</h3>
+<h3>Kombinasi DEADLY dengan Module Lain:</h3>
 <pre><code>LIQUIDITY GRAB (sweep)
 + SHADOW-FLOW (absorption)
 + DOOM SELL signal
 = WIN RATE 80%+ (ini setup institutional-grade)</code></pre>
 
-<p><strong>To the point:</strong> Liquidity grab ini seperti "radar" lo buat deteksi manipulasi. Kalau lo bisa recognize pola ini, lo ga bakal jadi korban lagi.</p>
+<p><strong>Real talk:</strong> Liquidity grab ini seperti "radar" lo buat deteksi manipulasi. Kalau lo bisa recognize pola ini, lo ga bakal jadi korban lagi.</p>
 
 <hr>
 
-<h2>⚡ FITUR HFT #3: THE PREDATOR METER (Deteksi Algoritma & HFT)</h2>
+<h2>⚡ MODUL HFT #3: THE PREDATOR METER (Deteksi Algoritma & HFT)</h2>
 
 <h3>Apa ini dalam bahasa sederhana?</h3>
 <p>Bayangin lo lagi di jalan tol. Tiba-tiba ada Lamborghini ngebut 300 km/jam lewat. Lo tau kan itu bukan mobil biasa?</p>
@@ -771,7 +821,7 @@ Result: Hit target dalam 6 jam</code></pre>
 <p>Algoritma komputer yang bisa execute ribuan order per detik. Mereka yang bikin harga "loncat" tiba-tiba. Retail trader ga bisa compete sama mereka, tapi lo bisa "ikut kereta" mereka.</p>
 
 <h3>Gimana cara kerjanya?</h3>
-<p>Tools ngukur "kecepatan" volume:</p>
+<p>Script ngukur "kecepatan" volume:</p>
 <pre><code>Volume Fast (EMA 5) / Volume Slow (EMA 20) * 100
 
 Kalau hasilnya >150% = PREDATOR aktif
@@ -857,11 +907,11 @@ Result: Hit dalam 2 jam, profit $800</code></pre>
 + DOOM SELL
 = SUPER BEARISH, massive dump incoming</code></pre>
 
-<p><strong>To the point:</strong> Predator Meter ini kayak "speedometer" market. Kalau lagi STAGNANT, jangan gas. Kalau lagi PREDATOR, siap-siap roller coaster.</p>
+<p><strong>Real talk:</strong> Predator Meter ini kayak "speedometer" market. Kalau lagi STAGNANT, jangan gas. Kalau lagi PREDATOR, siap-siap roller coaster.</p>
 
 <hr>
 
-<h2>💧 FITUR HFT #4: V-WAVE (Fuel Check - Apakah Rally/Dump Genuine?)</h2>
+<h2>💧 MODUL HFT #4: V-WAVE (Fuel Check - Apakah Rally/Dump Genuine?)</h2>
 
 <h3>Apa ini dalam bahasa sederhana?</h3>
 <p>Bayangin lo lagi nonton mobil balap. Ada mobil yang ngebut 200 km/jam. Tapi bensin-nya tinggal 10%? Pasti ga lama lagi dia harus pit stop kan?</p>
@@ -874,7 +924,7 @@ Result: Hit dalam 2 jam, profit $800</code></pre>
 <p>Itu karena rally/dump tersebut GA ADA FUEL (volume support). V-Wave kasih tau lo sebelum terjebak.</p>
 
 <h3>Gimana cara kerjanya?</h3>
-<p>Tools ngukur korelasi antara pergerakan harga dan volume:</p>
+<p>Script ngukur korelasi antara pergerakan harga dan volume:</p>
 <pre><code>V_Fuel = ((Close - Open) / (High - Low)) * Volume
 
 Terus dibanding sama V_Fuel candle sebelumnya</code></pre>
@@ -992,11 +1042,11 @@ Result: ETH dump dari $2,100 ke $1,950 (saved $150 loss)</code></pre>
 + DOOM SELL
 = EXIT ALL LONGS + SHORT AGGRESSIVELY</code></pre>
 
-<p><strong>To the point:</strong> V-Wave ini seperti "fuel gauge" di mobil lo. Kalau gauge udah merah (FOMO TRAP), jangan maksain ngebut. Stop dulu.</p>
+<p><strong>Real talk:</strong> V-Wave ini seperti "fuel gauge" di mobil lo. Kalau gauge udah merah (FOMO TRAP), jangan maksain ngebut. Stop dulu.</p>
 
 <hr>
 
-<h2>🛡️ FITUR HFT #5: DIVERGENCE SHIELD (Auto-Deteksi Pembalikan Tren)</h2>
+<h2>🛡️ MODUL HFT #5: DIVERGENCE SHIELD (Auto-Deteksi Pembalikan Tren)</h2>
 
 <h3>Apa ini dalam bahasa sederhana?</h3>
 <p>Pernah liat orang lagi jogging, makin lama makin lambat, akhirnya berhenti? Itu namanya "kehilangan tenaga".</p>
@@ -1104,11 +1154,11 @@ Result: GBP/USD dump 165 pip dalam 1 minggu</code></pre>
   EXIT ALL LONGS IMMEDIATELY
   GO SHORT AGGRESSIVELY</code></pre>
 
-<p><strong>To the point:</strong> Divergence Shield ini kayak "early warning system" tsunami. Kalau alarm bunyi (DIVERGENCE RISK), lo punya waktu buat evakuasi sebelum gelombang datang.</p>
+<p><strong>Real talk:</strong> Divergence Shield ini kayak "early warning system" tsunami. Kalau alarm bunyi (DIVERGENCE RISK), lo punya waktu buat evakuasi sebelum gelombang datang.</p>
 
 <hr>
 
-<h2>🚨 FITUR HFT #6: ALPHA-EXIT (Deteksi Whale Kabur)</h2>
+<h2>🚨 MODUL HFT #6: ALPHA-EXIT (Deteksi Whale Kabur)</h2>
 
 <h3>Apa ini dalam bahasa sederhana?</h3>
 <p>Bayangin lo lagi di konser. Tiba-tiba lo liat artis-nya kabur dari belakang panggung. Pertanda apa? Ada masalah!</p>
@@ -1121,7 +1171,7 @@ Result: GBP/USD dump 165 pip dalam 1 minggu</code></pre>
 <p>Ujung-ujungnya? Retail "pegang kantong kosong" (bag holder) pas harga dump.</p>
 
 <h3>Gimana cara kerjanya?</h3>
-<p>Tools deteksi 3 kondisi yang SEMUA harus terpenuhi:</p>
+<p>Script deteksi 3 kondisi yang SEMUA harus terpenuhi:</p>
 <pre><code>1. Price > EMA(20) - Rally mode (harga lagi naik)
 2. Volume Correlation < -0.5 - Negative correlation (harga naik, volume turun)
 3. Volume < SMA(Volume, 20) - Volume di bawah rata-rata
@@ -1244,7 +1294,7 @@ Retail yang FOMO: Trapped di $46k, loss -$5,000</code></pre>
   WIN RATE: 85-90%
   EXIT ALL LONGS + SHORT WITH CONFIDENCE</code></pre>
 
-<p><strong>To the point:</strong> Alpha-Exit ini kayak "smoke detector" di rumah lo. Kalau alarm bunyi (DUMP RISK), jangan cari tau dulu asapnya dari mana. KELUAR DULU. Investigasi nanti.</p>
+<p><strong>Real talk:</strong> Alpha-Exit ini kayak "smoke detector" di rumah lo. Kalau alarm bunyi (DUMP RISK), jangan cari tau dulu asapnya dari mana. KELUAR DULU. Investigasi nanti.</p>
 
 <hr>
 
@@ -1309,7 +1359,7 @@ Retail yang FOMO: Trapped di $46k, loss -$5,000</code></pre>
 <li><strong>50-70</strong> = Bullish healthy</li>
 <li><strong>30-50</strong> = Bearish healthy</li>
 <hr>
-<h3>Row 8: ALPHA-EXIT 🆕 **HFT FITURE**</h3>
+<h3>Row 8: ALPHA-EXIT 🆕 **HFT MODULE**</h3>
 </ul>
 <p><strong>Whale exit detector</strong></p>
 <ul>
@@ -1320,7 +1370,7 @@ Retail yang FOMO: Trapped di $46k, loss -$5,000</code></pre>
 
 <hr>
 
-<h3>Row 9: DIV-SHIELD 🆕 **HFT FITURE**</h3>
+<h3>Row 9: DIV-SHIELD 🆕 **HFT MODULE**</h3>
 <p><strong>Divergence detector</strong></p>
 <ul>
 <li><strong>DIVERGENCE RISK</strong> (red) = Reversal warning, close 50-75% posisi</li>
@@ -1330,7 +1380,7 @@ Retail yang FOMO: Trapped di $46k, loss -$5,000</code></pre>
 
 <hr>
 
-<h3>Row 10: SHADOW-FLOW 🆕 **HFT FITURE**</h3>
+<h3>Row 10: SHADOW-FLOW 🆕 **HFT MODULE**</h3>
 <p><strong>Dark pool activity</strong></p>
 <ul>
 <li><strong>ABSORPTION</strong> (fuchsia) = Institusi stealth accumulation/distribution</li>
@@ -1340,7 +1390,7 @@ Retail yang FOMO: Trapped di $46k, loss -$5,000</code></pre>
 
 <hr>
 
-<h3>Row 11: PREDATOR METER 🆕 **HFT FITURE**</h3>
+<h3>Row 11: PREDATOR METER 🆕 **HFT MODULE**</h3>
 <p><strong>HFT algorithm detector</strong></p>
 <ul>
 <li><strong>PREDATOR (HFT)</strong> (red) = Algoritma aktif, fast movement</li>
@@ -1351,7 +1401,7 @@ Retail yang FOMO: Trapped di $46k, loss -$5,000</code></pre>
 
 <hr>
 
-<h3>Row 12: V-WAVE 🆕 **HFT FITURE**</h3>
+<h3>Row 12: V-WAVE 🆕 **HFT MODULE**</h3>
 <p><strong>Volume-price fuel check</strong></p>
 <ul>
 <li><strong>HEAVY FUEL</strong> (lime) = Genuine move, aman ikut</li>
@@ -1361,7 +1411,7 @@ Retail yang FOMO: Trapped di $46k, loss -$5,000</code></pre>
 
 <hr>
 
-<h3>Row 13: LIQUIDITY-GRAB 🆕 **HFT FITURE**</h3>
+<h3>Row 13: LIQUIDITY-GRAB 🆕 **HFT MODULE**</h3>
 <p><strong>Stop hunt detector</strong></p>
 <ul>
 <li><strong>ACTIVE</strong> (red) = Lagi terjadi sweep (+ label di chart)</li>
@@ -1496,7 +1546,7 @@ Result: BTC dump to $43,200 in 2 days
 Profit: $4,200
 R:R: 1:7 (excellent!)</code></pre>
 
-<p><strong>Warning:</strong> Ini adalah "nuclear option" setup. Kalau 5+ HFT Features ngasih warning serentak, <strong>IT'S NOT A DRILL. ACT NOW.</strong></p>
+<p><strong>Warning:</strong> Ini adalah "nuclear option" setup. Kalau 5+ HFT modules ngasih warning serentak, <strong>IT'S NOT A DRILL. ACT NOW.</strong></p>
 
 <hr>
 
@@ -1588,8 +1638,8 @@ R:R: 1:5.6 (swing trading beauty)</code></pre>
 <p><strong>1. ✅ Use Dynamic Floor for stop loss</strong></p>
 <p>Manual stop = diburu market maker.</p>
 
-<p><strong>2. ✅ Check Multiple HFT Features</strong></p>
-<p>1 FITURe = clue, 3+ Features = conviction.</p>
+<p><strong>2. ✅ Check Multiple HFT Modules</strong></p>
+<p>1 module = clue, 3+ modules = conviction.</p>
 
 <p><strong>3. ✅ Respect GOLD/DOOM signals</strong></p>
 <p>Udah ada confluence built-in.</p>
@@ -1621,7 +1671,7 @@ R:R: 1:5.6 (swing trading beauty)</code></pre>
 <h3>FOREX (Major Pairs)</h3>
 <pre><code>Preset: INTRADAY
 Timeframe: 15M, 1H
-Focus Features:
+Focus Modules:
 - SHADOW-FLOW (institutional activity)
 - LIQUIDITY-GRAB (common di forex)
 - V-WAVE (volume reliability)
@@ -1632,7 +1682,7 @@ Why: Forex likuid, institutional footprint jelas, liquidity grab sering terjadi<
 <pre><code>Preset: SWING (hold days) atau SCALPING (day trade)
 Manual Override: Floor Mult 3.5-4.0 (volatilitas tinggi)
 Timeframe: 1H, 4H (swing) atau 5M, 15M (scalping)
-Focus Features:
+Focus Modules:
 - PREDATOR METER (HFT aktif)
 - ALPHA-EXIT (whale exit)
 - DIV-SHIELD (reversal warning)
@@ -1642,7 +1692,7 @@ Why: Crypto volatile, whale manipulation, HFT dominant</code></pre>
 <h3>SAHAM (Blue Chip Indonesia)</h3>
 <pre><code>Preset: INTRADAY
 Timeframe: 15M, 30M
-Focus Features:
+Focus Modules:
 - V-WAVE (genuine vs FOMO)
 - Q-RATING (volume critical di saham)
 - SHADOW-FLOW (smart money accumulation)
@@ -1653,7 +1703,7 @@ Why: Market hours terbatas (3.5 jam), volume penting, smart money clear</code></
 <pre><code>Preset: SWING
 Manual Override: ATR 21-25 (smooth trending)
 Timeframe: 1H, 4H
-Focus Features:
+Focus Modules:
 - DIV-SHIELD (reversal penting)
 - ALPHA-EXIT (trend exhaustion)
 - V-WAVE (genuine moves)
@@ -1664,14 +1714,14 @@ Why: Komoditas trend following, reversal warnings critical</code></pre>
 
 <h2>🏆 FINAL WISDOM</h2>
 
-<p><strong>Tools ini adalah institutional-grade trading system</strong> yang menggabungkan:</p>
+<p><strong>Script ini adalah institutional-grade trading system</strong> yang menggabungkan:</p>
 <ul>
-<li>✅ 7 HFT Features (teknologi institusi)</li>
+<li>✅ 7 HFT modules (teknologi institusi)</li>
 <li>✅ Dynamic Preset Engine (adaptif)</li>
 <li>✅ Clean UI (fokus ke signal penting)</li>
 <li>✅ 19-row dashboard (all info in one place)</li>
 </ul>
-<p><strong>HFT Features memberikan lo "x-ray vision":</strong></p>
+<p><strong>HFT Modules memberikan lo "x-ray vision":</strong></p>
 <ul>
 <li><strong>SHADOW-FLOW</strong> = Liat smart money</li>
 <li><strong>LIQUIDITY-GRAB</strong> = Deteksi manipulation</li>
@@ -1685,7 +1735,7 @@ Why: Komoditas trend following, reversal warnings critical</code></pre>
 <p>2. <strong>Risk management</strong> - Always use Dynamic Floor</p>
 <p>3. <strong>Patience</strong> - Market rewards patient trader</p>
 <p>4. <strong>Discipline</strong> - Follow signals, trust system</p>
-<p>5. <strong>Act on warnings</strong> - HFT Features kasih early warning, jangan ignore</p>
+<p>5. <strong>Act on warnings</strong> - HFT modules kasih early warning, jangan ignore</p>
 
 <p><strong>Ini adalah senjata yang sama yang dipakai prop firm dan institutional trader.</strong></p>
 
@@ -1697,12 +1747,12 @@ Why: Komoditas trend following, reversal warnings critical</code></pre>
 
 <p>*Edge terlindungi. Eksekusi di tangan lo. Sekarang lo punya radar institusi—tinggal ACTION.*</p>
 
-<p><strong>— SS BlackBox TITAN Edition v6.1 + HFT INJECTION —</strong></p>
+<p><strong>— SS BlackBox Monster Edition v6.1 + HFT INJECTION —</strong></p>
 <p><strong>— The Ultimate Retail Weapon Against The Market —</strong></p>
 
 <div class="cta-section">
     <h3 class="cta-title">Ready to Transform Your Trading?</h3>
-    <p class="cta-text">Mulai journey trading profesional lo dengan SS BlackBox TITAN Edition + HFT Features!</p>
+    <p class="cta-text">Mulai journey trading profesional lo dengan SS BlackBox Monster Edition + HFT Modules!</p>
     <a href="index.html#pricing" class="cta-button">Mulai Sekarang →</a>
 </div>
     </main>
@@ -1714,37 +1764,36 @@ Why: Komoditas trend following, reversal warnings critical</code></pre>
     </div>
     
     <script>
-        // Progress bar
-        window.addEventListener('scroll', () => {
-            const winScroll = document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById('progressBar').style.width = scrolled + '%';
+        window.addEventListener('scroll', function() {
+            var scrollPosition = window.pageYOffset;
+            var windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+            var scrollPercentage = (scrollPosition / windowHeight) * 100;
             
-            // Scroll to top button
-            const scrollTop = document.getElementById('scrollTop');
-            if (winScroll > 300) {
-                scrollTop.classList.add('visible');
+            document.getElementById('progressBar').style.width = scrollPercentage + '%';
+            
+            var scrollButton = document.getElementById('scrollTop');
+            if (scrollPosition > 400) {
+                scrollButton.classList.add('visible');
             } else {
-                scrollTop.classList.remove('visible');
+                scrollButton.classList.remove('visible');
             }
         });
         
-        // Scroll to top functionality
-        document.getElementById('scrollTop').addEventListener('click', () => {
+        document.getElementById('scrollTop').addEventListener('click', function() {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
         });
         
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+        var anchorLinks = document.querySelectorAll('a[href^="#"]');
+        anchorLinks.forEach(function(link) {
+            link.addEventListener('click', function(e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
+                var targetId = this.getAttribute('href');
+                var targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                     });
