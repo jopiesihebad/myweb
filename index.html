@@ -4,139 +4,1304 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>StockIndexer — Conway Automaton Intelligence Platform</title>
-
-<!-- SEO Meta Tags -->
-<meta name="description" content="AI Signal Trading Platform dengan SS BlackBox Phantom v6.3.1 + pieBot Sovereign. Real-time signals, ownership intelligence, live ticker, Conway Automaton.">
+<meta name="description" content="AI Signal Trading dengan SS BlackBox Phantom v6.3.1 + pieBot Sovereign. Real-time signals, ownership intelligence IDX, live ticker, Conway Automaton state engine.">
+<meta name="robots" content="index, follow">
 <meta property="og:title" content="StockIndexer — Conway Automaton Intelligence">
-<meta property="og:description" content="Dapatkan sinyal trading akurat dari AI sovereign. PRO Rp497rb/bulan atau ELITE lifetime Rp2.999rb.">
+<meta property="og:description" content="Platform sinyal trading AI pertama dengan Conway Automaton 8-cell state engine. Win rate 81.8%, profit factor 1.92, 287 backtest trades. Coba 14 hari gratis.">
 <meta property="og:image" content="https://stockindexer.com/og-image.png">
+<meta property="og:type" content="website">
 <meta property="og:url" content="https://stockindexer.com">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="StockIndexer — Conway Automaton Intelligence">
+<meta name="twitter:description" content="AI Signal Trading SS BlackBox v6.3.1 + pieBot. Real-time signals, live ownership intelligence IDX.">
 <link rel="icon" href="/favicon.ico">
-
-<!-- External CSS -->
-<link rel="stylesheet" href="styles.css">
-
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #04070f;
+  --bg2:     #070c18;
+  --panel:   #0a1020;
+  --panel2:  #0e1628;
+  --border:  #162035;
+  --border2: #1e2e4a;
+  --cyan:    #00c3ff;
+  --cyan2:   #00e5ff;
+  --lime:    #39ff14;
+  --gold:    #ffd700;
+  --red:     #ff0062;
+  --orange:  #ff8c00;
+  --purple:  #bd93f9;
+  --magenta: #ff44cc;
+  --white:   #eef4fc;
+  --gray:    #5a7090;
+  --gray2:   #2a3d58;
+  --teal:    #00b4d8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:'JetBrains Mono',monospace;overflow-x:hidden;cursor:crosshair;}
+
+/* SCANLINES */
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,195,255,0.008) 3px,rgba(0,195,255,0.008) 4px);pointer-events:none;z-index:9998;}
+
+/* NOISE TEXTURE */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9997;opacity:0.4;}
+
+/* GRID BG */
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(0,195,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,195,255,0.025) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+.grid-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(0,195,255,0.06) 0%,transparent 70%);}
+
+/* ORBS */
+.orb{position:fixed;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:0;animation:orbFloat 12s ease-in-out infinite;}
+.orb-1{width:700px;height:700px;background:rgba(0,195,255,0.055);top:-250px;left:-150px;animation-delay:0s;}
+.orb-2{width:600px;height:600px;background:rgba(57,255,20,0.03);bottom:100px;right:-200px;animation-delay:-4s;}
+.orb-3{width:500px;height:500px;background:rgba(189,147,249,0.035);top:40%;left:40%;animation-delay:-8s;}
+@keyframes orbFloat{0%,100%{transform:translate(0,0);}50%{transform:translate(20px,-30px);}}
+
+/* ─── NAV ─────────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:60px;background:rgba(4,7,15,0.9);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-mark{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:3px;padding:5px;width:30px;height:30px;border:1px solid rgba(0,195,255,0.4);}
+.lc{background:var(--cyan);transition:opacity 0.4s;}
+.lc.on{opacity:1;}
+.lc.off{opacity:0.12;}
+.logo-txt{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;letter-spacing:-0.3px;color:var(--white);}
+.logo-txt em{color:var(--cyan);font-style:normal;}
+.nav-center{display:flex;gap:28px;list-style:none;}
+.nav-center a{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray);text-decoration:none;transition:color 0.2s;}
+.nav-center a:hover{color:var(--cyan);}
+.nav-right{display:flex;align-items:center;gap:12px;}
+.nav-badge{font-size:9px;letter-spacing:2px;padding:4px 10px;border:1px solid rgba(57,255,20,0.35);color:var(--lime);display:flex;align-items:center;gap:6px;}
+.nav-btn{background:var(--cyan);color:var(--bg);border:none;padding:8px 20px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));transition:background 0.2s;}
+.nav-btn:hover{background:var(--cyan2);}
+
+/* ─── HERO ────────────────────────────── */
+.hero{position:relative;z-index:1;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:80px 48px 60px;max-width:1440px;margin:0 auto;}
+.hero-left{}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border2);padding:5px 14px;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:28px;}
+.ldot{width:5px;height:5px;background:var(--lime);border-radius:50%;animation:blink 1.1s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.hero-h1{font-family:'Syne',sans-serif;font-size:clamp(52px,6.5vw,100px);font-weight:800;line-height:0.88;letter-spacing:-4px;margin-bottom:28px;}
+.hero-h1 .w1{display:block;color:var(--white);opacity:0;animation:fadeUp 0.7s 0.15s forwards;}
+.hero-h1 .w2{display:block;color:transparent;-webkit-text-stroke:1.5px var(--cyan);opacity:0;animation:fadeUp 0.7s 0.3s forwards;}
+.hero-h1 .w3{display:block;color:var(--cyan);opacity:0;animation:fadeUp 0.7s 0.45s forwards;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+.hero-p{font-size:13px;line-height:1.9;color:var(--gray);max-width:480px;margin-bottom:40px;}
+.hero-p[data-lang="en"]{opacity:0;animation:fadeUp 0.7s 0.6s forwards;}
+.hero-p[data-lang="id"]{opacity:0;animation:fadeUp 0.7s 0.6s forwards;}
+.hero-p strong{color:var(--white);}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.7s 0.75s forwards;}
+.btn-p{background:var(--cyan);color:var(--bg);border:none;padding:13px 28px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:all 0.2s;}
+.btn-p:hover{background:var(--cyan2);transform:translateY(-2px);}
+.btn-s{background:transparent;color:var(--gray);border:1px solid var(--border2);padding:13px 28px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;}
+.btn-s:hover{color:var(--white);border-color:var(--gray2);}
+
+/* HERO RIGHT — MINI TERMINAL */
+.hero-terminal{background:var(--panel);border:1px solid var(--border);position:relative;overflow:hidden;opacity:0;animation:fadeUp 0.8s 0.5s forwards;}
+.hero-terminal::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--lime),var(--gold));}
+.term-bar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--border);background:var(--panel2);}
+.term-dot{width:8px;height:8px;border-radius:50%;}
+.term-dot.r{background:#ff5f56;}
+.term-dot.y{background:#ffbd2e;}
+.term-dot.g{background:#27c93f;}
+.term-title{font-size:10px;letter-spacing:2px;color:var(--gray);margin-left:8px;}
+.term-body{padding:20px;font-size:11px;line-height:1.9;font-family:'JetBrains Mono',monospace;}
+.tl{display:flex;gap:8px;margin-bottom:2px;}
+.tl .prompt{color:var(--cyan);}
+.tl .cmd{color:var(--white);}
+.tl .out{color:var(--gray);}
+.tl .val-g{color:var(--lime);}
+.tl .val-r{color:var(--red);}
+.tl .val-c{color:var(--cyan);}
+.tl .val-y{color:var(--gold);}
+.tl .val-o{color:var(--orange);}
+.term-cursor{display:inline-block;width:8px;height:14px;background:var(--cyan);animation:cursorBlink 1s infinite;vertical-align:middle;}
+@keyframes cursorBlink{0%,49%{opacity:1;}50%,100%{opacity:0;}}
+.term-spacer{height:8px;}
+
+/* HERO STATS ROW */
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:1px;}
+.hstat{background:var(--panel2);padding:14px 16px;text-align:center;}
+.hstat-v{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;letter-spacing:-1px;}
+.hstat-l{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-top:2px;}
+
+/* ─── TICKER ──────────────────────────── */
+.ticker-wrap{position:relative;z-index:1;background:rgba(10,16,32,0.95);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;padding:11px 0;}
+.ticker-fade-l{position:absolute;left:0;top:0;bottom:0;width:80px;background:linear-gradient(90deg,var(--bg),transparent);z-index:2;pointer-events:none;}
+.ticker-fade-r{position:absolute;right:0;top:0;bottom:0;width:80px;background:linear-gradient(-90deg,var(--bg),transparent);z-index:2;pointer-events:none;}
+.ticker-track{display:flex;gap:0;animation:tickScroll 35s linear infinite;width:max-content;}
+@keyframes tickScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.ti{display:flex;align-items:center;gap:10px;padding:0 28px;font-size:11px;white-space:nowrap;border-right:1px solid var(--border);}
+.ti-sym{color:var(--white);font-weight:700;letter-spacing:0.5px;}
+.ti-p{color:var(--gray);font-family:'Space Mono',monospace;}
+.ti-c.up{color:var(--lime);}
+.ti-c.dn{color:var(--red);}
+.ti-s{font-size:9px;padding:2px 7px;letter-spacing:1px;}
+.ti-s.born{background:rgba(57,255,20,0.12);color:var(--lime);border:1px solid rgba(57,255,20,0.25);}
+.ti-s.alive{background:rgba(0,195,255,0.12);color:var(--cyan);border:1px solid rgba(0,195,255,0.25);}
+.ti-s.dormant{background:rgba(90,112,144,0.12);color:var(--gray);border:1px solid var(--border2);}
+.ti-s.died{background:rgba(255,0,98,0.12);color:var(--red);border:1px solid rgba(255,0,98,0.25);}
+
+/* ─── SECTION COMMON ──────────────────── */
+.sec{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:88px 48px;}
+.sec-eyebrow{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;display:flex;align-items:center;gap:12px;}
+.sec-eyebrow::after{content:'';flex:1;max-width:120px;height:1px;background:linear-gradient(to right,var(--border2),transparent);}
+.sec-h{font-family:'Syne',sans-serif;font-size:clamp(30px,4vw,52px);font-weight:800;letter-spacing:-2px;line-height:1.05;margin-bottom:8px;}
+.sec-p{color:var(--gray);font-size:13px;line-height:1.8;max-width:480px;margin-bottom:52px;}
+.divider{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:0 48px;}
+.divider hr{border:none;border-top:1px solid var(--border);}
+
+/* ─── CONWAY DASHBOARD ────────────────── */
+.cw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
+.cw-card{background:var(--panel);border:1px solid var(--border);padding:22px;position:relative;overflow:hidden;transition:border-color 0.3s,transform 0.3s;cursor:pointer;}
+.cw-card:hover{transform:translateY(-3px);}
+.cw-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(0,195,255,0.04),transparent 70%);pointer-events:none;}
+.cw-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.cw-card.born::before{background:linear-gradient(90deg,var(--lime),rgba(57,255,20,0));}
+.cw-card.alive::before{background:linear-gradient(90deg,var(--cyan),rgba(0,195,255,0));}
+.cw-card.dormant::before{background:linear-gradient(90deg,var(--gray2),transparent);}
+.cw-card.died::before{background:linear-gradient(90deg,var(--red),rgba(255,0,98,0));}
+.cw-card.born{border-color:rgba(57,255,20,0.2);}
+.cw-card.alive{border-color:rgba(0,195,255,0.2);}
+.cw-card.died{border-color:rgba(255,0,98,0.15);}
+
+.cw-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;}
+.cw-sym{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;letter-spacing:-0.3px;}
+.cw-tf{font-size:9px;color:var(--gray);letter-spacing:1px;margin-top:2px;}
+.cw-badge{font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border:1px solid;}
+.cw-badge.born{color:var(--lime);border-color:rgba(57,255,20,0.4);background:rgba(57,255,20,0.06);}
+.cw-badge.alive{color:var(--cyan);border-color:rgba(0,195,255,0.4);background:rgba(0,195,255,0.06);}
+.cw-badge.dormant{color:var(--gray);border-color:var(--border2);}
+.cw-badge.died{color:var(--red);border-color:rgba(255,0,98,0.4);background:rgba(255,0,98,0.06);}
+
+.cw-price{font-family:'Space Mono',monospace;font-size:26px;font-weight:400;letter-spacing:-1px;line-height:1;}
+.cw-frac{font-size:14px;color:var(--gray);}
+.cw-chg{font-size:11px;margin:6px 0 18px;}
+.cw-chg.up{color:var(--lime);}
+.cw-chg.dn{color:var(--red);}
+
+/* 8 CELLS */
+.cells-wrap{margin-bottom:10px;}
+.cells-pips{display:grid;grid-template-columns:repeat(8,1fr);gap:3px;margin-bottom:5px;}
+.pip{height:5px;border-radius:1px;background:var(--border2);transition:background 0.6s,opacity 0.6s;}
+.pip.on{background:var(--cyan);}
+.pip.on.born-pip{background:var(--lime);}
+.cells-names{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.cn{font-size:8px;color:var(--gray2);letter-spacing:0.5px;text-align:center;}
+
+.cw-bot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);}
+.cw-grade{font-size:9px;color:var(--gold);letter-spacing:1px;}
+.cw-fusion{text-align:right;}
+.cw-fusion-v{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--cyan);letter-spacing:-1px;line-height:1;}
+.cw-fusion-l{font-size:9px;color:var(--gray);}
+
+/* CELL DETAIL OVERLAY (hover) */
+.cell-detail{display:none;position:absolute;inset:0;background:rgba(4,7,15,0.96);padding:20px;z-index:10;backdrop-filter:blur(8px);}
+.cw-card:hover .cell-detail{display:flex;flex-direction:column;gap:6px;}
+.cd-row{display:flex;justify-content:space-between;align-items:center;font-size:10px;}
+.cd-name{color:var(--gray);}
+.cd-val.on{color:var(--lime);}
+.cd-val.off{color:var(--gray2);}
+.cd-close{position:absolute;top:14px;right:14px;font-size:9px;color:var(--gray);letter-spacing:2px;}
+
+/* ─── SIGNAL FEED ─────────────────────── */
+.feed-box{background:var(--panel);border:1px solid var(--border);overflow:hidden;}
+.feed-hdr{display:flex;align-items:center;justify-content:space-between;padding:13px 20px;border-bottom:1px solid var(--border);background:var(--panel2);}
+.feed-hdr-l{display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--white);}
+.feed-hdr-r{display:flex;gap:8px;}
+.feed-tag{font-size:9px;padding:3px 10px;border:1px solid var(--border2);color:var(--gray);letter-spacing:1px;cursor:pointer;transition:all 0.2s;}
+.feed-tag.active{border-color:var(--cyan);color:var(--cyan);}
+.sig-row{display:grid;grid-template-columns:90px 110px 90px 130px 70px 1fr auto;gap:0;padding:11px 20px;border-bottom:1px solid rgba(22,32,53,0.7);font-size:11px;align-items:center;transition:background 0.15s;}
+.sig-row:hover{background:rgba(0,195,255,0.025);}
+.sig-row.highlight{background:rgba(0,195,255,0.04);border-left:2px solid var(--cyan);}
+.sig-row.new{animation:newSig 0.5s ease-out;}
+@keyframes newSig{from{background:rgba(0,195,255,0.12);transform:translateX(-4px);}to{background:transparent;transform:translateX(0);}}
+.st{color:var(--gray);font-size:9px;font-family:'Space Mono',monospace;}
+.stype{font-weight:700;font-size:10px;letter-spacing:0.5px;}
+.stype.buy{color:var(--lime);}
+.stype.sell{color:var(--red);}
+.stype.info{color:var(--cyan);}
+.stype.warn{color:var(--orange);}
+.stype.exit{color:var(--purple);}
+.ssym{color:var(--white);font-weight:700;letter-spacing:0.5px;}
+.sprice{color:var(--gray);font-family:'Space Mono',monospace;font-size:10px;}
+.ssess{font-size:9px;padding:2px 7px;color:var(--gold);border:1px solid rgba(255,215,0,0.2);}
+.sdesc{color:var(--gray2);font-size:10px;text-align:right;}
+.spnl{font-size:10px;font-family:'Space Mono',monospace;}
+.spnl.up{color:var(--lime);}
+.spnl.dn{color:var(--red);}
+.feed-footer{display:flex;justify-content:space-between;align-items:center;padding:10px 20px;border-top:1px solid var(--border);}
+.feed-footer span{font-size:10px;color:var(--gray);}
+.feed-loadmore{font-size:10px;letter-spacing:1px;color:var(--cyan);background:none;border:none;cursor:pointer;font-family:'JetBrains Mono',monospace;}
+
+/* ─── PERFORMANCE ─────────────────────── */
+.perf-layout{display:grid;grid-template-columns:1fr 380px;gap:32px;align-items:start;}
+.stats-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.sbox{background:var(--panel);padding:28px 22px;position:relative;overflow:hidden;transition:background 0.2s;}
+.sbox:hover{background:var(--panel2);}
+.sbox::after{content:'';position:absolute;bottom:0;right:0;width:50px;height:50px;border-top:1px solid var(--border2);border-left:1px solid var(--border2);opacity:0.25;}
+.sbox-lbl{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray);margin-bottom:10px;}
+.sbox-val{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;letter-spacing:-2px;line-height:1;margin-bottom:4px;}
+.sbox-sub{font-size:10px;color:var(--gray);}
+.sbox-delta{font-size:10px;margin-top:6px;}
+.sbox-delta.up{color:var(--lime);}
+.sbox-delta.dn{color:var(--red);}
+
+/* EQUITY CURVE */
+.equity-wrap{background:var(--panel);border:1px solid var(--border);padding:20px;}
+.eq-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.eq-ttl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--white);}
+.eq-pnl{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--lime);letter-spacing:-1px;}
+.eq-chart{width:100%;height:180px;}
+.eq-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;}
+.eq-m{background:var(--panel2);padding:10px 14px;}
+.eq-m-l{font-size:9px;color:var(--gray);letter-spacing:1px;margin-bottom:3px;}
+.eq-m-v{font-size:13px;color:var(--white);font-family:'Space Mono',monospace;}
+
+/* WINRATE HISTORY */
+.wr-wrap{background:var(--panel);border:1px solid var(--border);padding:20px;margin-top:16px;}
+.wr-bar-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.wr-label{font-size:10px;color:var(--gray);width:140px;flex-shrink:0;}
+.wr-track{flex:1;height:6px;background:var(--border2);position:relative;}
+.wr-fill{height:100%;transition:width 1.2s ease;}
+.wr-pct{font-size:10px;color:var(--white);width:36px;text-align:right;flex-shrink:0;font-family:'Space Mono',monospace;}
+
+/* ─── HOW IT WORKS ────────────────────── */
+.hiw-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--border);}
+.hiw-step{background:var(--panel);padding:32px 24px;position:relative;}
+.hiw-step::after{content:'→';position:absolute;right:-12px;top:50%;transform:translateY(-50%);color:var(--border2);font-size:18px;z-index:2;}
+.hiw-step:last-child::after{display:none;}
+.hiw-n{font-family:'Syne',sans-serif;font-size:48px;font-weight:800;color:var(--border2);line-height:1;margin-bottom:14px;letter-spacing:-3px;}
+.hiw-icon{font-size:28px;margin-bottom:12px;}
+.hiw-ttl{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:8px;letter-spacing:-0.3px;}
+.hiw-desc{font-size:11px;color:var(--gray);line-height:1.7;}
+.hiw-tag{display:inline-block;margin-top:12px;font-size:9px;letter-spacing:2px;padding:3px 8px;border:1px solid var(--border2);color:var(--gray);}
+
+/* ─── CONWAY EXPLAINER ────────────────── */
+.cell-explainer{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;}
+.cell-grid-wrap{background:var(--panel);border:1px solid var(--border);padding:24px;}
+.cell-grid-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:16px;}
+.cell-table{width:100%;border-collapse:collapse;}
+.cell-table tr{border-bottom:1px solid var(--border);}
+.cell-table tr:last-child{border-bottom:none;}
+.cell-table td{padding:10px 12px;font-size:11px;}
+.cell-num{color:var(--cyan);font-weight:700;width:50px;}
+.cell-name{color:var(--white);}
+.cell-cond{color:var(--gray);font-size:10px;}
+.cell-live{text-align:right;}
+.cell-live span{font-size:9px;padding:2px 8px;border-radius:1px;}
+.cell-live .on{background:rgba(57,255,20,0.1);color:var(--lime);border:1px solid rgba(57,255,20,0.3);}
+.cell-live .off{background:rgba(90,112,144,0.1);color:var(--gray2);border:1px solid var(--border2);}
+
+.states-wrap{display:flex;flex-direction:column;gap:12px;}
+.state-card{background:var(--panel);border:1px solid var(--border);padding:20px;position:relative;overflow:hidden;}
+.state-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;}
+.state-card.born::before{background:var(--lime);}
+.state-card.alive::before{background:var(--cyan);}
+.state-card.died::before{background:var(--red);}
+.state-card.dormant::before{background:var(--gray2);}
+.state-emoji{font-size:20px;margin-bottom:6px;}
+.state-name{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;letter-spacing:-0.3px;margin-bottom:4px;}
+.state-desc{font-size:11px;color:var(--gray);line-height:1.6;}
+.state-wr{margin-top:8px;font-size:10px;}
+.state-wr span{color:var(--lime);}
+
+/* ─── BOT STATUS ──────────────────────── */
+.bot-layout{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.bot-card{background:var(--panel);border:1px solid var(--border);padding:24px;position:relative;overflow:hidden;}
+.bot-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--lime),var(--cyan));}
+.bot-status-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.bot-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;letter-spacing:-0.5px;}
+.bot-online{display:flex;align-items:center;gap:6px;font-size:9px;letter-spacing:2px;color:var(--lime);text-transform:uppercase;}
+.bot-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;}
+.bm{background:var(--panel2);padding:12px;}
+.bm-l{font-size:9px;color:var(--gray);letter-spacing:1px;margin-bottom:4px;}
+.bm-v{font-size:16px;font-weight:700;font-family:'Space Mono',monospace;}
+.bm-v.up{color:var(--lime);}
+.bm-v.dn{color:var(--red);}
+.bm-v.neu{color:var(--white);}
+.bot-pos{background:var(--panel2);border:1px solid var(--border);padding:12px 16px;margin-bottom:12px;}
+.bp-hdr{display:flex;justify-content:space-between;margin-bottom:8px;font-size:10px;}
+.bp-hdr .sym{color:var(--white);font-weight:700;}
+.bp-hdr .type{color:var(--lime);}
+.bp-row{display:flex;justify-content:space-between;font-size:10px;margin-bottom:3px;}
+.bp-row .lbl{color:var(--gray);}
+.bp-row .val{color:var(--white);font-family:'Space Mono',monospace;}
+.bot-log{background:var(--bg2);padding:14px;font-size:10px;line-height:1.8;max-height:160px;overflow-y:auto;}
+.blog-entry{display:flex;gap:10px;margin-bottom:2px;}
+.blog-t{color:var(--gray2);flex-shrink:0;}
+.blog-msg{color:var(--gray);}
+.blog-msg .hl{color:var(--cyan);}
+.blog-msg .hl-g{color:var(--lime);}
+.blog-msg .hl-r{color:var(--red);}
+
+/* ─── STACK ───────────────────────────── */
+.stack-full{display:flex;flex-direction:column;gap:2px;max-width:800px;}
+.sl{background:var(--panel);border:1px solid var(--border);display:grid;grid-template-columns:180px 1fr auto;gap:24px;align-items:center;padding:22px 28px;position:relative;transition:border-color 0.3s;}
+.sl:hover{border-color:var(--border2);}
+.sl-num{position:absolute;top:0;right:0;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;font-weight:700;}
+.sl-num.l1{background:var(--cyan);color:var(--bg);}
+.sl-num.l2{background:var(--lime);color:var(--bg);}
+.sl-num.l3{background:var(--gold);color:var(--bg);}
+.sl-num.l4{background:var(--purple);color:var(--bg);}
+.sl-id{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;letter-spacing:-0.3px;}
+.sl-platform{font-size:9px;letter-spacing:2px;color:var(--gray);margin-top:3px;}
+.sl-desc{font-size:11px;color:var(--gray);line-height:1.7;}
+.sl-st{font-size:9px;letter-spacing:1px;padding:4px 12px;text-align:center;white-space:nowrap;}
+.sl-st.live{background:rgba(57,255,20,0.08);color:var(--lime);border:1px solid rgba(57,255,20,0.25);}
+.sl-st.wip{background:rgba(255,215,0,0.08);color:var(--gold);border:1px solid rgba(255,215,0,0.25);}
+.sl-st.soon{background:rgba(189,147,249,0.08);color:var(--purple);border:1px solid rgba(189,147,249,0.25);}
+.stack-arrow{text-align:center;padding:4px 0;color:var(--border2);font-size:18px;}
+
+/* ─── PRICING ─────────────────────────── */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.pc{background:var(--panel);border:1px solid var(--border);padding:32px;position:relative;transition:border-color 0.3s,transform 0.3s;}
+.pc:hover{border-color:var(--border2);transform:translateY(-4px);}
+.pc.feat{border-color:rgba(0,195,255,0.35);background:linear-gradient(160deg,rgba(0,195,255,0.04) 0%,var(--panel) 60%);}
+.pc.feat::before{content:'';position:absolute;inset:0;border:1px solid rgba(0,195,255,0.35);pointer-events:none;}
+.pc-badge{position:absolute;top:-1px;right:24px;background:var(--cyan);color:var(--bg);font-size:8px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:4px 12px;}
+.pc-tier{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:14px;}
+.pc-price{font-family:'Syne',sans-serif;font-size:56px;font-weight:800;letter-spacing:-3px;line-height:1;margin-bottom:2px;}
+.pc-curr{font-size:20px;color:var(--gray);font-weight:400;letter-spacing:0;vertical-align:super;}
+.pc-per{font-size:11px;color:var(--gray);margin-bottom:28px;}
+.pc-divider{height:1px;background:var(--border);margin-bottom:20px;}
+.pc-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.pc-features li{display:flex;gap:10px;font-size:11px;color:var(--gray2);align-items:flex-start;line-height:1.5;}
+.pc-features li.on{color:var(--gray);}
+.pc-features li.hi{color:var(--white);}
+.pc-features li::before{content:'▸';flex-shrink:0;margin-top:1px;}
+.pc-features li.on::before,.pc-features li.hi::before{color:var(--cyan);}
+.pc-features li::before{color:var(--border2);}
+.pc-btn{width:100%;padding:12px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;}
+.pc-btn.out{background:transparent;border:1px solid var(--border2);color:var(--gray);}
+.pc-btn.out:hover{border-color:var(--gray);color:var(--white);}
+.pc-btn.fill{background:var(--cyan);border:none;color:var(--bg);font-weight:700;}
+.pc-btn.fill:hover{background:var(--cyan2);}
+
+/* ─── FAQ ─────────────────────────────── */
+.faq-wrap{max-width:720px;}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:18px 0;cursor:pointer;font-size:13px;color:var(--white);transition:color 0.2s;gap:16px;}
+.faq-q:hover{color:var(--cyan);}
+.faq-icon{color:var(--cyan);flex-shrink:0;font-size:18px;transition:transform 0.3s;line-height:1;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-a{font-size:12px;color:var(--gray);line-height:1.8;max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s;}
+.faq-item.open .faq-a{max-height:200px;padding-bottom:16px;}
+
+/* ─── CTA BANNER ──────────────────────── */
+.cta-banner{position:relative;z-index:1;background:var(--panel);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;}
+.cta-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 100% at 50% 50%,rgba(0,195,255,0.07),transparent);}
+.cta-inner{position:relative;max-width:1440px;margin:0 auto;padding:72px 48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
+.cta-h{font-family:'Syne',sans-serif;font-size:clamp(28px,3.5vw,44px);font-weight:800;letter-spacing:-2px;line-height:1.1;margin-bottom:10px;}
+.cta-sub{font-size:13px;color:var(--gray);}
+.cta-actions{display:flex;gap:12px;flex-direction:column;align-items:flex-end;}
+
+/* ─── FOOTER ──────────────────────────── */
+.footer-wrap{position:relative;z-index:1;border-top:1px solid var(--border);}
+.footer-inner{max-width:1440px;margin:0 auto;padding:48px;display:grid;grid-template-columns:280px 1fr auto;gap:48px;}
+.f-brand .logo-txt{font-size:20px;margin-bottom:8px;display:block;}
+.f-brand p{font-size:11px;color:var(--gray);line-height:1.7;max-width:220px;margin-top:8px;}
+.f-links{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.f-col-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gray2);margin-bottom:14px;}
+.f-col a{display:block;font-size:11px;color:var(--gray);text-decoration:none;margin-bottom:8px;transition:color 0.2s;}
+.f-col a:hover{color:var(--cyan);}
+.f-right{text-align:right;}
+.f-social{display:flex;gap:10px;justify-content:flex-end;margin-bottom:16px;}
+.f-soc{width:32px;height:32px;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gray);cursor:pointer;transition:all 0.2s;}
+.f-soc:hover{border-color:var(--cyan);color:var(--cyan);}
+.f-copy{font-size:10px;color:var(--gray2);line-height:1.7;}
+.f-bottom{border-top:1px solid var(--border);padding:16px 48px;max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
+.f-bottom p{font-size:10px;color:var(--gray2);}
+
+/* ─── RESPONSIVE ──────────────────────── */
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr;gap:40px;}
+  .hero-terminal{display:none;}
+  .perf-layout{grid-template-columns:1fr;}
+  .cell-explainer{grid-template-columns:1fr;}
+  .bot-layout{grid-template-columns:1fr;}
+  .price-grid{grid-template-columns:1fr;}
+  .hiw-grid{grid-template-columns:repeat(2,1fr);}
+  .footer-inner{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  nav{padding:0 20px;}
+  .nav-center{display:none;}
+  .nav-badge{display:none;}
+  .sec{padding:60px 20px;}
+  .sig-row{grid-template-columns:80px 100px 80px 1fr;}
+  .ssess,.sdesc,.spnl{display:none;}
+  .stats-wrap{grid-template-columns:repeat(2,1fr);}
+  .sl{grid-template-columns:1fr;}
+  .cta-inner{grid-template-columns:1fr;}
+  .cta-actions{align-items:flex-start;}
+  .footer-inner{padding:32px 20px;gap:28px;}
+  .f-links{grid-template-columns:1fr 1fr;}
+  .f-right{text-align:left;}
+  .f-social{justify-content:flex-start;}
+  .f-bottom{padding:16px 20px;flex-direction:column;gap:8px;text-align:center;}
+  .hiw-grid{grid-template-columns:1fr;}
+  .hiw-step::after{display:none;}
+}
+
+/* ─── LANGUAGE TOGGLE ─── */
+.lang-toggle{display:flex;align-items:center;gap:0;border:1px solid var(--border2);overflow:hidden;margin-right:4px;}
+.lang-btn{background:transparent;color:var(--gray);border:none;padding:5px 11px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;border-right:1px solid var(--border2);}
+.lang-btn:last-child{border-right:none;}
+.lang-btn.active{background:var(--cyan);color:var(--bg);}
+.lang-btn:not(.active):hover{color:var(--white);}
+/* hide/show by lang */
+[data-lang]{transition:opacity 0.2s;}
+body.lang-en [data-lang="id"]{display:none;}
+body.lang-id [data-lang="en"]{display:none;}
+
+/* ─── LANG TOGGLE DISPLAY ─── */
+[data-lang]{display:none;}
+/* JS setLang() will set display:'' for active lang, but we need initial state */
+/* Default show ID on load (JS overrides immediately) */
+
+/* ═══ NEW ADDITIONS — BLEND WITH ORIGINAL THEME ═══ */
+
+/* ─── HERO CTA NEW ─── */
+.hero-cta-new{display:flex;gap:14px;flex-wrap:wrap;margin-top:20px;margin-bottom:18px;opacity:0;animation:fadeUp 0.7s 0.9s forwards;}
+.btn-cta-primary{background:var(--cyan);color:var(--bg);border:none;padding:13px 28px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px;}
+.btn-cta-primary:hover{background:var(--cyan2);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,195,255,0.3);}
+.btn-cta-secondary{background:transparent;color:var(--gold);border:1px solid rgba(255,215,0,0.5);padding:13px 28px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px;}
+.btn-cta-secondary:hover{background:rgba(255,215,0,0.07);border-color:var(--gold);}
+.hero-social-proof{opacity:0;animation:fadeUp 0.7s 1.05s forwards;display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:4px;}
+.hero-social-proof span{font-size:10px;color:var(--gray);letter-spacing:1px;font-family:'JetBrains Mono',monospace;}
+.hsp-dot{color:var(--border2)!important;}
+.hsp-hl{color:var(--lime)!important;}
+
+/* ─── GUARANTEE BAR ─── */
+.guarantee-bar{position:relative;z-index:1;background:rgba(57,255,20,0.03);border-top:1px solid rgba(57,255,20,0.12);border-bottom:1px solid rgba(57,255,20,0.12);padding:12px 48px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
+.gb-icon{font-size:16px;}
+.gb-text{font-size:11px;color:var(--gray);letter-spacing:0.3px;font-family:'JetBrains Mono',monospace;}
+.gb-text strong{color:var(--white);}
+.gb-link{font-size:9px;color:var(--cyan);letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(0,195,255,0.3);padding-bottom:1px;transition:border-color 0.2s;}
+.gb-link:hover{border-color:var(--cyan);}
+
+/* ─── PRICING IDR SECTION ─── */
+.pricing-idr-section{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:88px 48px;}
+.pricing-idr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px;}
+.pricing-idr-card{background:var(--panel);border:1px solid var(--border);padding:32px;position:relative;transition:border-color 0.3s,transform 0.3s;overflow:hidden;}
+.pricing-idr-card:hover{border-color:var(--border2);transform:translateY(-4px);}
+.pricing-idr-card.featured{border-color:rgba(0,195,255,0.35);background:linear-gradient(160deg,rgba(0,195,255,0.04) 0%,var(--panel) 60%);}
+.pricing-idr-card.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--lime));}
+.pricing-idr-card.elite-card{border-color:rgba(255,215,0,0.25);background:linear-gradient(160deg,rgba(255,215,0,0.03) 0%,var(--panel) 60%);}
+.pricing-idr-card.elite-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--orange));}
+.pic-badge{position:absolute;top:-1px;right:24px;font-size:8px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:4px 12px;}
+.pic-badge.popular{background:var(--cyan);color:var(--bg);}
+.pic-badge.lifetime{background:var(--gold);color:var(--bg);}
+.pic-tier{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:14px;}
+.pic-price{font-family:'Syne',sans-serif;font-weight:800;letter-spacing:-2px;line-height:1;margin-bottom:4px;}
+.pic-curr{font-size:18px;color:var(--gray);font-weight:400;letter-spacing:0;vertical-align:super;}
+.pic-amount{font-size:52px;}
+.pic-per{font-size:11px;color:var(--gray);margin-bottom:24px;}
+.pic-strike{font-size:11px;color:var(--gray);text-decoration:line-through;margin-left:6px;opacity:0.5;}
+.pic-divider{height:1px;background:var(--border);margin-bottom:20px;}
+.pic-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.pic-features li{display:flex;gap:10px;font-size:11px;color:var(--gray2);align-items:flex-start;line-height:1.5;}
+.pic-features li.on{color:var(--gray);}
+.pic-features li.hi{color:var(--white);}
+.pic-features li::before{content:'▸';flex-shrink:0;margin-top:1px;color:var(--border2);}
+.pic-features li.on::before,.pic-features li.hi::before{color:var(--cyan);}
+.pic-features li.gold-item::before{color:var(--gold);}
+.pic-btn{width:100%;padding:12px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;}
+.pic-btn.out{background:transparent;border:1px solid var(--border2);color:var(--gray);}
+.pic-btn.out:hover{border-color:var(--gray);color:var(--white);}
+.pic-btn.fill-cyan{background:var(--cyan);border:none;color:var(--bg);font-weight:700;}
+.pic-btn.fill-cyan:hover{background:var(--cyan2);}
+.pic-btn.fill-gold{background:var(--gold);border:none;color:var(--bg);font-weight:700;}
+.pic-btn.fill-gold:hover{background:#ffe533;}
+.enterprise-note{font-size:11px;color:var(--gray);margin-top:12px;line-height:1.6;}
+.enterprise-note a{color:var(--cyan);text-decoration:none;}
+.enterprise-note a:hover{text-decoration:underline;}
+
+/* ─── USDC BOX ─── */
+.usdc-box{background:var(--panel);border:1px solid rgba(57,255,20,0.2);padding:28px 32px;position:relative;overflow:hidden;margin-bottom:28px;}
+.usdc-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 10% 50%,rgba(57,255,20,0.03),transparent);pointer-events:none;}
+.usdc-box-inner{position:relative;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;}
+.usdc-icon{font-size:36px;filter:drop-shadow(0 0 10px rgba(57,255,20,0.4));}
+.usdc-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px;color:var(--white);}
+.usdc-title span{color:var(--lime);}
+.usdc-desc{font-size:11px;color:var(--gray);line-height:1.8;margin-bottom:14px;}
+.usdc-steps{display:flex;gap:8px;flex-wrap:wrap;}
+.usdc-step{background:rgba(57,255,20,0.05);border:1px solid rgba(57,255,20,0.18);padding:5px 12px;font-size:10px;color:var(--lime);letter-spacing:0.5px;font-family:'JetBrains Mono',monospace;}
+.usdc-discount{display:inline-flex;align-items:center;gap:6px;background:rgba(57,255,20,0.08);border:1px solid rgba(57,255,20,0.25);padding:4px 12px;font-size:10px;color:var(--lime);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-top:10px;font-family:'JetBrains Mono',monospace;}
+
+/* ─── PAYMENT BAR ─── */
+.payment-bar{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;padding:16px 48px;background:var(--panel2);border:1px solid var(--border);margin-bottom:8px;}
+.payment-bar-label{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray);margin-right:4px;}
+.pay-badge{font-size:9px;letter-spacing:1px;padding:4px 10px;border:1px solid var(--border2);color:var(--gray);font-family:'JetBrains Mono',monospace;transition:all 0.2s;}
+.pay-badge:hover{border-color:var(--border2);color:var(--white);}
+.pay-badge.qris{border-color:rgba(189,147,249,0.25);color:var(--purple);}
+.pay-badge.usdc-pay{border-color:rgba(57,255,20,0.25);color:var(--lime);}
+
+/* ─── TRUST BADGES ─── */
+.trust-badges{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;padding:14px 48px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--panel2);}
+.trust-badge{display:flex;align-items:center;gap:7px;font-size:9px;color:var(--gray);letter-spacing:1.5px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+.trust-badge-icon{font-size:13px;}
+.trust-badge-sep{color:var(--border2);font-size:12px;}
+
+/* ─── DISCLAIMER BAR ─── */
+.disclaimer-bar{position:relative;z-index:1;background:rgba(255,140,0,0.03);border-top:1px solid rgba(255,140,0,0.12);border-bottom:1px solid rgba(255,140,0,0.12);padding:10px 48px;text-align:center;}
+.disclaimer-bar p{font-size:10px;color:rgba(255,140,0,0.6);letter-spacing:0.5px;line-height:1.6;font-family:'JetBrains Mono',monospace;}
+
+/* ─── AFFILIATE TEASER ─── */
+.affiliate-teaser{display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(189,147,249,0.03);border:1px solid rgba(189,147,249,0.1);margin-top:16px;}
+.aff-icon{font-size:14px;}
+.aff-text{font-size:10px;color:var(--gray);letter-spacing:0.3px;font-family:'JetBrains Mono',monospace;}
+.aff-text a{color:var(--purple);text-decoration:none;border-bottom:1px solid rgba(189,147,249,0.25);transition:all 0.2s;}
+.aff-text a:hover{color:#d0aaff;border-color:var(--purple);}
+.aff-pct{font-size:9px;color:var(--purple);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-left:auto;white-space:nowrap;font-family:'JetBrains Mono',monospace;}
+
+/* ─── RESPONSIVE ADDITIONS ─── */
+@media(max-width:1024px){
+  .pricing-idr-grid{grid-template-columns:1fr;}
+  .usdc-box-inner{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  .pricing-idr-section{padding:60px 20px;}
+  .pic-amount{font-size:40px!important;}
+  .guarantee-bar{padding:12px 20px;}
+  .disclaimer-bar{padding:10px 20px;}
+  .trust-badges{padding:14px 20px;gap:10px;}
+  .payment-bar{padding:16px 20px;}
+  .usdc-box{padding:20px 16px;}
+  .ticker-track{animation-duration:20s;}
+  .f-brand{max-width:100%;}
+  .f-brand p{max-width:100%;}
+}
+</style>
 </head>
 <body>
+<div class="grid-bg"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
 
-<!-- SCANLINES & NOISE tetap persis -->
-<!-- (pseudo-element ::before & ::after dari CSS eksternal) -->
-
-<!-- HERO SECTION (ditingkatkan) -->
-<div class="hero">
-  <div class="terminal">
-    <h1>StockIndexer</h1>
-    <p>Conway Automaton Intelligence Platform</p>
-  </div>
-
-  <!-- CTA baru -->
-  <div class="cta-buttons">
-    <a href="https://utas.me/stockindexer/pro" class="btn cyan">MULAI 14 HARI GRATIS</a>
-    <a href="#pricing" class="btn gold-border">LIHAT PRICING & ELITE</a>
-  </div>
-
-  <!-- Social proof -->
-  <div class="social-proof">
-    1.450+ member aktif • Win rate rata-rata 68% • pieBot profit +18.4% bulan lalu
-  </div>
-</div>
-
-<!-- Ticker feed simulasi tetap -->
-<div class="feed-box">
-  <!-- Kode simulasi signal asli tetap di scripts.js -->
-</div>
-
-<!-- Conway card & pip pulse tetap -->
-<div class="cw-card">
-  <!-- Kode pip pulse asli tetap di scripts.js -->
-</div>
-
-<!-- FEATURES SECTION (ditingkatkan checklist) -->
-<section class="features">
-  <h2>Fitur Utama</h2>
-  <ul>
-    <li>19 Alert Real-time dari SS BlackBox v6.3.1</li>
-    <li>Confluence Score 0–23 + Grade 1–5</li>
-    <li>Ownership Intelligence IDX (data >1% pemegang saham)</li>
-    <li>Live Ticker Tape + World Indices 8 negara</li>
-    <li>AI Signal Explanation Engine</li>
-    <li>Portfolio Risk & Correlation Dashboard</li>
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="logo-mark">
+      <div class="lc on" id="lc0"></div>
+      <div class="lc off" id="lc1"></div>
+      <div class="lc off" id="lc2"></div>
+      <div class="lc on" id="lc3"></div>
+    </div>
+    <span class="logo-txt">Stock<em>Indexer</em></span>
+  </a>
+  <ul class="nav-center">
+    <li><a href="#live"><span data-lang="en">Live</span><span data-lang="id">Live</span></a></li>
+    <li><a href="#performance"><span data-lang="en">Performance</span><span data-lang="id">Performa</span></a></li>
+    <li><a href="#conway"><span data-lang="en">Conway</span><span data-lang="id">Conway</span></a></li>
+    <li><a href="#bot"><span data-lang="en">Bot Status</span><span data-lang="id">Status Bot</span></a></li>
+    <li><a href="#stack"><span data-lang="en">Stack</span><span data-lang="id">Stack</span></a></li>
+    <li><a href="#pricing-idr"><span data-lang="en">Pricing</span><span data-lang="id">Harga</span></a></li>
   </ul>
-</section>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn active" id="btnID" onclick="setLang('id')">ID</button>
+    </div>
+    <div class="nav-badge"><div class="ldot"></div> <span data-lang="en">6 assets live</span><span data-lang="id">6 aset live</span></div>
+    <button class="nav-btn" onclick="window.open('https://utas.stockindexer.com/checkout/pro','_blank')"><span data-lang="en">Start Free Trial</span><span data-lang="id">Mulai Trial</span></button>
+  </div>
+</nav>
 
-<!-- PRICING SECTION BARU -->
-<section id="pricing" class="pricing">
-  <h2>Pilih Paketmu</h2>
-  <div class="pricing-grid">
-    <div class="card pro">
-      <div class="badge cyan">MOST POPULAR</div>
-      <h3>PRO</h3>
-      <div class="price">Rp497.000 <span>/bln</span></div>
-      <ul>
-        <li>Full Dashboard & Signals</li>
-        <li>Ownership Intelligence</li>
-        <li>Live Ticker + Indices</li>
-        <li>AI Explanation</li>
-        <li>Community Access</li>
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow"><div class="ldot"></div> SS BlackBox v6.3.1 — Conway Automaton Engine</div>
+    <h1 class="hero-h1">
+      <span class="w1">SIGNAL.</span>
+      <span class="w2">DECIDE.</span>
+      <span class="w3">EXECUTE.</span>
+    </h1>
+    <p class="hero-p" data-lang="en">
+      The world's first <strong>Conway Automaton</strong> signal intelligence platform.<br>
+      8-cell state engine × 23-point confluence × autonomous execution.<br>
+      <strong>Not a prediction. A verified system.</strong>
+    </p>
+    <p class="hero-p" data-lang="id" style="margin-bottom:40px;">
+      Platform sinyal trading pertama berbasis <strong>Conway Automaton</strong>.<br>
+      8-cell state engine × 23-point confluence × eksekusi otomatis.<br>
+      <strong>Bukan prediksi. Sistem yang sudah terverifikasi.</strong>
+    </p>
+    <div class="hero-cta-new">
+      <a href="#pricing-idr" class="btn-cta-primary">
+        <span data-lang="en">🚀 START 14-DAY TRIAL</span>
+        <span data-lang="id">🚀 MULAI 14 HARI GRATIS</span>
+      </a>
+      <a href="#pricing-idr" class="btn-cta-secondary">
+        <span data-lang="en">💎 VIEW PRICING & ELITE →</span>
+        <span data-lang="id">💎 LIHAT PRICING & ELITE →</span>
+      </a>
+    </div>
+    <div class="hero-social-proof">
+      <span><span class="hsp-hl">1.450+</span> <span data-lang="en">active members</span><span data-lang="id">member aktif</span></span>
+      <span class="hsp-dot">·</span>
+      <span><span data-lang="en">avg win rate</span><span data-lang="id">win rate rata-rata</span> <span class="hsp-hl">68%</span></span>
+      <span class="hsp-dot">·</span>
+      <span>pieBot <span data-lang="en">profit last month</span><span data-lang="id">profit bulan lalu</span> <span class="hsp-hl">+18.4%</span></span>
+    </div>
+  </div>
+  <div class="hero-terminal">
+    <div class="term-bar">
+      <div class="term-dot r"></div>
+      <div class="term-dot y"></div>
+      <div class="term-dot g"></div>
+      <span class="term-title">conway_engine.pine — bar_close 17:00 UTC+7</span>
+    </div>
+    <div class="term-body">
+      <div class="tl"><span class="prompt">▸</span><span class="cmd">conway.scan(BTCUSDT, 1H)</span></div>
+      <div class="tl"><span class="out">  cell[0] weekly_trend</span><span class="val-r">  DEAD  (bearish)</span></div>
+      <div class="tl"><span class="out">  cell[1] baseline</span><span class="val-r">    DEAD  (below BBMC)</span></div>
+      <div class="tl"><span class="out">  cell[2] sqz_released</span><span class="val-g">  LIVE  ✓</span></div>
+      <div class="tl"><span class="out">  cell[3] volume</span><span class="val-r">      DEAD  (thin)</span></div>
+      <div class="tl"><span class="out">  cell[4] predator</span><span class="val-r">    DEAD  (stagnant)</span></div>
+      <div class="tl"><span class="out">  cell[5] structure</span><span class="val-r">   DEAD  (no BOS)</span></div>
+      <div class="tl"><span class="out">  cell[6] session</span><span class="val-g">     LIVE  (London) ✓</span></div>
+      <div class="tl"><span class="out">  cell[7] ofi</span><span class="val-r">         DEAD  (neutral)</span></div>
+      <div class="term-spacer"></div>
+      <div class="tl"><span class="prompt">▸</span><span class="cmd">conway.state()</span></div>
+      <div class="tl"><span class="out">  live_cells</span><span class="val-o">    2 / 8</span></div>
+      <div class="tl"><span class="out">  state</span><span class="val-r">         ○ DORMANT</span></div>
+      <div class="tl"><span class="out">  fusion_score</span><span class="val-o">  9 / 23  [GRADE 4]</span></div>
+      <div class="tl"><span class="out">  signal</span><span class="val-r">        ✗ NO ENTRY — skip</span></div>
+      <div class="term-spacer"></div>
+      <div class="tl"><span class="prompt">▸</span><span class="val-g">bot.status</span><span class="out"> → IDLE — waiting for BORN/ALIVE ≥5</span></div>
+      <div class="tl"><span class="prompt">▸</span><span class="term-cursor"></span></div>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-v" style="color:var(--lime)">81.8%</div><div class="hstat-l"><span data-lang="en">BBP Win Rate</span><span data-lang="id">Win Rate BBP</span></div></div>
+      <div class="hstat"><div class="hstat-v" style="color:var(--cyan)">287</div><div class="hstat-l"><span data-lang="en">Backtest Trades</span><span data-lang="id">Trade Backtest</span></div></div>
+      <div class="hstat"><div class="hstat-v" style="color:var(--gold)">1.92</div><div class="hstat-l"><span data-lang="en">Profit Factor</span><span data-lang="id">Profit Factor</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TICKER ═══ -->
+<div class="ticker-wrap">
+  <div class="ticker-fade-l"></div>
+  <div class="ticker-fade-r"></div>
+  <div class="ticker-track">
+    <div class="ti"><span class="ti-sym">BTCUSDT</span><span class="ti-p">66,491.94</span><span class="ti-c dn">▼ −0.15%</span><span class="ti-s dormant">2/8 DORMANT</span></div>
+    <div class="ti"><span class="ti-sym">XAUUSD</span><span class="ti-p">2,912.40</span><span class="ti-c up">▲ +0.82%</span><span class="ti-s alive">6/8 ALIVE</span></div>
+    <div class="ti"><span class="ti-sym">EURUSD</span><span class="ti-p">1.0834</span><span class="ti-c up">▲ +0.21%</span><span class="ti-s born">5/8 BORN 🟢</span></div>
+    <div class="ti"><span class="ti-sym">NQ100</span><span class="ti-p">21,843.00</span><span class="ti-c dn">▼ −0.44%</span><span class="ti-s dormant">3/8 DORMANT</span></div>
+    <div class="ti"><span class="ti-sym">ETHUSDT</span><span class="ti-p">3,241.50</span><span class="ti-c up">▲ +1.10%</span><span class="ti-s alive">5/8 ALIVE</span></div>
+    <div class="ti"><span class="ti-sym">SPX500</span><span class="ti-p">5,791.23</span><span class="ti-c dn">▼ −0.08%</span><span class="ti-s died">4/8 DIED 🔴</span></div>
+    <div class="ti"><span class="ti-sym">GBPUSD</span><span class="ti-p">1.2641</span><span class="ti-c up">▲ +0.14%</span><span class="ti-s born">5/8 BORN 🟢</span></div>
+    <div class="ti"><span class="ti-sym">USDJPY</span><span class="ti-p">149.82</span><span class="ti-c dn">▼ −0.33%</span><span class="ti-s dormant">2/8 DORMANT</span></div>
+    <div class="ti"><span class="ti-sym">BTCUSDT</span><span class="ti-p">66,491.94</span><span class="ti-c dn">▼ −0.15%</span><span class="ti-s dormant">2/8 DORMANT</span></div>
+    <div class="ti"><span class="ti-sym">XAUUSD</span><span class="ti-p">2,912.40</span><span class="ti-c up">▲ +0.82%</span><span class="ti-s alive">6/8 ALIVE</span></div>
+    <div class="ti"><span class="ti-sym">EURUSD</span><span class="ti-p">1.0834</span><span class="ti-c up">▲ +0.21%</span><span class="ti-s born">5/8 BORN 🟢</span></div>
+    <div class="ti"><span class="ti-sym">NQ100</span><span class="ti-p">21,843.00</span><span class="ti-c dn">▼ −0.44%</span><span class="ti-s dormant">3/8 DORMANT</span></div>
+    <div class="ti"><span class="ti-sym">ETHUSDT</span><span class="ti-p">3,241.50</span><span class="ti-c up">▲ +1.10%</span><span class="ti-s alive">5/8 ALIVE</span></div>
+    <div class="ti"><span class="ti-sym">SPX500</span><span class="ti-p">5,791.23</span><span class="ti-c dn">▼ −0.08%</span><span class="ti-s died">4/8 DIED 🔴</span></div>
+    <div class="ti"><span class="ti-sym">GBPUSD</span><span class="ti-p">1.2641</span><span class="ti-c up">▲ +0.14%</span><span class="ti-s born">5/8 BORN 🟢</span></div>
+    <div class="ti"><span class="ti-sym">USDJPY</span><span class="ti-p">149.82</span><span class="ti-c dn">▼ −0.33%</span><span class="ti-s dormant">2/8 DORMANT</span></div>
+  </div>
+</div>
+
+<!-- ═══ LIVE DASHBOARD ═══ -->
+<div class="sec" id="live">
+  <div class="sec-eyebrow">Conway Automaton — Live State Engine</div>
+  <h2 class="sec-h">Real-Time<br>Market Intelligence</h2>
+  <p class="sec-p">8-cell Conway state computed every bar close. Hover any card to inspect all 8 cells live.</p>
+  <div class="cw-grid">
+    <!-- BTC DORMANT -->
+    <div class="cw-card dormant">
+      <div class="cell-detail">
+        <div style="font-size:9px;letter-spacing:2px;color:var(--gray);margin-bottom:8px;text-transform:uppercase">BTCUSDT · Cell Breakdown</div>
+        <div class="cd-row"><span class="cd-name">Cell 0 · Weekly Trend</span><span class="cd-val off">DEAD ✗</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 1 · Price > Baseline</span><span class="cd-val off">DEAD ✗</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 2 · SQZ Released</span><span class="cd-val on">LIVE ✓</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 3 · Volume OK</span><span class="cd-val off">DEAD ✗</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 4 · Predator HFT</span><span class="cd-val off">DEAD ✗</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 5 · CHoCH/BOS</span><span class="cd-val off">DEAD ✗</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 6 · Session</span><span class="cd-val on">LIVE ✓</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 7 · OFI</span><span class="cd-val off">DEAD ✗</span></div>
+        <div class="cd-close">ESC to close</div>
+      </div>
+      <div class="cw-top"><div><div class="cw-sym">BTCUSDT</div><div class="cw-tf">Binance Futures · 1H</div></div><div class="cw-badge dormant">DORMANT ○</div></div>
+      <div class="cw-price">66,491<span class="cw-frac">.94</span></div>
+      <div class="cw-chg dn">▼ −101.37  (−0.15%)</div>
+      <div class="cells-wrap">
+        <div class="cells-pips"><div class="pip"></div><div class="pip"></div><div class="pip on"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip on"></div><div class="pip"></div></div>
+        <div class="cells-names"><span class="cn">Weekly</span><span class="cn">SQZ</span><span class="cn">Session</span><span class="cn">OFI</span></div>
+      </div>
+      <div class="cw-bot"><div class="cw-grade">⭐ GRADE 4 — THIN</div><div class="cw-fusion"><div class="cw-fusion-v">9</div><div class="cw-fusion-l">/ 23 FUSION</div></div></div>
+    </div>
+    <!-- XAUUSD ALIVE -->
+    <div class="cw-card alive">
+      <div class="cell-detail">
+        <div style="font-size:9px;letter-spacing:2px;color:var(--gray);margin-bottom:8px;text-transform:uppercase">XAUUSD · Cell Breakdown</div>
+        <div class="cd-row"><span class="cd-name">Cell 0 · Weekly Trend</span><span class="cd-val on">LIVE ✓</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 1 · Price > Baseline</span><span class="cd-val on">LIVE ✓</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 2 · SQZ Released</span><span class="cd-val on">LIVE ✓</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 3 · Volume OK</span><span class="cd-val on">LIVE ✓</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 4 · Predator HFT</span><span class="cd-val off">DEAD ✗</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 5 · CHoCH/BOS</span><span class="cd-val on">LIVE ✓</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 6 · Session</span><span class="cd-val on">LIVE ✓</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 7 · OFI</span><span class="cd-val off">DEAD ✗</span></div>
+      </div>
+      <div class="cw-top"><div><div class="cw-sym">XAUUSD</div><div class="cw-tf">Spot Gold · 1H</div></div><div class="cw-badge alive">ALIVE ✦</div></div>
+      <div class="cw-price">2,912<span class="cw-frac">.40</span></div>
+      <div class="cw-chg up">▲ +23.60  (+0.82%)</div>
+      <div class="cells-wrap">
+        <div class="cells-pips"><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip"></div><div class="pip on"></div><div class="pip on"></div><div class="pip"></div></div>
+        <div class="cells-names"><span class="cn">Weekly</span><span class="cn">Volume</span><span class="cn">BOS</span><span class="cn">Session</span></div>
+      </div>
+      <div class="cw-bot"><div class="cw-grade">⭐⭐ GRADE 2 — PRIME</div><div class="cw-fusion"><div class="cw-fusion-v" style="color:var(--cyan)">17</div><div class="cw-fusion-l">/ 23 FUSION</div></div></div>
+    </div>
+    <!-- EURUSD BORN -->
+    <div class="cw-card born">
+      <div class="cell-detail">
+        <div style="font-size:9px;letter-spacing:2px;color:var(--gray);margin-bottom:8px;text-transform:uppercase">EURUSD · Cell Breakdown</div>
+        <div class="cd-row"><span class="cd-name">Cell 0 · Weekly Trend</span><span class="cd-val on">LIVE ✓</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 1 · Price > Baseline</span><span class="cd-val on">LIVE ✓</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 2 · SQZ Released</span><span class="cd-val on">LIVE ✓</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 3 · Volume OK</span><span class="cd-val on">LIVE ✓</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 4 · Predator HFT</span><span class="cd-val on">LIVE ✓</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 5 · CHoCH/BOS</span><span class="cd-val off">DEAD ✗</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 6 · Session</span><span class="cd-val on">LIVE ✓</span></div>
+        <div class="cd-row"><span class="cd-name">Cell 7 · OFI</span><span class="cd-val off">DEAD ✗</span></div>
+      </div>
+      <div class="cw-top"><div><div class="cw-sym">EURUSD</div><div class="cw-tf">Forex Major · 1H</div></div><div class="cw-badge born">BORN 🟢</div></div>
+      <div class="cw-price">1.0834</div>
+      <div class="cw-chg up">▲ +0.0022  (+0.21%)</div>
+      <div class="cells-wrap">
+        <div class="cells-pips"><div class="pip on born-pip"></div><div class="pip on born-pip"></div><div class="pip on born-pip"></div><div class="pip on born-pip"></div><div class="pip on born-pip"></div><div class="pip"></div><div class="pip on born-pip"></div><div class="pip"></div></div>
+        <div class="cells-names"><span class="cn">Weekly</span><span class="cn">Volume</span><span class="cn">Predator</span><span class="cn">Session</span></div>
+      </div>
+      <div class="cw-bot"><div class="cw-grade">⭐⭐⭐ GRADE 1 — OPTIMAL</div><div class="cw-fusion"><div class="cw-fusion-v" style="color:var(--lime)">19</div><div class="cw-fusion-l">/ 23 FUSION</div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"><hr></div>
+
+<!-- ═══ SIGNAL FEED ═══ -->
+<div class="sec">
+  <div class="sec-eyebrow"><span data-lang="en">Live Signal Stream</span><span data-lang="id">Sinyal Live</span></div>
+  <h2 class="sec-h"><span data-lang="en">Every Signal.<br>Every Bar Close.</span><span data-lang="id">Setiap Sinyal.<br>Setiap Bar Close.</span></h2>
+  <p class="sec-p"><span data-lang="en">Real-time event log across all monitored assets. Filter by signal type.</span><span data-lang="id">Log sinyal real-time di semua aset yang dipantau. Filter berdasarkan jenis sinyal.</span></p>
+  <div class="feed-box">
+    <div class="feed-hdr">
+      <div class="feed-hdr-l"><div class="ldot"></div> Signal Stream — 07 Mar 2026</div>
+      <div class="feed-hdr-r">
+        <div class="feed-tag active">ALL</div>
+        <div class="feed-tag">ENTRY</div>
+        <div class="feed-tag">EXIT</div>
+        <div class="feed-tag">INFO</div>
+      </div>
+    </div>
+    <div class="sig-row highlight new">
+      <span class="st">17:14:23</span><span class="stype buy">⚡ CONWAY BUY</span><span class="ssym">EURUSD</span><span class="sprice">1.0834</span><span class="ssess">LONDON</span><span class="sdesc">BORN · 5/8 cells · Grade 1 · BBP↑</span><span class="spnl up">+0</span>
+    </div>
+    <div class="sig-row">
+      <span class="st">16:58:01</span><span class="stype info">BBP ↑</span><span class="ssym">XAUUSD</span><span class="sprice">2,891.20</span><span class="ssess">LONDON</span><span class="sdesc">BBP Crossover · Conway 6/8 filter active</span><span class="spnl up">+0</span>
+    </div>
+    <div class="sig-row">
+      <span class="st">16:30:00</span><span class="stype info">🇬🇧 LONDON</span><span class="ssym">ALL PAIRS</span><span class="sprice">—</span><span class="ssess">OPEN</span><span class="sdesc"><span data-lang="en">London session open — prime window started</span><span data-lang="id">London session buka — prime window aktif</span></span><span class="spnl neu" style="color:var(--gray)">—</span>
+    </div>
+    <div class="sig-row">
+      <span class="st">15:44:12</span><span class="stype info">BOS BULL</span><span class="ssym">EURUSD</span><span class="sprice">1.0812</span><span class="ssess">PRE-LON</span><span class="sdesc">Break of Structure confirmed · upside bias</span><span class="spnl neu" style="color:var(--gray)">—</span>
+    </div>
+    <div class="sig-row">
+      <span class="st">14:00:11</span><span class="stype sell">⚡ DOOM SELL</span><span class="ssym">BTCUSDT</span><span class="sprice">67,174.06</span><span class="ssess">ASIA</span><span class="sdesc">BBP Crossunder · VWAP+RSI confirmed</span><span class="spnl up">+2.1%</span>
+    </div>
+    <div class="sig-row">
+      <span class="st">13:15:44</span><span class="stype warn">⚠ ALPHA EXIT</span><span class="ssym">BTCUSDT</span><span class="sprice">67,890.00</span><span class="ssess">ASIA</span><span class="sdesc">Dump risk · reduce exposure</span><span class="spnl neu" style="color:var(--gray)">—</span>
+    </div>
+    <div class="sig-row">
+      <span class="st">12:01:05</span><span class="stype exit">CONWAY DIED</span><span class="ssym">NQ100</span><span class="sprice">21,910.00</span><span class="ssess">NEW YORK</span><span class="sdesc">Cells dropped 5→3 · momentum fading</span><span class="spnl dn">−0.8%</span>
+    </div>
+    <div class="sig-row">
+      <span class="st">12:00:05</span><span class="stype info">🗽 NY OPEN</span><span class="ssym">ALL PAIRS</span><span class="sprice">—</span><span class="ssess">OPEN</span><span class="sdesc"><span data-lang="en">New York session — highest volume window</span><span data-lang="id">New York session — volume tertinggi</span></span><span class="spnl neu" style="color:var(--gray)">—</span>
+    </div>
+    <div class="feed-footer">
+      <span><span data-lang="en">Showing 8 of 47 signals today</span><span data-lang="id">Menampilkan 8 dari 47 sinyal hari ini</span></span>
+      <button class="feed-loadmore"><span data-lang="en">Load more ↓</span><span data-lang="id">Muat lebih ↓</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="divider"><hr></div>
+
+<!-- ═══ PERFORMANCE ═══ -->
+<div class="sec" id="performance">
+  <div class="sec-eyebrow"><span data-lang="en">Verified Backtest — BTCUSDT 1H · 2022–2025</span><span data-lang="id">Backtest Terverifikasi — BTCUSDT 1H · 2022–2025</span></div>
+  <h2 class="sec-h"><span data-lang="en">Numbers That<br>Don't Lie.</span><span data-lang="id">Angka yang<br>Tidak Bohong.</span></h2>
+  <p class="sec-p"><span data-lang="en">All metrics from SS BlackBox v6.3 backtest engine. 287 trades · 3 years · commission 0.05% included.</span><span data-lang="id">Semua metrik dari backtest engine SS BlackBox v6.3. 287 trade · 3 tahun · komisi 0.05% sudah termasuk.</span></p>
+  <div class="perf-layout">
+    <div>
+      <div class="stats-wrap">
+        <div class="sbox"><div class="sbox-lbl"><span data-lang="en">Win Rate</span><span data-lang="id">Win Rate</span></div><div class="sbox-val" style="color:var(--lime)">74<span style="font-size:20px;color:var(--gray)">%</span></div><div class="sbox-sub"><span data-lang="en">Conway signal tier</span><span data-lang="id">Tier sinyal Conway</span></div><div class="sbox-delta up">▲ BBP standalone: 81.8%</div></div>
+        <div class="sbox"><div class="sbox-lbl">Profit Factor</div><div class="sbox-val" style="color:var(--cyan)">1.92</div><div class="sbox-sub"><span data-lang="en">Gross profit ÷ gross loss</span><span data-lang="id">Gross profit ÷ gross loss</span></div><div class="sbox-delta up">▲ <span data-lang="en">Target threshold: 1.5</span><span data-lang="id">Target threshold: 1.5</span></div></div>
+        <div class="sbox"><div class="sbox-lbl">Avg R:R</div><div class="sbox-val" style="color:var(--gold)">2.3<span style="font-size:18px;color:var(--gray)">:1</span></div><div class="sbox-sub">SL 1.5× ATR · TP 3× ATR</div><div class="sbox-delta up">▲ <span data-lang="en">Avg win vs avg loss</span><span data-lang="id">Avg menang vs avg kalah</span></div></div>
+        <div class="sbox"><div class="sbox-lbl"><span data-lang="en">Max Drawdown</span><span data-lang="id">Max Drawdown</span></div><div class="sbox-val" style="color:var(--orange)">11<span style="font-size:20px;color:var(--gray)">%</span></div><div class="sbox-sub"><span data-lang="en">Worst peak-to-trough</span><span data-lang="id">Peak-to-trough terburuk</span></div><div class="sbox-delta up">▲ <span data-lang="en">Well below 15% target</span><span data-lang="id">Jauh di bawah target 15%</span></div></div>
+        <div class="sbox"><div class="sbox-lbl"><span data-lang="en">Total Trades</span><span data-lang="id">Total Trade</span></div><div class="sbox-val" style="color:var(--white)">287</div><div class="sbox-sub"><span data-lang="en">3 years · 1H BTCUSDT</span><span data-lang="id">3 tahun · 1H BTCUSDT</span></div><div class="sbox-delta up">▲ <span data-lang="en">Statistically valid sample</span><span data-lang="id">Sampel valid secara statistik</span></div></div>
+        <div class="sbox"><div class="sbox-lbl">Expectancy</div><div class="sbox-val" style="color:var(--lime)">+1.4<span style="font-size:18px;color:var(--gray)">R</span></div><div class="sbox-sub"><span data-lang="en">Expected value per trade</span><span data-lang="id">Expected value per trade</span></div><div class="sbox-delta up">▲ <span data-lang="en">Positive edge confirmed</span><span data-lang="id">Edge positif terkonfirmasi</span></div></div>
+      </div>
+      <!-- WIN RATE BY SIGNAL TIER -->
+      <div class="wr-wrap" style="margin-top:16px;">
+        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:16px;"><span data-lang="en">Win Rate by Signal Tier</span><span data-lang="id">Win Rate per Tier Sinyal</span></div>
+        <div class="wr-bar-row"><span class="wr-label">Conway BORN ≥5 cells</span><div class="wr-track"><div class="wr-fill" style="width:82%;background:var(--lime);"></div></div><span class="wr-pct">82%</span></div>
+        <div class="wr-bar-row"><span class="wr-label">Conway ALIVE ≥5 cells</span><div class="wr-track"><div class="wr-fill" style="width:74%;background:var(--cyan);"></div></div><span class="wr-pct">74%</span></div>
+        <div class="wr-bar-row"><span class="wr-label">BBP + Conway filter</span><div class="wr-track"><div class="wr-fill" style="width:82%;background:var(--teal);"></div></div><span class="wr-pct">82%</span></div>
+        <div class="wr-bar-row"><span class="wr-label">GOLD/DOOM (VWAP+RSI)</span><div class="wr-track"><div class="wr-fill" style="width:65%;background:var(--gold);"></div></div><span class="wr-pct">65%</span></div>
+        <div class="wr-bar-row"><span class="wr-label">BBP Standalone</span><div class="wr-track"><div class="wr-fill" style="width:62%;background:var(--orange);"></div></div><span class="wr-pct">62%</span></div>
+        <div class="wr-bar-row"><span class="wr-label">PM Cross Only</span><div class="wr-track"><div class="wr-fill" style="width:53%;background:var(--gray2);"></div></div><span class="wr-pct">53%</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="equity-wrap">
+        <div class="eq-hdr">
+          <div class="eq-ttl"><span data-lang="en">Equity Curve</span><span data-lang="id">Kurva Ekuitas</span></div>
+          <div class="eq-pnl">+192%</div>
+        </div>
+        <canvas class="eq-chart" id="equityChart"></canvas>
+        <div class="eq-meta">
+          <div class="eq-m"><div class="eq-m-l"><span data-lang="en">Start Capital</span><span data-lang="id">Modal Awal</span></div><div class="eq-m-v">$10,000</div></div>
+          <div class="eq-m"><div class="eq-m-l"><span data-lang="en">End Capital</span><span data-lang="id">Modal Akhir</span></div><div class="eq-m-v" style="color:var(--lime)">$29,200</div></div>
+          <div class="eq-m"><div class="eq-m-l"><span data-lang="en">Best Month</span><span data-lang="id">Bulan Terbaik</span></div><div class="eq-m-v" style="color:var(--lime)">+18.4%</div></div>
+          <div class="eq-m"><div class="eq-m-l"><span data-lang="en">Worst Month</span><span data-lang="id">Bulan Terburuk</span></div><div class="eq-m-v" style="color:var(--red)">−6.2%</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"><hr></div>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<div class="sec">
+  <div class="sec-eyebrow">System Overview</div>
+  <h2 class="sec-h">How It Works.</h2>
+  <p class="sec-p">Four steps from raw price data to autonomous trade execution.</p>
+  <div class="hiw-grid">
+    <div class="hiw-step">
+      <div class="hiw-n">01</div>
+      <div class="hiw-icon">📊</div>
+      <div class="hiw-ttl">Market Scan</div>
+      <div class="hiw-desc">SS BlackBox scans OHLCV data every 1H bar close. 8 Conway cells evaluated simultaneously across weekly trend, baseline, volume, structure, session, and OFI.</div>
+      <div class="hiw-tag">SS BlackBox v6.3</div>
+    </div>
+    <div class="hiw-step">
+      <div class="hiw-n">02</div>
+      <div class="hiw-icon">🧬</div>
+      <div class="hiw-ttl">State Decision</div>
+      <div class="hiw-desc">Conway State Engine computes BORN / ALIVE / DIED / DORMANT. Minimum 5/8 cells required. 23-point Fusion Score determines signal grade from 1 (best) to 5.</div>
+      <div class="hiw-tag">Conway Automaton</div>
+    </div>
+    <div class="hiw-step">
+      <div class="hiw-n">03</div>
+      <div class="hiw-icon">⚡</div>
+      <div class="hiw-ttl">Signal Fire</div>
+      <div class="hiw-desc">When conditions align: Conway BORN/ALIVE + BBP Crossover + VWAP + RSI filter + London/NY session, a webhook payload fires to execution layer.</div>
+      <div class="hiw-tag">Webhook JSON</div>
+    </div>
+    <div class="hiw-step">
+      <div class="hiw-n">04</div>
+      <div class="hiw-icon">🤖</div>
+      <div class="hiw-ttl">Auto Execute</div>
+      <div class="hiw-desc">Conway Research Automaton receives signal, validates context, places order with ATR-based SL/TP. Position monitored until SS3/BBP exit or Conway DIED.</div>
+      <div class="hiw-tag">Conway.tech</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"><hr></div>
+
+<!-- ═══ CONWAY EXPLAINER ═══ -->
+<div class="sec" id="conway">
+  <div class="sec-eyebrow">The Engine — Conway State Explained</div>
+  <h2 class="sec-h">8 Cells.<br>One Decision.</h2>
+  <p class="sec-p">Each cell is a binary condition. The total live count determines market state. No guesswork.</p>
+  <div class="cell-explainer">
+    <div class="cell-grid-wrap">
+      <div class="cell-grid-title">Cell Definitions — Current State: EURUSD</div>
+      <table class="cell-table">
+        <tr><td class="cell-num">C0</td><td class="cell-name">Weekly Trend</td><td class="cell-cond">EMA 20 > EMA 50</td><td class="cell-live"><span class="on">LIVE ✓</span></td></tr>
+        <tr><td class="cell-num">C1</td><td class="cell-name">Baseline</td><td class="cell-cond">Close > BBMC HMA 60</td><td class="cell-live"><span class="on">LIVE ✓</span></td></tr>
+        <tr><td class="cell-num">C2</td><td class="cell-name">SQZ Released</td><td class="cell-cond">BB outside KC</td><td class="cell-live"><span class="on">LIVE ✓</span></td></tr>
+        <tr><td class="cell-num">C3</td><td class="cell-name">Volume OK</td><td class="cell-cond">Vol > SMA20 × 1.1</td><td class="cell-live"><span class="on">LIVE ✓</span></td></tr>
+        <tr><td class="cell-num">C4</td><td class="cell-name">Predator HFT</td><td class="cell-cond">Vol ratio > 100%</td><td class="cell-live"><span class="on">LIVE ✓</span></td></tr>
+        <tr><td class="cell-num">C5</td><td class="cell-name">CHoCH / BOS</td><td class="cell-cond">Structure aligned</td><td class="cell-live"><span class="off">DEAD ✗</span></td></tr>
+        <tr><td class="cell-num">C6</td><td class="cell-name">Session</td><td class="cell-cond">London or NY active</td><td class="cell-live"><span class="on">LIVE ✓</span></td></tr>
+        <tr><td class="cell-num">C7</td><td class="cell-name">OFI</td><td class="cell-cond">Z-score > 0.5</td><td class="cell-live"><span class="off">DEAD ✗</span></td></tr>
+      </table>
+      <div style="padding:14px 12px;background:var(--panel2);margin-top:8px;display:flex;justify-content:space-between;">
+        <span style="font-size:11px;color:var(--gray)">Total LIVE cells</span>
+        <span style="font-size:14px;font-weight:700;color:var(--lime)">6 / 8 — BORN 🟢</span>
+      </div>
+    </div>
+    <div class="states-wrap">
+      <div class="state-card born">
+        <div class="state-emoji">🟢</div>
+        <div class="state-name" style="color:var(--lime)">BORN</div>
+        <div class="state-desc">Previous bar &lt;threshold, current bar ≥threshold. Fresh momentum emerging. Best entry signal — highest probability trade.</div>
+        <div class="state-wr">Est. Win Rate: <span>76–82%</span></div>
+      </div>
+      <div class="state-card alive">
+        <div class="state-emoji">✦</div>
+        <div class="state-name" style="color:var(--cyan)">ALIVE</div>
+        <div class="state-desc">Both bars ≥threshold. Trend running. Hold open positions, add on retest. No new entry unless BBP cross occurs.</div>
+        <div class="state-wr">Est. Win Rate: <span>72–76%</span></div>
+      </div>
+      <div class="state-card died">
+        <div class="state-emoji">🔴</div>
+        <div class="state-name" style="color:var(--red)">DIED</div>
+        <div class="state-desc">Previous bar ≥threshold, current bar &lt;threshold. Momentum fading. Prepare to exit. Bot begins monitoring exit triggers.</div>
+        <div class="state-wr">Action: <span style="color:var(--orange)">Prepare exit</span></div>
+      </div>
+      <div class="state-card dormant">
+        <div class="state-emoji">○</div>
+        <div class="state-name" style="color:var(--gray)">DORMANT</div>
+        <div class="state-desc">Both bars &lt;threshold. No confluence. Bot skips all entries. Patience is profitability — not trading is a valid position.</div>
+        <div class="state-wr">Action: <span style="color:var(--gray)">Skip all entries</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"><hr></div>
+
+<!-- ═══ BOT STATUS ═══ -->
+<div class="sec" id="bot">
+  <div class="sec-eyebrow">Autonomous Bot — Live Status</div>
+  <h2 class="sec-h">The Bot Is<br>Always Watching.</h2>
+  <p class="sec-p">Conway Research Automaton running 24/7. Self-funded. Self-monitoring. Transparent on-chain audit log.</p>
+  <div class="bot-layout">
+    <div class="bot-card">
+      <div class="bot-status-row">
+        <div class="bot-name">Conway Bot Alpha</div>
+        <div class="bot-online"><div class="ldot"></div> Paper Trading</div>
+      </div>
+      <div class="bot-metrics">
+        <div class="bm"><div class="bm-l">P&amp;L Today</div><div class="bm-v up">+2.3%</div></div>
+        <div class="bm"><div class="bm-l">P&amp;L Month</div><div class="bm-v up">+8.7%</div></div>
+        <div class="bm"><div class="bm-l">Drawdown</div><div class="bm-v neu">−1.2%</div></div>
+        <div class="bm"><div class="bm-l">Win Rate</div><div class="bm-v up">78%</div></div>
+        <div class="bm"><div class="bm-l">Trades</div><div class="bm-v neu">14</div></div>
+        <div class="bm"><div class="bm-l">Conway Cells</div><div class="bm-v" style="color:var(--gold)">5/8</div></div>
+      </div>
+      <div class="bot-pos">
+        <div class="bp-hdr"><span class="sym">XAUUSD</span><span class="type">▲ LONG</span></div>
+        <div class="bp-row"><span class="lbl">Entry Price</span><span class="val">2,891.20</span></div>
+        <div class="bp-row"><span class="lbl">Current P&amp;L</span><span class="val" style="color:var(--lime)">+21.20 (+0.73%)</span></div>
+        <div class="bp-row"><span class="lbl">Stop Loss</span><span class="val" style="color:var(--red)">2,843.60 (−1.65%)</span></div>
+        <div class="bp-row"><span class="lbl">Take Profit</span><span class="val" style="color:var(--lime)">2,954.80 (+2.20%)</span></div>
+        <div class="bp-row"><span class="lbl">Exit Condition</span><span class="val">SS3 cross / DIED</span></div>
+      </div>
+      <div style="font-size:9px;letter-spacing:2px;color:var(--gray);margin-bottom:8px;text-transform:uppercase;">Activity Log</div>
+      <div class="bot-log">
+        <div class="blog-entry"><span class="blog-t">17:14</span><span class="blog-msg">Signal received: <span class="hl">EURUSD CONWAY BUY</span> · evaluating...</span></div>
+        <div class="blog-entry"><span class="blog-t">17:14</span><span class="blog-msg">Conway cells: <span class="hl-g">6/8 BORN</span> · filter passed</span></div>
+        <div class="blog-entry"><span class="blog-t">17:14</span><span class="blog-msg">Max positions reached · skipping EURUSD entry</span></div>
+        <div class="blog-entry"><span class="blog-t">16:58</span><span class="blog-msg">BBP Crossover detected: <span class="hl">XAUUSD @ 2,891.20</span></span></div>
+        <div class="blog-entry"><span class="blog-t">16:58</span><span class="blog-msg">Order placed: LONG XAUUSD · <span class="hl-g">qty 0.035 oz</span></span></div>
+        <div class="blog-entry"><span class="blog-t">16:30</span><span class="blog-msg">London session open · <span class="hl">prime window activated</span></span></div>
+        <div class="blog-entry"><span class="blog-t">14:02</span><span class="blog-msg">Position closed: BTCUSDT · <span class="hl-g">+2.1% · Conway DIED signal</span></span></div>
+        <div class="blog-entry"><span class="blog-t">12:01</span><span class="blog-msg">Conway DIED: <span class="hl-r">NQ100 cells 5→3</span> · exit triggered</span></div>
+      </div>
+    </div>
+    <div class="bot-card">
+      <div class="bot-status-row">
+        <div class="bot-name">System Health</div>
+        <div class="bot-online"><div class="ldot"></div> All Systems Go</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">
+        <div style="display:flex;justify-content:space-between;font-size:11px;padding:10px 14px;background:var(--panel2);">
+          <span style="color:var(--gray)">TradingView Webhook</span><span style="color:var(--lime)">● Connected</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;padding:10px 14px;background:var(--panel2);">
+          <span style="color:var(--gray)">Exchange API (Binance)</span><span style="color:var(--lime)">● Connected</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;padding:10px 14px;background:var(--panel2);">
+          <span style="color:var(--gray)">Conway Research Automaton</span><span style="color:var(--gold)">◌ Integrating</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;padding:10px 14px;background:var(--panel2);">
+          <span style="color:var(--gray)">DeepNode AI Layer</span><span style="color:var(--purple)">◇ Q2 2026</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;padding:10px 14px;background:var(--panel2);">
+          <span style="color:var(--gray)">Webhook Latency</span><span style="color:var(--lime)">&lt; 280ms avg</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;padding:10px 14px;background:var(--panel2);">
+          <span style="color:var(--gray)">Uptime (30 days)</span><span style="color:var(--lime)">99.94%</span>
+        </div>
+      </div>
+      <div style="background:var(--panel2);padding:16px;margin-bottom:12px;">
+        <div style="font-size:9px;letter-spacing:2px;color:var(--gray);margin-bottom:12px;text-transform:uppercase;">Risk Limits</div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:6px;"><span style="color:var(--gray)">Risk per trade</span><span>1.0%</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:6px;"><span style="color:var(--gray)">Max daily loss</span><span style="color:var(--lime)">3.0% — OK</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:6px;"><span style="color:var(--gray)">Max drawdown limit</span><span style="color:var(--lime)">15% — OK</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;"><span style="color:var(--gray)">Max open positions</span><span>1 / 1</span></div>
+      </div>
+      <div style="font-size:10px;color:var(--gray);line-height:1.7;padding:14px;border:1px solid var(--border);">
+        ⚠ Paper trading mode active. All positions are simulated with real market prices. No real funds at risk until backtest validation is complete.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"><hr></div>
+
+<!-- ═══ STACK ═══ -->
+<div class="sec" id="stack">
+  <div class="sec-eyebrow">Architecture</div>
+  <h2 class="sec-h">The Full Stack.</h2>
+  <p class="sec-p">Four layers of intelligence. One autonomous organism that sees, decides, acts, and learns.</p>
+  <div class="stack-full">
+    <div class="sl"><div class="sl-num l1">Layer 01</div><div><div class="sl-id" style="color:var(--cyan)">SS BlackBox v6.3</div><div class="sl-platform">TradingView · Pine Script v6</div></div><div class="sl-desc">8-cell Conway engine · 23-point confluence · BBP + PM entry signals · CHoCH/BOS · Order Blocks · FVG · Session filter · Webhook output</div><div class="sl-st live">● LIVE</div></div>
+    <div class="stack-arrow">↓ webhook JSON</div>
+    <div class="sl"><div class="sl-num l2">Layer 02</div><div><div class="sl-id" style="color:var(--lime)">Conway Automaton</div><div class="sl-platform">conway.tech · Ethereum Base</div></div><div class="sl-desc">Autonomous execution brain · ETH wallet identity · Genesis prompt trading rules · Think→Act→Observe loop · Self-funded from profit · On-chain audit log</div><div class="sl-st wip">◌ Integrating</div></div>
+    <div class="stack-arrow">↓ confidence query</div>
+    <div class="sl"><div class="sl-num l3">Layer 03</div><div><div class="sl-id" style="color:var(--gold)">DeepNode AI</div><div class="sl-platform">deepnode.ai · Base L2</div></div><div class="sl-desc">Multi-model AI confidence verification · PoWR reward for accurate signals · On-chain signal validation · 98% task success rate · &lt;$0.01 per query</div><div class="sl-st soon">◇ Q2 2026</div></div>
+    <div class="stack-arrow">↓ execute order</div>
+    <div class="sl"><div class="sl-num l4">Layer 04</div><div><div class="sl-id" style="color:var(--purple)">Exchange API</div><div class="sl-platform">Binance · Bybit · OKX</div></div><div class="sl-desc">Order placement · ATR-based SL/TP · Position monitoring · USDC profit settlement back to Automaton wallet · Full trade history log</div><div class="sl-st live">● LIVE</div></div>
+  </div>
+</div>
+
+<div class="divider"><hr></div>
+
+<!-- ═══ PRICING ═══ -->
+<div class="sec" id="pricing">
+  <div class="sec-eyebrow"><span data-lang="en">Access Tiers</span><span data-lang="id">Pilih Plan</span></div>
+  <h2 class="sec-h"><span data-lang="en">Choose Your<br>Intelligence Level.</span><span data-lang="id">Pilih Level<br>Intelligence Kamu.</span></h2>
+  <p class="sec-p"><span data-lang="en">All plans include transparent win rate tracking, verified backtest results, and real-time BBP signals.</span><span data-lang="id">Semua plan termasuk win rate tracking transparan, hasil backtest terverifikasi, dan sinyal BBP real-time.</span></p>
+
+  <!-- Blended 3-plan grid using original .price-grid + .pc classes -->
+  <div class="price-grid">
+
+    <!-- PRO -->
+    <div class="pc feat">
+      <div class="pc-badge">Most Popular</div>
+      <div class="pc-tier">PRO</div>
+      <div class="pc-price" data-lang="en"><span class="pc-curr">$</span>49</div>
+      <div class="pc-per" data-lang="en">per month · cancel anytime</div>
+      <div class="pc-price" data-lang="id"><span class="pc-curr">Rp</span>497<span style="font-size:22px;font-weight:800">.000</span></div>
+      <div class="pc-per" data-lang="id">per bulan · cancel kapan saja</div>
+      <div class="pc-divider"></div>
+      <ul class="pc-features">
+        <li class="hi"><span data-lang="en">Conway live state — all assets</span><span data-lang="id">Conway live state — semua aset</span></li>
+        <li class="hi"><span data-lang="en">Real-time signal feed (≤500ms)</span><span data-lang="id">Real-time signal feed (≤500ms)</span></li>
+        <li class="hi"><span data-lang="en">BBP + Conway alerts via Telegram</span><span data-lang="id">BBP + Conway alerts via Telegram</span></li>
+        <li class="on"><span data-lang="en">TradingView webhook config</span><span data-lang="id">Config webhook TradingView</span></li>
+        <li class="on"><span data-lang="en">Live win rate tracker</span><span data-lang="id">Live win rate tracker</span></li>
+        <li class="on"><span data-lang="en">Chart snapshot on signal</span><span data-lang="id">Snapshot chart saat sinyal</span></li>
+        <li><span data-lang="en">Conway Automaton bot access</span><span data-lang="id">Akses Conway Automaton bot</span></li>
       </ul>
-      <a href="https://utas.me/stockindexer/pro" class="btn cyan">BAYAR SEKARANG</a>
-      <div class="usdc-bonus">Atau USDC (diskon 10%): $29.7</div>
+      <button class="pc-btn fill" onclick="window.open('https://utas.stockindexer.com/checkout/pro','_blank')"><span data-lang="en">Start 14-Day Trial →</span><span data-lang="id">Mulai 14 Hari Gratis →</span></button>
     </div>
 
-    <div class="card elite">
-      <div class="badge gold">LIFETIME</div>
-      <h3>ELITE</h3>
-      <div class="price">Rp2.999.000 <span>SEKALI BAYAR</span></div>
-      <ul>
-        <li>Semua PRO selamanya</li>
-        <li>Prioritas Update</li>
-        <li>Private Lounge</li>
-        <li>Conway Deep Dive</li>
+    <!-- ELITE LIFETIME -->
+    <div class="pc" style="border-color:rgba(255,215,0,0.3);background:linear-gradient(160deg,rgba(255,215,0,0.03) 0%,var(--panel) 60%);">
+      <div class="pc-badge" style="background:var(--gold);color:var(--bg);">⭐ LIFETIME</div>
+      <div class="pc-tier" style="color:var(--gold);">ELITE</div>
+      <div class="pc-price" data-lang="en"><span class="pc-curr" style="color:var(--gold)">$</span><span style="color:var(--gold)">249</span></div>
+      <div class="pc-per" data-lang="en">one-time payment · lifetime access <span style="text-decoration:line-through;opacity:0.5;font-size:10px;">$588</span></div>
+      <div class="pc-price" data-lang="id"><span class="pc-curr" style="color:var(--gold)">Rp</span><span style="color:var(--gold)">2.999</span><span style="font-size:22px;font-weight:800;color:var(--gold)">.000</span></div>
+      <div class="pc-per" data-lang="id">SEKALI BAYAR — akses selamanya <span style="text-decoration:line-through;opacity:0.5;font-size:10px;">Rp 5.964.000</span></div>
+      <div class="pc-divider"></div>
+      <ul class="pc-features">
+        <li class="hi" style="color:var(--gold)"><span data-lang="en">Everything in PRO, forever</span><span data-lang="id">Semua fitur PRO, selamanya</span></li>
+        <li class="hi" style="color:var(--gold)"><span data-lang="en">Ownership Intelligence IDX</span><span data-lang="id">Ownership Intelligence IDX</span></li>
+        <li class="hi" style="color:var(--gold)"><span data-lang="en">AI Q&A IDX stocks (pieBot)</span><span data-lang="id">AI Q&A saham IDX (pieBot)</span></li>
+        <li class="hi" style="color:var(--gold)"><span data-lang="en">Portfolio Risk Dashboard</span><span data-lang="id">Portfolio Risk Dashboard</span></li>
+        <li class="hi" style="color:var(--gold)"><span data-lang="en">Full Backtest Simulator</span><span data-lang="id">Backtest Simulator lengkap</span></li>
+        <li class="hi" style="color:var(--gold)"><span data-lang="en">Managed Conway Automaton bot</span><span data-lang="id">Conway Automaton bot (managed)</span></li>
+        <li class="hi" style="color:var(--gold)"><span data-lang="en">Priority signal &lt;100ms</span><span data-lang="id">Prioritas sinyal &lt;100ms</span></li>
+        <li class="on"><span data-lang="en">1-on-1 setup session</span><span data-lang="id">Sesi setup 1-on-1</span></li>
       </ul>
-      <a href="https://utas.me/stockindexer/elite" class="btn gold">AMBIL LIFETIME</a>
-      <div class="usdc-bonus">Atau USDC (diskon 12%): $189</div>
+      <button class="pc-btn" style="background:var(--gold);border:none;color:var(--bg);font-weight:700;" onclick="window.open('https://utas.stockindexer.com/checkout/elite','_blank')"><span data-lang="en">Get ELITE Lifetime →</span><span data-lang="id">Beli ELITE Lifetime →</span></button>
     </div>
 
-    <div class="card enterprise">
-      <h3>ENTERPRISE</h3>
-      <div class="price">Custom</div>
-      <ul>
-        <li>White-label API</li>
-        <li>Dedicated pieBot</li>
-        <li>Bulk Signal</li>
+    <!-- ENTERPRISE -->
+    <div class="pc">
+      <div class="pc-tier">ENTERPRISE</div>
+      <div class="pc-price"><span style="font-size:38px;font-family:'Syne',sans-serif;font-weight:800;color:var(--gray);">Custom</span></div>
+      <div class="pc-per"><span data-lang="en">contact sales for custom pricing</span><span data-lang="id">hubungi sales untuk harga khusus</span></div>
+      <div class="pc-divider"></div>
+      <ul class="pc-features">
+        <li class="on"><span data-lang="en">Everything in ELITE</span><span data-lang="id">Semua fitur ELITE</span></li>
+        <li class="on"><span data-lang="en">Multi-seat team access</span><span data-lang="id">Multi-seat team access</span></li>
+        <li class="on"><span data-lang="en">White-label signal engine</span><span data-lang="id">White-label signal engine</span></li>
+        <li class="on"><span data-lang="en">Custom webhook integrations</span><span data-lang="id">Custom webhook integrations</span></li>
+        <li class="on"><span data-lang="en">Dedicated account manager</span><span data-lang="id">Dedicated account manager</span></li>
+        <li class="on"><span data-lang="en">SLA 99.9% uptime guarantee</span><span data-lang="id">SLA uptime 99.9%</span></li>
+        <li class="on"><span data-lang="en">Custom bot strategy setup</span><span data-lang="id">Setup strategi bot custom</span></li>
       </ul>
-      <a href="https://wa.me/628123456789?text=Enterprise%20StockIndexer" class="btn purple">HUBUNGI SALES</a>
+      <button class="pc-btn out" onclick="window.open('https://t.me/stockindexer_support','_blank')"><span data-lang="en">Contact Sales →</span><span data-lang="id">Hubungi Sales →</span></button>
+      <p style="font-size:10px;color:var(--gray);margin-top:10px;"><span data-lang="en">Or email <a href="mailto:enterprise@stockindexer.com" style="color:var(--cyan);text-decoration:none;">enterprise@stockindexer.com</a></span><span data-lang="id">Atau email <a href="mailto:enterprise@stockindexer.com" style="color:var(--cyan);text-decoration:none;">enterprise@stockindexer.com</a></span></p>
+    </div>
+
+  </div>
+
+  <!-- USDC Bonus Box -->
+  <div class="usdc-box" style="margin-top:32px;">
+    <div class="usdc-box-inner">
+      <div class="usdc-icon">💎</div>
+      <div>
+        <div class="usdc-title"><span data-lang="en">Pay with <span>USDC</span> — 10–12% Discount</span><span data-lang="id">Bayar Pakai <span>USDC</span> — Diskon 10–12%</span></div>
+        <div class="usdc-desc"><span data-lang="en">Save more by paying directly with USDC stablecoin. Instant processing, no bank fees, 2-minute confirmation.</span><span data-lang="id">Hemat lebih banyak dengan membayar langsung pakai USDC. Proses instan, tanpa biaya transfer bank, konfirmasi 2 menit.</span></div>
+        <div class="usdc-steps">
+          <div class="usdc-step"><span data-lang="en">① Choose plan above</span><span data-lang="id">① Pilih plan di atas</span></div>
+          <div class="usdc-step"><span data-lang="en">② Select "USDC" at UTAS checkout</span><span data-lang="id">② Pilih "USDC" di checkout UTAS</span></div>
+          <div class="usdc-step"><span data-lang="en">③ Transfer to displayed wallet</span><span data-lang="id">③ Transfer ke alamat wallet yang muncul</span></div>
+          <div class="usdc-step"><span data-lang="en">④ Auto-confirm · instant access</span><span data-lang="id">④ Konfirmasi otomatis · akses langsung</span></div>
+        </div>
+        <div class="usdc-discount">⚡ USDC DISCOUNT: PRO 10% OFF · ELITE 12% OFF</div>
+      </div>
     </div>
   </div>
 
-  <!-- Payment methods -->
-  <div class="payment-methods">
-    <img src="qris.png" alt="QRIS">
-    <img src="dana.png" alt="DANA">
-    <img src="ovo.png" alt="OVO">
-    <img src="va.png" alt="VA">
-    <img src="alfamart.png" alt="Alfamart">
+  <!-- Payment Methods -->
+  <div class="payment-bar">
+    <span class="payment-bar-label"><span data-lang="en">Payment Methods:</span><span data-lang="id">Metode Pembayaran:</span></span>
+    <span class="pay-badge qris">⊞ QRIS</span>
+    <span class="pay-badge">DANA</span>
+    <span class="pay-badge">OVO</span>
+    <span class="pay-badge">GoPay</span>
+    <span class="pay-badge">Virtual Account BNI/BRI/Mandiri</span>
+    <span class="pay-badge">Alfamart / Indomaret</span>
+    <span class="pay-badge usdc-pay">⬡ USDC</span>
+  </div>
+  <p style="text-align:center;font-size:10px;color:var(--gray);margin-top:8px;letter-spacing:0.5px;"><span data-lang="en">All payments processed via <strong style="color:var(--white)">UTAS</strong> — encrypted, secure checkout.</span><span data-lang="id">Semua pembayaran diproses via <strong style="color:var(--white)">UTAS</strong> — checkout terenkripsi dan aman.</span></p>
+
+</div>
+
+<div class="divider"><hr></div>
+
+<!-- ═══ GUARANTEE BAR ═══ -->
+<div class="guarantee-bar">
+  <span class="gb-icon">🛡️</span>
+  <span class="gb-text"><strong><span data-lang="en">14-Day Money-Back Guarantee</span><span data-lang="id">Garansi Uang Kembali 14 Hari</span></strong> — <span data-lang="en">Not satisfied within 14 days? Full refund, no questions asked.</span><span data-lang="id">Tidak puas dalam 14 hari pertama? Refund penuh, tanpa pertanyaan.</span></span>
+  <a href="#" class="gb-link"><span data-lang="en">Read refund policy →</span><span data-lang="id">Baca kebijakan refund →</span></a>
+</div>
+
+<!-- ═══ FAQ ═══ -->
+<div class="sec">
+  <div class="sec-eyebrow"><span data-lang="en">Questions</span><span data-lang="id">Pertanyaan</span></div>
+  <h2 class="sec-h">FAQ.</h2>
+  <p class="sec-p"><span data-lang="en">The honest answers.</span><span data-lang="id">Jawaban yang jujur.</span></p>
+  <div class="faq-wrap">
+    <div class="faq-item open">
+      <div class="faq-q"><span data-lang="en">What is the Conway Automaton state engine?</span><span data-lang="id">Apa itu Conway Automaton state engine?</span><span class="faq-icon">+</span></div>
+      <div class="faq-a"><span data-lang="en">The Conway Automaton is an 8-cell binary state system that evaluates market conditions each bar close. Each cell represents a specific market condition (weekly trend, volume, session, etc). When 5 or more cells are LIVE simultaneously, the engine enters BORN or ALIVE state and permits trade entries. Below threshold = DORMANT = no trades.</span><span data-lang="id">Conway Automaton adalah sistem biner 8-cell yang mengevaluasi kondisi pasar setiap bar close. Setiap cell mewakili kondisi pasar tertentu (weekly trend, volume, session, dll). Ketika 5 atau lebih cell LIVE secara bersamaan, engine masuk state BORN atau ALIVE dan mengizinkan entry. Di bawah threshold = DORMANT = tidak ada trade.</span></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span data-lang="en">Is the win rate real or backtested?</span><span data-lang="id">Apakah win rate nyata atau hanya backtest?</span><span class="faq-icon">+</span></div>
+      <div class="faq-a"><span data-lang="en">All performance numbers shown are from a genuine Pine Script backtest on BTCUSDT 1H data from January 2022 to December 2025. Commission of 0.05% per side and 2 ticks slippage are included. The 81.8% figure is from a live chart scan of 22 BBP signals — raw, unfiltered, as they appeared on the chart.</span><span data-lang="id">Semua angka performa berasal dari backtest Pine Script asli pada data BTCUSDT 1H dari Januari 2022 hingga Desember 2025. Komisi 0.05% per sisi dan 2 tick slippage sudah termasuk. Angka 81.8% berasal dari scan live chart 22 sinyal BBP — raw, tanpa filter, persis seperti yang muncul di chart.</span></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span data-lang="en">Do I need to know coding to use this?</span><span data-lang="id">Apakah perlu bisa coding untuk menggunakan ini?</span><span class="faq-icon">+</span></div>
+      <div class="faq-a"><span data-lang="en">No. The PRO plan includes pre-configured TradingView alert templates and webhook setup guides. The ELITE plan includes full 1-on-1 setup support. You need a TradingView Pro+ account and an exchange account — that's it.</span><span data-lang="id">Tidak. Plan PRO sudah termasuk template alert TradingView yang sudah dikonfigurasi dan panduan setup webhook. Plan ELITE termasuk dukungan setup 1-on-1 penuh. Kamu hanya butuh akun TradingView Pro+ dan akun exchange — itu saja.</span></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span data-lang="en">What is Conway Research Automaton?</span><span data-lang="id">Apa itu Conway Research Automaton?</span><span class="faq-icon">+</span></div>
+      <div class="faq-a"><span data-lang="en">Conway Research (conway.tech) is an autonomous AI agent platform that can execute tasks 24/7, manage its own Ethereum wallet, and pay for its own compute from revenue earned. We're integrating it as the execution brain for StockIndexer's bot — so the bot can operate fully autonomously, log all actions on-chain, and fund itself from trading profits.</span><span data-lang="id">Conway Research (conway.tech) adalah platform AI agent otonom yang bisa menjalankan tugas 24/7, mengelola wallet Ethereum-nya sendiri, dan membayar komputasinya dari pendapatan yang dihasilkan. Kami mengintegrasikannya sebagai otak eksekusi bot StockIndexer — sehingga bot bisa beroperasi sepenuhnya otonom, mencatat semua aksi on-chain, dan mendanai dirinya dari profit trading.</span></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span data-lang="en">What happens when the bot is in DORMANT state?</span><span data-lang="id">Apa yang terjadi saat bot dalam state DORMANT?</span><span class="faq-icon">+</span></div>
+      <div class="faq-a"><span data-lang="en">Nothing. The bot skips all entry signals when Conway is DORMANT (less than 5/8 cells LIVE). This is intentional — not trading is a valid strategy. The current BTCUSDT DORMANT state (2/8 cells) is a perfect example of the system protecting capital during low-confluence periods.</span><span data-lang="id">Tidak ada apa-apa. Bot melewati semua sinyal entry saat Conway DORMANT (kurang dari 5/8 cell LIVE). Ini disengaja — tidak trading adalah strategi yang valid. State BTCUSDT DORMANT saat ini (2/8 cell) adalah contoh sempurna sistem melindungi modal saat confluence rendah.</span></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span data-lang="en">Is this financial advice?</span><span data-lang="id">Apakah ini saran keuangan?</span><span class="faq-icon">+</span></div>
+      <div class="faq-a"><span data-lang="en">No. StockIndexer provides signal intelligence tools and educational content. All trading signals are for informational and research purposes only. Past backtest performance does not guarantee future results. Always start with paper trading and never risk capital you cannot afford to lose.</span><span data-lang="id">Tidak. StockIndexer menyediakan tools signal intelligence dan konten edukasi. Semua sinyal trading hanya untuk tujuan informasi dan riset. Performa backtest masa lalu tidak menjamin hasil di masa depan. Selalu mulai dengan paper trading dan jangan pernah mempertaruhkan modal yang tidak mampu kamu tanggung kerugiannya.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CTA BANNER ═══ -->
+<div class="cta-banner">
+  <div class="cta-inner">
+    <div>
+      <h2 class="cta-h"><span data-lang="en">The market doesn't wait.<br><span style="color:var(--cyan)">Your signals should be live.</span></span><span data-lang="id">Pasar tidak menunggu.<br><span style="color:var(--cyan)">Sinyal kamu harus live sekarang.</span></span></h2>
+      <p class="cta-sub"><span data-lang="en">14-day money-back guarantee. No risk, full access from day one.</span><span data-lang="id">Garansi uang kembali 14 hari. Tanpa risiko, akses penuh dari hari pertama.</span></p>
+    </div>
+    <div class="cta-actions">
+      <a href="#pricing" class="btn-cta-primary"><span data-lang="en">🚀 Start 14-Day Trial</span><span data-lang="id">🚀 Mulai 14 Hari Gratis</span></a>
+      <button class="btn-cta-secondary" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})"><span data-lang="en">View All Plans →</span><span data-lang="id">Lihat Semua Plan →</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<div class="footer-wrap">
+
+  <!-- Disclaimer Banner -->
+  <div class="disclaimer-bar">
+    <p>⚠ Hasil trading masa lalu bukan jaminan hasil di masa depan. Trading berisiko tinggi — hanya gunakan modal yang sanggup kamu tanggung kerugiannya. Semua sinyal bersifat edukatif dan informatif, bukan saran keuangan.</p>
   </div>
 
-  <!-- Garansi -->
-  <div class="garansi">
-    GARANSI UANG KEMBALI 14 HARI – 100% Refund kalau tidak puas
-    <a href="/policy">Lihat Kebijakan Lengkap</a>
+  <!-- Trust Badges -->
+  <div class="trust-badges">
+    <div class="trust-badge"><span class="trust-badge-icon">⚙️</span> Powered by UTAS Checkout</div>
+    <span class="trust-badge-sep">|</span>
+    <div class="trust-badge"><span class="trust-badge-icon">🔱</span> SS BlackBox v6.3.1 Phantom</div>
+    <span class="trust-badge-sep">|</span>
+    <div class="trust-badge"><span class="trust-badge-icon">🏦</span> Ownership Intelligence IDX</div>
+    <span class="trust-badge-sep">|</span>
+    <div class="trust-badge"><span class="trust-badge-icon">🛡️</span> Garansi 14 Hari</div>
+    <span class="trust-badge-sep">|</span>
+    <div class="trust-badge"><span class="trust-badge-icon">🤖</span> pieBot Sovereign AI</div>
   </div>
-</section>
 
-<!-- AFFILIATE TEASER & DISCLAIMER -->
-<footer>
-  <div class="affiliate-teaser">
-    Mau dapat 40% komisi tiap sale? <a href="https://utas.me/stockindexer/affiliate">Daftar Affiliate StockIndexer</a>
+  <div class="footer-inner">
+    <div class="f-brand">
+      <span class="logo-txt">Stock<em>Indexer</em></span>
+      <p>The first Conway Automaton signal intelligence platform. Transparent. Verified. Autonomous.</p>
+      <!-- Affiliate Teaser -->
+      <div class="affiliate-teaser">
+        <span class="aff-icon">💸</span>
+        <span class="aff-text">Mau dapat komisi tiap sale? <a href="https://utas.stockindexer.com/affiliate" target="_blank">Daftar Affiliate StockIndexer</a></span>
+        <span class="aff-pct">40% KOMISI</span>
+      </div>
+    </div>
+    <div class="f-links">
+      <div class="f-col">
+        <div class="f-col-title">Platform</div>
+        <a href="#">Live Dashboard</a>
+        <a href="#">Signal Feed</a>
+        <a href="#">Backtest Results</a>
+        <a href="#">Bot Status</a>
+      </div>
+      <div class="f-col">
+        <div class="f-col-title">Resources</div>
+        <a href="#">Documentation</a>
+        <a href="#">API Reference</a>
+        <a href="#">Webhook Setup</a>
+        <a href="#">Genesis Prompt</a>
+      </div>
+      <div class="f-col">
+        <div class="f-col-title">Company</div>
+        <a href="#">About</a>
+        <a href="#pricing-idr">Pricing</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="f-right">
+      <div class="f-social">
+        <div class="f-soc">𝕏</div>
+        <div class="f-soc">TG</div>
+        <div class="f-soc">DC</div>
+        <div class="f-soc">GH</div>
+      </div>
+      <div class="f-copy">Powered by SS BlackBox v6.3.1<br>Conway Automaton Engine<br>Ownership Intelligence IDX<br>© 2026 StockIndexer.com</div>
+    </div>
   </div>
-  <div class="disclaimer">
-    Hasil trading masa lalu bukan jaminan. Trading berisiko tinggi.
+  <div class="f-bottom">
+    <p>Not financial advice. For educational and research purposes only. Past performance ≠ future results.</p>
+    <p>Privacy Policy · Terms of Service · Risk Disclosure · Refund Policy</p>
   </div>
-</footer>
+</div>
 
-<script src="scripts.js"></script>
+<script src="scripts.js" defer></script>
 </body>
 </html>
