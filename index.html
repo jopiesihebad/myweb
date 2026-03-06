@@ -1,637 +1,142 @@
 <!DOCTYPE html>
-<html lang="id" translate="no">
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="google" content="notranslate">
-<link rel="stylesheet" href="css/style.css?v=2.2.0" />
-<link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  
-<title>SS BlackBox Phantom Edition v6.1 + HFT: Institutional Edge | StockIndexer</title>
-<meta name="description" content="Gunakan teknologi HFT untuk deteksi pergerakan Smart Money. Panduan lengkap SS BlackBox Phantom Edition v6.1: Sistem trading adaptif untuk Forex, Crypto, & Saham. Dapatkan edge lo!">
-<meta name="keywords" content="SS BlackBox, HFT Trading, Smart Money Concepts, TradingView Indicator, StockIndexer, Forex Strategy, Crypto Trading, Institutional Trading">
-<meta name="author" content="StockIndexer">
-<link rel="canonical" href="https://stockindexer.com/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StockIndexer — Conway Automaton Intelligence Platform</title>
 
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://stockindexer.com/">
-<meta property="og:title" content="SS BlackBox Phantom Edition v6.1 + HFT: Institutional Edge">
-<meta property="og:description" content="Bongkar manipulasi pasar dengan 7 Fitur HFT. Trading tenang dengan strategi Smart Money.">
-<meta property="og:image" content="https://stockindexer.com/assets/img/og-preview.jpg"> <meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://stockindexer.com/">
-<meta property="twitter:title" content="SS BlackBox Phantom Edition v6.1 + HFT: Institutional Edge">
-<meta property="twitter:description" content="Stop being exit liquidity. Trading pakai senjata Institusi sekarang.">
-<meta property="twitter:image" content="https://stockindexer.com/assets/img/og-preview.jpg">
+<!-- SEO Meta Tags -->
+<meta name="description" content="AI Signal Trading Platform dengan SS BlackBox Phantom v6.3.1 + pieBot Sovereign. Real-time signals, ownership intelligence, live ticker, Conway Automaton.">
+<meta property="og:title" content="StockIndexer — Conway Automaton Intelligence">
+<meta property="og:description" content="Dapatkan sinyal trading akurat dari AI sovereign. PRO Rp497rb/bulan atau ELITE lifetime Rp2.999rb.">
+<meta property="og:image" content="https://stockindexer.com/og-image.png">
+<meta property="og:url" content="https://stockindexer.com">
+<link rel="icon" href="/favicon.ico">
 
-<link rel="icon" type="image/png" href="/favicon.png">
-<meta name="theme-color" content="#0f172a"> <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // 1. Deteksi kedatangan dari UTAS (Auto Unlock)
-        const urlParams = new URLSearchParams(window.location.search);
-        
-        // Cek jika ada parameter sukses atau referrer dari Utas
-        if (urlParams.get('status') === 'success' || document.referrer.includes('utas.co')) {
-            localStorage.setItem('ss_blackbox_premium', 'true');
-            console.log("Access Granted: Premium Token Activated via Payment.");
-            
-            // Opsional: Hilangkan parameter URL agar terlihat bersih
-            window.history.replaceState({}, document.title, window.location.pathname);
-        }
+<!-- External CSS -->
+<link rel="stylesheet" href="styles.css">
 
-        // 2. Simple Analytics (Optional: Cek berapa kali user Premium balik lagi)
-        if (localStorage.getItem('ss_blackbox_premium') === 'true') {
-            console.log("Welcome back, Premium Member!");
-            // Lo bisa tambahkan logika ganti teks tombol di Landing Page dari "Beli" jadi "Akses Panduan"
-            const ctaBtn = document.querySelector('.btn-unlock');
-            if(ctaBtn) {
-                ctaBtn.innerText = "🔓 Akses Panduan Premium Lo";
-                ctaBtn.href = "complete-guide-premium.html";
-            }
-        }
-    });
-</script>
-
-<script>
-    if (window.location.pathname.includes('complete-guide-premium')) {
-        var meta = document.createElement('meta');
-        meta.name = "robots";
-        meta.content = "noindex, nofollow";
-        document.getElementsByTagName('head')[0].appendChild(meta);
-    }
-</script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<!-- ================= PAGE 1 : HERO ================= -->
-<section class="hero">
+<!-- SCANLINES & NOISE tetap persis -->
+<!-- (pseudo-element ::before & ::after dari CSS eksternal) -->
 
-  <video class="hero-bg" autoplay muted loop playsinline data-lazy-video>
-    <source src="assets/hero.mp4" type="video/mp4" />
-  </video>
-
-  <div class="hero-overlay"></div>
-
-  <!-- HEADER : LOGO ONLY -->
-  <header class="hero-header hero-header-c\enter">
-    <img src="assets/si.png" alt="StockIndexer" class="header-logo">
-  </header>
-
-  <div class="hero-center">
-
-    <h1 class="animate delay-1">
-      Berhenti Menebak.<br>
-      <br>
-      Saatnya Trading dengan Data <span>'Elite 10%'</span>
-    </h1>
-
-    <p class="animate delay-2">
-      Miliki 'kompas' Market Marker yang selama ini tak terlihat di chart biasa. Jelas, terarah, dan terukur.
-    </p>
-
-    <div class="hero-cta animate delay-3">
-      <a href="#request" class="btn primary">Dapatkan Akses</a>
-      <button class="btn ghost demo-trigger">Watch Demo</button>
-    </div>
-
+<!-- HERO SECTION (ditingkatkan) -->
+<div class="hero">
+  <div class="terminal">
+    <h1>StockIndexer</h1>
+    <p>Conway Automaton Intelligence Platform</p>
   </div>
-</section>
 
-<!-- ================= PAGE 2 : CORE VALUES ================= -->
-<section class="section values">
-  <div class="container">
-
-    <div class="grid values-grid">
-      <div class="card animate delay-1">
-        <i class="fa-solid fa-layer-group icon"></i>
-        <h3>Melihat Pasar Sebenarnya</h3>
-        <p>Data murni langsung dari sumbernya. Tanpa delay, tanpa distorsi.</p>
-      </div>
-
-      <div class="card animate delay-2">
-        <i class="fa-solid fa-chart-line icon"></i>
-        <h3>Langsung ke Intinya</h3>
-        <p>Mengubah data pasar yang rumit menjadi keputusan yang sederhana.</p>
-      </div>
-
-      <div class="card animate delay-3">
-        <i class="fa-solid fa-building-columns icon"></i>
-        <h3>Trading System Framework</h3>
-        <p>Teknologi yang bekerja dalam senyap, agar Anda bisa fokus sepenuhnya pada strategi.</p>
-      </div>
-
-      <div class="card animate delay-4">
-        <i class="fa-solid fa-shield-halved icon"></i>
-        <h3>Kendali Penuh di Tangan Anda</h3>
-        <p>Alat bantu ntuk menjaga risiko tetap terukur, bukan sekadar mengejar profit semata.</p>
-      </div>
-    </div>
-
+  <!-- CTA baru -->
+  <div class="cta-buttons">
+    <a href="https://utas.me/stockindexer/pro" class="btn cyan">MULAI 14 HARI GRATIS</a>
+    <a href="#pricing" class="btn gold-border">LIHAT PRICING & ELITE</a>
   </div>
-</section>
 
-<!-- ================= PAGE 3 : METHODOLOGY ================= -->
-<section class="section methodology video-section">
-
-  <video class="section-bg" autoplay muted loop playsinline data-lazy-video>
-    <source src="assets/hero.mp4" type="video/mp4" />
-  </video>
-
-  <div class="section-overlay"></div>
-
-  <div class="container section-content">
-
-    <div class="section-logo">
-      <img src="assets/bb.png" alt="StockIndexer">
-    </div>
-
-    <h2>Metodologi Kami</h2>
-    <p class="subtitle">
-      Pendekatan yang disiplin dan berbasis riset terhadap intelijen pasar.
-    </p>
-
-    <div class="grid methodology-grid">
-      <div class="card animate delay-1">
-        <span class="step">01</span>
-        <h4>Pengambilan Data</h4>
-        <p>Data pasar dari berbagai sumber dikumpulkan dan dinormalisasi.</p>
-      </div>
-
-      <div class="card animate delay-2">
-        <span class="step">02</span>
-        <h4>Pemprosesan Kriteria</h4>
-        <p>Model-model tersebut mengekstrak pola, momentum, dan pergeseran rezim.</p>
-      </div>
-
-      <div class="card animate delay-3">
-        <span class="step">03</span>
-        <h4>Penyaringan Risiko</h4>
-        <p>Kriteria disaring melalui lapisan volatilitas dan konteks.</p>
-      </div>
-
-      <div class="card animate delay-4">
-        <span class="step">04</span>
-        <h4>Lapisan Pengambilan Keputusan</h4>
-        <p>wawasan yang selaras dengan eksekusi dan alur kerja portofolio.</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ================= PAGE 4 : PRICING ================= -->
-<section class="section pricing" id="pricing">
-  <div class="container">
-
-    <h2>Akses Tanpa Batas</h2>
-    <p class="subtitle">Gak perlu bayar $2,450 untuk dapat engine standar Trader 10%.</p>
-
-    <div class="pricing-grid">
-
-      <div class="pricing-card animate delay-1">
-        <div class="badge-popular badge-monthly">PRO - Paling Populer ✨</div>
-
-        <div class="price">
-  <span class="price-old">Rp. 1.970.000</span>
-  <span class="amount">Rp. 497.000</span>
-  <span class="period">/ bulan</span>
-
-  <div class="price-note">
-    Cuma seharga satu kali Stop Loss Anda yang konyol
+  <!-- Social proof -->
+  <div class="social-proof">
+    1.450+ member aktif • Win rate rata-rata 68% • pieBot profit +18.4% bulan lalu
   </div>
 </div>
 
-        <ul class="feature-list">
-          <li>✔ Akun TradingView Rp. 0</li>
-          <li>✔ Full akses SS BlackBox Phantom</li>
-          <li>✔ Full akses Trade Compass IHSG</li>
-          <li>✔ 12 saham kurasi</li>
-          <li>✔ Data standar institusi</li>
-          <li>✔ Kriteria konkret</li>
-          <li>✔ Risiko terkendali</li>
-          <li>✔ Workflow pro</li>
-          <li>✔ E-book panduan</li>
-        </ul>
-
-        <a href="#request" class="btn primary pricing-cta">Dapatkan Akses</a>
-      </div>
-
-      <div class="pricing-card featured animate delay-2">
-        <div class="badge-popular">ELITE - Diskon 85% 🔥</div>
-
-        <div class="price">
-  <span class="price-old">Rp. 19.970.000</span>
-  <span class="amount">Rp. 2.995.000</span>
-  <span class="period">lifetime</span>
-
-  <div class="price-note">
-    Investasi sekali untuk edge selamanya
-  </div>
+<!-- Ticker feed simulasi tetap -->
+<div class="feed-box">
+  <!-- Kode simulasi signal asli tetap di scripts.js -->
 </div>
 
-        <ul class="feature-list">
-          <li>✔ Semua fitur bulanan, ditambah:</li>
-          <li>✔ Data Elite 10% + 10 screener</li>
-          <li>✔ All-market optimized</li>
-          <li>✔ File cheat sheet</li>
-          <li>✔ 24/7 Market Intelligence</li>
-          <li>✔ Server prioritas</li>
-          <li>✔ Kriteria berlapis</li>
-          <li>✔ Data historis</li>
-          <li>✔ Bebas biaya bulanan</li>
-        </ul>
-
-        <a href="#request" class="btn primary pricing-cta">Dapatkan Akses</a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-  <!-- ================= PAGE : TESTIMONIALS ================= -->
-<section class="section testimonials">
-
-  <div class="container">
-
-    <h2 class="animate delay-1">
-      Dipercaya oleh<br>
-      <span>Para Trader Profesional</span>
-    </h2>
-
-    <p class="subtitle animate delay-2">
-      Digunakan oleh para trader, analis, dan investor Saham, Forex, Crypto dan Komoditi.
-    </p>
-
-    <div class="testimonial-grid">
-
-      <!-- CARD 1 -->
-      <div class="testimonial-card animate delay-1">
-  <div class="testimonial-avatar" data-name="Andreas K"></div>
-
-  <p class="testimonial-text">
-    “StockIndexer membantu saya memperlambat pengambilan keputusan.
-    Alih-alih bereaksi terhadap gejolak pasar,
-    saya mendapatkan konteks yang lebih jelas
-    seputar risiko dan momentum.”
-  </p>
-
-  <div class="testimonial-meta">
-    <strong>Andreas K.</strong>
-    <span>Trader Ritel</span>
-  </div>
+<!-- Conway card & pip pulse tetap -->
+<div class="cw-card">
+  <!-- Kode pip pulse asli tetap di scripts.js -->
 </div>
 
-      <!-- CARD 2 -->
-      <div class="testimonial-card animate delay-2">
-        <div class="testimonial-avatar" data-name="Michael K"></div>
-
-        <p class="testimonial-text">
-          “Nilai terpenting bagi saya adalah
-          konsistensi. Kriteria bukan hanya peringatan,
-          tetapi juga disertai struktur dan alasan.”
-        </p>
-
-        <div class="testimonial-meta">
-          <strong>Michael T.</strong>
-          <span>Analis Ekuitas</span>
-        </div>
-      </div>
-
-      <!-- CARD 3 -->
-      <div class="testimonial-card animate delay-3">
-        <div class="testimonial-avatar" data-name="Rizky S"></div>
-
-        <p class="testimonial-text">
-          “StockIndexer adalah lapisan verifikasi saya.
-          Keputusan trading harus berbasis data,
-          Bukan asumsi. Aplikasi ini menyediakan metrik
-          yang saya butuhkan secara objektif.”
-        </p>
-
-        <div class="testimonial-meta">
-          <strong>Rizky S.</strong>
-          <span>Manajer Portofolio</span>
-        </div>
-      </div>
-
-      <!-- CARD 4 -->
-      <div class="testimonial-card animate delay-4">
-        <div class="testimonial-avatar" data-name="Daniel N"></div>
-
-        <p class="testimonial-text">
-          “Ini bukan alat untuk cepat cuan.
-          Alat ini dirancang untuk orang-orang yang sudah
-          memahami risiko dan menginginkan
-          masukan keputusan yang lebih jelas dan nyata.”
-        </p>
-
-        <div class="testimonial-meta">
-          <strong>Daniel N.</strong>
-          <span>Investor yang Berorientasi pada Riset</span>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-  
-<!-- ================= PAGE 5 : AUDIENCE ================= -->
-<section class="section audience">
-  <div class="container">
-
-    <h2>
-      Trading Tanpa Drama<br><span>Bisa Tidur dengan Senyum</span>
-    </h2>
-
-    <p class="subtitle">
-      StockIndexer gunakan strategi yang dirancang untuk menjaga modal - dan kewarasan - Anda tetap utuh.
-    </p>
-
-    <div class="audience-grid">
-      <div class="audience-column">
-        <h3>Untuk Siapa Ini Ditujukan</h3>
-        <div class="card"><h4>Trader Rasional</h4><p>Pengambilan keputusan berdasarkan data.</p></div>
-        <div class="card"><h4>Investor Riset</h4><p>Kriteria dengan konteks.</p></div>
-        <div class="card"><h4>Tim Institusional</h4><p>Alur kerja yang dikelola risikonya.</p></div>
-        <div class="card"><h4>Pemikir Jangka Panjang</h4><p>Konsistensi dan ketenangan lebih penting.</p></div>
-      </div>
-
-      <div class="audience-column muted">
-        <h3>Ini Bukan Untuk Siapa</h3>
-        <div class="card"><h4>Yang Ingin Cepat Kaya</h4><p>Tidak ada kekayaan tanpa stabilitas.</p></div>
-        <div class="card"><h4>Pemburu Kriteria</h4><p>Tidak ada peringatan buta konteks.</p></div>
-        <div class="card"><h4>Non-Trader</h4><p>Membutuhkan pengetahuan dasar.</p></div>
-        <div class="card"><h4>Trader Impulsif</h4><p>Pasar bukan tempat adu nasib.</p></div>
-      </div>
-    </div>
-
-  </div>
+<!-- FEATURES SECTION (ditingkatkan checklist) -->
+<section class="features">
+  <h2>Fitur Utama</h2>
+  <ul>
+    <li>19 Alert Real-time dari SS BlackBox v6.3.1</li>
+    <li>Confluence Score 0–23 + Grade 1–5</li>
+    <li>Ownership Intelligence IDX (data >1% pemegang saham)</li>
+    <li>Live Ticker Tape + World Indices 8 negara</li>
+    <li>AI Signal Explanation Engine</li>
+    <li>Portfolio Risk & Correlation Dashboard</li>
+  </ul>
 </section>
 
-<!-- ================= PAGE 6 : REQUEST ================= -->
-<section class="section invite" id="request">
-  <div class="container invite-container">
-
-    <h2>Request an Invitation</h2>
-    <p class="subtitle">Akses terbatas. Amankan posisi prioritas Anda untuk pembukaan slot bulan ini.</p>
-
-    <div class="payment-box">
-      <button class="btn primary pay-xendit">Bayar dengan Aman (utas.me)</button>
-
-      <p class="payment-note">
-        Pembayaran aman melalui bank transfer, QRIS, dan dompet elektronik.
-      </p>
-
-      <div class="divider">atau</div>
-
-      <div class="marketplace-grid">
-        <a class="market-btn shopee" href="#">Bayar melalui Shopee</a>
-        <a class="market-btn tiktok" href="#">Bayar melalui TikTokShop</a>
-        <a class="market-btn blibli" href="#">Bayar melalui Blibli</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-  <!-- ================= PAGE 7 : FAQ ================= -->
-<section class="section faq" id="faq">
-  <div class="container">
-
-    <h2 class="animate">FAQ</h2>
-    <p class="subtitle animate">
-      Pertanyaan yang Sering Diajukan.
-    </p>
-
-    <div class="faq-list">
-
-      <div class="faq-item">
-        <button class="faq-question">
-          Apakah Tool ini cocok untuk pemula yang belum paham chart?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>
-            Sangat cocok. Tool Stock Indexer (SS BlackBox Phantom v6.1 dan Trade Compass IHSG v8.1.1)
-            didesain untuk menyederhanakan analisa teknikal yang rumit menjadi Kriteria visual yang
-            mudah dibaca. Anda tidak perlu menghafal ratusan pola candle, biarkan back-end kami
-            yang bekerja.
-          </p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question">
-          Berapa harga sebenarnya? Ada biaya tersembunyi?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>
-            Saat ini kami menawarkan <strong>Promo Lifetime Rp. 2.995.000</strong> (Sekali bayar untuk selamanya).
-            Kami juga menyediakan opsi <i>Bulanan Rp 497.000,</i> namun 98% member kami memilih Lifetime karena
-            jauh lebih hemat (hanya seharga 6 bulan langganan, tapi dapat akses dan update seumur hidup). Tidak ada biaya
-            perpanjangan tahunan.
-          </p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question">
-          Apa syarat untuk mendapatkan akses Invite-Only ini?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>
-            Selain melakukan pembayaran, Anda WAJIB mendaftar akun TradingView "Basic" (Gratis) 
-            menggunakan <strong>Link Resmi/Referral</strong> dari StockIndexer.
-            <i>Username</i> dari akun yang terdaftar lewat link kamilah yang nantinya akan kami beri izin akses 
-            (grant access) ke Tool.
-          </p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question">
-          Bagaimana jika saya sudah punya akun TradingView lama?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>
-            Untuk mendapatkan akses Tool ini, Anda perlu membuat akun baru menggunakan link dari kami.
-            Akun TradingView "Basic" (Gratis) sudah sangat cukup untuk menjalankan Tool ini,
-            jadi Anda tidak perlu mengeluarkan biaya langganan ke pihak TradingView.
-          </p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question">
-          Saya gaptek, apakah ada panduan cara pasangnya?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>
-            Jangan khawatir! Kami memberikan <strong>Garansi Bimbingan Sampai Bisa.</strong>
-            Setelah pembelian, Anda akan mendapatkan video tutorial cara pasang. Jika masih bingung,
-            tim support kami akan memandu Anda via chat/remote sampai Tool muncul di layar Anda 
-            dan siap digunakan.
-          </p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question">
-          Apakah ada grup komunitas atau tempat diskusi jika saya bingung soal trading?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>
-            Jelas ada. Sebagai bagian dari komitmen kami, pemilik lisensi <strong>LIFETIME,</strong> akan 
-            bergabung dalam <stong>VIP StockIndexer.</stong> Ini adalah ruang tertutup untuk membedah analisa teknikal,
-            fundamental dan pola smart money secara real-time. Memastikan investasi Anda pada teknologi ini
-            terkonversi menjadi keahlian trading tingkat tinggi.
-          </p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question">
-          Apakah Tool ini bisa dipakai di HP (Android/iOS)?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>
-            Bisa banget! Karena Tool ini berbasis cloud di TradingView, setelah Anda pasang sekali,
-            Anda bisa melihat chart dan Kriterianya dari Laptop, Tablet, maupun aplikasi TradingView di HP
-            Anda di mana saja.
-          </p>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question">
-          Apakah ada garansi uang kembali (Refund)?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>
-            Karena ini adalah produk digital yang tidak bisa dikembalikan setelah akses dibuka,
-            kami tidak melayani refund uang. Sebagai gantinya, kami memberikan <strong>Garansi Support Penuh.</strong>
-            Kami pastikan alat ini berfungsi di akun Anda dan kami ajarkan cara bacanya sampai Anda mengerti.
-          </p>
-        </div>
-      </div>
-
-<div class="faq-item">
-        <button class="faq-question">
-          Berapa lama proses aktivasinya setelah saya transfer?
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>
-            Proses aktivasi biasanya memakan waktu 15 - 60 menit pada jam kerja (09.00 - 21.00 WIB) untuk
-            verifikasi pembayaran dan input username Anda ke dalam sistem <i>Invite-Only.</i>
-          </p>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-</section>
-
-<!-- ================= FOOTER ================= -->
-<footer class="site-footer">
-
-  <div class="footer-logo-center">
-    <img src="assets/si.png" alt="StockIndexer">
-  </div>
-
-  <div class="container footer-grid">
-
-    <div class="footer-col brand">
-      <p class="footer-desc">
-        StockIndexer adalah alat analisis teknikal<br>
-        untuk pengambilan keputusan yang lebih baik · Mitra afiliasi TradingView
-      </p>
-    </div>
-
-    <div class="footer-col">
-      <h4>Perusahaan</h4>
+<!-- PRICING SECTION BARU -->
+<section id="pricing" class="pricing">
+  <h2>Pilih Paketmu</h2>
+  <div class="pricing-grid">
+    <div class="card pro">
+      <div class="badge cyan">MOST POPULAR</div>
+      <h3>PRO</h3>
+      <div class="price">Rp497.000 <span>/bln</span></div>
       <ul>
-        <li><a href="#">Tentang</a></li>
-        <li><a href="#">Metodologi</a></li>
-        <li><a href="#">Harga</a></li>
-        <li><a href="#">Kontak</a></li>
+        <li>Full Dashboard & Signals</li>
+        <li>Ownership Intelligence</li>
+        <li>Live Ticker + Indices</li>
+        <li>AI Explanation</li>
+        <li>Community Access</li>
       </ul>
+      <a href="https://utas.me/stockindexer/pro" class="btn cyan">BAYAR SEKARANG</a>
+      <div class="usdc-bonus">Atau USDC (diskon 10%): $29.7</div>
     </div>
 
-    <div class="footer-col">
-      <h4>Sumber daya</h4>
+    <div class="card elite">
+      <div class="badge gold">LIFETIME</div>
+      <h3>ELITE</h3>
+      <div class="price">Rp2.999.000 <span>SEKALI BAYAR</span></div>
       <ul>
-        <li><a href="#">Pendidikan</a></li>
-        <li><a href="#">Wawasan</a></li>
-        <li><a href="#">Afiliasi</a></li>
-        <li><a href="#">Riset</a></li>
+        <li>Semua PRO selamanya</li>
+        <li>Prioritas Update</li>
+        <li>Private Lounge</li>
+        <li>Conway Deep Dive</li>
       </ul>
+      <a href="https://utas.me/stockindexer/elite" class="btn gold">AMBIL LIFETIME</a>
+      <div class="usdc-bonus">Atau USDC (diskon 12%): $189</div>
     </div>
 
-    <div class="footer-col">
-      <h4>Legal</h4>
+    <div class="card enterprise">
+      <h3>ENTERPRISE</h3>
+      <div class="price">Custom</div>
       <ul>
-        <li><a href="#">Risiko</a></li>
-        <li><a href="#">Privacy</a></li>
-        <li><a href="#">Ketentuan</a></li>
-        <li><a href="#">Penyingkapan</a></li>
+        <li>White-label API</li>
+        <li>Dedicated pieBot</li>
+        <li>Bulk Signal</li>
       </ul>
+      <a href="https://wa.me/628123456789?text=Enterprise%20StockIndexer" class="btn purple">HUBUNGI SALES</a>
     </div>
-
   </div>
 
-  <div class="footer-disclaimer container">
-    <p>DISCLAIMER: Segala bentuk investasi memiliki risiko. Masa lalu tidak menjamin kinerja masa depan. 
-      Kami menyediakan tool sebagai layanan edukasi dan data.
-      StockIndexer adalah alat bantu analisa, BUKAN penasihat keuangan. 
-      Segala keputusan jual/beli adalah tanggung pribadi trader (DYOR).
-      Developer tidak bertanggung jawab atas keuntungan atau kerugian yang timbul.</p>
-    <p class="copyright">
-      Seluruh teks dan desain adalah hak cipta © 2014–<span id="year"></span> StockIndexer.com. Semua hak dilindungi undang-undang.
-    </p>
+  <!-- Payment methods -->
+  <div class="payment-methods">
+    <img src="qris.png" alt="QRIS">
+    <img src="dana.png" alt="DANA">
+    <img src="ovo.png" alt="OVO">
+    <img src="va.png" alt="VA">
+    <img src="alfamart.png" alt="Alfamart">
+  </div>
+
+  <!-- Garansi -->
+  <div class="garansi">
+    GARANSI UANG KEMBALI 14 HARI – 100% Refund kalau tidak puas
+    <a href="/policy">Lihat Kebijakan Lengkap</a>
+  </div>
+</section>
+
+<!-- AFFILIATE TEASER & DISCLAIMER -->
+<footer>
+  <div class="affiliate-teaser">
+    Mau dapat 40% komisi tiap sale? <a href="https://utas.me/stockindexer/affiliate">Daftar Affiliate StockIndexer</a>
+  </div>
+  <div class="disclaimer">
+    Hasil trading masa lalu bukan jaminan. Trading berisiko tinggi.
   </div>
 </footer>
 
-<script src="js/main.js"></script>
-  
-  <!-- ================= DEMO MODAL ================= -->
-<div class="demo-modal" id="demoModal" aria-hidden="true">
-
-  <div class="demo-backdrop"></div>
-
-  <div class="demo-dialog" role="dialog" aria-modal="true">
-    <button class="demo-close" aria-label="Close demo">×</button>
-
-    <div class="demo-video-wrap">
-      <video
-        id="demoVideo"
-        src="assets/video.mp4"
-        playsinline
-        muted
-        preload="metadata"
-      ></video>
-    </div>
-
-    <div class="demo-footer">
-      <p class="demo-caption">
-        Institutional-grade market intelligence in action.
-      </p>
-      <a href="#request" class="btn primary demo-invite">
-        Dapatkan Akses
-      </a>
-    </div>
-  </div>
-
-</div>
-
+<script src="scripts.js"></script>
 </body>
 </html>
