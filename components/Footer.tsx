@@ -1,7 +1,3 @@
-'use client'
-
-import Link from 'next/link'
-
 export default function Footer() {
   return (
     <footer style={{ position: 'relative', zIndex: 1, borderTop: '1px solid var(--border)' }}>
