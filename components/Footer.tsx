@@ -1,3 +1,5 @@
+'use client'
+
 export default function Footer() {
   return (
     <footer style={{ position: 'relative', zIndex: 1, borderTop: '1px solid var(--border)' }}>
@@ -60,10 +62,11 @@ export default function Footer() {
             <div key={col.title} className="f-col">
               <div style={{ fontSize: '9px', letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--gray2)', marginBottom: '14px' }}>{col.title}</div>
               {col.links.map(l => (
-                <Link key={l} href="#" style={{ display: 'block', fontSize: '11px', color: 'var(--gray)', textDecoration: 'none', marginBottom: '8px', transition: 'color 0.2s' }}
+                <a key={l} href="#"
+                  style={{ display: 'block', fontSize: '11px', color: 'var(--gray)', textDecoration: 'none', marginBottom: '8px', transition: 'color 0.2s' }}
                   onMouseEnter={e => (e.currentTarget.style.color = 'var(--cyan)')}
                   onMouseLeave={e => (e.currentTarget.style.color = 'var(--gray)')}
-                >{l}</Link>
+                >{l}</a>
               ))}
             </div>
           ))}
