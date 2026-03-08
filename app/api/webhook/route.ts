@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-/* ─── Valid alert types — SS BlackBox v6.3.1 (19 utama) ─── */
+// Valid alert types — SS BlackBox v6.3.1 (19 utama)
 const VALID_ALERT_TYPES = new Set([
   'GOLD_BUY', 'DOOM_SELL', 'CONWAY_BUY', 'CONWAY_SELL',
   'CONWAY_BORN', 'CONWAY_DIED', 'PM_BUY', 'PM_SELL',
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid payload or alert type' }, { status: 400 });
     }
 
-    // Log untuk debug (lihat di Vercel logs)
+    // Log untuk debug (lihat di Vercel logs atau console lokal)
     console.log('Webhook received:', body);
 
     // Nanti tambah broadcast ke WS server kalau lo punya
