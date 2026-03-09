@@ -32,8 +32,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" translate="no" suppressHydrationWarning>
       <head>
+        {/* Block browser auto-translate — site is English-only */}
+        <meta name="google" content="notranslate" />
+        <meta httpEquiv="Content-Language" content="en" />
         <link
           href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&display=swap"
           rel="stylesheet"
