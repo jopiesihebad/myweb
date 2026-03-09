@@ -10,17 +10,19 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   asChild?: boolean
 }
 
-/* Use inline style for anything Tailwind can't express (clip-path, CSS vars in bg) */
+/* Split every border shorthand into borderWidth + borderStyle + borderColor
+   to avoid React's "Removing borderColor when border is set" warning */
 const variantStyles: Record<ButtonVariant, React.CSSProperties> = {
-  default:     { background: '#00c3ff', color: '#04070f', border: '1px solid #00c3ff' },
-  ghost:       { background: 'transparent', color: '#5a7090', border: '1px solid transparent' },
-  outline:     { background: 'transparent', color: '#eef4fc', border: '1px solid #1e2e4a' },
-  gold:        { background: 'transparent', color: '#ffd700', border: '1px solid rgba(255,215,0,0.5)' },
-  destructive: { background: 'rgba(255,0,98,0.1)', color: '#ff0062', border: '1px solid rgba(255,0,98,0.3)' },
+  default:     { background: '#00c3ff', color: '#04070f', borderWidth: '1px', borderStyle: 'solid', borderColor: '#00c3ff' },
+  ghost:       { background: 'transparent', color: '#5a7090', borderWidth: '1px', borderStyle: 'solid', borderColor: 'transparent' },
+  outline:     { background: 'transparent', color: '#eef4fc', borderWidth: '1px', borderStyle: 'solid', borderColor: '#1e2e4a' },
+  gold:        { background: 'transparent', color: '#ffd700', borderWidth: '1px', borderStyle: 'solid', borderColor: 'rgba(255,215,0,0.5)' },
+  destructive: { background: 'rgba(255,0,98,0.1)', color: '#ff0062', borderWidth: '1px', borderStyle: 'solid', borderColor: 'rgba(255,0,98,0.3)' },
 }
 
+/* Hover: only override what changes — no border shorthand anywhere */
 const variantHover: Record<ButtonVariant, React.CSSProperties> = {
-  default:     { background: '#00e5ff' },
+  default:     { background: '#00e5ff', borderColor: '#00e5ff' },
   ghost:       { background: 'rgba(0,195,255,0.05)', color: '#eef4fc' },
   outline:     { borderColor: '#00c3ff', color: '#00c3ff' },
   gold:        { background: 'rgba(255,215,0,0.07)', borderColor: '#ffd700' },
@@ -37,7 +39,6 @@ const sizeStyles: Record<ButtonSize, React.CSSProperties> = {
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant = 'default', size = 'md', style, className, children, ...props }, ref) => {
     const [hovered, setHovered] = React.useState(false)
-
     return (
       <button
         ref={ref}
