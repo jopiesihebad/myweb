@@ -301,19 +301,47 @@ export default function Page() {
                 ))}
               </div>
               <div style={{ fontSize: '9px', letterSpacing: '2px', color: 'var(--gray)', marginBottom: '8px', textTransform: 'uppercase' }}>Activity Log</div>
-              <div style={{ background: 'var(--bg2)', padding: '14px', fontSize: '10px', lineHeight: 1.8, maxHeight: '160px', overflowY: 'auto' }}>
-                {[
-                  ['17:14','Signal received: EURUSD CONWAY BUY · evaluating…'],
-                  ['17:14','Conway cells: 6/8 BORN · filter passed'],
-                  ['17:14','Max positions reached · skipping EURUSD entry'],
-                  ['16:58','BBP Crossover detected: XAUUSD @ 2,891.20'],
-                  ['16:58','Order placed: LONG XAUUSD · qty 0.035 oz'],
-                  ['16:30','London session open · prime window activated'],
-                  ['14:02','Position closed: BTCUSDT · +2.1% · Conway DIED signal'],
-                ].map(([t,msg],i) => (
+              <div style={{ background: 'var(--bg2)', padding: '14px', fontSize: '10px', lineHeight: 1.8, maxHeight: '160px', overflowY: 'auto', fontFamily: '"JetBrains Mono", monospace' }}>
+                {([
+                  { t:'17:14', parts:[
+                    { txt:'Signal received: ', c:'#5a7090' },
+                    { txt:'EURUSD CONWAY BUY', c:'#00c3ff' },
+                    { txt:' · evaluating...', c:'#5a7090' },
+                  ]},
+                  { t:'17:14', parts:[
+                    { txt:'Conway cells: ', c:'#5a7090' },
+                    { txt:'6/8 BORN', c:'#39ff14' },
+                    { txt:' · filter passed', c:'#5a7090' },
+                  ]},
+                  { t:'17:14', parts:[
+                    { txt:'Max positions reached · skipping EURUSD entry', c:'#5a7090' },
+                  ]},
+                  { t:'16:58', parts:[
+                    { txt:'BBP Crossover detected: ', c:'#5a7090' },
+                    { txt:'XAUUSD @ 2,891.20', c:'#00c3ff' },
+                  ]},
+                  { t:'16:58', parts:[
+                    { txt:'Order placed: ', c:'#5a7090' },
+                    { txt:'LONG XAUUSD', c:'#5a7090' },
+                    { txt:' · qty 0.035 oz', c:'#39ff14' },
+                  ]},
+                  { t:'16:30', parts:[
+                    { txt:'London session open · ', c:'#5a7090' },
+                    { txt:'prime window activated', c:'#00c3ff' },
+                  ]},
+                  { t:'14:02', parts:[
+                    { txt:'Position closed: ', c:'#5a7090' },
+                    { txt:'BTCUSDT · +2.1%', c:'#39ff14' },
+                    { txt:' · Conway DIED signal', c:'#ff0062' },
+                  ]},
+                ] as { t: string; parts: { txt: string; c: string }[] }[]).map(({ t, parts }, i) => (
                   <div key={i} style={{ display: 'flex', gap: '10px', marginBottom: '2px' }}>
-                    <span style={{ color: 'var(--gray2)', flexShrink: 0 }}>{t}</span>
-                    <span style={{ color: 'var(--gray)' }}>{msg}</span>
+                    <span style={{ color: '#2a3d58', flexShrink: 0 }}>{t}</span>
+                    <span>
+                      {parts.map((p, j) => (
+                        <span key={j} style={{ color: p.c }}>{p.txt}</span>
+                      ))}
+                    </span>
                   </div>
                 ))}
               </div>
