@@ -18,6 +18,13 @@ const FALLBACK_RATE = 16200   // IDR per 1 USD — fallback if API fails
 function fmtIDR(n: number) {
   return 'Rp ' + n.toLocaleString('id-ID')
 }
+/* Short display: 497.000 → 497K · 2.999.000 → 2.999K */
+function fmtIDRShort(n: number) {
+  const k = n / 1000
+  // Keep up to 3 decimal places of K, strip trailing zeros
+  const kStr = k % 1 === 0 ? k.toFixed(0) : k.toLocaleString('id-ID', { maximumFractionDigits: 3 })
+  return kStr + 'K'
+}
 function fmtUSD(idr: number, rate: number) {
   const usd = idr / rate
   return '$' + (usd < 10 ? usd.toFixed(2) : Math.round(usd).toLocaleString('en-US'))
@@ -87,13 +94,13 @@ function PriceBlock({
         {fmtIDR(idrOrig)}
       </div>
 
-      {/* Main IDR price */}
+      {/* Main IDR price — K-abbreviated so it fits in card */}
       <div style={{
-        fontFamily: 'Syne, sans-serif', fontSize: '52px', fontWeight: 800,
+        fontFamily: 'Syne, sans-serif', fontSize: '64px', fontWeight: 800,
         letterSpacing: '-3px', lineHeight: 1, color, marginBottom: '4px',
       }}>
         <span style={{ fontSize: '20px', fontWeight: 400, verticalAlign: 'super', letterSpacing: 0 }}>Rp </span>
-        {(idr).toLocaleString('id-ID')}
+        {fmtIDRShort(idr)}
       </div>
 
       {/* Sub-label (per bulan / sekali bayar) */}
@@ -313,16 +320,6 @@ export default function PricingSection() {
         </p>
       </div>
 
-      {/* ── Guarantee bar (bottom) ── */}
-      <div className="guarantee-bar" style={{ position: 'relative', zIndex: 1 }}>
-        <span style={{ fontSize: '16px' }}>🛡️</span>
-        <span style={{ fontSize: '11px', color: '#5a7090' }}>
-          <strong style={{ color: '#eef4fc' }}>14-Day Money-Back Guarantee</strong> — Not satisfied? Full refund, no questions asked.
-        </span>
-        <a href="#" style={{ fontSize: '9px', color: '#00c3ff', letterSpacing: '1.5px', textTransform: 'uppercase', textDecoration: 'none', borderBottom: '1px solid rgba(0,195,255,0.3)', paddingBottom: '1px' }}>
-          Read policy →
-        </a>
-      </div>
     </>
   )
 }
