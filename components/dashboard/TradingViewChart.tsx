@@ -146,10 +146,10 @@ export default function TradingViewChart({
       .filter(s => s.ticker === symbol)
       .map(sig => ({
         time: Math.floor(new Date(sig.timestamp).getTime() / 1000) as any,
-        position: sig.signal.includes('SELL') || sig.signal.includes('EXIT') ? 'aboveBar' : 'belowBar',
-        color: SIG_COLORS[sig.signal] || '#00c3ff',
-        shape: sig.signal.includes('EXIT') ? 'arrowDown' : sig.signal.includes('SELL') ? 'arrowDown' : 'arrowUp',
-        text: sig.signal.replace('_', ' ').replace('ENTRY_', ''),
+        position: sig.alert_type.includes('SELL') || sig.alert_type.includes('EXIT') ? 'aboveBar' : 'belowBar',
+        color: SIG_COLORS[sig.alert_type] || '#00c3ff',
+        shape: sig.alert_type.includes('EXIT') ? 'arrowDown' : sig.alert_type.includes('SELL') ? 'arrowDown' : 'arrowUp',
+        text: sig.alert_type.replace(/_/g, ' ').replace('ENTRY ', ''),
         size: 1.5,
       }))
 
