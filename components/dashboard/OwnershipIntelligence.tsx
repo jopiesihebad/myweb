@@ -35,38 +35,130 @@ interface NetworkEdge {
 }
 
 // ── Mock data ─────────────────────────────────────────────────────────────────
-const MOCK_OWNERSHIP: Investor[] = [
-  { id:'inv-01', name:'Pemerintah RI / Kementerian BUMN', type:'CP', origin:'LOCAL',   pct:53.19, shares:217200000000, change:0,     hidden:false, lastUpdated:'2025-09-30' },
-  { id:'inv-02', name:'BlackRock Inc.',                   type:'FRG', origin:'FOREIGN', pct:5.84,  shares:23840000000, change:0.21,  hidden:false, lastUpdated:'2025-09-30' },
-  { id:'inv-03', name:'Vanguard Group Inc.',              type:'MF',  origin:'FOREIGN', pct:3.12,  shares:12740000000, change:-0.08, hidden:false, lastUpdated:'2025-09-30' },
-  { id:'inv-04', name:'Danareksa Investment Management',  type:'MF',  origin:'LOCAL',   pct:2.87,  shares:11710000000, change:0.15,  hidden:false, lastUpdated:'2025-09-30' },
-  { id:'inv-05', name:'PT Taspen (Persero)',               type:'ID',  origin:'LOCAL',   pct:2.41,  shares:9840000000,  change:0.03,  hidden:false, lastUpdated:'2025-09-30' },
-  { id:'inv-06', name:'Government of Singapore (GIC)',    type:'FRG', origin:'FOREIGN', pct:1.94,  shares:7920000000,  change:0.44,  hidden:true,  affiliation:'GIC Direct Investments', lastUpdated:'2025-09-30' },
-  { id:'inv-07', name:'Eastspring Investments',           type:'MF',  origin:'FOREIGN', pct:1.62,  shares:6610000000,  change:-0.12, hidden:false, lastUpdated:'2025-09-30' },
-  { id:'inv-08', name:'PT Asuransi Jiwa Manulife',        type:'IB',  origin:'LOCAL',   pct:1.31,  shares:5340000000,  change:0.07,  hidden:false, lastUpdated:'2025-09-30' },
-  { id:'inv-09', name:'Norges Bank Investment Mgmt',      type:'FRG', origin:'FOREIGN', pct:1.18,  shares:4810000000,  change:0.31,  hidden:true,  lastUpdated:'2025-09-30' },
-  { id:'inv-10', name:'PT Bahana TCW Investment Mgmt',    type:'MF',  origin:'LOCAL',   pct:0.94,  shares:3840000000,  change:0.09,  hidden:false, lastUpdated:'2025-09-30' },
-  { id:'inv-11', name:'Public Float / Others',            type:'ID',  origin:'LOCAL',   pct:25.58, shares:104390000000,change:0,     hidden:false, lastUpdated:'2025-09-30' },
-]
 
-const NETWORK_NODES: NetworkNode[] = [
-  { id:'bbri', label:'BBRI', type:'investee', x:300, y:200, size:40, color:'#00c3ff' },
-  { id:'govt', label:'Gov RI', type:'holding', x:180, y:80, size:50, color:'#ffd700' },
-  { id:'bri', label:'PT BRI', type:'subsidiary', x:420, y:80, size:30, color:'#39ff14' },
-  { id:'agro', label:'BRI Agro', type:'subsidiary', x:180, y:320, size:25, color:'#39ff14' },
-  { id:'bri-ins', label:'BRI Insurance', type:'subsidiary', x:420, y:320, size:25, color:'#39ff14' },
-  { id:'blackrock', label:'BlackRock', type:'holding', x:80, y:200, size:30, color:'#bd93f9' },
-  { id:'vanguard', label:'Vanguard', type:'holding', x:520, y:200, size:25, color:'#ff44cc' },
-]
+// ── Per-ticker ownership data ─────────────────────────────────────────────────
+const OWNERSHIP_DATA: Record<string, Investor[]> = {
+  BBRI: [
+    { id:'inv-01', name:'Pemerintah RI / Kementerian BUMN', type:'CP',  origin:'LOCAL',   pct:53.19, shares:217200000000, change:0,     hidden:false, lastUpdated:'2025-09-30' },
+    { id:'inv-02', name:'BlackRock Inc.',                   type:'FRG', origin:'FOREIGN', pct:5.84,  shares:23840000000,  change:0.21,  hidden:false, lastUpdated:'2025-09-30' },
+    { id:'inv-03', name:'Vanguard Group Inc.',              type:'MF',  origin:'FOREIGN', pct:3.12,  shares:12740000000,  change:-0.08, hidden:false, lastUpdated:'2025-09-30' },
+    { id:'inv-04', name:'Danareksa Investment Management',  type:'MF',  origin:'LOCAL',   pct:2.87,  shares:11710000000,  change:0.15,  hidden:false, lastUpdated:'2025-09-30' },
+    { id:'inv-05', name:'PT Taspen (Persero)',              type:'ID',  origin:'LOCAL',   pct:2.41,  shares:9840000000,   change:0.03,  hidden:false, lastUpdated:'2025-09-30' },
+    { id:'inv-06', name:'Government of Singapore (GIC)',    type:'FRG', origin:'FOREIGN', pct:1.94,  shares:7920000000,   change:0.44,  hidden:true,  affiliation:'GIC Direct Investments', lastUpdated:'2025-09-30' },
+    { id:'inv-07', name:'Eastspring Investments',           type:'MF',  origin:'FOREIGN', pct:1.62,  shares:6610000000,   change:-0.12, hidden:false, lastUpdated:'2025-09-30' },
+    { id:'inv-08', name:'PT Asuransi Jiwa Manulife',        type:'IB',  origin:'LOCAL',   pct:1.31,  shares:5340000000,   change:0.07,  hidden:false, lastUpdated:'2025-09-30' },
+    { id:'inv-09', name:'Norges Bank Investment Mgmt',      type:'FRG', origin:'FOREIGN', pct:1.18,  shares:4810000000,   change:0.31,  hidden:true,  lastUpdated:'2025-09-30' },
+    { id:'inv-10', name:'PT Bahana TCW Investment Mgmt',    type:'MF',  origin:'LOCAL',   pct:0.94,  shares:3840000000,   change:0.09,  hidden:false, lastUpdated:'2025-09-30' },
+    { id:'inv-11', name:'Public Float / Others',            type:'ID',  origin:'LOCAL',   pct:25.58, shares:104390000000, change:0,     hidden:false, lastUpdated:'2025-09-30' },
+  ],
+  BBCA: [
+    { id:'bc-01', name:'PT Dwimuria Investama Andalan',     type:'CP',  origin:'LOCAL',   pct:54.94, shares:135000000000, change:0,     hidden:false, lastUpdated:'2025-09-30' },
+    { id:'bc-02', name:'BlackRock Inc.',                    type:'FRG', origin:'FOREIGN', pct:6.12,  shares:15030000000,  change:0.18,  hidden:false, lastUpdated:'2025-09-30' },
+    { id:'bc-03', name:'Vanguard Group Inc.',               type:'MF',  origin:'FOREIGN', pct:3.44,  shares:8450000000,   change:-0.05, hidden:false, lastUpdated:'2025-09-30' },
+    { id:'bc-04', name:'PT Prudential Life Assurance',      type:'IB',  origin:'LOCAL',   pct:2.18,  shares:5350000000,   change:0.12,  hidden:false, lastUpdated:'2025-09-30' },
+    { id:'bc-05', name:'GIC Singapore',                     type:'FRG', origin:'FOREIGN', pct:1.87,  shares:4590000000,   change:0.38,  hidden:true,  lastUpdated:'2025-09-30' },
+    { id:'bc-06', name:'Norges Bank Investment Mgmt',       type:'FRG', origin:'FOREIGN', pct:1.24,  shares:3050000000,   change:0.22,  hidden:true,  lastUpdated:'2025-09-30' },
+    { id:'bc-07', name:'Eastspring Investments',            type:'MF',  origin:'FOREIGN', pct:1.11,  shares:2730000000,   change:-0.09, hidden:false, lastUpdated:'2025-09-30' },
+    { id:'bc-08', name:'PT Manulife Aset Manajemen',        type:'MF',  origin:'LOCAL',   pct:0.89,  shares:2190000000,   change:0.04,  hidden:false, lastUpdated:'2025-09-30' },
+    { id:'bc-09', name:'Public Float / Others',             type:'ID',  origin:'LOCAL',   pct:28.21, shares:69330000000,  change:0,     hidden:false, lastUpdated:'2025-09-30' },
+  ],
+  ANTM: [
+    { id:'am-01', name:'Pemerintah RI / MIND ID',           type:'CP',  origin:'LOCAL',   pct:65.00, shares:15600000000,  change:0,     hidden:false, lastUpdated:'2025-09-30' },
+    { id:'am-02', name:'BlackRock Inc.',                    type:'FRG', origin:'FOREIGN', pct:3.21,  shares:770000000,    change:0.44,  hidden:false, lastUpdated:'2025-09-30' },
+    { id:'am-03', name:'Vanguard Group Inc.',               type:'MF',  origin:'FOREIGN', pct:1.84,  shares:440000000,    change:0.11,  hidden:false, lastUpdated:'2025-09-30' },
+    { id:'am-04', name:'PT Taspen (Persero)',               type:'ID',  origin:'LOCAL',   pct:1.52,  shares:365000000,    change:0.02,  hidden:false, lastUpdated:'2025-09-30' },
+    { id:'am-05', name:'Norges Bank Investment Mgmt',       type:'FRG', origin:'FOREIGN', pct:0.98,  shares:235000000,    change:0.67,  hidden:true,  lastUpdated:'2025-09-30' },
+    { id:'am-06', name:'PT Bahana TCW Investment Mgmt',     type:'MF',  origin:'LOCAL',   pct:0.81,  shares:194000000,    change:0.14,  hidden:false, lastUpdated:'2025-09-30' },
+    { id:'am-07', name:'Public Float / Others',             type:'ID',  origin:'LOCAL',   pct:26.64, shares:6390000000,   change:0,     hidden:false, lastUpdated:'2025-09-30' },
+  ],
+  ASII: [
+    { id:'as-01', name:'Jardine Matheson Holdings',         type:'CP',  origin:'FOREIGN', pct:50.11, shares:20290000000,  change:0,     hidden:false, lastUpdated:'2025-09-30' },
+    { id:'as-02', name:'BlackRock Inc.',                    type:'FRG', origin:'FOREIGN', pct:4.88,  shares:1980000000,   change:0.15,  hidden:false, lastUpdated:'2025-09-30' },
+    { id:'as-03', name:'Vanguard Group Inc.',               type:'MF',  origin:'FOREIGN', pct:2.34,  shares:950000000,    change:-0.06, hidden:false, lastUpdated:'2025-09-30' },
+    { id:'as-04', name:'PT Taspen (Persero)',               type:'ID',  origin:'LOCAL',   pct:1.98,  shares:800000000,    change:0.01,  hidden:false, lastUpdated:'2025-09-30' },
+    { id:'as-05', name:'GIC Singapore',                     type:'FRG', origin:'FOREIGN', pct:1.74,  shares:704000000,    change:0.29,  hidden:true,  lastUpdated:'2025-09-30' },
+    { id:'as-06', name:'PT Manulife Aset Manajemen',        type:'MF',  origin:'LOCAL',   pct:1.12,  shares:454000000,    change:0.08,  hidden:false, lastUpdated:'2025-09-30' },
+    { id:'as-07', name:'Norges Bank Investment Mgmt',       type:'FRG', origin:'FOREIGN', pct:0.87,  shares:352000000,    change:0.21,  hidden:false, lastUpdated:'2025-09-30' },
+    { id:'as-08', name:'Public Float / Others',             type:'ID',  origin:'LOCAL',   pct:36.96, shares:14970000000,  change:0,     hidden:false, lastUpdated:'2025-09-30' },
+  ],
+}
 
-const NETWORK_EDGES: NetworkEdge[] = [
-  { from:'govt', to:'bbri', pct:53.19, color:'#ffd700' },
-  { from:'bri',  to:'bbri', pct:100,   color:'#39ff14' },
-  { from:'bbri', to:'agro', pct:87,    color:'#39ff14' },
-  { from:'bbri', to:'bri-ins', pct:65, color:'#39ff14' },
-  { from:'blackrock', to:'bbri', pct:5.84, color:'#bd93f9' },
-  { from:'vanguard',  to:'bbri', pct:3.12, color:'#ff44cc' },
-]
+const NETWORK_DATA: Record<string, { nodes: NetworkNode[]; edges: NetworkEdge[] }> = {
+  BBRI: {
+    nodes: [
+      { id:'bbri', label:'BBRI', type:'investee', x:300, y:200, size:40, color:'#00c3ff' },
+      { id:'govt', label:'Gov RI', type:'holding', x:180, y:80, size:50, color:'#ffd700' },
+      { id:'bri', label:'PT BRI', type:'subsidiary', x:420, y:80, size:30, color:'#39ff14' },
+      { id:'agro', label:'BRI Agro', type:'subsidiary', x:180, y:320, size:25, color:'#39ff14' },
+      { id:'bri-ins', label:'BRI Ins', type:'subsidiary', x:420, y:320, size:25, color:'#39ff14' },
+      { id:'blackrock', label:'BlackRock', type:'holding', x:80, y:200, size:30, color:'#bd93f9' },
+      { id:'vanguard', label:'Vanguard', type:'holding', x:520, y:200, size:25, color:'#ff44cc' },
+    ],
+    edges: [
+      { from:'govt', to:'bbri', pct:53.19, color:'#ffd700' },
+      { from:'bri', to:'bbri', pct:100, color:'#39ff14' },
+      { from:'bbri', to:'agro', pct:87, color:'#39ff14' },
+      { from:'bbri', to:'bri-ins', pct:65, color:'#39ff14' },
+      { from:'blackrock', to:'bbri', pct:5.84, color:'#bd93f9' },
+      { from:'vanguard', to:'bbri', pct:3.12, color:'#ff44cc' },
+    ],
+  },
+  BBCA: {
+    nodes: [
+      { id:'bbca', label:'BBCA', type:'investee', x:300, y:200, size:40, color:'#00c3ff' },
+      { id:'dwimuria', label:'Dwimuria', type:'holding', x:160, y:80, size:50, color:'#ffd700' },
+      { id:'hartono', label:'R.Hartono', type:'person', x:440, y:80, size:35, color:'#ff8c00' },
+      { id:'bca-fin', label:'BCA Finance', type:'subsidiary', x:160, y:320, size:25, color:'#39ff14' },
+      { id:'bca-ins', label:'BCA Insurance', type:'subsidiary', x:440, y:320, size:25, color:'#39ff14' },
+      { id:'blackrock', label:'BlackRock', type:'holding', x:80, y:200, size:28, color:'#bd93f9' },
+      { id:'vanguard', label:'Vanguard', type:'holding', x:520, y:200, size:22, color:'#ff44cc' },
+    ],
+    edges: [
+      { from:'dwimuria', to:'bbca', pct:54.94, color:'#ffd700' },
+      { from:'hartono', to:'dwimuria', pct:100, color:'#ff8c00' },
+      { from:'bbca', to:'bca-fin', pct:100, color:'#39ff14' },
+      { from:'bbca', to:'bca-ins', pct:100, color:'#39ff14' },
+      { from:'blackrock', to:'bbca', pct:6.12, color:'#bd93f9' },
+      { from:'vanguard', to:'bbca', pct:3.44, color:'#ff44cc' },
+    ],
+  },
+  ANTM: {
+    nodes: [
+      { id:'antm', label:'ANTM', type:'investee', x:300, y:200, size:40, color:'#ff8c00' },
+      { id:'mindid', label:'MIND ID', type:'holding', x:180, y:80, size:45, color:'#ffd700' },
+      { id:'govt', label:'Gov RI', type:'holding', x:420, y:80, size:50, color:'#ffd700' },
+      { id:'pani', label:'Antam Nikel', type:'subsidiary', x:150, y:320, size:25, color:'#39ff14' },
+      { id:'ubp', label:'UBP', type:'subsidiary', x:450, y:320, size:25, color:'#39ff14' },
+      { id:'blackrock', label:'BlackRock', type:'holding', x:80, y:200, size:25, color:'#bd93f9' },
+    ],
+    edges: [
+      { from:'mindid', to:'antm', pct:65.00, color:'#ffd700' },
+      { from:'govt', to:'mindid', pct:100, color:'#ffd700' },
+      { from:'antm', to:'pani', pct:100, color:'#39ff14' },
+      { from:'antm', to:'ubp', pct:51, color:'#39ff14' },
+      { from:'blackrock', to:'antm', pct:3.21, color:'#bd93f9' },
+    ],
+  },
+  ASII: {
+    nodes: [
+      { id:'asii', label:'ASII', type:'investee', x:300, y:200, size:40, color:'#39ff14' },
+      { id:'jardine', label:'Jardine', type:'holding', x:180, y:80, size:50, color:'#ffd700' },
+      { id:'astra-mtr', label:'Astra Motor', type:'subsidiary', x:150, y:320, size:25, color:'#39ff14' },
+      { id:'astra-fin', label:'Astra Credit', type:'subsidiary', x:300, y:340, size:25, color:'#39ff14' },
+      { id:'aij', label:'Astra Ins', type:'subsidiary', x:450, y:320, size:25, color:'#39ff14' },
+      { id:'blackrock', label:'BlackRock', type:'holding', x:80, y:200, size:28, color:'#bd93f9' },
+      { id:'gic', label:'GIC', type:'holding', x:520, y:200, size:25, color:'#ff44cc' },
+    ],
+    edges: [
+      { from:'jardine', to:'asii', pct:50.11, color:'#ffd700' },
+      { from:'asii', to:'astra-mtr', pct:100, color:'#39ff14' },
+      { from:'asii', to:'astra-fin', pct:100, color:'#39ff14' },
+      { from:'asii', to:'aij', pct:100, color:'#39ff14' },
+      { from:'blackrock', to:'asii', pct:4.88, color:'#bd93f9' },
+      { from:'gic', to:'asii', pct:1.74, color:'#ff44cc' },
+    ],
+  },
+}
 
 const TYPE_META: Record<string, { label:string; color:string }> = {
   CP:  { label:'Corporate',  color:'#ffd700' },
@@ -76,10 +168,27 @@ const TYPE_META: Record<string, { label:string; color:string }> = {
   FRG: { label:'Foreign',    color:'#ff44cc' },
 }
 
-const MOCK_QA: Record<string, string> = {
-  'pemegang saham terbesar bbri': '**Pemegang saham terbesar BBRI** adalah **Pemerintah RI / Kementerian BUMN** dengan kepemilikan **53.19%** (217.2 miliar saham). Kepemilikan ini tidak berubah sejak Q3 2024. Pemerintah mempertahankan kendali mayoritas sebagai bagian dari strategi BUMN strategis.\n\n*Sumber: IDX disclosure Q3 2025 · Terakhir diperbarui: 30 Sep 2025*',
-  'foreign ownership bbri': '**Total foreign ownership BBRI: 13.7%** — didominasi oleh BlackRock Inc. (5.84%), Vanguard Group (3.12%), GIC Singapore (1.94%), dan Norges Bank (1.18%). Ada **2 investor asing** yang diduga mengakumulasi tersembunyi (melebihi 1% tanpa laporan resmi). Foreign ownership turun 0.8% dari Q2 ke Q3 2025.\n\n*Catatan: GIC Singapore dan Norges Bank terdeteksi flag tersembunyi.*',
-  'hidden accumulation': '**2 investor terdeteksi akumulasi tersembunyi:**\n1. **GIC Direct Investments** (afiliasi Gov Singapore) — pembelian bertahap melalui beberapa entitas berbeda total +0.44% di Q3 2025\n2. **Norges Bank** — akumulasi +0.31% melalui nominee accounts\n\n*Metode deteksi: crossing 1% reporting threshold berulang kali di bawah limit, multiple custodian accounts, pola pembelian incremental.*',
+const MOCK_QA: Record<string, Record<string, string>> = {
+  BBRI: {
+    'pemegang saham terbesar': 'Pemegang saham terbesar BBRI adalah Pemerintah RI / Kementerian BUMN dengan kepemilikan 53.19% (217.2 miliar saham).',
+    'foreign ownership': 'Total foreign ownership BBRI: 13.7% — BlackRock (5.84%), Vanguard (3.12%), GIC Singapore (1.94%), Norges Bank (1.18%).',
+    'hidden accumulation': '2 investor terdeteksi akumulasi tersembunyi: GIC Singapore (+0.44%) dan Norges Bank (+0.31%).',
+  },
+  BBCA: {
+    'pemegang saham terbesar': 'Pemegang saham terbesar BBCA adalah PT Dwimuria Investama Andalan milik Robert Hartono dengan kepemilikan 54.94%.',
+    'foreign ownership': 'Total foreign ownership BBCA: ~17.2% — BlackRock (6.12%), Vanguard (3.44%), GIC Singapore (1.87%).',
+    'hidden accumulation': '2 investor terdeteksi akumulasi tersembunyi di BBCA: GIC Singapore (+0.38%) dan Norges Bank (+0.22%).',
+  },
+  ANTM: {
+    'pemegang saham terbesar': 'Pemegang saham terbesar ANTM adalah Pemerintah RI melalui MIND ID dengan kepemilikan 65%.',
+    'foreign ownership': 'Total foreign ownership ANTM: ~7% — BlackRock (3.21%), Vanguard (1.84%), Norges Bank (0.98%).',
+    'hidden accumulation': '1 investor terdeteksi akumulasi tersembunyi di ANTM: Norges Bank (+0.67% Q3 2025).',
+  },
+  ASII: {
+    'pemegang saham terbesar': 'Pemegang saham terbesar ASII adalah Jardine Matheson Holdings (Hong Kong) dengan kepemilikan 50.11%.',
+    'foreign ownership': 'Total foreign ownership ASII: ~61% — Jardine (50.11%), BlackRock (4.88%), GIC Singapore (1.74%).',
+    'hidden accumulation': '1 investor terdeteksi akumulasi tersembunyi di ASII: GIC Singapore (+0.29% Q3 2025).',
+  },
 }
 
 function ConglomerateGraph({ nodes, edges }: { nodes: NetworkNode[]; edges: NetworkEdge[] }) {
@@ -163,9 +272,11 @@ function ConglomerateGraph({ nodes, edges }: { nodes: NetworkNode[]; edges: Netw
 }
 
 // ── Main component ─────────────────────────────────────────────────────────────
+const TICKER_TABS = ['BBCA', 'BBRI', 'ANTM', 'ASII'] as const
+type TickerTab = typeof TICKER_TABS[number]
+
 export default function OwnershipIntelligence() {
-  const [ticker, setTicker] = useState('BBRI')
-  const [inputTicker, setInputTicker] = useState('BBRI')
+  const [ticker, setTicker] = useState<TickerTab>('BBRI')
   const [originFilter, setOriginFilter] = useState<'ALL' | 'LOCAL' | 'FOREIGN'>('ALL')
   const [typeFilter, setTypeFilter] = useState<'ALL' | 'CP' | 'ID' | 'IB' | 'MF' | 'FRG'>('ALL')
   const [showGraph, setShowGraph] = useState(false)
@@ -175,25 +286,31 @@ export default function OwnershipIntelligence() {
   const [sortKey, setSortKey] = useState<'pct' | 'change'>('pct')
   const [sortDir, setSortDir] = useState<'desc' | 'asc'>('desc')
 
+  const currentData    = OWNERSHIP_DATA[ticker] ?? []
+  const currentNetwork = NETWORK_DATA[ticker]   ?? { nodes: [], edges: [] }
+  const currentQA      = MOCK_QA[ticker]        ?? {}
+
   const handleQA = useCallback(async () => {
     if (!qaInput.trim()) return
     setQaLoading(true)
     setQaAnswer('')
-    // Simulate API delay
-    await new Promise(r => setTimeout(r, 1200))
-    const key = qaInput.toLowerCase().replace(/[^a-z0-9\s]/g,'').trim()
-    const found = Object.entries(MOCK_QA).find(([k]) => key.includes(k) || k.includes(key.split(' ')[0]))
-    setQaAnswer(found ? found[1] : `Tidak ditemukan data untuk "${qaInput}". Coba: "pemegang saham terbesar BBRI", "foreign ownership BBRI", atau "hidden accumulation".`)
+    await new Promise(r => setTimeout(r, 800))
+    const key = qaInput.toLowerCase()
+    const found = Object.entries(currentQA).find(([k]) => key.includes(k))
+    setQaAnswer(found
+      ? found[1]
+      : `Data tidak ditemukan. Coba: "pemegang saham terbesar", "foreign ownership", atau "hidden accumulation".`
+    )
     setQaLoading(false)
-  }, [qaInput])
+  }, [qaInput, currentQA])
 
-  const filtered = MOCK_OWNERSHIP
+  const filtered = currentData
     .filter(inv => {
       if (originFilter !== 'ALL' && inv.origin !== originFilter) return false
       if (typeFilter !== 'ALL' && inv.type !== typeFilter) return false
       return true
     })
-    .sort((a,b) => {
+    .sort((a, b) => {
       const mul = sortDir === 'desc' ? -1 : 1
       return (a[sortKey] - b[sortKey]) * mul
     })
@@ -226,28 +343,21 @@ export default function OwnershipIntelligence() {
           </span>
         </div>
 
-        {/* Ticker search */}
-        <div style={{ display:'flex', gap:6 }}>
-          <input
-            value={inputTicker}
-            onChange={e => setInputTicker(e.target.value.toUpperCase())}
-            onKeyDown={e => e.key === 'Enter' && setTicker(inputTicker)}
-            placeholder="BBRI"
-            style={{
-              background:'#0a1020', border:'1px solid #162035',
-              borderRadius:6, padding:'5px 10px',
-              fontFamily:'JetBrains Mono,monospace', fontSize:12,
-              color:'#00c3ff', width:80, outline:'none',
-            }}
-          />
-          <button onClick={() => setTicker(inputTicker)} style={{
-            background:'#00c3ff20', border:'1px solid #00c3ff',
-            borderRadius:6, padding:'5px 12px',
-            fontFamily:'Space Mono,monospace', fontSize:10,
-            color:'#00c3ff', cursor:'pointer', letterSpacing:1,
-          }}>
-            LOAD
-          </button>
+        {/* 4-tab ticker switcher */}
+        <div style={{ display:'flex', gap:4 }}>
+          {TICKER_TABS.map(t => (
+            <button key={t} onClick={() => { setTicker(t); setQaAnswer('') }}
+              style={{
+                padding:'4px 12px', fontFamily:'Space Mono,monospace', fontSize:9,
+                letterSpacing:1, cursor:'pointer', borderRadius:4,
+                background: ticker === t ? '#00c3ff20' : 'transparent',
+                border: `1px solid ${ticker === t ? '#00c3ff' : '#162035'}`,
+                color: ticker === t ? '#00c3ff' : '#4a6080',
+                transition:'all 0.15s',
+              }}>
+              {t}
+            </button>
+          ))}
         </div>
       </div>
 
@@ -458,7 +568,7 @@ export default function OwnershipIntelligence() {
             </button>
           </div>
           {showGraph
-            ? <ConglomerateGraph nodes={NETWORK_NODES} edges={NETWORK_EDGES} />
+            ? <ConglomerateGraph nodes={currentNetwork.nodes} edges={currentNetwork.edges} />
             : (
               <div style={{
                 height:160, display:'flex', alignItems:'center', justifyContent:'center',
@@ -485,7 +595,7 @@ export default function OwnershipIntelligence() {
             value={qaInput}
             onChange={e => setQaInput(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && handleQA()}
-            placeholder="Siapa pemegang saham terbesar BBRI?"
+            placeholder={`Tanya tentang ${ticker}...`}
             style={{
               flex:1, background:'#04070f', border:'1px solid #162035',
               borderRadius:6, padding:'8px 12px',
@@ -508,7 +618,7 @@ export default function OwnershipIntelligence() {
 
         {/* Quick suggestions */}
         <div style={{ display:'flex', gap:4, flexWrap:'wrap', marginBottom:10 }}>
-          {['pemegang saham terbesar BBRI', 'foreign ownership BBRI', 'hidden accumulation'].map(s => (
+          {['pemegang saham terbesar', 'foreign ownership', 'hidden accumulation'].map(s => (
             <button key={s} onClick={() => { setQaInput(s); }} style={{
               background:'#162035', border:'1px solid #1e2f4a',
               borderRadius:12, padding:'3px 10px',
