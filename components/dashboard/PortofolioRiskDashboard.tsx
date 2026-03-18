@@ -28,30 +28,31 @@ const SECTOR_COLORS: Record<string, string> = {
   'Mining':        '#ff0062',
   'Infrastructure':'#8aa0b8',
   'Crypto':        '#00ffcc',
+  'Commodity':     '#ffd700',
+  'Forex':         '#39ff14',
 }
 
 const DEFAULT_PORTFOLIO: Position[] = [
-  { symbol:'BBCA', sector:'Banking',    value:25000000, pct:25.0, signal:'CONWAY BUY' },
-  { symbol:'BBRI', sector:'Banking',    value:20000000, pct:20.0, signal:undefined },
-  { symbol:'TLKM', sector:'Telco',      value:15000000, pct:15.0, signal:undefined },
-  { symbol:'ANTM', sector:'Mining',     value:12000000, pct:12.0, signal:'DOOM SELL' },
-  { symbol:'GOTO', sector:'Technology', value:10000000, pct:10.0, signal:undefined },
-  { symbol:'ASII', sector:'Consumer',   value:8000000,  pct:8.0,  signal:'GOLD BUY' },
-  { symbol:'ADRO', sector:'Energy',     value:6000000,  pct:6.0,  signal:undefined },
-  { symbol:'SMGR', sector:'Property',   value:4000000,  pct:4.0,  signal:undefined },
+  { symbol:'BBCA',    sector:'Banking',    value:25000000, pct:25.0, signal:'CONWAY BUY' },
+  { symbol:'BBRI',    sector:'Banking',    value:20000000, pct:20.0, signal:undefined    },
+  { symbol:'BTCUSDT', sector:'Crypto',     value:15000000, pct:15.0, signal:undefined    },
+  { symbol:'ANTM',    sector:'Mining',     value:12000000, pct:12.0, signal:undefined    },
+  { symbol:'XAUUSD',  sector:'Commodity',  value:10000000, pct:10.0, signal:'GOLD BUY'  },
+  { symbol:'ASII',    sector:'Consumer',   value:8000000,  pct:8.0,  signal:undefined    },
+  { symbol:'NVDA',    sector:'Technology', value:6000000,  pct:6.0,  signal:'CONWAY BUY' },
+  { symbol:'EURUSD',  sector:'Forex',      value:4000000,  pct:4.0,  signal:undefined    },
 ]
 
-// Fake correlation matrix
-const SYMBOLS = ['BBCA','BBRI','TLKM','ANTM','GOTO','ASII','ADRO','SMGR']
+const SYMBOLS = ['BBCA','BBRI','BTCUSDT','ANTM','XAUUSD','ASII','NVDA','EURUSD']
 const CORR_MATRIX: Record<string, Record<string, number>> = {
-  BBCA: { BBCA:1.00, BBRI:0.87, TLKM:0.34, ANTM:-0.12, GOTO:0.28, ASII:0.45, ADRO:-0.08, SMGR:0.31 },
-  BBRI: { BBCA:0.87, BBRI:1.00, TLKM:0.29, ANTM:-0.15, GOTO:0.22, ASII:0.41, ADRO:-0.11, SMGR:0.28 },
-  TLKM: { BBCA:0.34, BBRI:0.29, TLKM:1.00, ANTM:0.08,  GOTO:0.51, ASII:0.39, ADRO:0.12,  SMGR:0.44 },
-  ANTM: { BBCA:-0.12,BBRI:-0.15,TLKM:0.08, ANTM:1.00,  GOTO:-0.04,ASII:0.19, ADRO:0.72,  SMGR:0.15 },
-  GOTO: { BBCA:0.28, BBRI:0.22, TLKM:0.51, ANTM:-0.04, GOTO:1.00, ASII:0.33, ADRO:-0.06, SMGR:0.22 },
-  ASII: { BBCA:0.45, BBRI:0.41, TLKM:0.39, ANTM:0.19,  GOTO:0.33, ASII:1.00, ADRO:0.24,  SMGR:0.58 },
-  ADRO: { BBCA:-0.08,BBRI:-0.11,TLKM:0.12, ANTM:0.72,  GOTO:-0.06,ASII:0.24, ADRO:1.00,  SMGR:0.19 },
-  SMGR: { BBCA:0.31, BBRI:0.28, TLKM:0.44, ANTM:0.15,  GOTO:0.22, ASII:0.58, ADRO:0.19,  SMGR:1.00 },
+  BBCA:    { BBCA:1.00, BBRI:0.87, BTCUSDT:0.12, ANTM:-0.12, XAUUSD:0.08,  ASII:0.45,  NVDA:0.21,  EURUSD:0.05  },
+  BBRI:    { BBCA:0.87, BBRI:1.00, BTCUSDT:0.09, ANTM:-0.15, XAUUSD:0.06,  ASII:0.41,  NVDA:0.18,  EURUSD:0.03  },
+  BTCUSDT: { BBCA:0.12, BBRI:0.09, BTCUSDT:1.00, ANTM:0.34,  XAUUSD:0.41,  ASII:0.08,  NVDA:0.62,  EURUSD:0.18  },
+  ANTM:    { BBCA:-0.12,BBRI:-0.15,BTCUSDT:0.34, ANTM:1.00,  XAUUSD:0.58,  ASII:0.19,  NVDA:0.14,  EURUSD:-0.04 },
+  XAUUSD:  { BBCA:0.08, BBRI:0.06, BTCUSDT:0.41, ANTM:0.58,  XAUUSD:1.00,  ASII:0.11,  NVDA:0.09,  EURUSD:0.31  },
+  ASII:    { BBCA:0.45, BBRI:0.41, BTCUSDT:0.08, ANTM:0.19,  XAUUSD:0.11,  ASII:1.00,  NVDA:0.28,  EURUSD:0.07  },
+  NVDA:    { BBCA:0.21, BBRI:0.18, BTCUSDT:0.62, ANTM:0.14,  XAUUSD:0.09,  ASII:0.28,  NVDA:1.00,  EURUSD:0.14  },
+  EURUSD:  { BBCA:0.05, BBRI:0.03, BTCUSDT:0.18, ANTM:-0.04, XAUUSD:0.31,  ASII:0.07,  NVDA:0.14,  EURUSD:1.00  },
 }
 
 function corrColor(v: number) {
@@ -143,7 +144,7 @@ export default function PortfolioRiskDashboard() {
   const suggestions = [
     positions.some(p => p.sector === 'Banking' && p.pct > 30) && '⚠ Banking overweight >30% — consider trimming BBRI',
     positions.some(p => p.signal === 'DOOM SELL') && '🛑 ANTM DOOM SELL active — reduce or hedge exposure',
-    riskScore > 50 && '📊 Portfolio risk elevated — diversify into low-corr assets (GOTO, SMGR)',
+    riskScore > 50 && '📊 Portfolio risk elevated — diversify into low-corr assets (XAUUSD, EURUSD)',
     '✅ BBCA CONWAY BUY — consider adding to banking core position',
   ].filter(Boolean) as string[]
 
