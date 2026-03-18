@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState, useCallback } from 'react'
-import { useWS, SignalPayload } from './WebSocketProvider'
+import { useWS, type SignalPayload } from './WebSocketProvider'
 
 declare global {
   interface Window { LightweightCharts: any }
