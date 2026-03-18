@@ -132,13 +132,8 @@ function makeMockSignal(overrides: Partial<SignalPayload> = {}): SignalPayload {
   }
 }
 
-const INITIAL_SIGNALS: SignalPayload[] = [
-  makeMockSignal({ alert_type: 'CONWAY_BUY',   ticker: 'BTCUSDT', cells: 6, fusion: 19, tier: 'A' }),
-  makeMockSignal({ alert_type: 'GOLD_BUY',      ticker: 'BBCA',   cells: 7, fusion: 21, tier: 'A' }),
-  makeMockSignal({ alert_type: 'LH_EXIT',       ticker: 'ANTM',   cells: 3, fusion:  8, tier: 'C', atr: 0, sl_price: 0, tp_price: 0 }),
-  makeMockSignal({ alert_type: 'BBP_ENTRY_BUY', ticker: 'SOLUSDT',cells: 5, fusion: 14, tier: 'B' }),
-  makeMockSignal({ alert_type: 'CONWAY_BORN',   ticker: 'XAUUSD', cells: 6, fusion: 20, tier: 'S' }),
-]
+// Empty initial signals — populated in useEffect (client-only) to avoid hydration mismatch
+const INITIAL_SIGNALS: SignalPayload[] = []
 
 // ─── Provider ─────────────────────────────────────────────────
 export function WebSocketProvider({ children }: { children: React.ReactNode }) {
@@ -227,7 +222,18 @@ export function WebSocketProvider({ children }: { children: React.ReactNode }) {
     mounted.current = true
 
     if (DEV_MODE) {
-      // DEV: simulate connected + periodic mock signals
+      // Populate initial mock signals client-side only (avoids hydration mismatch)
+      const initSignals: SignalPayload[] = [
+        makeMockSignal({ alert_type: 'CONWAY_BUY',   ticker: 'BTCUSDT', cells: 6, fusion: 19, tier: 'A' }),
+        makeMockSignal({ alert_type: 'GOLD_BUY',      ticker: 'BBCA',   cells: 7, fusion: 21, tier: 'A' }),
+        makeMockSignal({ alert_type: 'LH_EXIT',       ticker: 'ANTM',   cells: 3, fusion:  8, tier: 'C', atr: 0, sl_price: 0, tp_price: 0 }),
+        makeMockSignal({ alert_type: 'BBP_ENTRY_BUY', ticker: 'SOLUSDT',cells: 5, fusion: 14, tier: 'B' }),
+        makeMockSignal({ alert_type: 'CONWAY_BORN',   ticker: 'XAUUSD', cells: 6, fusion: 20, tier: 'S' }),
+      ]
+      setSignals(initSignals)
+      initSignals.forEach(s => handleSignal(s))
+
+      // Simulate connected + periodic mock signals
       setStatus('connected')
       const interval = setInterval(() => {
         if (Math.random() > 0.6) handleSignal(makeMockSignal())
