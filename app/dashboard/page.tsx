@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
-import { WebSocketProvider, useWS } from '../../components/dashboard/WebSocketProvider'
-import LiveTickerTape from '../../components/dashboard/LiveTickerTape'
-import LayoutSwitcher from '../../components/dashboard/LayoutSwitcher'
+import { WebSocketProvider, useWS } from '@/components/dashboard/WebSocketProvider'
+import LiveTickerTape from '@/components/dashboard/LiveTickerTape'
+import LayoutSwitcher from '@/components/dashboard/LayoutSwitcher'
 
 // ── Global style constants ─────────────────────────────────────────────────────
 const BG_MAIN  = '#04070f'
