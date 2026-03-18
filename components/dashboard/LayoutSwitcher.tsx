@@ -7,10 +7,12 @@ import SignalExplanation from './SignalExplanation'
 import PortfolioRiskDashboard from './PortfolioRiskDashboard'
 import { SentimentAnalyzer, BacktestSimulator } from './SentimentAndBacktest'
 import WorldIndices from './WorldIndices'
+import TradeLog from './TradeLog'
+import AffiliateTools from './AffiliateTools'
 
 const TradingViewChart = dynamic(() => import('./TradingViewChart'), { ssr: false })
 
-export type LayoutType = 'quick' | 'portfolio' | 'signal' | 'minimal'
+export type LayoutType = 'quick' | 'portfolio' | 'signal' | 'journal' | 'minimal'
 
 interface LayoutMeta {
   key: LayoutType
@@ -24,7 +26,8 @@ const LAYOUTS: LayoutMeta[] = [
   { key:'quick',     label:'Quick Glance',     icon:'⚡', desc:'Overview + chart + top signals',         color:'#00c3ff' },
   { key:'portfolio', label:'Portfolio First',  icon:'◈',  desc:'Portfolio risk + ownership + signals',   color:'#ffd700' },
   { key:'signal',    label:'Signal Deep Dive', icon:'🔱', desc:'Full signal breakdown + backtest',        color:'#bd93f9' },
-  { key:'minimal',   label:'Minimal Mobile',   icon:'◯',  desc:'Clean mobile-optimized view',            color:'#39ff14' },
+  { key:'journal',   label:'Trade Journal',    icon:'📋', desc:'Full trade log + P&L history',           color:'#39ff14' },
+  { key:'minimal',   label:'Minimal Mobile',   icon:'◯',  desc:'Clean mobile-optimized view',            color:'#ff8c00' },
 ]
 
 // ── Shared panel wrapper ──────────────────────────────────────────────────────
@@ -54,7 +57,7 @@ function QuickGlanceLayout() {
       {/* Chart (full width) */}
       <TradingViewChart height={380} />
 
-      {/* 2-col: Signals + Sentiment */}
+      {/* 2-col: Signals + Sentiment + Tools */}
       <div style={{ display:'grid', gridTemplateColumns:'3fr 2fr', gap:16 }}>
         <Panel>
           <SignalExplanation />
@@ -62,6 +65,9 @@ function QuickGlanceLayout() {
         <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
           <Panel>
             <SentimentAnalyzer />
+          </Panel>
+          <Panel>
+            <AffiliateTools />
           </Panel>
         </div>
       </div>
@@ -122,7 +128,18 @@ function SignalDeepDiveLayout() {
   )
 }
 
-// ── Layout 4: Minimal Mobile ──────────────────────────────────────────────────
+// ── Layout 4: Trade Journal ───────────────────────────────────────────────────
+function TradeJournalLayout() {
+  return (
+    <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
+      <Panel>
+        <TradeLog />
+      </Panel>
+    </div>
+  )
+}
+
+// ── Layout 5: Minimal Mobile ──────────────────────────────────────────────────
 function MinimalMobileLayout() {
   const [activeSection, setActiveSection] = useState<'signals' | 'chart' | 'portfolio' | 'indices'>('signals')
   const TABS = [
@@ -233,6 +250,7 @@ export default function LayoutSwitcher() {
         {active === 'quick'     && <QuickGlanceLayout />}
         {active === 'portfolio' && <PortfolioFirstLayout />}
         {active === 'signal'    && <SignalDeepDiveLayout />}
+        {active === 'journal'   && <TradeJournalLayout />}
         {active === 'minimal'   && <MinimalMobileLayout />}
       </div>
 
