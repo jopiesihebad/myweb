@@ -65,7 +65,7 @@ export default function TradingViewChart({
   const chartRef = useRef<any>(null)
   const candleSeriesRef = useRef<any>(null)
   const markerSyncRef = useRef<any[]>([])
-  const { signals, tickers } = useWS()
+  const { signals, assetStates } = useWS()
 
   const [symbol, setSymbol] = useState(propSymbol || 'BTCUSDT')
   const [tf, setTf] = useState('60')
@@ -211,22 +211,23 @@ export default function TradingViewChart({
   // Live price update via WebSocket
   useEffect(() => {
     if (!candleSeriesRef.current) return
-    const ticker = tickers.find(t => t.symbol === symbol)
-    if (!ticker) return
+    const state = assetStates[symbol]
+    if (!state?.lastClose) return
     const now = Math.floor(Date.now() / 1000)
+    const price = state.lastClose
     try {
       candleSeriesRef.current.update({
-        time: now,
-        open: ticker.price * (1 - Math.random() * 0.001),
-        high: ticker.price * (1 + Math.random() * 0.002),
-        low:  ticker.price * (1 - Math.random() * 0.002),
-        close: ticker.price,
+        time:  now,
+        open:  price * (1 - 0.0005),
+        high:  price * (1 + 0.001),
+        low:   price * (1 - 0.001),
+        close: price,
       })
     } catch {}
-  }, [tickers, symbol])
+  }, [assetStates, symbol])
 
-  const currentPrice = tickers.find(t => t.symbol === symbol)?.price
-  const currentChange = tickers.find(t => t.symbol === symbol)?.changePct
+  const currentPrice  = assetStates[symbol]?.lastClose ?? null
+  const currentChange = null  // changePct not tracked in assetStates
 
   return (
     <div style={{ background:'#04070f', borderRadius:10, overflow:'hidden', border:'1px solid #162035' }}>
