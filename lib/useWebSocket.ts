@@ -1,132 +1,200 @@
-'use client'
+// ─────────────────────────────────────────────────────────────
+//  lib/assetRegistry.ts  —  SS BlackBox Asset Registry
+//  PINE_ASSETS  : 24 locked assets (3 TradingView tabs)
+//  DASHBOARD_ASSETS : expanded registry per asset class
+//  ASSET_REGISTRY   : full combined registry
+// ─────────────────────────────────────────────────────────────
 
-import { useEffect, useRef, useCallback, useState } from 'react'
+export type AssetClass = 'CRYPTO' | 'FOREX' | 'COMMODITY' | 'IDX' | 'USA'
 
-export type SignalPayload = {
-  ticker:       string
-  close:        number
-  confluence:   number
-  grade:        number
-  cells:        number
-  session:      string
-  filter_mode:  string
-  atr:          number
-  sl_price:     number
-  tp_price:     number
-  timestamp:    string
-  alert_type:   AlertType
-  message:      string
+export type Asset = {
+  ticker:    string          // canonical ticker (e.g. "BTCUSDT", "BBCA")
+  name:      string          // display name
+  assetClass: AssetClass
+  exchange:  string          // exchange prefix for TradingView (e.g. "BINANCE", "IDX")
+  precision: number          // decimal places for price display
+  priceFmt:  'crypto' | 'forex' | 'stock' | 'commodity'
 }
 
-export type AlertType =
-  | 'GOLD_BUY'        | 'DOOM_SELL'        | 'CONWAY_BUY'     | 'CONWAY_SELL'
-  | 'CONWAY_BORN'     | 'CONWAY_DIED'      | 'PM_BUY'         | 'PM_SELL'
-  | 'BULLISH_LIQ_GRAB'| 'BEARISH_LIQ_GRAB'| 'BREAKOUT'       | 'SQZ_RELEASED'
-  | 'PREDATOR_HFT'    | 'ALPHA_EXIT'       | 'DIVERGENCE_RISK'| 'HIGH_CONFLUENCE'
-  | 'CHoCH_BULL'      | 'CHoCH_BEAR'       | 'BOS_BULL'       | 'BOS_BEAR'
-  | 'OB_TOUCH_BULL'   | 'OB_TOUCH_BEAR'   | 'BBP_ENTRY_BUY'  | 'BBP_ENTRY_SELL'
-  | 'LH_EXIT'
+// ─── PINE SCRIPT TABS (LOCKED — DO NOT CHANGE) ───────────────
+// Tab 1: Crypto + Commodity (8 assets)
+// Tab 2: Forex + IDX        (8 assets)
+// Tab 3: USA Stocks         (8 assets)
 
-export type WsStatus = 'connecting' | 'connected' | 'disconnected' | 'error'
+export const PINE_ASSETS: Asset[] = [
+  // TAB 1 — CRYPTO + COMMODITY
+  { ticker: 'BTCUSDT',  name: 'Bitcoin',        assetClass: 'CRYPTO',    exchange: 'BINANCE', precision: 2,  priceFmt: 'crypto'    },
+  { ticker: 'ETHUSDT',  name: 'Ethereum',        assetClass: 'CRYPTO',    exchange: 'BINANCE', precision: 2,  priceFmt: 'crypto'    },
+  { ticker: 'SOLUSDT',  name: 'Solana',          assetClass: 'CRYPTO',    exchange: 'BINANCE', precision: 2,  priceFmt: 'crypto'    },
+  { ticker: 'BNBUSDT',  name: 'BNB',             assetClass: 'CRYPTO',    exchange: 'BINANCE', precision: 2,  priceFmt: 'crypto'    },
+  { ticker: 'XAUUSD',   name: 'Gold',            assetClass: 'COMMODITY', exchange: 'OANDA',   precision: 2,  priceFmt: 'commodity' },
+  { ticker: 'WTIUSD',   name: 'WTI Crude Oil',   assetClass: 'COMMODITY', exchange: 'OANDA',   precision: 2,  priceFmt: 'commodity' },
+  { ticker: 'XAGUSD',   name: 'Silver',          assetClass: 'COMMODITY', exchange: 'OANDA',   precision: 4,  priceFmt: 'commodity' },
+  { ticker: 'XCUUSD',   name: 'Copper',          assetClass: 'COMMODITY', exchange: 'OANDA',   precision: 4,  priceFmt: 'commodity' },
+  // TAB 2 — FOREX + IDX
+  { ticker: 'EURUSD',   name: 'Euro / USD',      assetClass: 'FOREX',     exchange: 'OANDA',   precision: 5,  priceFmt: 'forex'     },
+  { ticker: 'GBPUSD',   name: 'GBP / USD',       assetClass: 'FOREX',     exchange: 'OANDA',   precision: 5,  priceFmt: 'forex'     },
+  { ticker: 'USDJPY',   name: 'USD / JPY',        assetClass: 'FOREX',     exchange: 'OANDA',   precision: 3,  priceFmt: 'forex'     },
+  { ticker: 'AUDUSD',   name: 'AUD / USD',        assetClass: 'FOREX',     exchange: 'OANDA',   precision: 5,  priceFmt: 'forex'     },
+  { ticker: 'BBCA',     name: 'Bank BCA',         assetClass: 'IDX',       exchange: 'IDX',     precision: 0,  priceFmt: 'stock'     },
+  { ticker: 'BBRI',     name: 'Bank BRI',         assetClass: 'IDX',       exchange: 'IDX',     precision: 0,  priceFmt: 'stock'     },
+  { ticker: 'ANTM',     name: 'Aneka Tambang',    assetClass: 'IDX',       exchange: 'IDX',     precision: 0,  priceFmt: 'stock'     },
+  { ticker: 'ASII',     name: 'Astra International', assetClass: 'IDX',   exchange: 'IDX',     precision: 0,  priceFmt: 'stock'     },
+  // TAB 3 — USA
+  { ticker: 'NVDA',     name: 'NVIDIA',           assetClass: 'USA',       exchange: 'NASDAQ',  precision: 2,  priceFmt: 'stock'     },
+  { ticker: 'SPY',      name: 'S&P 500 ETF',      assetClass: 'USA',       exchange: 'AMEX',    precision: 2,  priceFmt: 'stock'     },
+  { ticker: 'AAPL',     name: 'Apple',            assetClass: 'USA',       exchange: 'NASDAQ',  precision: 2,  priceFmt: 'stock'     },
+  { ticker: 'TSLA',     name: 'Tesla',            assetClass: 'USA',       exchange: 'NASDAQ',  precision: 2,  priceFmt: 'stock'     },
+  { ticker: 'META',     name: 'Meta Platforms',   assetClass: 'USA',       exchange: 'NASDAQ',  precision: 2,  priceFmt: 'stock'     },
+  { ticker: 'MSFT',     name: 'Microsoft',        assetClass: 'USA',       exchange: 'NASDAQ',  precision: 2,  priceFmt: 'stock'     },
+  { ticker: 'QQQ',      name: 'Nasdaq 100 ETF',   assetClass: 'USA',       exchange: 'NASDAQ',  precision: 2,  priceFmt: 'stock'     },
+  { ticker: 'AMD',      name: 'AMD',              assetClass: 'USA',       exchange: 'NASDAQ',  precision: 2,  priceFmt: 'stock'     },
+]
 
-interface UseWebSocketOptions {
-  onSignal?: (payload: SignalPayload) => void
-  reconnectDelay?: number
+// ─── DASHBOARD EXPANDED ASSETS (per class) ───────────────────
+
+const IDX_ASSETS: Asset[] = [
+  { ticker: 'BBCA',  name: 'Bank BCA',             assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'BBRI',  name: 'Bank BRI',             assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'BMRI',  name: 'Bank Mandiri',          assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'BBNI',  name: 'Bank BNI',             assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'BBTN',  name: 'Bank BTN',             assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'BRIS',  name: 'Bank BSI',             assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'ANTM',  name: 'Aneka Tambang',         assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'PTBA',  name: 'Bukit Asam',           assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'INCO',  name: 'Vale Indonesia',        assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'ADRO',  name: 'Adaro Energy',          assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'HRUM',  name: 'Harum Energy',          assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'ITMG',  name: 'Indo Tambangraya',      assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'MDKA',  name: 'Merdeka Copper Gold',   assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'AMMN',  name: 'Amman Mineral',         assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'ASII',  name: 'Astra International',   assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'ICBP',  name: 'Indofood CBP',          assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'INDF',  name: 'Indofood',              assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'UNVR',  name: 'Unilever Indonesia',    assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'KLBF',  name: 'Kalbe Farma',           assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'CPIN',  name: 'Charoen Pokphand',      assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'MAPI',  name: 'Mitra Adiperkasa',      assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'UNTR',  name: 'United Tractors',       assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'TLKM',  name: 'Telkom Indonesia',      assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'EXCL',  name: 'XL Axiata',             assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'TOWR',  name: 'Sarana Menara',         assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'BREN',  name: 'Barito Renewables',     assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'TPIA',  name: 'Chandra Asri',          assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'PGAS',  name: 'Perusahaan Gas Negara', assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'ARTO',  name: 'Bank Jago',             assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+  { ticker: 'GOTO',  name: 'GoTo Gojek Tokopedia',  assetClass: 'IDX', exchange: 'IDX', precision: 0, priceFmt: 'stock' },
+]
+
+const USA_ASSETS: Asset[] = [
+  { ticker: 'NVDA',  name: 'NVIDIA',            assetClass: 'USA', exchange: 'NASDAQ', precision: 2, priceFmt: 'stock' },
+  { ticker: 'AAPL',  name: 'Apple',             assetClass: 'USA', exchange: 'NASDAQ', precision: 2, priceFmt: 'stock' },
+  { ticker: 'TSLA',  name: 'Tesla',             assetClass: 'USA', exchange: 'NASDAQ', precision: 2, priceFmt: 'stock' },
+  { ticker: 'MSFT',  name: 'Microsoft',         assetClass: 'USA', exchange: 'NASDAQ', precision: 2, priceFmt: 'stock' },
+  { ticker: 'AMZN',  name: 'Amazon',            assetClass: 'USA', exchange: 'NASDAQ', precision: 2, priceFmt: 'stock' },
+  { ticker: 'META',  name: 'Meta Platforms',    assetClass: 'USA', exchange: 'NASDAQ', precision: 2, priceFmt: 'stock' },
+  { ticker: 'GOOGL', name: 'Alphabet',          assetClass: 'USA', exchange: 'NASDAQ', precision: 2, priceFmt: 'stock' },
+  { ticker: 'AMD',   name: 'AMD',               assetClass: 'USA', exchange: 'NASDAQ', precision: 2, priceFmt: 'stock' },
+  { ticker: 'SPY',   name: 'S&P 500 ETF',       assetClass: 'USA', exchange: 'AMEX',   precision: 2, priceFmt: 'stock' },
+  { ticker: 'QQQ',   name: 'Nasdaq 100 ETF',    assetClass: 'USA', exchange: 'NASDAQ', precision: 2, priceFmt: 'stock' },
+  { ticker: 'IWM',   name: 'Russell 2000 ETF',  assetClass: 'USA', exchange: 'AMEX',   precision: 2, priceFmt: 'stock' },
+  { ticker: 'JPM',   name: 'JPMorgan Chase',    assetClass: 'USA', exchange: 'NYSE',   precision: 2, priceFmt: 'stock' },
+  { ticker: 'COIN',  name: 'Coinbase',          assetClass: 'USA', exchange: 'NASDAQ', precision: 2, priceFmt: 'stock' },
+  { ticker: 'PLTR',  name: 'Palantir',          assetClass: 'USA', exchange: 'NASDAQ', precision: 2, priceFmt: 'stock' },
+  { ticker: 'NFLX',  name: 'Netflix',           assetClass: 'USA', exchange: 'NASDAQ', precision: 2, priceFmt: 'stock' },
+  { ticker: 'AVGO',  name: 'Broadcom',          assetClass: 'USA', exchange: 'NASDAQ', precision: 2, priceFmt: 'stock' },
+  { ticker: 'TSM',   name: 'TSMC',              assetClass: 'USA', exchange: 'NYSE',   precision: 2, priceFmt: 'stock' },
+  { ticker: 'INTC',  name: 'Intel',             assetClass: 'USA', exchange: 'NASDAQ', precision: 2, priceFmt: 'stock' },
+]
+
+const CRYPTO_ASSETS: Asset[] = [
+  { ticker: 'BTCUSDT',  name: 'Bitcoin',      assetClass: 'CRYPTO', exchange: 'BINANCE', precision: 2, priceFmt: 'crypto' },
+  { ticker: 'ETHUSDT',  name: 'Ethereum',     assetClass: 'CRYPTO', exchange: 'BINANCE', precision: 2, priceFmt: 'crypto' },
+  { ticker: 'XRPUSDT',  name: 'XRP',          assetClass: 'CRYPTO', exchange: 'BINANCE', precision: 4, priceFmt: 'crypto' },
+  { ticker: 'SOLUSDT',  name: 'Solana',       assetClass: 'CRYPTO', exchange: 'BINANCE', precision: 2, priceFmt: 'crypto' },
+  { ticker: 'BNBUSDT',  name: 'BNB',          assetClass: 'CRYPTO', exchange: 'BINANCE', precision: 2, priceFmt: 'crypto' },
+  { ticker: 'DOGEUSDT', name: 'Dogecoin',     assetClass: 'CRYPTO', exchange: 'BINANCE', precision: 5, priceFmt: 'crypto' },
+  { ticker: 'ADAUSDT',  name: 'Cardano',      assetClass: 'CRYPTO', exchange: 'BINANCE', precision: 4, priceFmt: 'crypto' },
+  { ticker: 'AVAXUSDT', name: 'Avalanche',    assetClass: 'CRYPTO', exchange: 'BINANCE', precision: 2, priceFmt: 'crypto' },
+  { ticker: 'LINKUSDT', name: 'Chainlink',    assetClass: 'CRYPTO', exchange: 'BINANCE', precision: 3, priceFmt: 'crypto' },
+  { ticker: 'DOTUSDT',  name: 'Polkadot',     assetClass: 'CRYPTO', exchange: 'BINANCE', precision: 3, priceFmt: 'crypto' },
+  { ticker: 'LTCUSDT',  name: 'Litecoin',     assetClass: 'CRYPTO', exchange: 'BINANCE', precision: 2, priceFmt: 'crypto' },
+  { ticker: 'NEARUSDT', name: 'NEAR Protocol', assetClass: 'CRYPTO', exchange: 'BINANCE', precision: 3, priceFmt: 'crypto' },
+  { ticker: 'SUIUSDT',  name: 'Sui',          assetClass: 'CRYPTO', exchange: 'BINANCE', precision: 4, priceFmt: 'crypto' },
+  { ticker: 'PEPEUSDT', name: 'Pepe',         assetClass: 'CRYPTO', exchange: 'BINANCE', precision: 8, priceFmt: 'crypto' },
+]
+
+const FOREX_ASSETS: Asset[] = [
+  { ticker: 'EURUSD', name: 'Euro / USD',       assetClass: 'FOREX', exchange: 'OANDA', precision: 5, priceFmt: 'forex' },
+  { ticker: 'USDJPY', name: 'USD / JPY',         assetClass: 'FOREX', exchange: 'OANDA', precision: 3, priceFmt: 'forex' },
+  { ticker: 'GBPUSD', name: 'GBP / USD',         assetClass: 'FOREX', exchange: 'OANDA', precision: 5, priceFmt: 'forex' },
+  { ticker: 'AUDUSD', name: 'AUD / USD',         assetClass: 'FOREX', exchange: 'OANDA', precision: 5, priceFmt: 'forex' },
+  { ticker: 'USDCAD', name: 'USD / CAD',         assetClass: 'FOREX', exchange: 'OANDA', precision: 5, priceFmt: 'forex' },
+  { ticker: 'USDCHF', name: 'USD / CHF',         assetClass: 'FOREX', exchange: 'OANDA', precision: 5, priceFmt: 'forex' },
+  { ticker: 'NZDUSD', name: 'NZD / USD',         assetClass: 'FOREX', exchange: 'OANDA', precision: 5, priceFmt: 'forex' },
+  { ticker: 'EURJPY', name: 'EUR / JPY',         assetClass: 'FOREX', exchange: 'OANDA', precision: 3, priceFmt: 'forex' },
+  { ticker: 'GBPJPY', name: 'GBP / JPY',         assetClass: 'FOREX', exchange: 'OANDA', precision: 3, priceFmt: 'forex' },
+  { ticker: 'EURGBP', name: 'EUR / GBP',         assetClass: 'FOREX', exchange: 'OANDA', precision: 5, priceFmt: 'forex' },
+  { ticker: 'AUDJPY', name: 'AUD / JPY',         assetClass: 'FOREX', exchange: 'OANDA', precision: 3, priceFmt: 'forex' },
+  { ticker: 'USDIDR', name: 'USD / IDR',         assetClass: 'FOREX', exchange: 'OANDA', precision: 2, priceFmt: 'forex' },
+]
+
+const COMMODITY_ASSETS: Asset[] = [
+  { ticker: 'XAUUSD',      name: 'Gold',          assetClass: 'COMMODITY', exchange: 'OANDA', precision: 2, priceFmt: 'commodity' },
+  { ticker: 'XAGUSD',      name: 'Silver',        assetClass: 'COMMODITY', exchange: 'OANDA', precision: 4, priceFmt: 'commodity' },
+  { ticker: 'WTIUSD',      name: 'WTI Crude Oil', assetClass: 'COMMODITY', exchange: 'OANDA', precision: 2, priceFmt: 'commodity' },
+  { ticker: 'BRENTUSD',    name: 'Brent Crude',   assetClass: 'COMMODITY', exchange: 'OANDA', precision: 2, priceFmt: 'commodity' },
+  { ticker: 'NATURALGAS',  name: 'Natural Gas',   assetClass: 'COMMODITY', exchange: 'NYMEX', precision: 3, priceFmt: 'commodity' },
+  { ticker: 'XCUUSD',      name: 'Copper',        assetClass: 'COMMODITY', exchange: 'OANDA', precision: 4, priceFmt: 'commodity' },
+  { ticker: 'XPTUSD',      name: 'Platinum',      assetClass: 'COMMODITY', exchange: 'OANDA', precision: 2, priceFmt: 'commodity' },
+  { ticker: 'NICKELUSD',   name: 'Nickel',        assetClass: 'COMMODITY', exchange: 'LME',   precision: 2, priceFmt: 'commodity' },
+]
+
+// ─── COMBINED REGISTRIES ──────────────────────────────────────
+
+export const DASHBOARD_ASSETS: Record<AssetClass, Asset[]> = {
+  CRYPTO:    CRYPTO_ASSETS,
+  FOREX:     FOREX_ASSETS,
+  COMMODITY: COMMODITY_ASSETS,
+  IDX:       IDX_ASSETS,
+  USA:       USA_ASSETS,
 }
 
-export function useWebSocket({ onSignal, reconnectDelay = 5000 }: UseWebSocketOptions = {}) {
-  const ws       = useRef<WebSocket | null>(null)
-  const timer    = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const mounted  = useRef(true)
-  const [status, setStatus] = useState<WsStatus>('disconnected')
+// Full deduplicated registry (Pine assets + dashboard extras)
+const _allTickers = new Set<string>()
+export const ASSET_REGISTRY: Asset[] = [
+  ...PINE_ASSETS,
+  ...CRYPTO_ASSETS,
+  ...FOREX_ASSETS,
+  ...COMMODITY_ASSETS,
+  ...IDX_ASSETS,
+  ...USA_ASSETS,
+].filter(a => {
+  if (_allTickers.has(a.ticker)) return false
+  _allTickers.add(a.ticker)
+  return true
+})
 
-  const connect = useCallback(() => {
-    const url = process.env.NEXT_PUBLIC_WS_URL
-    if (!url || !mounted.current) return
+// ─── LOOKUP HELPERS ───────────────────────────────────────────
 
-    setStatus('connecting')
-
-    try {
-      ws.current = new WebSocket(url)
-
-      ws.current.onopen = () => {
-        if (!mounted.current) return
-        setStatus('connected')
-        console.log('[WS] Connected to', url)
-      }
-
-      ws.current.onmessage = (event: MessageEvent) => {
-        if (!mounted.current) return
-        try {
-          const payload: SignalPayload = JSON.parse(event.data as string)
-          onSignal?.(payload)
-        } catch {
-          console.warn('[WS] Invalid JSON payload:', event.data)
-        }
-      }
-
-      ws.current.onerror = () => {
-        if (!mounted.current) return
-        setStatus('error')
-      }
-
-      ws.current.onclose = () => {
-        if (!mounted.current) return
-        setStatus('disconnected')
-        console.log(`[WS] Disconnected. Reconnecting in ${reconnectDelay}ms…`)
-        timer.current = setTimeout(connect, reconnectDelay)
-      }
-    } catch (err) {
-      console.error('[WS] Failed to connect:', err)
-      setStatus('error')
-      timer.current = setTimeout(connect, reconnectDelay)
-    }
-  }, [onSignal, reconnectDelay])
-
-  useEffect(() => {
-    mounted.current = true
-    connect()
-    return () => {
-      mounted.current = false
-      if (timer.current) clearTimeout(timer.current)
-      ws.current?.close()
-    }
-  }, [connect])
-
-  const send = useCallback((data: unknown) => {
-    if (ws.current?.readyState === WebSocket.OPEN) {
-      ws.current.send(JSON.stringify(data))
-    }
-  }, [])
-
-  return { status, send }
+export function getAsset(ticker: string): Asset | undefined {
+  return ASSET_REGISTRY.find(a => a.ticker === ticker)
 }
 
-/* ─── Alert type → display helpers ─── */
-export const ALERT_META: Record<AlertType, { label: string; color: string; category: 'ENTRY'|'EXIT'|'INFO' }> = {
-  GOLD_BUY:         { label: '⚡ GOLD BUY',         color: '#ffd700', category: 'ENTRY' },
-  DOOM_SELL:        { label: '⚡ DOOM SELL',         color: '#ff0062', category: 'ENTRY' },
-  CONWAY_BUY:       { label: '⚡ CONWAY BUY',        color: '#39ff14', category: 'ENTRY' },
-  CONWAY_SELL:      { label: '⚡ CONWAY SELL',       color: '#ff0062', category: 'ENTRY' },
-  CONWAY_BORN:      { label: '🟢 CONWAY BORN',       color: '#39ff14', category: 'INFO'  },
-  CONWAY_DIED:      { label: '🔴 CONWAY DIED',       color: '#ff0062', category: 'EXIT'  },
-  PM_BUY:           { label: 'PM BUY',               color: '#00c3ff', category: 'ENTRY' },
-  PM_SELL:          { label: 'PM SELL',              color: '#ff8c00', category: 'ENTRY' },
-  BULLISH_LIQ_GRAB: { label: '💧 LIQ GRAB BULL',    color: '#39ff14', category: 'INFO'  },
-  BEARISH_LIQ_GRAB: { label: '💧 LIQ GRAB BEAR',    color: '#ff0062', category: 'INFO'  },
-  BREAKOUT:         { label: '🚀 BREAKOUT',           color: '#00c3ff', category: 'ENTRY' },
-  SQZ_RELEASED:     { label: '⊕ SQZ RELEASED',      color: '#bd93f9', category: 'INFO'  },
-  PREDATOR_HFT:     { label: '🦈 PREDATOR HFT',      color: '#ff8c00', category: 'INFO'  },
-  ALPHA_EXIT:       { label: '⚠ ALPHA EXIT',         color: '#ff8c00', category: 'EXIT'  },
-  DIVERGENCE_RISK:  { label: '⚠ DIVERGENCE RISK',   color: '#ff8c00', category: 'EXIT'  },
-  HIGH_CONFLUENCE:  { label: '★ HIGH CONFLUENCE',    color: '#ffd700', category: 'INFO'  },
-  CHoCH_BULL:       { label: 'CHoCH BULL',           color: '#39ff14', category: 'INFO'  },
-  CHoCH_BEAR:       { label: 'CHoCH BEAR',           color: '#ff0062', category: 'INFO'  },
-  BOS_BULL:         { label: 'BOS BULL',             color: '#39ff14', category: 'INFO'  },
-  BOS_BEAR:         { label: 'BOS BEAR',             color: '#ff0062', category: 'INFO'  },
-  OB_TOUCH_BULL:    { label: 'OB TOUCH BULL',        color: '#00c3ff', category: 'INFO'  },
-  OB_TOUCH_BEAR:    { label: 'OB TOUCH BEAR',        color: '#ff0062', category: 'INFO'  },
-  BBP_ENTRY_BUY:    { label: 'BBP ENTRY BUY',        color: '#39ff14', category: 'ENTRY' },
-  BBP_ENTRY_SELL:   { label: 'BBP ENTRY SELL',       color: '#ff0062', category: 'ENTRY' },
-  LH_EXIT:          { label: 'LH EXIT',              color: '#bd93f9', category: 'EXIT'  },
+export function getAssetsByClass(cls: AssetClass): Asset[] {
+  return DASHBOARD_ASSETS[cls] ?? []
+}
+
+export function isPineAsset(ticker: string): boolean {
+  return PINE_ASSETS.some(a => a.ticker === ticker)
+}
+
+// Format price according to asset precision
+export function formatPrice(price: number, ticker: string): string {
+  const asset = getAsset(ticker)
+  const precision = asset?.precision ?? 2
+  return price.toLocaleString('en-US', {
+    minimumFractionDigits: precision,
+    maximumFractionDigits: precision,
+  })
 }
