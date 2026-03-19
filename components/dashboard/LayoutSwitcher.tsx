@@ -123,19 +123,10 @@ function PortfolioFirstLayout({
         </Panel>
       </div>
 
-      {/* ── Row 3: Trade Log (left) + Affiliate (right) ── */}
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 300px', gap:16, alignItems:'start' }}>
-
-        {/* Left: Trade Log — P&L history */}
-        <Panel>
-          <TradeLog />
-        </Panel>
-
-        {/* Right: Tools & Brokers */}
-        <Panel style={{ alignSelf:'start' }}>
-          <AffiliateTools />
-        </Panel>
-      </div>
+      {/* ── Row 3: Tools & Brokers ── */}
+      <Panel style={{ alignSelf:'start' }}>
+        <AffiliateTools />
+      </Panel>
 
     </div>
   )
