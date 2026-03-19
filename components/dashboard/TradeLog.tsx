@@ -96,6 +96,33 @@ export default function TradeLog() {
     fetchJournal()
   }, [])
 
+  // Export to CSV
+  const exportCSV = () => {
+    const headers = ['Time','Ticker','Signal','Tier','Entry','SL','TP','Exit','Reason','PnL R','PnL USD','Session']
+    const rows = filtered.map(t => [
+      new Date(t.timestamp).toLocaleString('en-GB'),
+      t.ticker,
+      t.alert_type,
+      t.tier,
+      t.entry,
+      t.sl,
+      t.tp,
+      t.exit_price ?? '—',
+      t.exit_reason,
+      t.pnl_r !== null ? `${t.pnl_r > 0 ? '+' : ''}${t.pnl_r.toFixed(2)}R` : '—',
+      t.pnl_usd !== null ? `${t.pnl_usd > 0 ? '+' : ''}${t.pnl_usd}` : '—',
+      t.session,
+    ])
+    const csv = [headers, ...rows].map(r => r.map(v => `"${v}"`).join(',')).join('\n')
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
+    const url  = URL.createObjectURL(blob)
+    const a    = document.createElement('a')
+    a.href     = url
+    a.download = `stockindexer_trades_${new Date().toISOString().slice(0,10)}.csv`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
   const filtered = trades.filter(t => {
     const tierOk = tierFilter === 'ALL' || t.tier === tierFilter
     const statusOk = statusFilter === 'ALL'
@@ -118,12 +145,20 @@ export default function TradeLog() {
             {loading ? 'SYNCING...' : error ? 'MOCK DATA' : 'LIVE'}
           </span>
         </div>
-        <button
-          onClick={() => window.location.reload()}
-          style={{ fontFamily:'Space Mono,monospace', fontSize:9, color:'#00c3ff', background:'none', border:'1px solid #162035', borderRadius:4, padding:'3px 10px', cursor:'pointer', letterSpacing:1 }}
-        >
-          ↻ REFRESH
-        </button>
+        <div style={{ display:'flex', gap:6 }}>
+          <button
+            onClick={exportCSV}
+            style={{ fontFamily:'Space Mono,monospace', fontSize:9, color:'#39ff14', background:'none', border:'1px solid #39ff1440', borderRadius:4, padding:'3px 10px', cursor:'pointer', letterSpacing:1 }}
+          >
+            ↓ CSV
+          </button>
+          <button
+            onClick={() => window.location.reload()}
+            style={{ fontFamily:'Space Mono,monospace', fontSize:9, color:'#00c3ff', background:'none', border:'1px solid #162035', borderRadius:4, padding:'3px 10px', cursor:'pointer', letterSpacing:1 }}
+          >
+            ↻ REFRESH
+          </button>
+        </div>
       </div>
 
       {/* Summary bar */}
@@ -246,7 +281,7 @@ export default function TradeLog() {
           {filtered.length} of {trades.length} trades · Last updated: {timeAgo(summary.lastUpdated)}
         </span>
         <span style={{ fontFamily:'Space Mono,monospace', fontSize:9, color:'#2a3d58' }}>
-          Source: soul.md via GitHub
+          Source: soul.md via GitHub · {filtered.length} trades in export
         </span>
       </div>
     </div>
