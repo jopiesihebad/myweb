@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts'
 
 interface Position {
@@ -148,12 +148,42 @@ export default function PortfolioRiskDashboard() {
     '✅ BBCA CONWAY BUY — consider adding to banking core position',
   ].filter(Boolean) as string[]
 
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
   const handleUpload = useCallback(() => {
+    fileInputRef.current?.click()
+  }, [])
+
+  const handleFileChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
     setUploading(true)
-    setTimeout(() => {
+
+    const reader = new FileReader()
+    reader.onload = (ev) => {
+      try {
+        const text  = ev.target?.result as string
+        const lines = text.split('\n').filter(l => l.trim())
+        // Expected CSV: Symbol,Sector,Value,Pct
+        const parsed: Position[] = lines.slice(1).map((line, i) => {
+          const [symbol, sector, value, pct] = line.split(',').map(s => s.trim().replace(/"/g,''))
+          return {
+            symbol: symbol || `ASSET${i}`,
+            sector: sector || 'Unknown',
+            value:  parseFloat(value) || 0,
+            pct:    parseFloat(pct)   || 0,
+          }
+        }).filter(p => p.value > 0)
+
+        if (parsed.length > 0) setPositions(parsed)
+      } catch {
+        // Keep default if parse fails
+      }
       setUploading(false)
-      // In production: parse CSV, update positions
-    }, 1500)
+      // Reset input so same file can be uploaded again
+      if (fileInputRef.current) fileInputRef.current.value = ''
+    }
+    reader.readAsText(file)
   }, [])
 
   const TABS = [
@@ -176,14 +206,42 @@ export default function PortfolioRiskDashboard() {
           <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize:11, color:'#4a6080' }}>
             IDR {(totalValue/1e6).toFixed(1)}M
           </span>
-          <button onClick={handleUpload} disabled={uploading} style={{
-            background: uploading ? '#162035' : '#bd93f920',
-            border:'1px solid #bd93f940', borderRadius:6, padding:'5px 12px',
-            fontFamily:'Space Mono,monospace', fontSize:9, color:'#bd93f9',
-            cursor: uploading ? 'wait' : 'pointer', letterSpacing:1,
-          }}>
-            {uploading ? 'LOADING...' : '↑ UPLOAD CSV'}
-          </button>
+          <div style={{ display:'flex', gap:6 }}>
+            {/* Hidden file input */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".csv"
+              onChange={handleFileChange}
+              style={{ display:'none' }}
+            />
+            {/* Download CSV template */}
+            <button
+              onClick={() => {
+                const template = `Symbol,Sector,Value,Pct\nBBCA,Banking,25000000,25\nBBRI,Banking,20000000,20\nBTCUSDT,Crypto,15000000,15\n`
+                const blob = new Blob([template], { type: 'text/csv' })
+                const url  = URL.createObjectURL(blob)
+                const a    = document.createElement('a')
+                a.href = url; a.download = 'portfolio_template.csv'; a.click()
+                URL.revokeObjectURL(url)
+              }}
+              style={{
+                background:'transparent', border:'1px solid #162035', borderRadius:6,
+                padding:'5px 10px', fontFamily:'Space Mono,monospace', fontSize:9,
+                color:'#4a6080', cursor:'pointer', letterSpacing:1,
+              }}
+            >
+              ↓ TEMPLATE
+            </button>
+            <button onClick={handleUpload} disabled={uploading} style={{
+              background: uploading ? '#162035' : '#bd93f920',
+              border:'1px solid #bd93f940', borderRadius:6, padding:'5px 12px',
+              fontFamily:'Space Mono,monospace', fontSize:9, color:'#bd93f9',
+              cursor: uploading ? 'wait' : 'pointer', letterSpacing:1,
+            }}>
+              {uploading ? 'PARSING...' : '↑ UPLOAD CSV'}
+            </button>
+          </div>
         </div>
       </div>
 
