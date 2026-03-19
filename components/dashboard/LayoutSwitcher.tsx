@@ -75,9 +75,12 @@ function QuickGlanceLayout({
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Layout 2: Portfolio First
-//  Portfolio risk pie + correlation heatmap + rebalancing
-//  TV chart for selected ticker · Signal feed mini · Affiliate tools
-//  NO Ownership Intelligence (moved to own menu)
+//  Visual hierarchy:
+//  - Top: summary stats bar (total value, risk score, open positions, live signals)
+//  - Mid-left: Portfolio Risk full (pie + correlation + bar + rebalancing)
+//  - Mid-right: TV Chart → selected ticker + signal badges from assetStates
+//  - Bottom-left: Trade Log (P&L audit)
+//  - Bottom-right: Affiliate tools + links
 // ─────────────────────────────────────────────────────────────────────────────
 function PortfolioFirstLayout({
   activeTicker,
@@ -89,25 +92,47 @@ function PortfolioFirstLayout({
   return (
     <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
 
-      {/* Row 1: Portfolio Risk — full width (pie + heatmap + bar + risk meter + suggestions) */}
+      {/* ── Row 1: Portfolio Risk (full width) ─────────── */}
+      {/* Contains: pie chart, correlation heatmap, bar chart, */}
+      {/* risk meter, rebalancing suggestions, position table  */}
       <Panel>
         <PortfolioRiskDashboard />
       </Panel>
 
-      {/* Row 2: Chart + Signal mini (2-col) */}
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 400px', gap:16 }}>
-        <TradingViewChart height={380} symbol={activeTicker} />
-        <Panel>
+      {/* ── Row 2: Chart (left, wider) + Signals (right) ── */}
+      <div style={{ display:'grid', gridTemplateColumns:'3fr 2fr', gap:16, alignItems:'start' }}>
+
+        {/* Left: TV Chart — shows selected ticker */}
+        <div style={{ display:'flex', flexDirection:'column', gap:4 }}>
+          <div style={{ fontFamily:'Space Mono,monospace', fontSize:8, color:'#4a6080', letterSpacing:1, padding:'0 4px' }}>
+            CHART — click portfolio row or ticker tape to switch
+          </div>
+          <TradingViewChart height={400} symbol={activeTicker} />
+        </div>
+
+        {/* Right: Active signals for portfolio tickers only */}
+        <Panel style={{ alignSelf:'start' }}>
+          <div style={{ display:'flex', alignItems:'center', gap:6, marginBottom:12 }}>
+            <span style={{ width:3, height:14, background:'linear-gradient(180deg,#ffd700,#bd93f9)', borderRadius:2, display:'inline-block' }} />
+            <span style={{ fontFamily:'Syne,sans-serif', fontSize:12, fontWeight:700, color:'#c8d8e8', letterSpacing:1 }}>
+              ACTIVE SIGNALS
+            </span>
+            <span style={{ fontFamily:'Space Mono,monospace', fontSize:8, color:'#4a6080' }}>portfolio assets</span>
+          </div>
           <SignalExplanation />
         </Panel>
       </div>
 
-      {/* Row 3: Trade Log mini + Affiliate (2-col) */}
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 340px', gap:16 }}>
+      {/* ── Row 3: Trade Log (left) + Affiliate (right) ── */}
+      <div style={{ display:'grid', gridTemplateColumns:'1fr 300px', gap:16, alignItems:'start' }}>
+
+        {/* Left: Trade Log — P&L history */}
         <Panel>
           <TradeLog />
         </Panel>
-        <Panel>
+
+        {/* Right: Tools & Brokers */}
+        <Panel style={{ alignSelf:'start' }}>
           <AffiliateTools />
         </Panel>
       </div>
