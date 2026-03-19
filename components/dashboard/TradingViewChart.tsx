@@ -121,7 +121,7 @@ export default function TradingViewChart({
         horzAlign: 'center',
         vertAlign: 'center',
         color: '#00c3ff08',
-        text: `SS BlackBox v6.3.1`,
+        text: `SS BlackBox v6.4`,
       },
     })
 
@@ -345,7 +345,7 @@ export default function TradingViewChart({
           </div>
         ))}
         <div style={{ marginLeft:'auto', fontFamily:'Space Mono,monospace', fontSize:8, color:'#4a6080' }}>
-          SS BlackBox v6.3.1 Overlays
+          SS BlackBox v6.4 Overlays
         </div>
       </div>
 
