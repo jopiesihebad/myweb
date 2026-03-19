@@ -236,17 +236,36 @@ function TopNav({ onTickerClick }: { onTickerClick: (s: string) => void }) {
           </div>
 
           {/* Nav links */}
-          {['Dashboard', 'Signals', 'Portfolio', 'Docs'].map(link => (
-            <button key={link} style={{
+          {[
+            { label: 'DASHBOARD',  href: '/dashboard'  },
+            { label: 'SIGNALS',    href: '/#live'       },
+            { label: 'PORTFOLIO',  href: '/dashboard'   },
+            { label: 'INDICATOR',  href: '/indicator'   },
+          ].map(link => (
+            <a key={link.label} href={link.href} style={{
               fontFamily: 'Space Mono, monospace', fontSize: 9,
               letterSpacing: 1, padding: '4px 10px', borderRadius: 4,
-              background: link === 'Dashboard' ? `${C_CYAN}15` : 'transparent',
-              border: `1px solid ${link === 'Dashboard' ? C_CYAN + '60' : 'transparent'}`,
-              color: link === 'Dashboard' ? C_CYAN : '#4a6080',
+              background: link.label === 'DASHBOARD' ? `${C_CYAN}15` : 'transparent',
+              border: `1px solid ${link.label === 'DASHBOARD' ? C_CYAN + '60' : 'transparent'}`,
+              color: link.label === 'DASHBOARD' ? C_CYAN : '#4a6080',
               cursor: 'pointer', transition: 'all 0.2s',
-            }}>
-              {link.toUpperCase()}
-            </button>
+              textDecoration: 'none',
+            }}
+              onMouseEnter={e => {
+                if (link.label !== 'DASHBOARD') {
+                  e.currentTarget.style.color = C_CYAN
+                  e.currentTarget.style.border = `1px solid ${C_CYAN}40`
+                }
+              }}
+              onMouseLeave={e => {
+                if (link.label !== 'DASHBOARD') {
+                  e.currentTarget.style.color = '#4a6080'
+                  e.currentTarget.style.border = '1px solid transparent'
+                }
+              }}
+            >
+              {link.label}
+            </a>
           ))}
 
           {/* Member badge */}
@@ -337,7 +356,7 @@ function DashboardContent() {
           </div>
 
           {/* Layout switcher + all panels */}
-          <LayoutSwitcher />
+          <LayoutSwitcher activeTicker={activeTicker} />
         </main>
       </div>
 
@@ -354,7 +373,7 @@ function DashboardContent() {
           flexWrap: 'wrap', gap: 8,
         }}>
           <span style={{ fontFamily: 'Space Mono, monospace', fontSize: 8, color: '#4a6080', letterSpacing: 1 }}>
-            © 2026 stockindexer.com · SS BlackBox Phantom v6.3.1 · Conway Automaton
+            © 2026 stockindexer.com · SS BlackBox Phantom v6.4 · Conway Automaton
           </span>
           <div style={{ display: 'flex', gap: 12 }}>
             {['DISCLAIMER', 'TERMS', 'PRIVACY', 'DOCS'].map(l => (
