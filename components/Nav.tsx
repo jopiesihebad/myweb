@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useWsSignal } from '@/components/WebSocketProvider'
 
 const NAV_LINKS = [
   { href: '#live',        label: 'Live'       },
@@ -18,6 +19,12 @@ const CELL_PATTERNS = [
 
 export default function Nav() {
   const [pattern, setPattern] = useState(0)
+  const { assetStates } = useWsSignal()
+
+  // Count assets currently BORN or ALIVE
+  const liveCount = Object.values(assetStates).filter(
+    s => s.conwayState === 'born' || s.conwayState === 'alive'
+  ).length
 
   useEffect(() => {
     const id = setInterval(() => setPattern(p => (p + 1) % CELL_PATTERNS.length), 900)
@@ -76,7 +83,7 @@ export default function Nav() {
           border: '1px solid rgba(57,255,20,0.35)', color: 'var(--lime)',
           display: 'flex', alignItems: 'center', gap: '6px',
         }}>
-          <div className="ldot" /> 6 assets live
+          <div className="ldot" /> {liveCount} asset{liveCount !== 1 ? 's' : ''} live
         </div>
         <a href="/dashboard" style={{
           fontSize: '10px', letterSpacing: '1.5px', padding: '6px 14px',
