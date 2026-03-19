@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
+import { useWS } from './WebSocketProvider'
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts'
 
 interface Position {
@@ -120,6 +121,26 @@ function RiskMeter({ score }: { score: number }) {
 
 export default function PortfolioRiskDashboard() {
   const [positions, setPositions] = useState<Position[]>(DEFAULT_PORTFOLIO)
+  const { assetStates } = useWS()
+
+  // Auto-update signal badges from live assetStates
+  useEffect(() => {
+    setPositions(prev => prev.map(pos => {
+      const state = assetStates[pos.symbol]
+      if (!state) return pos
+      const sig = state.lastSignal
+      const signalLabel =
+        sig === 'CONWAY_BORN' ? 'CONWAY BORN 🟢' :
+        sig === 'CONWAY_BUY'  ? 'CONWAY BUY ✦'  :
+        sig === 'GOLD_BUY'    ? 'GOLD BUY ⚡'    :
+        sig === 'BBP_ENTRY_BUY' ? 'BBP BUY ▲'   :
+        sig === 'LH_EXIT'     ? 'LH EXIT ⚠'     :
+        sig === 'ALPHA_EXIT'  ? 'ALPHA EXIT 🔮'  :
+        sig === 'CONWAY_DIED' ? 'CONWAY DIED 🔴' :
+        undefined
+      return { ...pos, signal: signalLabel }
+    }))
+  }, [assetStates])
   const [uploading, setUploading] = useState(false)
   const [activeTab, setActiveTab] = useState<'pie' | 'heatmap' | 'bar'>('pie')
 
