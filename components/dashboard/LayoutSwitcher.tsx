@@ -46,7 +46,7 @@ function Panel({ children, style = {} }: { children: ReactNode; style?: React.CS
 }
 
 // ── Layout 1: Quick Glance ────────────────────────────────────────────────────
-function QuickGlanceLayout() {
+function QuickGlanceLayout({ activeTicker }: { activeTicker: string }) {
   return (
     <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
       {/* World indices */}
@@ -55,7 +55,7 @@ function QuickGlanceLayout() {
       </Panel>
 
       {/* Chart (full width) */}
-      <TradingViewChart height={380} />
+      <TradingViewChart height={380} symbol={activeTicker} />
 
       {/* 2-col: Signals + Sentiment + Tools */}
       <div style={{ display:'grid', gridTemplateColumns:'3fr 2fr', gap:16 }}>
@@ -76,7 +76,7 @@ function QuickGlanceLayout() {
 }
 
 // ── Layout 2: Portfolio First ─────────────────────────────────────────────────
-function PortfolioFirstLayout() {
+function PortfolioFirstLayout({ activeTicker }: { activeTicker: string }) {
   return (
     <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
       {/* Portfolio full width */}
@@ -90,7 +90,7 @@ function PortfolioFirstLayout() {
           <OwnershipIntelligence />
         </Panel>
         <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
-          <TradingViewChart height={340} />
+          <TradingViewChart height={340} symbol={activeTicker} />
           <Panel>
             <SignalExplanation />
           </Panel>
@@ -101,11 +101,11 @@ function PortfolioFirstLayout() {
 }
 
 // ── Layout 3: Signal Deep Dive ────────────────────────────────────────────────
-function SignalDeepDiveLayout() {
+function SignalDeepDiveLayout({ activeTicker }: { activeTicker: string }) {
   return (
     <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
       {/* Chart */}
-      <TradingViewChart height={420} />
+      <TradingViewChart height={420} symbol={activeTicker} />
 
       {/* Signals full width */}
       <Panel>
@@ -140,7 +140,7 @@ function TradeJournalLayout() {
 }
 
 // ── Layout 5: Minimal Mobile ──────────────────────────────────────────────────
-function MinimalMobileLayout() {
+function MinimalMobileLayout({ activeTicker }: { activeTicker: string }) {
   const [activeSection, setActiveSection] = useState<'signals' | 'chart' | 'portfolio' | 'indices'>('signals')
   const TABS = [
     { key:'signals',   label:'SIGNALS',   icon:'⚡', color:'#ffd700'  },
@@ -180,7 +180,7 @@ function MinimalMobileLayout() {
         </Panel>
       )}
       {activeSection === 'chart' && (
-        <TradingViewChart height={320} />
+        <TradingViewChart height={320} symbol={activeTicker} />
       )}
       {activeSection === 'portfolio' && (
         <Panel>
@@ -197,7 +197,7 @@ function MinimalMobileLayout() {
 }
 
 // ── LayoutSwitcher (exported) ─────────────────────────────────────────────────
-export default function LayoutSwitcher() {
+export default function LayoutSwitcher({ activeTicker = 'BTCUSDT' }: { activeTicker?: string }) {
   const [active, setActive] = useState<LayoutType>('quick')
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const activeLayout = LAYOUTS.find(l => l.key === active)!
@@ -247,11 +247,11 @@ export default function LayoutSwitcher() {
 
       {/* Content */}
       <div style={{ animation:'fadeUp 0.3s ease', padding:'0 4px' }}>
-        {active === 'quick'     && <QuickGlanceLayout />}
-        {active === 'portfolio' && <PortfolioFirstLayout />}
-        {active === 'signal'    && <SignalDeepDiveLayout />}
+        {active === 'quick'     && <QuickGlanceLayout activeTicker={activeTicker} />}
+        {active === 'portfolio' && <PortfolioFirstLayout activeTicker={activeTicker} />}
+        {active === 'signal'    && <SignalDeepDiveLayout activeTicker={activeTicker} />}
         {active === 'journal'   && <TradeJournalLayout />}
-        {active === 'minimal'   && <MinimalMobileLayout />}
+        {active === 'minimal'   && <MinimalMobileLayout activeTicker={activeTicker} />}
       </div>
 
       <style>{`
