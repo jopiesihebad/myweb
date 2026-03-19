@@ -87,26 +87,35 @@ function PortfolioFirstLayout({ activeTicker, onTickerSelect }: { activeTicker: 
 function SignalDeepDiveLayout({ activeTicker }: { activeTicker: string }) {
   return (
     <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
-      {/* Chart */}
-      <TradingViewChart height={420} symbol={activeTicker} />
 
-      {/* Signals full width */}
+      {/* Row 1: Chart full width */}
+      <TradingViewChart height={460} symbol={activeTicker} />
+
+      {/* Row 2: Signal Explanation (full — all 29 alert types, tier filter, expandable) */}
       <Panel>
         <SignalExplanation />
       </Panel>
 
-      {/* 3-col: Backtest + Sentiment + Indices */}
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:16 }}>
-        <Panel>
-          <BacktestSimulator />
-        </Panel>
+      {/* Row 3: Sentiment + AI Scoring + News */}
+      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:16 }}>
         <Panel>
           <SentimentAnalyzer />
         </Panel>
         <Panel>
-          <WorldIndices />
+          <BacktestSimulator />
         </Panel>
       </div>
+
+      {/* Row 4: Ownership Intelligence (full — AI Q&A, network graph, ownership table) */}
+      <Panel>
+        <OwnershipIntelligence />
+      </Panel>
+
+      {/* Row 5: World Indices context */}
+      <Panel>
+        <WorldIndices />
+      </Panel>
+
     </div>
   )
 }
