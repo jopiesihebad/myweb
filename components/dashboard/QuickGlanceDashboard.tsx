@@ -185,12 +185,26 @@ function StatBox({ label, value, color, sub }: { label: string; value: string; c
 
 // ─── Session Clock Strip ─────────────────────────────────────────────────────
 function SessionClockStrip() {
-  const [now, setNow] = useState(new Date())
+  const [now, setNow] = useState<Date | null>(null)
 
   useEffect(() => {
+    setNow(new Date())
     const id = setInterval(() => setNow(new Date()), 1000)
     return () => clearInterval(id)
   }, [])
+
+  // Not yet mounted — render skeleton
+  if (!now) return (
+    <div style={{
+      background:'#0a1020', border:'1px solid #162035', borderRadius:10,
+      padding:'10px 16px', height:52,
+      display:'flex', alignItems:'center',
+    }}>
+      <span style={{ fontFamily:'Space Mono,monospace', fontSize:13, color:'#2a3d58', letterSpacing:1 }}>
+        ··:··:·· UTC
+      </span>
+    </div>
+  )
 
   const utcH   = now.getUTCHours()
   const utcM   = now.getUTCMinutes()
