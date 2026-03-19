@@ -9,10 +9,11 @@ import { SentimentAnalyzer, BacktestSimulator } from './SentimentAndBacktest'
 import WorldIndices from './WorldIndices'
 import TradeLog from './TradeLog'
 import AffiliateTools from './AffiliateTools'
+import StockHeatmap from './StockHeatmap'
 
 const TradingViewChart = dynamic(() => import('./TradingViewChart'), { ssr: false })
 
-export type LayoutType = 'quick' | 'portfolio' | 'signal' | 'journal' | 'minimal'
+export type LayoutType = 'quick' | 'portfolio' | 'signal' | 'journal' | 'heatmap' | 'minimal'
 
 interface LayoutMeta {
   key: LayoutType
@@ -27,6 +28,7 @@ const LAYOUTS: LayoutMeta[] = [
   { key:'portfolio', label:'Portfolio First',  icon:'◈',  desc:'Portfolio risk + ownership + signals',   color:'#ffd700' },
   { key:'signal',    label:'Signal Deep Dive', icon:'🔱', desc:'Full signal breakdown + backtest',        color:'#bd93f9' },
   { key:'journal',   label:'Trade Journal',    icon:'📋', desc:'Full trade log + P&L history',           color:'#39ff14' },
+  { key:'heatmap',   label:'Stock Map',         icon:'🗺',  desc:'Conway state heatmap — 24 assets',       color:'#bd93f9' },
   { key:'minimal',   label:'Minimal Mobile',   icon:'◯',  desc:'Clean mobile-optimized view',            color:'#ff8c00' },
 ]
 
@@ -196,8 +198,20 @@ function MinimalMobileLayout({ activeTicker }: { activeTicker: string }) {
   )
 }
 
+
+// ── Layout: Stock Heatmap ─────────────────────────────────────────────────────
+function HeatmapLayout({ activeTicker, onTickerSelect }: { activeTicker: string; onTickerSelect?: (t: string) => void }) {
+  return (
+    <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
+      <Panel>
+        <StockHeatmap onTickerSelect={onTickerSelect} />
+      </Panel>
+    </div>
+  )
+}
+
 // ── LayoutSwitcher (exported) ─────────────────────────────────────────────────
-export default function LayoutSwitcher({ activeTicker = 'BTCUSDT' }: { activeTicker?: string }) {
+export default function LayoutSwitcher({ activeTicker = 'BTCUSDT', onTickerSelect }: { activeTicker?: string; onTickerSelect?: (t: string) => void }) {
   const [active, setActive] = useState<LayoutType>('quick')
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const activeLayout = LAYOUTS.find(l => l.key === active)!
@@ -251,6 +265,7 @@ export default function LayoutSwitcher({ activeTicker = 'BTCUSDT' }: { activeTic
         {active === 'portfolio' && <PortfolioFirstLayout activeTicker={activeTicker} />}
         {active === 'signal'    && <SignalDeepDiveLayout activeTicker={activeTicker} />}
         {active === 'journal'   && <TradeJournalLayout />}
+        {active === 'heatmap'   && <HeatmapLayout activeTicker={activeTicker} onTickerSelect={onTickerSelect} />}
         {active === 'minimal'   && <MinimalMobileLayout activeTicker={activeTicker} />}
       </div>
 
