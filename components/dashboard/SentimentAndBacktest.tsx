@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, ResponsiveContainer, Area, AreaChart } from 'recharts'
 
 // ── SENTIMENT ANALYZER ────────────────────────────────────────────────────────
@@ -72,9 +72,48 @@ function SentimentMeter({ score }: { score: number }) {
   )
 }
 
+type SentimentData = {
+  overallScore: number
+  overallLabel: string
+  bullishPct:   number
+  bearishPct:   number
+  neutralPct:   number
+  news: {
+    title:     string
+    source:    string
+    url:       string
+    pubDate:   string
+    sentiment: string
+    score:     number
+    impact:    string
+    summary:   string
+  }[]
+  source: string
+  lastUpdated: string
+}
+
 export function SentimentAnalyzer() {
   const [ticker, setTicker] = useState('BBRI')
-  const sentScore = 68
+  const [data,   setData]   = useState<SentimentData | null>(null)
+  const [loading, setLoading] = useState(true)
+  const sentScore = data?.overallScore ?? 68
+
+  useEffect(() => {
+    async function fetchSentiment() {
+      try {
+        const res = await fetch('/api/sentiment')
+        if (res.ok) {
+          const json = await res.json()
+          setData(json)
+        }
+      } catch { /* use mock */ }
+      finally { setLoading(false) }
+    }
+    fetchSentiment()
+    // Refresh every 30 min
+    const id = setInterval(fetchSentiment, 1800000)
+    return () => clearInterval(id)
+  }, [])
 
   return (
     <div>
@@ -84,6 +123,16 @@ export function SentimentAnalyzer() {
           <span style={{ fontFamily:'Syne,sans-serif', fontSize:13, fontWeight:700, color:'#c8d8e8', letterSpacing:1, textTransform:'uppercase' }}>
             Sentiment & News
           </span>
+          {loading && (
+            <span style={{ fontSize:8, color:'#4a6080', fontFamily:'Space Mono,monospace', letterSpacing:1, animation:'pipPulse 1.5s infinite' }}>
+              LOADING...
+            </span>
+          )}
+          {data && !loading && (
+            <span style={{ fontSize:8, color: data.source === 'live' ? '#39ff14' : '#4a6080', fontFamily:'Space Mono,monospace', letterSpacing:1 }}>
+              {data.source === 'live' ? '● LIVE RSS' : '○ MOCK'}
+            </span>
+          )}
         </div>
         <select value={ticker} onChange={e => setTicker(e.target.value)} style={{
           background:'#0a1020', border:'1px solid #162035', borderRadius:5,
@@ -99,6 +148,13 @@ export function SentimentAnalyzer() {
       {/* Sentiment meter */}
       <div style={{ background:'#0a1020', border:'1px solid #162035', borderRadius:8, padding:'14px 16px', marginBottom:12 }}>
         <SentimentMeter score={sentScore} />
+      {data && (
+        <div style={{ display:'flex', gap:16, marginTop:8 }}>
+          <span style={{ fontSize:9, color:'#39ff14', fontFamily:'Space Mono,monospace' }}>▲ {data.bullishPct}% bullish</span>
+          <span style={{ fontSize:9, color:'#ff0062', fontFamily:'Space Mono,monospace' }}>▼ {data.bearishPct}% bearish</span>
+          <span style={{ fontSize:9, color:'#4a6080', fontFamily:'Space Mono,monospace' }}>— {data.neutralPct}% neutral</span>
+        </div>
+      )}
         <div style={{ display:'flex', gap:8, marginTop:10 }}>
           {[
             { label:'Social Score', value:'72', color:'#bd93f9' },
@@ -123,7 +179,7 @@ export function SentimentAnalyzer() {
 
       {/* News list */}
       <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
-        {MOCK_NEWS.map((n, i) => {
+        {(data?.news ?? []).map((n, i) => {
           const sentColor = n.sentiment === 'BULLISH' ? '#39ff14' : n.sentiment === 'BEARISH' ? '#ff0062' : '#ffd700'
           return (
             <div key={n.id} style={{
@@ -140,7 +196,7 @@ export function SentimentAnalyzer() {
               </div>
               <div style={{ flex:1 }}>
                 <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize:11, color:'#c8d8e8', lineHeight:1.5, marginBottom:4 }}>
-                  {n.headline}
+                  {n.title}
                 </div>
                 <div style={{ display:'flex', gap:8, alignItems:'center' }}>
                   <span style={{ fontFamily:'Space Mono,monospace', fontSize:8, color:'#4a6080' }}>{n.source}</span>
