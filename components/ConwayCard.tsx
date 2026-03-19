@@ -317,3 +317,42 @@ export default function ConwayCards() {
 
 // Also export single card for direct use
 export { CardDisplay }
+
+// ─── ConwayAllCards — 5 cards side by side for landing page ──
+// Shows best asset per class simultaneously, no rolling
+export function ConwayAllCards() {
+  const { assetStates } = useWsSignal()
+
+  const getBestForClass = (cls: AssetClass): AssetState | null => {
+    const classAssets = PINE_ASSETS.filter(a => a.assetClass === cls)
+    let best: AssetState | null = null
+    for (const a of classAssets) {
+      const s = assetStates[a.ticker]
+      if (!s) continue
+      if (!best || s.fusion > best.fusion) best = s
+    }
+    return best
+  }
+
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5,1fr)', gap: '12px' }}>
+      {CLASS_ORDER.map(cls => {
+        const state = getBestForClass(cls) ?? {
+          ticker: PINE_ASSETS.find(a => a.assetClass === cls)?.ticker ?? cls,
+          assetClass: cls,
+          conwayState: 'dormant' as ConwayState,
+          cells: 0, cells_arr: [0,0,0,0,0,0,0,0],
+          fusion: 0, tier: null, lastSignal: null, lastClose: null, lastUpdate: null,
+        }
+        return (
+          <CardDisplay
+            key={cls}
+            d={buildCardData(state as AssetState)}
+            pinned={false}
+            onPin={() => {}}
+          />
+        )
+      })}
+    </div>
+  )
+}
