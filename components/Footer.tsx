@@ -14,7 +14,7 @@ export default function Footer() {
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '20px', flexWrap: 'wrap', padding: '14px 48px', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', background: 'var(--panel2)' }}>
         {[
           { icon: '⚙️', text: 'Powered by UTAS Checkout' },
-          { icon: '🔱', text: 'SS BlackBox v6.3.1 Phantom' },
+          { icon: '🔱', text: 'SS BlackBox v6.4 Phantom' },
           { icon: '🏦', text: 'Ownership Intelligence IDX' },
           { icon: '🛡️', text: 'Garansi 14 Hari' },
           { icon: '🤖', text: 'pieBot Sovereign AI' },
@@ -55,18 +55,35 @@ export default function Footer() {
         {/* Links */}
         <div className="f-links" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '16px' }}>
           {[
-            { title: 'Platform',  links: ['Live Dashboard','Signal Feed','Backtest Results','Bot Status'] },
-            { title: 'Resources', links: ['Documentation','API Reference','Webhook Setup','Genesis Prompt'] },
-            { title: 'Company',   links: ['About','Pricing','Blog','Contact'] },
+            { title: 'Platform', links: [
+              { label: 'Live Dashboard',    href: '/dashboard'     },
+              { label: 'Signal Feed',       href: '/#live'         },
+              { label: 'Indicator License', href: '/indicator'     },
+              { label: 'Bot Status',        href: '/#bot'          },
+            ]},
+            { title: 'Resources', links: [
+              { label: 'API Reference',    href: '/api/webhook'    },
+              { label: 'Webhook Setup',    href: '/indicator'      },
+              { label: 'Pricing',          href: '/#pricing'       },
+              { label: 'FAQ',              href: '/#faq'           },
+            ]},
+            { title: 'Company', links: [
+              { label: 'About',            href: '/#conway'        },
+              { label: 'Affiliate',        href: 'https://utas.stockindexer.com/affiliate' },
+              { label: 'HargaTerbaik',     href: 'https://hargaterbaik.com' },
+              { label: 'Contact',          href: 'mailto:enterprise@stockindexer.com' },
+            ]},
           ].map(col => (
             <div key={col.title} className="f-col">
               <div style={{ fontSize: '9px', letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--gray2)', marginBottom: '14px' }}>{col.title}</div>
               {col.links.map(l => (
-                <a key={l} href="#"
+                <a key={l.label} href={l.href}
+                  target={l.href.startsWith('http') ? '_blank' : undefined}
+                  rel={l.href.startsWith('http') ? 'noreferrer' : undefined}
                   style={{ display: 'block', fontSize: '11px', color: 'var(--gray)', textDecoration: 'none', marginBottom: '8px', transition: 'color 0.2s' }}
                   onMouseEnter={e => (e.currentTarget.style.color = 'var(--cyan)')}
                   onMouseLeave={e => (e.currentTarget.style.color = 'var(--gray)')}
-                >{l}</a>
+                >{l.label}</a>
               ))}
             </div>
           ))}
@@ -75,15 +92,20 @@ export default function Footer() {
         {/* Right: social + copy */}
         <div className="f-right" style={{ textAlign: 'right' }}>
           <div className="f-social" style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end', marginBottom: '16px' }}>
-            {['𝕏','TG','DC','GH'].map(s => (
-              <div key={s} style={{ width: '32px', height: '32px', border: '1px solid var(--border2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', color: 'var(--gray)', cursor: 'pointer', transition: 'all 0.2s' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor='var(--cyan)'; (e.currentTarget as HTMLDivElement).style.color='var(--cyan)' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor='var(--border2)'; (e.currentTarget as HTMLDivElement).style.color='var(--gray)' }}
-              >{s}</div>
+            {[
+              { icon: '𝕏',  href: 'https://x.com/stockindexer'               },
+              { icon: 'TG', href: 'https://t.me/stockindexer_signals'         },
+              { icon: 'DC', href: 'https://discord.gg/stockindexer'           },
+            ].map(s => (
+              <a key={s.icon} href={s.href} target="_blank" rel="noreferrer"
+                style={{ width: '32px', height: '32px', border: '1px solid var(--border2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', color: 'var(--gray)', cursor: 'pointer', transition: 'all 0.2s', textDecoration: 'none' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor='var(--cyan)'; (e.currentTarget as HTMLAnchorElement).style.color='var(--cyan)' }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor='var(--border2)'; (e.currentTarget as HTMLAnchorElement).style.color='var(--gray)' }}
+              >{s.icon}</a>
             ))}
           </div>
           <div style={{ fontSize: '10px', color: 'var(--gray2)', lineHeight: 1.7 }}>
-            Powered by SS BlackBox v6.3.1<br />
+            Powered by SS BlackBox v6.4<br />
             Conway Automaton Engine<br />
             Ownership Intelligence IDX<br />
             © 2026 StockIndexer.com
