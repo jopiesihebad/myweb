@@ -14,7 +14,7 @@ import StockHeatmap from './StockHeatmap'
 
 const TradingViewChart = dynamic(() => import('./TradingViewChart'), { ssr: false })
 
-export type LayoutType = 'quick' | 'portfolio' | 'signal' | 'ownership' | 'journal' | 'heatmap' | 'minimal'
+export type LayoutType = 'quick' | 'portfolio' | 'signal' | 'ownership' | 'journal' | 'heatmap' | 'tools' | 'minimal'
 
 interface LayoutMeta {
   key:   LayoutType
@@ -31,6 +31,7 @@ const LAYOUTS: LayoutMeta[] = [
   { key:'ownership', label:'Ownership Intel',    icon:'🏛',  desc:'IDX shareholding — BBCA/BBRI/ANTM/ASII + AI Q&A', color:'#ff44cc' },
   { key:'journal',   label:'Trade Journal',      icon:'📋', desc:'Full pieBot trade log + P&L + CSV export',         color:'#39ff14' },
   { key:'heatmap',   label:'Stock Map',          icon:'🗺',  desc:'Conway heatmap — 24 assets real-time',            color:'#ff8c00' },
+  { key:'tools',     label:'Tools & Brokers',    icon:'🔗',  desc:'Exchanges, platforms, trader setup',               color:'#ff8c00' },
   { key:'minimal',   label:'Minimal',            icon:'◯',  desc:'Mobile-optimized compact view',                    color:'#8aa0b8' },
 ]
 
@@ -122,11 +123,6 @@ function PortfolioFirstLayout({
           <SignalExplanation />
         </Panel>
       </div>
-
-      {/* ── Row 3: Tools & Brokers ── */}
-      <Panel style={{ alignSelf:'start' }}>
-        <AffiliateTools />
-      </Panel>
 
     </div>
   )
@@ -231,6 +227,20 @@ function TradeJournalLayout() {
     <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
       <Panel>
         <TradeLog />
+      </Panel>
+    </div>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  Layout: Tools & Brokers (mandiri)
+//  Exchanges, platforms, trader setup, SS BlackBox license CTA
+// ─────────────────────────────────────────────────────────────────────────────
+function ToolsLayout() {
+  return (
+    <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
+      <Panel>
+        <AffiliateTools />
       </Panel>
     </div>
   )
@@ -363,6 +373,7 @@ export default function LayoutSwitcher({
         {active === 'signal'    && <SignalDeepDiveLayout  activeTicker={activeTicker} />}
         {active === 'ownership' && <OwnershipLayout />}
         {active === 'journal'   && <TradeJournalLayout />}
+        {active === 'tools'     && <ToolsLayout />}
         {active === 'heatmap'   && <HeatmapLayout         activeTicker={activeTicker} onTickerSelect={onTickerSelect} />}
         {active === 'minimal'   && <MinimalMobileLayout   activeTicker={activeTicker} />}
       </div>
