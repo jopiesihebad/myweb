@@ -5,7 +5,7 @@ import { WebSocketProvider } from '../components/WebSocketProvider'
 export const metadata: Metadata = {
   title: 'StockIndexer — Conway Automaton Intelligence Platform',
   description:
-    'AI Signal Trading with SS BlackBox v6.3.1 + pieBot Sovereign. Real-time signals, Ownership Intelligence IDX, Conway Automaton state engine. 14-day free trial.',
+    'AI Signal Trading with SS BlackBox v6.4 + pieBot Sovereign. Real-time signals, Ownership Intelligence IDX, Conway Automaton state engine. 14-day free trial.',
   keywords: [
     'trading signals', 'Conway Automaton', 'SS BlackBox', 'pieBot',
     'stock signals IDX', 'forex signals', 'crypto signals', 'backtest trading',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'StockIndexer — Conway Automaton Intelligence',
-    description: 'AI Signal Trading SS BlackBox v6.3.1 + pieBot. Real-time signals, live Ownership Intelligence IDX.',
+    description: 'AI Signal Trading SS BlackBox v6.4 + pieBot. Real-time signals, live Ownership Intelligence IDX.',
     images: ['https://stockindexer.com/og-image.png'],
   },
   icons: { icon: '/favicon.ico' },
