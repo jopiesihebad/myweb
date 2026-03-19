@@ -224,7 +224,7 @@ export default function LayoutSwitcher({ activeTicker = 'BTCUSDT', onTickerSelec
         padding:'10px 16px', background:'#0a1020',
         borderBottom:'1px solid #162035', marginBottom:20,
         borderRadius:'8px 8px 0 0',
-        position:'sticky', top:0, zIndex:40,
+        position:'sticky', top:60, zIndex:50,
       }}>
         <div style={{ display:'flex', alignItems:'center', gap:10 }}>
           <span style={{ fontSize:16 }}>{activeLayout.icon}</span>
