@@ -2,7 +2,7 @@ import Nav           from '@/components/Nav'
 import Hero          from '@/components/Hero'
 import FaqList       from '@/components/FaqList'
 import TickerTape    from '@/components/TickerTape'
-import ConwayCards  from '@/components/ConwayCard'
+import ConwayCards, { ConwayAllCards } from '@/components/ConwayCard'
 import SignalFeed    from '@/components/SignalFeed'
 import EquityChart   from '@/components/EquityChart'
 import PricingSection from '@/components/PricingSection'
@@ -69,8 +69,8 @@ export default function Page() {
         <div className="sec-eyebrow">Conway Automaton — Live State Engine</div>
         <h2 className="sec-h">Real-Time<br />Market Intelligence</h2>
         <p className="sec-p">8-cell Conway state computed every bar close. Hover any card to inspect all 8 cells live. Covering crypto, forex, commodities, and IDX stocks.</p>
-        <div style={{ maxWidth: '360px' }}>
-          <ConwayCards />
+        <div style={{ width: '100%' }}>
+          <ConwayAllCards />
         </div>
       </section>
 
