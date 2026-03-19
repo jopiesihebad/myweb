@@ -356,7 +356,7 @@ function DashboardContent() {
           </div>
 
           {/* Layout switcher + all panels */}
-          <LayoutSwitcher activeTicker={activeTicker} />
+          <LayoutSwitcher activeTicker={activeTicker} onTickerSelect={setActiveTicker} />
         </main>
       </div>
 
