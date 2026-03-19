@@ -61,28 +61,34 @@ export default function TradingViewChart({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [propSymbol])
 
-  // Reload widget when symbol/tf changes
+  // Reload widget when symbol/tf changes — debounced to avoid iframe contentWindow error
   useEffect(() => {
     if (!containerRef.current) return
+
+    // Clear previous widget immediately
     containerRef.current.innerHTML = ''
 
-    const tvSymbol = TV_SYMBOL_MAP[symbol] || `BINANCE:${symbol}`
-    const interval = TV_INTERVAL[tf] || '60'
+    // Debounce: give browser time to fully unmount previous iframe
+    const timer = setTimeout(() => {
+      if (!containerRef.current) return
 
-    const container = document.createElement('div')
-    container.className = 'tradingview-widget-container'
-    container.style.cssText = 'height:100%;width:100%'
+      const tvSymbol = TV_SYMBOL_MAP[symbol] || `BINANCE:${symbol}`
+      const interval = TV_INTERVAL[tf] || '60'
 
-    const widget = document.createElement('div')
-    widget.className = 'tradingview-widget-container__widget'
-    widget.style.cssText = 'height:calc(100% - 32px);width:100%'
-    container.appendChild(widget)
+      const container = document.createElement('div')
+      container.className = 'tradingview-widget-container'
+      container.style.cssText = 'height:100%;width:100%'
 
-    const script = document.createElement('script')
-    script.type  = 'text/javascript'
-    script.src   = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js'
-    script.async = true
-    script.innerHTML = JSON.stringify({
+      const widget = document.createElement('div')
+      widget.className = 'tradingview-widget-container__widget'
+      widget.style.cssText = 'height:calc(100% - 32px);width:100%'
+      container.appendChild(widget)
+
+      const script = document.createElement('script')
+      script.type  = 'text/javascript'
+      script.src   = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js'
+      script.async = true
+      script.innerHTML = JSON.stringify({
       autosize:          true,
       symbol:            tvSymbol,
       interval,
@@ -117,10 +123,17 @@ export default function TradingViewChart({
       },
     })
 
-    container.appendChild(script)
-    containerRef.current.appendChild(container)
+      container.appendChild(script)
+      containerRef.current.appendChild(container)
+    }, 150) // 150ms debounce
 
-    return () => { if (containerRef.current) containerRef.current.innerHTML = '' }
+    return () => {
+      clearTimeout(timer)
+      // Delay cleanup to let TV widget finish its own teardown
+      setTimeout(() => {
+        if (containerRef.current) containerRef.current.innerHTML = ''
+      }, 50)
+    }
   }, [symbol, tf])
 
   const tvSymbol   = TV_SYMBOL_MAP[symbol] || symbol
@@ -229,7 +242,24 @@ export default function TradingViewChart({
       </div>
 
       {/* Widget container */}
-      <div ref={containerRef} style={{ height, width:'100%' }} />
+      <div style={{ position:'relative' }}>
+        <div ref={containerRef} style={{ height, width:'100%' }} />
+        {/* TV widget takes ~1-2s to load — show subtle loading state */}
+        <style>{`
+          .tv-loading-shimmer {
+            position: absolute; inset: 0;
+            background: linear-gradient(90deg, #04070f 25%, #0a1020 50%, #04070f 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            pointer-events: none;
+            z-index: 1;
+          }
+          @keyframes shimmer {
+            0%   { background-position: 200% 0 }
+            100% { background-position: -200% 0 }
+          }
+        `}</style>
+      </div>
 
       {/* Footer */}
       <div style={{
