@@ -23,7 +23,7 @@ export default function Hero() {
         <motion.div {...fade(0.1)} style={{ marginBottom: '28px' }}>
           <Badge variant="outline">
             <div className="ldot" style={{ marginRight: '8px' }} />
-            SS BlackBox v6.3.1 — Conway Automaton Engine
+            SS BlackBox v6.4 — Conway Automaton Engine
           </Badge>
         </motion.div>
 
