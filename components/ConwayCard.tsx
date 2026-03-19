@@ -315,44 +315,102 @@ export default function ConwayCards() {
   )
 }
 
-// Also export single card for direct use
-export { CardDisplay }
 
-// ─── ConwayAllCards — 5 cards side by side for landing page ──
-// Shows best asset per class simultaneously, no rolling
+// ─── ConwayAllCards — 5 cards, each rolling independently ────
+// Each card = 1 asset class, cycles through its assets every 8s
+// Assets sorted: active signals first (BORN→ALIVE→DIED→DORMANT), then fusion desc
 export function ConwayAllCards() {
   const { assetStates } = useWsSignal()
 
-  const getBestForClass = (cls: AssetClass): AssetState | null => {
-    const classAssets = PINE_ASSETS.filter(a => a.assetClass === cls)
-    let best: AssetState | null = null
-    for (const a of classAssets) {
-      const s = assetStates[a.ticker]
-      if (!s) continue
-      if (!best || s.fusion > best.fusion) best = s
-    }
-    return best
-  }
+  const [indices, setIndices] = useState<Record<AssetClass, number>>(
+    () => Object.fromEntries(CLASS_ORDER.map(cls => [cls, 0])) as Record<AssetClass, number>
+  )
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setIndices(prev => {
+        const next = { ...prev }
+        for (const cls of CLASS_ORDER) {
+          const total = PINE_ASSETS.filter(a => a.assetClass === cls).length
+          next[cls] = (prev[cls] + 1) % total
+        }
+        return next
+      })
+    }, 8000)
+    return () => clearInterval(id)
+  }, [])
 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5,1fr)', gap: '12px' }}>
       {CLASS_ORDER.map(cls => {
-        const state = getBestForClass(cls) ?? {
-          ticker: PINE_ASSETS.find(a => a.assetClass === cls)?.ticker ?? cls,
-          assetClass: cls,
-          conwayState: 'dormant' as ConwayState,
-          cells: 0, cells_arr: [0,0,0,0,0,0,0,0],
-          fusion: 0, tier: null, lastSignal: null, lastClose: null, lastUpdate: null,
+        const classAssets = PINE_ASSETS
+          .filter(a => a.assetClass === cls)
+          .sort((a, b) => {
+            const sa = assetStates[a.ticker]
+            const sb = assetStates[b.ticker]
+            const stateOrder = (s: AssetState | undefined) =>
+              !s ? 3 : s.conwayState === 'born' ? 0 : s.conwayState === 'alive' ? 1 : s.conwayState === 'died' ? 2 : 3
+            const oa = stateOrder(sa), ob = stateOrder(sb)
+            if (oa !== ob) return oa - ob
+            return (sb?.fusion ?? 0) - (sa?.fusion ?? 0)
+          })
+
+        const idx   = indices[cls] % classAssets.length
+        const asset = classAssets[idx]
+        const state = asset ? assetStates[asset.ticker] : undefined
+
+        const cardState: AssetState = state ?? {
+          ticker:      asset?.ticker ?? cls,
+          assetClass:  cls,
+          conwayState: 'dormant',
+          cells:       0,
+          cells_arr:   [0,0,0,0,0,0,0,0],
+          fusion:      0,
+          tier:        null,
+          lastSignal:  null,
+          lastClose:   null,
+          lastUpdate:  null,
         }
+
         return (
-          <CardDisplay
-            key={cls}
-            d={buildCardData(state as AssetState)}
-            pinned={false}
-            onPin={() => {}}
-          />
+          <div key={cls} style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            {/* Pagination dots — one per asset in class */}
+            <div style={{ display: 'flex', gap: '4px', justifyContent: 'center' }}>
+              {classAssets.map((a, i) => {
+                const s    = assetStates[a.ticker]
+                const isActive = i === idx
+                const dotColor =
+                  s?.conwayState === 'born'  ? '#39ff14' :
+                  s?.conwayState === 'alive' ? '#00c3ff' :
+                  s?.conwayState === 'died'  ? '#ff0062' : '#1e2e4a'
+                return (
+                  <div key={a.ticker} title={a.ticker} style={{
+                    width:        isActive ? 16 : 6,
+                    height:       6,
+                    borderRadius: 3,
+                    background:   isActive ? dotColor : '#1e2e4a',
+                    transition:   'all 0.4s ease',
+                  }} />
+                )
+              })}
+            </div>
+
+            <CardDisplay
+              d={buildCardData(cardState)}
+              pinned={false}
+              onPin={() => {}}
+            />
+
+            {/* Ticker + position counter */}
+            <div style={{ textAlign: 'center', fontSize: '8px', color: '#2a3d58', letterSpacing: '1px', fontFamily: 'Space Mono,monospace' }}>
+              {asset?.ticker} · {idx + 1}/{classAssets.length}
+            </div>
+          </div>
         )
       })}
     </div>
   )
 }
+
+// Also export single card for direct use
+export { CardDisplay }
