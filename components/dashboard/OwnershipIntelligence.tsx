@@ -294,15 +294,32 @@ export default function OwnershipIntelligence() {
     if (!qaInput.trim()) return
     setQaLoading(true)
     setQaAnswer('')
-    await new Promise(r => setTimeout(r, 800))
-    const key = qaInput.toLowerCase()
-    const found = Object.entries(currentQA).find(([k]) => key.includes(k))
-    setQaAnswer(found
-      ? found[1]
-      : `Data tidak ditemukan. Coba: "pemegang saham terbesar", "foreign ownership", atau "hidden accumulation".`
-    )
-    setQaLoading(false)
-  }, [qaInput, currentQA])
+    try {
+      const res = await fetch('/api/ownership-qa', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question: qaInput, ticker }),
+      })
+      const data = await res.json()
+      if (data.answer) {
+        setQaAnswer(data.answer)
+      } else {
+        // Fallback to mock if API unavailable
+        const key = qaInput.toLowerCase()
+        const found = Object.entries(currentQA).find(([k]) => key.includes(k))
+        setQaAnswer(found
+          ? found[1]
+          : `AI API tidak tersedia. Coba pertanyaan: "pemegang saham terbesar", "foreign ownership", atau "hidden accumulation".`
+        )
+      }
+    } catch {
+      const key = qaInput.toLowerCase()
+      const found = Object.entries(currentQA).find(([k]) => key.includes(k))
+      setQaAnswer(found ? found[1] : 'Gagal menghubungi AI. Periksa koneksi.')
+    } finally {
+      setQaLoading(false)
+    }
+  }, [qaInput, ticker, currentQA])
 
   const filtered = currentData
     .filter(inv => {
@@ -618,7 +635,13 @@ export default function OwnershipIntelligence() {
 
         {/* Quick suggestions */}
         <div style={{ display:'flex', gap:4, flexWrap:'wrap', marginBottom:10 }}>
-          {['pemegang saham terbesar', 'foreign ownership', 'hidden accumulation'].map(s => (
+          {[
+              'pemegang saham terbesar',
+              'foreign ownership',
+              'hidden accumulation',
+              `siapa pengendali ${ticker}?`,
+              `anak usaha ${ticker}`,
+            ].map(s => (
             <button key={s} onClick={() => { setQaInput(s); }} style={{
               background:'#162035', border:'1px solid #1e2f4a',
               borderRadius:12, padding:'3px 10px',
@@ -644,7 +667,16 @@ export default function OwnershipIntelligence() {
             whiteSpace:'pre-line',
           }}>
             <span style={{ color:'#00c3ff', marginRight:8 }}>▶</span>
-            {qaAnswer.replace(/\*\*(.*?)\*\*/g, '$1')}
+            {qaAnswer.split('\n').map((line, i) => (
+                <span key={i}>
+                  {line.split(/\*\*(.*?)\*\*/).map((part, j) =>
+                    j % 2 === 1
+                      ? <strong key={j} style={{ color: '#eef4fc' }}>{part}</strong>
+                      : part
+                  )}
+                  {i < qaAnswer.split('\n').length - 1 && <br />}
+                </span>
+              ))}
           </div>
         )}
 
