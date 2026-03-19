@@ -4,12 +4,11 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 const NAV_LINKS = [
-  { href: '#live',        label: 'Live'        },
-  { href: '#performance', label: 'Performance' },
-  { href: '#conway',      label: 'Conway'      },
-  { href: '#bot',         label: 'Bot Status'  },
-  { href: '#stack',       label: 'Stack'       },
-  { href: '#pricing',     label: 'Pricing'     },
+  { href: '#live',        label: 'Live'       },
+  { href: '#performance', label: 'Performance'},
+  { href: '#pricing',     label: 'Pricing'    },
+  { href: '/indicator',   label: 'Indicator'  },
+  { href: '/dashboard',   label: 'Dashboard'  },
 ]
 
 const CELL_PATTERNS = [
@@ -36,7 +35,7 @@ export default function Nav() {
       borderBottom: '1px solid var(--border)',
     }}>
       {/* Logo */}
-      <Link href="#" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
+      <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
         <div style={{
           display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr',
           gap: '3px', padding: '5px', width: '30px', height: '30px',
@@ -79,6 +78,16 @@ export default function Nav() {
         }}>
           <div className="ldot" /> 6 assets live
         </div>
+        <a href="/dashboard" style={{
+          fontSize: '10px', letterSpacing: '1.5px', padding: '6px 14px',
+          border: '1px solid rgba(0,195,255,0.3)', color: 'var(--cyan)',
+          textDecoration: 'none', transition: 'all 0.2s',
+        }}
+          onMouseEnter={e => { e.currentTarget.style.background = 'rgba(0,195,255,0.08)' }}
+          onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
+        >
+          Member Login
+        </a>
         <a
           href="https://utas.stockindexer.com/checkout/pro"
           target="_blank" rel="noreferrer"
