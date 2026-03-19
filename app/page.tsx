@@ -2,62 +2,15 @@ import Nav           from '@/components/Nav'
 import Hero          from '@/components/Hero'
 import FaqList       from '@/components/FaqList'
 import TickerTape    from '@/components/TickerTape'
-import ConwayCard    from '@/components/ConwayCard'
+import ConwayCards  from '@/components/ConwayCard'
 import SignalFeed    from '@/components/SignalFeed'
 import EquityChart   from '@/components/EquityChart'
 import PricingSection from '@/components/PricingSection'
+import WorldIndices  from '@/components/WorldIndices'
 import Footer        from '@/components/Footer'
 import FadeUp        from '@/components/FadeUp'
-import type { ConwayCardData } from '@/components/ConwayCard'
 
 /* ─── Static Data ─── */
-const CARDS: ConwayCardData[] = [
-  {
-    sym:'BTCUSDT', tf:'Binance Futures · 1H', price:'66,491.94', chg:'▼ −101.37  (−0.15%)', up:false, state:'dormant',
-    cells:[0,0,1,0,0,0,1,0], fusion:9, grade:'⭐ GRADE 4 — THIN',
-    details:[
-      {name:'Weekly Trend',on:false},{name:'Price > Baseline',on:false},{name:'SQZ Released',on:true},
-      {name:'Volume OK',on:false},{name:'Predator HFT',on:false},{name:'CHoCH/BOS',on:false},
-      {name:'Session',on:true},{name:'OFI',on:false},
-    ],
-  },
-  {
-    sym:'XAUUSD', tf:'Spot Gold · 1H', price:'2,912.40', chg:'▲ +23.60  (+0.82%)', up:true, state:'alive',
-    cells:[1,1,1,1,0,1,1,0], fusion:17, grade:'⭐⭐ GRADE 2 — PRIME',
-    details:[
-      {name:'Weekly Trend',on:true},{name:'Price > Baseline',on:true},{name:'SQZ Released',on:true},
-      {name:'Volume OK',on:true},{name:'Predator HFT',on:false},{name:'CHoCH/BOS',on:true},
-      {name:'Session',on:true},{name:'OFI',on:false},
-    ],
-  },
-  {
-    sym:'EURUSD', tf:'Forex Major · 1H', price:'1.0834', chg:'▲ +0.0022  (+0.21%)', up:true, state:'born',
-    cells:[1,1,1,1,1,0,1,0], fusion:19, grade:'⭐⭐⭐ GRADE 1 — OPTIMAL',
-    details:[
-      {name:'Weekly Trend',on:true},{name:'Price > Baseline',on:true},{name:'SQZ Released',on:true},
-      {name:'Volume OK',on:true},{name:'Predator HFT',on:true},{name:'CHoCH/BOS',on:false},
-      {name:'Session',on:true},{name:'OFI',on:false},
-    ],
-  },
-  {
-    sym:'BBCA.JK', tf:'IDX Banking · 1H', price:'9,650', chg:'▲ +100  (+1.05%)', up:true, state:'born',
-    cells:[1,1,1,1,1,1,1,0], fusion:21, grade:'⭐⭐⭐ GRADE 1 — OPTIMAL',
-    details:[
-      {name:'Weekly Trend',on:true},{name:'Price > Baseline',on:true},{name:'SQZ Released',on:true},
-      {name:'Volume OK',on:true},{name:'Predator HFT',on:true},{name:'CHoCH/BOS',on:true},
-      {name:'Session',on:true},{name:'OFI',on:false},
-    ],
-  },
-  {
-    sym:'TLKM.JK', tf:'IDX Telecom · 1H', price:'3,420', chg:'▼ −20  (−0.58%)', up:false, state:'dormant',
-    cells:[0,1,0,1,0,0,1,0], fusion:8, grade:'⭐ GRADE 4 — THIN',
-    details:[
-      {name:'Weekly Trend',on:false},{name:'Price > Baseline',on:true},{name:'SQZ Released',on:false},
-      {name:'Volume OK',on:true},{name:'Predator HFT',on:false},{name:'CHoCH/BOS',on:false},
-      {name:'Session',on:true},{name:'OFI',on:false},
-    ],
-  },
-]
 
 const PERF_STATS = [
   { lbl:'Win Rate',      val:'74%',   valBig:'74',  valSuf:'%',  valSufSz:'20px', color:'#39ff14', sub:'Conway signal tier — all trades',           delta:'▲ BBP standalone: 81.8%' },
@@ -78,14 +31,14 @@ const WR_BARS = [
 ]
 
 const HOW_STEPS = [
-  { n:'01', icon:'📊', ttl:'Market Scan',   tag:'SS BlackBox v6.3',  desc:'SS BlackBox scans OHLCV data every 1H bar close. 8 Conway cells evaluated simultaneously across weekly trend, baseline, volume, structure, session, and OFI.' },
+  { n:'01', icon:'📊', ttl:'Market Scan',   tag:'SS BlackBox v6.4',  desc:'SS BlackBox scans OHLCV data every 1H bar close. 8 Conway cells evaluated simultaneously across weekly trend, baseline, volume, structure, session, and OFI.' },
   { n:'02', icon:'🧬', ttl:'State Decision',tag:'Conway Automaton',   desc:'Conway State Engine computes BORN / ALIVE / DIED / DORMANT. Minimum 5/8 cells required. 23-point Fusion Score determines signal grade from 1 (best) to 5.' },
   { n:'03', icon:'⚡', ttl:'Signal Fire',   tag:'Webhook JSON',       desc:'When conditions align: Conway BORN/ALIVE + BBP Crossover + VWAP + RSI filter + London/NY session, a webhook payload fires to the execution layer.' },
   { n:'04', icon:'🤖', ttl:'Auto Execute',  tag:'Conway.tech',        desc:'Conway Research Automaton receives signal, validates context, places order with ATR-based SL/TP. Position monitored until SS3/BBP exit or Conway DIED.' },
 ]
 
 const STACK_LAYERS = [
-  { n:'Layer 01', color:'#00c3ff', id:'SS BlackBox v6.3',     platform:'TradingView · Pine Script v6',  desc:'8-cell Conway engine · 23-point confluence · BBP + PM entry signals · CHoCH/BOS · Order Blocks · FVG · Session filter · Webhook output', status:'● LIVE',       statusC:'#39ff14', arrow:'↓ webhook JSON'      },
+  { n:'Layer 01', color:'#00c3ff', id:'SS BlackBox v6.4',     platform:'TradingView · Pine Script v6',  desc:'8-cell Conway engine · 23-point confluence · BBP + PM entry signals · CHoCH/BOS · Order Blocks · FVG · Session filter · Webhook output', status:'● LIVE',       statusC:'#39ff14', arrow:'↓ webhook JSON'      },
   { n:'Layer 02', color:'#39ff14', id:'Conway Automaton',     platform:'conway.tech · Ethereum Base',   desc:'Autonomous execution brain · ETH wallet identity · Genesis prompt trading rules · Think→Act→Observe loop · Self-funded from profit · On-chain audit log', status:'◌ Integrating', statusC:'#ffd700', arrow:'↓ confidence query'  },
   { n:'Layer 03', color:'#ffd700', id:'DeepNode AI',          platform:'deepnode.ai · Base L2',         desc:'Multi-model AI confidence verification · PoWR reward for accurate signals · On-chain signal validation · 98% task success rate · <$0.01 per query', status:'◇ Q2 2026',    statusC:'#bd93f9', arrow:'↓ execute order'     },
   { n:'Layer 04', color:'#bd93f9', id:'Exchange API',         platform:'Binance · Bybit · OKX',         desc:'Order placement · ATR-based SL/TP · Position monitoring · USDC profit settlement back to Automaton wallet · Full trade history log', status:'● LIVE',       statusC:'#39ff14', arrow:'' },
@@ -116,8 +69,8 @@ export default function Page() {
         <div className="sec-eyebrow">Conway Automaton — Live State Engine</div>
         <h2 className="sec-h">Real-Time<br />Market Intelligence</h2>
         <p className="sec-p">8-cell Conway state computed every bar close. Hover any card to inspect all 8 cells live. Covering crypto, forex, commodities, and IDX stocks.</p>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(280px,1fr))', gap: '16px' }}>
-          {CARDS.map(c => <ConwayCard key={c.sym} d={c} />)}
+        <div style={{ maxWidth: '360px' }}>
+          <ConwayCards />
         </div>
       </section>
 
@@ -137,7 +90,7 @@ export default function Page() {
       <section className="sec" id="performance">
         <div className="sec-eyebrow">Verified Backtest — BTCUSDT 1H · 2022–2025</div>
         <h2 className="sec-h">Numbers That<br />Don&apos;t Lie.</h2>
-        <p className="sec-p">All metrics from SS BlackBox v6.3 backtest engine. 287 trades · 3 years · commission 0.05% included. No curve fitting.</p>
+        <p className="sec-p">All metrics from SS BlackBox v6.4 backtest engine. 287 trades · 3 years · commission 0.05% included. No curve fitting.</p>
         <div className="perf-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: '32px', alignItems: 'start' }}>
           <div>
             <div className="stats-wrap" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1px', background: 'var(--border)' }}>
@@ -409,8 +362,22 @@ export default function Page() {
 
       <div className="divider"><hr /></div>
 
+      {/* ─── MACRO INDICES ─── */}
+      <section className="sec">
+        <div className="sec-eyebrow">Market Context</div>
+        <h2 className="sec-h">Global Indices.</h2>
+        <p className="sec-p">Macro market context — not part of signal universe, but useful for broader context.</p>
+        <div style={{ maxWidth: '800px' }}>
+          <WorldIndices />
+        </div>
+      </section>
+
+      <div className="divider"><hr /></div>
+
       {/* ─── PRICING ─── */}
-      <PricingSection />
+      <div id="pricing">
+        <PricingSection />
+      </div>
 
       <div className="divider"><hr /></div>
 
