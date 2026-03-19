@@ -182,7 +182,7 @@ export function SentimentAnalyzer() {
         {(data?.news ?? []).map((n, i) => {
           const sentColor = n.sentiment === 'BULLISH' ? '#39ff14' : n.sentiment === 'BEARISH' ? '#ff0062' : '#ffd700'
           return (
-            <div key={n.id} style={{
+            <div key={`news-${i}-${n.title.slice(0,20)}`} style={{
               background:'#0a1020',
               border:`1px solid ${sentColor}25`,
               borderLeft:`3px solid ${sentColor}`,
@@ -192,7 +192,7 @@ export function SentimentAnalyzer() {
               display:'flex', gap:10, alignItems:'flex-start',
             }}>
               <div style={{ minWidth:36, textAlign:'right' }}>
-                <span style={{ fontFamily:'Space Mono,monospace', fontSize:8, color:'#4a6080' }}>{n.time}</span>
+                <span style={{ fontFamily:'Space Mono,monospace', fontSize:8, color:'#4a6080' }}>{n.pubDate ? new Date(n.pubDate).toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit'}) : '—'}</span>
               </div>
               <div style={{ flex:1 }}>
                 <div style={{ fontFamily:'JetBrains Mono,monospace', fontSize:11, color:'#c8d8e8', lineHeight:1.5, marginBottom:4 }}>
@@ -200,9 +200,9 @@ export function SentimentAnalyzer() {
                 </div>
                 <div style={{ display:'flex', gap:8, alignItems:'center' }}>
                   <span style={{ fontFamily:'Space Mono,monospace', fontSize:8, color:'#4a6080' }}>{n.source}</span>
-                  {n.ticker && (
+                  {n.impact && (
                     <span style={{ fontFamily:'Space Mono,monospace', fontSize:8, color:'#00c3ff', background:'#00c3ff15', padding:'1px 5px', borderRadius:3 }}>
-                      {n.ticker}
+                      {n.impact}
                     </span>
                   )}
                   <span style={{ fontFamily:'Space Mono,monospace', fontSize:8, color:sentColor, background:`${sentColor}15`, padding:'1px 5px', borderRadius:3, letterSpacing:0.5 }}>
@@ -210,7 +210,7 @@ export function SentimentAnalyzer() {
                   </span>
                   <div style={{ display:'flex', gap:2 }}>
                     {Array.from({length:5}).map((_,j) => (
-                      <div key={j} style={{ width:5, height:5, borderRadius:1, background: j < n.impact ? sentColor : '#162035' }} />
+                      <div key={j} style={{ width:5, height:5, borderRadius:1, background: j < Math.round((Math.abs(n.score ?? 0) / 100) * 5) ? sentColor : '#162035' }} />
                     ))}
                   </div>
                 </div>
