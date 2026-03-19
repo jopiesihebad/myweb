@@ -69,6 +69,13 @@ export default function TradingViewChart({
 
   const [symbol, setSymbol] = useState(propSymbol || 'BTCUSDT')
   const [tf, setTf] = useState('60')
+
+  // Sync internal symbol when parent passes new activeTicker
+  useEffect(() => {
+    if (propSymbol && propSymbol !== symbol) {
+      setSymbol(propSymbol)
+    }
+  }, [propSymbol])
   const [loaded, setLoaded] = useState(false)
   const [scriptLoaded, setScriptLoaded] = useState(false)
   const [showVolume, setShowVolume] = useState(false)
@@ -264,15 +271,16 @@ export default function TradingViewChart({
 
         {/* Right: controls */}
         <div style={{ display:'flex', alignItems:'center', gap:4 }}>
-          {/* Symbol picker */}
-          {['BTCUSDT','XAUUSD','BBCA.JK','ANTM.JK'].map(s => (
+          {/* Symbol picker — PINE_ASSETS canonical tickers */}
+          {['BTCUSDT','ETHUSDT','XAUUSD','BBCA','BBRI','ANTM','ASII','NVDA','EURUSD','SOLUSDT'].map(s => (
             <button key={s} onClick={() => setSymbol(s)} style={{
               fontFamily:'Space Mono,monospace', fontSize:8, letterSpacing:0.5,
               padding:'2px 7px', borderRadius:3, cursor:'pointer',
               background: symbol === s ? '#00c3ff20' : 'transparent',
               border: `1px solid ${symbol === s ? '#00c3ff' : '#162035'}`,
               color: symbol === s ? '#00c3ff' : '#4a6080',
-            }}>{s.replace('.JK','')}</button>
+              transition: 'all 0.15s',
+            }}>{s}</button>
           ))}
 
           <div style={{ width:1, height:16, background:'#162035', margin:'0 2px' }} />
