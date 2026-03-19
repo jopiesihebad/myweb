@@ -9,6 +9,7 @@ import { SentimentAnalyzer, BacktestSimulator } from './SentimentAndBacktest'
 import WorldIndices from './WorldIndices'
 import TradeLog from './TradeLog'
 import AffiliateTools from './AffiliateTools'
+import QuickGlanceDashboard from './QuickGlanceDashboard'
 import StockHeatmap from './StockHeatmap'
 
 const TradingViewChart = dynamic(() => import('./TradingViewChart'), { ssr: false })
@@ -48,37 +49,17 @@ function Panel({ children, style = {} }: { children: ReactNode; style?: React.CS
 }
 
 // ── Layout 1: Quick Glance ────────────────────────────────────────────────────
-function QuickGlanceLayout({ activeTicker }: { activeTicker: string }) {
+function QuickGlanceLayout({ activeTicker, onTickerSelect }: { activeTicker: string; onTickerSelect?: (t: string) => void }) {
   return (
-    <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
-      {/* World indices */}
-      <Panel>
-        <WorldIndices />
-      </Panel>
-
-      {/* Chart (full width) */}
-      <TradingViewChart height={380} symbol={activeTicker} />
-
-      {/* 2-col: Signals + Sentiment + Tools */}
-      <div style={{ display:'grid', gridTemplateColumns:'3fr 2fr', gap:16 }}>
-        <Panel>
-          <SignalExplanation />
-        </Panel>
-        <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
-          <Panel>
-            <SentimentAnalyzer />
-          </Panel>
-          <Panel>
-            <AffiliateTools />
-          </Panel>
-        </div>
-      </div>
-    </div>
+    <QuickGlanceDashboard
+      activeTicker={activeTicker}
+      onTickerSelect={onTickerSelect ?? (() => {})}
+    />
   )
 }
 
 // ── Layout 2: Portfolio First ─────────────────────────────────────────────────
-function PortfolioFirstLayout({ activeTicker }: { activeTicker: string }) {
+function PortfolioFirstLayout({ activeTicker, onTickerSelect }: { activeTicker: string; onTickerSelect?: (t: string) => void }) {
   return (
     <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
       {/* Portfolio full width */}
@@ -261,8 +242,8 @@ export default function LayoutSwitcher({ activeTicker = 'BTCUSDT', onTickerSelec
 
       {/* Content */}
       <div style={{ animation:'fadeUp 0.3s ease', padding:'0 4px' }}>
-        {active === 'quick'     && <QuickGlanceLayout activeTicker={activeTicker} />}
-        {active === 'portfolio' && <PortfolioFirstLayout activeTicker={activeTicker} />}
+        {active === 'quick'     && <QuickGlanceLayout activeTicker={activeTicker} onTickerSelect={onTickerSelect} />}
+        {active === 'portfolio' && <PortfolioFirstLayout activeTicker={activeTicker} onTickerSelect={onTickerSelect} />}
         {active === 'signal'    && <SignalDeepDiveLayout activeTicker={activeTicker} />}
         {active === 'journal'   && <TradeJournalLayout />}
         {active === 'heatmap'   && <HeatmapLayout activeTicker={activeTicker} onTickerSelect={onTickerSelect} />}
