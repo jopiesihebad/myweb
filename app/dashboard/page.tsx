@@ -318,10 +318,15 @@ function DashboardContent() {
   const [activeTicker, setActiveTicker] = useState('BTCUSDT')
 
   return (
-    <div className="scanlines noise-overlay grid-bg" style={{
+    <div className="scanlines noise-overlay" style={{
       minHeight: '100vh',
       background: BG_MAIN,
       position: 'relative',
+      backgroundImage: `
+        linear-gradient(rgba(0,195,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,195,255,0.025) 1px, transparent 1px)
+      `,
+      backgroundSize: '48px 48px',
     }}>
       <BackgroundOrbs />
 
