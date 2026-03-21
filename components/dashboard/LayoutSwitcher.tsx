@@ -11,10 +11,11 @@ import TradeLog from './TradeLog'
 import AffiliateTools from './AffiliateTools'
 import QuickGlanceDashboard from './QuickGlanceDashboard'
 import StockHeatmap from './StockHeatmap'
+import SmartFlowIntelligence from './SmartFlowIntelligence'
 
 const TradingViewChart = dynamic(() => import('./TradingViewChart'), { ssr: false })
 
-export type LayoutType = 'quick' | 'portfolio' | 'signal' | 'ownership' | 'journal' | 'heatmap' | 'tools' | 'minimal'
+export type LayoutType = 'quick' | 'portfolio' | 'signal' | 'ownership' | 'journal' | 'heatmap' | 'tools' | 'smartflow' | 'minimal'
 
 interface LayoutMeta {
   key:   LayoutType
@@ -31,6 +32,7 @@ const LAYOUTS: LayoutMeta[] = [
   { key:'ownership', label:'Ownership Intel',    icon:'🏛',  desc:'IDX shareholding data — BBCA/BBRI/ANTM/ASII + AI Q&A', color:'#ff44cc' },
   { key:'journal',   label:'Signal Journal',     icon:'📋', desc:'Signal tracking log + performance report + CSV export',         color:'#39ff14' },
   { key:'heatmap',   label:'Signal Map',         icon:'🗺',  desc:'Conway state heatmap — 24 assets real-time',            color:'#ff8c00' },
+  { key:'smartflow', label:'Smart Flow Intel',   icon:'🧠',  desc:'4-class market intelligence — Saham, Crypto, Commodity, Forex', color:'#ff44cc' },
   { key:'tools',     label:'Tools & Exchanges',  icon:'🔗',  desc:'OJK-licensed exchanges, platforms, trader setup',               color:'#ff8c00' },
   { key:'minimal',   label:'Compact View',       icon:'◯',  desc:'Mobile-optimized compact view',                    color:'#8aa0b8' },
 ]
@@ -247,6 +249,17 @@ function ToolsLayout() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+//  Layout: Smart Flow Intelligence
+// ─────────────────────────────────────────────────────────────────────────────
+function SmartFlowLayout() {
+  return (
+    <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
+      <SmartFlowIntelligence />
+    </div>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 //  Layout 6: Stock Map (Heatmap)
 //  24 assets Conway state heatmap
 //  BY STATE / BY FUSION / BY CLASS view modes
@@ -374,6 +387,7 @@ export default function LayoutSwitcher({
         {active === 'ownership' && <OwnershipLayout />}
         {active === 'journal'   && <TradeJournalLayout />}
         {active === 'tools'     && <ToolsLayout />}
+        {active === 'smartflow' && <SmartFlowLayout />}
         {active === 'heatmap'   && <HeatmapLayout         activeTicker={activeTicker} onTickerSelect={onTickerSelect} />}
         {active === 'minimal'   && <MinimalMobileLayout   activeTicker={activeTicker} />}
       </div>
