@@ -144,8 +144,8 @@ export default function PricingSection() {
       <div className="guarantee-bar" style={{ position: 'relative', zIndex: 1 }}>
         <span style={{ fontSize: '16px' }}>⚠️</span>
         <span style={{ fontSize: '11px', color: '#5a7090', letterSpacing: '0.3px' }}>
-          <strong style={{ color: '#eef4fc' }}>Platform Intelligence Tools — Bukan Robot Trading.</strong>{' '}
-          Semua sinyal bersifat informatif. Eksekusi 100% manual oleh pengguna. Tidak ada jaminan profit.
+          <strong style={{ color: '#eef4fc' }}>Intelligence Tools Platform — Not a Trading Robot.</strong>{' '}
+          All signals are informational. Execution is 100% manual by user. No profit guarantees.
         </span>
         <a href="#faq" style={{ fontSize: '9px', color: '#00c3ff', letterSpacing: '1.5px', textTransform: 'uppercase', textDecoration: 'none', borderBottom: '1px solid rgba(0,195,255,0.3)', paddingBottom: '1px' }}>
           Baca FAQ →
