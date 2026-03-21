@@ -7,21 +7,21 @@ import { Badge } from '@/components/ui/badge'
 
 /* ─── Prices in IDR (source of truth) ─── */
 const PRICES = {
-  PRO_IDR:         497_000,
-  PRO_IDR_ORIG:    994_000,   // crossed-out original
-  ELITE_IDR:     2_999_000,
-  ELITE_IDR_ORIG: 5_964_000,  // crossed-out original
+  STARTER_IDR:       149_000,
+  STARTER_IDR_ORIG:  199_000,
+  STARTER_ANN:     1_342_000,   // 149K × 12 × 0.75
+  PRO_IDR:           349_000,
+  PRO_IDR_ORIG:      499_000,
+  PRO_ANN:         3_141_000,   // 349K × 12 × 0.75
+  ELITE_IDR:       2_799_000,
+  ELITE_IDR_ORIG:  3_999_000,
 }
 
-const FALLBACK_RATE = 16200   // IDR per 1 USD — fallback if API fails
+const FALLBACK_RATE = 16200
 
-function fmtIDR(n: number) {
-  return 'Rp ' + n.toLocaleString('id-ID')
-}
-/* Short display: 497.000 → 497K · 2.999.000 → 2.999K */
+function fmtIDR(n: number) { return 'Rp ' + n.toLocaleString('id-ID') }
 function fmtIDRShort(n: number) {
   const k = n / 1000
-  // Keep up to 3 decimal places of K, strip trailing zeros
   const kStr = k % 1 === 0 ? k.toFixed(0) : k.toLocaleString('id-ID', { maximumFractionDigits: 3 })
   return kStr + 'K'
 }
@@ -31,34 +31,36 @@ function fmtUSD(idr: number, rate: number) {
 }
 
 /* ─── Features ─── */
+const STARTER_FEATURES = [
+  { t: 'hi',  text: 'Conway Signal Intelligence — 5 pair monitoring' },
+  { t: 'hi',  text: 'State monitoring: BORN / ALIVE / DIED / DORMANT' },
+  { t: 'hi',  text: 'Confluence Score real-time (5 pairs)' },
+  { t: 'on',  text: 'Daily Signal Feed via dashboard' },
+  { t: 'on',  text: 'Session clock: ASIA / LONDON / NY / IDX' },
+  { t: 'on',  text: 'World Indices & DXY/VIX macro strip' },
+  { t: 'off', text: 'Historical signal data (Pro only)' },
+  { t: 'off', text: 'Full 24-asset monitoring (Pro only)' },
+]
+
 const PRO_FEATURES = [
-  { t: 'hi',  text: 'Conway live state — all assets (crypto, forex, IDX)' },
-  { t: 'hi',  text: 'Real-time signal feed ≤500ms latency' },
-  { t: 'hi',  text: 'BBP + Conway alerts via Telegram bot' },
-  { t: 'on',  text: 'TradingView webhook config guide' },
-  { t: 'on',  text: 'Live win rate tracker dashboard' },
-  { t: 'on',  text: 'Chart snapshot on every signal' },
-  { t: 'on',  text: '14-day money-back guarantee' },
-  { t: 'off', text: 'Conway Automaton bot access (coming)' },
+  { t: 'hi',  text: 'All Starter features included' },
+  { t: 'hi',  text: 'Full 24 assets: crypto, IDX stocks, forex, commodities' },
+  { t: 'hi',  text: 'Full dashboard: Signal Deep Dive, Stock Map, Portfolio' },
+  { t: 'hi',  text: 'Historical signal data + performance report' },
+  { t: 'on',  text: 'Ownership Intelligence: BBCA/BBRI/ANTM/ASII + AI Q&A' },
+  { t: 'on',  text: 'Sentiment & News AI Scoring — powered by Claude AI' },
+  { t: 'on',  text: 'Daily Risk Meter + Watch List (almost signal alerts)' },
+  { t: 'on',  text: 'Signal Tracking Journal + CSV export' },
 ]
+
 const ELITE_FEATURES = [
-  { t: 'gold', text: 'Everything in PRO, forever — no renewal' },
-  { t: 'gold', text: 'Ownership Intelligence IDX (stock screening)' },
-  { t: 'gold', text: 'AI Q&A IDX stocks (pieBot Sovereign)' },
-  { t: 'gold', text: 'Portfolio Risk Dashboard' },
-  { t: 'gold', text: 'Full Backtest Simulator access' },
-  { t: 'gold', text: 'Managed Conway Automaton bot' },
-  { t: 'gold', text: 'Priority signal <100ms latency' },
-  { t: 'on',   text: '1-on-1 onboarding setup session' },
-]
-const ENT_FEATURES = [
-  { t: 'on', text: 'Everything in ELITE' },
-  { t: 'on', text: 'Multi-seat team access (up to 50 users)' },
-  { t: 'on', text: 'White-label signal engine' },
-  { t: 'on', text: 'Custom webhook integrations' },
-  { t: 'on', text: 'Dedicated account manager' },
-  { t: 'on', text: 'SLA 99.9% uptime guarantee' },
-  { t: 'on', text: 'Custom bot strategy setup' },
+  { t: 'gold', text: 'All Pro features — forever, no renewal needed' },
+  { t: 'gold', text: '🔮 EXCLUSIVE: SS BlackBox Phantom Private Version (TradingView invite-only)' },
+  { t: 'gold', text: 'Lifetime automatic updates — all future versions included' },
+  { t: 'gold', text: 'Priority support — response ≤4 hours on business days' },
+  { t: 'gold', text: 'Early access to new features before other tiers' },
+  { t: 'gold', text: 'Exclusive Elite badge in dashboard' },
+  { t: 'on',   text: 'Onboarding session for TradingView indicator setup' },
 ]
 
 type FeatItem = { t: string; text: string }
@@ -69,7 +71,7 @@ function FeatureList({ items }: { items: FeatItem[] }) {
       {items.map((f, i) => (
         <li key={i}
           className={f.t === 'gold' ? 'gold-f' : f.t === 'on' ? 'on' : f.t === 'hi' ? 'hi' : ''}
-          style={{ color: f.t === 'gold' ? '#ffd700' : f.t === 'hi' ? '#eef4fc' : f.t === 'on' ? '#5a7090' : '#2a3d58' }}>
+          style={{ color: f.t === 'gold' ? '#ffd700' : f.t === 'hi' ? '#eef4fc' : f.t === 'on' ? '#5a7090' : '#2a3d58', fontSize: f.t === 'gold' ? '12px' : undefined }}>
           {f.text}
         </li>
       ))}
@@ -77,52 +79,33 @@ function FeatureList({ items }: { items: FeatItem[] }) {
   )
 }
 
-/* ─── Price block component ─── */
 function PriceBlock({
-  idr, idrOrig, rate, rateLoading, color = '#eef4fc', subLabel,
+  idr, idrOrig, rate, rateLoading, color = '#eef4fc', subLabel, annLabel,
 }: {
   idr: number; idrOrig: number; rate: number; rateLoading: boolean
-  color?: string; subLabel: string
+  color?: string; subLabel: string; annLabel?: string
 }) {
   return (
     <div style={{ marginBottom: '24px' }}>
-      {/* Crossed-out original price */}
-      <div style={{
-        fontSize: '12px', color: '#2a3d58', textDecoration: 'line-through',
-        letterSpacing: '0.5px', marginBottom: '4px', fontFamily: '"JetBrains Mono", monospace',
-      }}>
+      <div style={{ fontSize: '12px', color: '#2a3d58', textDecoration: 'line-through', letterSpacing: '0.5px', marginBottom: '4px', fontFamily: '"JetBrains Mono", monospace' }}>
         {fmtIDR(idrOrig)}
       </div>
-
-      {/* Main IDR price — K-abbreviated so it fits in card */}
-      <div style={{
-        fontFamily: 'Syne, sans-serif', fontSize: '64px', fontWeight: 800,
-        letterSpacing: '-3px', lineHeight: 1, color, marginBottom: '4px',
-      }}>
+      <div style={{ fontFamily: 'Syne, sans-serif', fontSize: '64px', fontWeight: 800, letterSpacing: '-3px', lineHeight: 1, color, marginBottom: '4px' }}>
         <span style={{ fontSize: '20px', fontWeight: 400, verticalAlign: 'super', letterSpacing: 0 }}>Rp </span>
         {fmtIDRShort(idr)}
       </div>
-
-      {/* Sub-label (per bulan / sekali bayar) */}
-      <div style={{ fontSize: '11px', color: '#5a7090', marginBottom: '6px' }}>
-        {subLabel}
-      </div>
-
-      {/* Realtime USD conversion */}
-      <div style={{
-        display: 'inline-flex', alignItems: 'center', gap: '6px',
-        background: 'rgba(0,195,255,0.05)', border: '1px solid rgba(0,195,255,0.15)',
-        padding: '3px 10px', fontSize: '10px', letterSpacing: '0.5px',
-      }}>
+      <div style={{ fontSize: '11px', color: '#5a7090', marginBottom: '4px' }}>{subLabel}</div>
+      {annLabel && (
+        <div style={{ fontSize: '10px', color: '#39ff14', marginBottom: '6px', letterSpacing: '0.3px' }}>
+          📅 Annual: {annLabel} <span style={{ color: '#2a6040' }}>(save 25%)</span>
+        </div>
+      )}
+      <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(0,195,255,0.05)', border: '1px solid rgba(0,195,255,0.15)', padding: '3px 10px', fontSize: '10px', letterSpacing: '0.5px' }}>
         <span style={{ color: '#5a7090' }}>≈</span>
         <span style={{ color: '#00c3ff', fontFamily: '"JetBrains Mono", monospace', fontWeight: 700 }}>
           {rateLoading ? '…' : fmtUSD(idr, rate)} USD
         </span>
-        {!rateLoading && (
-          <span style={{ color: '#2a3d58', fontSize: '9px' }}>
-            · live rate
-          </span>
-        )}
+        {!rateLoading && <span style={{ color: '#2a3d58', fontSize: '9px' }}>· live rate</span>}
       </div>
     </div>
   )
@@ -138,23 +121,18 @@ export default function PricingSection() {
   const [rateLoading, setLoading] = useState(true)
   const [rateTs, setRateTs]       = useState<string | null>(null)
 
-  /* Fetch live IDR/USD rate once on mount */
   useEffect(() => {
     let cancelled = false
     async function fetchRate() {
       try {
-        // frankfurter.app — free, no API key, ~4h cache
         const res  = await fetch('https://api.frankfurter.app/latest?from=USD&to=IDR')
         const data = await res.json() as { rates: { IDR: number }; date: string }
         if (!cancelled && data?.rates?.IDR) {
           setRate(data.rates.IDR)
           setRateTs(data.date)
         }
-      } catch {
-        // keep FALLBACK_RATE silently
-      } finally {
-        if (!cancelled) setLoading(false)
-      }
+      } catch { /* keep fallback */ }
+      finally { if (!cancelled) setLoading(false) }
     }
     fetchRate()
     return () => { cancelled = true }
@@ -162,27 +140,28 @@ export default function PricingSection() {
 
   return (
     <>
-      {/* ── Guarantee bar (top) ── */}
+      {/* ── Disclaimer bar (top) ── */}
       <div className="guarantee-bar" style={{ position: 'relative', zIndex: 1 }}>
-        <span style={{ fontSize: '16px' }}>🛡️</span>
+        <span style={{ fontSize: '16px' }}>⚠️</span>
         <span style={{ fontSize: '11px', color: '#5a7090', letterSpacing: '0.3px' }}>
-          <strong style={{ color: '#eef4fc' }}>14-Day Money-Back Guarantee</strong> — Not satisfied in the first 14 days? Full refund, no questions asked.
+          <strong style={{ color: '#eef4fc' }}>Platform Intelligence Tools — Bukan Robot Trading.</strong>{' '}
+          Semua sinyal bersifat informatif. Eksekusi 100% manual oleh pengguna. Tidak ada jaminan profit.
         </span>
-        <a href="#" style={{ fontSize: '9px', color: '#00c3ff', letterSpacing: '1.5px', textTransform: 'uppercase', textDecoration: 'none', borderBottom: '1px solid rgba(0,195,255,0.3)', paddingBottom: '1px' }}>
-          Read refund policy →
+        <a href="#faq" style={{ fontSize: '9px', color: '#00c3ff', letterSpacing: '1.5px', textTransform: 'uppercase', textDecoration: 'none', borderBottom: '1px solid rgba(0,195,255,0.3)', paddingBottom: '1px' }}>
+          Baca FAQ →
         </a>
       </div>
 
       {/* ── Pricing section ── */}
       <div className="sec" id="pricing" style={{ position: 'relative', zIndex: 1 }}>
-        <div className="sec-eyebrow">Access Tiers</div>
-        <h2 className="sec-h">Choose Your<br />Intelligence Level.</h2>
+        <div className="sec-eyebrow">Choose Your Intelligence Level</div>
+        <h2 className="sec-h">Access Signals.<br />You Decide.</h2>
         <p className="sec-p">
-          All plans include transparent win rate tracking, verified backtest results, and real-time BBP signals.
-          14-day money-back guarantee on all plans.
+          Pure subscription — no performance fees, no managed accounts, no profit sharing.
+          All trade execution is done independently by users on OJK-licensed exchanges.
           {rateTs && (
             <span style={{ display: 'block', marginTop: '6px', fontSize: '10px', color: '#2a3d58' }}>
-              USD conversion rate updated: {rateTs} · 1 USD = Rp {Math.round(rate).toLocaleString('id-ID')}
+              USD rate updated: {rateTs} · 1 USD = Rp {Math.round(rate).toLocaleString('id-ID')}
             </span>
           )}
         </p>
@@ -190,11 +169,38 @@ export default function PricingSection() {
         {/* 3-card grid */}
         <div className="price-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '16px', marginBottom: '32px' }}>
 
-          {/* PRO */}
+          {/* STARTER */}
           <motion.div {...cardAnim} transition={{ ...cardAnim.transition, delay: 0 }}
             className="pc feat" style={{ position: 'relative', overflow: 'hidden' }}>
+            <div style={{ fontSize: '9px', letterSpacing: '3px', textTransform: 'uppercase', color: '#5a7090', marginBottom: '14px' }}>STARTER</div>
+
+            <PriceBlock
+              idr={PRICES.STARTER_IDR}
+              idrOrig={PRICES.STARTER_IDR_ORIG}
+              rate={rate}
+              rateLoading={rateLoading}
+              color="#eef4fc"
+              subLabel="per month · cancel anytime"
+              annLabel={fmtIDR(PRICES.STARTER_ANN) + '/thn'}
+            />
+
+            <div style={{ height: '1px', background: '#162035', marginBottom: '20px' }} />
+            <FeatureList items={STARTER_FEATURES} />
+            <Button
+              variant="default"
+              size="lg"
+              onClick={() => window.open('https://utas.stockindexer.com/checkout/starter', '_blank')}
+              style={{ width: '100%', justifyContent: 'center' }}
+            >
+              ⚡ START STARTER
+            </Button>
+          </motion.div>
+
+          {/* PRO */}
+          <motion.div {...cardAnim} transition={{ ...cardAnim.transition, delay: 0.05 }}
+            className="pc feat" style={{ position: 'relative', overflow: 'hidden' }}>
             <div style={{ position: 'absolute', top: '-1px', right: '24px' }}>
-              <Badge variant="cyan">Most Popular</Badge>
+              <Badge variant="cyan">Paling Populer</Badge>
             </div>
             <div style={{ fontSize: '9px', letterSpacing: '3px', textTransform: 'uppercase', color: '#5a7090', marginBottom: '14px' }}>PRO</div>
 
@@ -203,8 +209,9 @@ export default function PricingSection() {
               idrOrig={PRICES.PRO_IDR_ORIG}
               rate={rate}
               rateLoading={rateLoading}
-              color="#eef4fc"
-              subLabel="per bulan · cancel anytime"
+              color="#00c3ff"
+              subLabel="per month · cancel anytime"
+              annLabel={fmtIDR(PRICES.PRO_ANN) + '/thn'}
             />
 
             <div style={{ height: '1px', background: '#162035', marginBottom: '20px' }} />
@@ -215,7 +222,7 @@ export default function PricingSection() {
               onClick={() => window.open('https://utas.stockindexer.com/checkout/pro', '_blank')}
               style={{ width: '100%', justifyContent: 'center' }}
             >
-              🚀 START 14-DAY FREE TRIAL
+              🚀 START PRO
             </Button>
           </motion.div>
 
@@ -241,8 +248,13 @@ export default function PricingSection() {
               rate={rate}
               rateLoading={rateLoading}
               color="#ffd700"
-              subLabel="sekali bayar · lifetime access"
+              subLabel="one-time payment · lifetime access"
             />
+
+            {/* Elite exclusive callout */}
+            <div style={{ background: 'rgba(255,215,0,0.05)', border: '1px solid rgba(255,215,0,0.2)', padding: '10px 12px', marginBottom: '16px', fontSize: '10px', color: '#ffd700', lineHeight: 1.7 }}>
+              🔮 <strong>Invite-Only:</strong> SS BlackBox Phantom Private Version on TradingView — exclusively for Elite members. Not sold separately.
+            </div>
 
             <div style={{ height: '1px', background: '#162035', marginBottom: '20px' }} />
             <FeatureList items={ELITE_FEATURES} />
@@ -255,27 +267,6 @@ export default function PricingSection() {
               💎 GET ELITE LIFETIME →
             </Button>
           </motion.div>
-
-          {/* ENTERPRISE */}
-          <motion.div {...cardAnim} transition={{ ...cardAnim.transition, delay: 0.2 }}
-            className="pc" style={{ position: 'relative', overflow: 'hidden' }}>
-            <div style={{ fontSize: '9px', letterSpacing: '3px', textTransform: 'uppercase', color: '#5a7090', marginBottom: '14px' }}>ENTERPRISE</div>
-            <div style={{ fontFamily: 'Syne, sans-serif', fontSize: '38px', fontWeight: 800, color: '#5a7090', marginBottom: '2px' }}>Custom</div>
-            <div style={{ fontSize: '11px', color: '#5a7090', marginBottom: '28px' }}>contact sales for custom pricing</div>
-            <div style={{ height: '1px', background: '#162035', marginBottom: '20px' }} />
-            <FeatureList items={ENT_FEATURES} />
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => window.open('https://t.me/stockindexer_support', '_blank')}
-              style={{ width: '100%', justifyContent: 'center' }}
-            >
-              CONTACT SALES →
-            </Button>
-            <p style={{ fontSize: '10px', color: '#5a7090', marginTop: '10px' }}>
-              Or email <a href="mailto:enterprise@stockindexer.com" style={{ color: '#00c3ff', textDecoration: 'none' }}>enterprise@stockindexer.com</a>
-            </p>
-          </motion.div>
         </div>
 
         {/* ── USDC Bonus Box ── */}
@@ -287,15 +278,15 @@ export default function PricingSection() {
                 Pay with <span style={{ color: '#39ff14' }}>USDC</span> — Save 10–12%
               </div>
               <div style={{ fontSize: '11px', color: '#5a7090', lineHeight: 1.8, marginBottom: '14px' }}>
-                Save more by paying directly with USDC. Instant processing, no bank transfer fees, 2-minute confirmation.
+                Instant processing, no bank transfer fees, 2-minute confirmation.
               </div>
               <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '12px' }}>
-                {['① Choose plan above', '② Select "USDC" at UTAS checkout', '③ Transfer to wallet address', '④ Auto-confirmed · instant access'].map(s => (
+                {['① Select a plan above', '② Choose "USDC" at UTAS checkout', '③ Transfer to wallet address', '④ Access activated instantly'].map(s => (
                   <div key={s} style={{ background: 'rgba(57,255,20,0.05)', border: '1px solid rgba(57,255,20,0.18)', padding: '5px 12px', fontSize: '10px', color: '#39ff14', letterSpacing: '0.5px' }}>{s}</div>
                 ))}
               </div>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(57,255,20,0.08)', border: '1px solid rgba(57,255,20,0.25)', padding: '4px 12px', fontSize: '10px', color: '#39ff14', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
-                ⚡ USDC DISCOUNT: PRO 10% OFF · ELITE 12% OFF
+                ⚡ USDC DISCOUNT: STARTER 10% · PRO 10% · ELITE 12%
               </div>
             </div>
           </div>
@@ -316,10 +307,18 @@ export default function PricingSection() {
           ))}
         </div>
         <p style={{ textAlign: 'center', fontSize: '10px', color: '#5a7090', marginTop: '8px', letterSpacing: '0.5px' }}>
-          All payments processed via <strong style={{ color: '#eef4fc' }}>UTAS</strong> — encrypted and secure checkout.
+          All payments processed via <strong style={{ color: '#eef4fc' }}>UTAS</strong> — secure and encrypted checkout.
         </p>
-      </div>
 
+        {/* ── Disclaimer box ── */}
+        <div style={{ marginTop: '20px', padding: '14px 18px', background: 'rgba(255,0,98,0.04)', border: '1px solid rgba(255,0,98,0.15)', fontSize: '10px', color: '#5a7090', lineHeight: 1.8, letterSpacing: '0.3px' }}>
+          <strong style={{ color: '#ff6080' }}>DISCLAIMER:</strong> Subscription provides access to intelligence tools and signal feed —
+          not a guarantee of profit or specific trading results. No performance fees.
+          All trading decisions and execution are the sole responsibility of the subscriber on
+          OJK/BAPPEBTI-licensed exchanges. Trading involves risk of loss. Promo prices are time-limited.
+          Annual plans are billed in full at the start of the period.
+        </div>
+      </div>
     </>
   )
 }
