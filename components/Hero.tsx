@@ -23,7 +23,7 @@ export default function Hero() {
         <motion.div {...fade(0.1)} style={{ marginBottom: '28px' }}>
           <Badge variant="outline">
             <div className="ldot" style={{ marginRight: '8px' }} />
-            SS BlackBox v6.4 — Conway Automaton Engine
+            SS BlackBox v6.4 — Conway Signal Intelligence Platform
           </Badge>
         </motion.div>
 
@@ -35,16 +35,28 @@ export default function Hero() {
         }}>
           <motion.span {...fade(0.15)} style={{ display: 'block', color: '#eef4fc' }}>SIGNAL.</motion.span>
           <motion.span {...fade(0.30)} style={{ display: 'block', color: 'transparent', WebkitTextStroke: '1.5px #00c3ff' }}>DECIDE.</motion.span>
-          <motion.span {...fade(0.45)} style={{ display: 'block', color: '#00c3ff' }}>EXECUTE.</motion.span>
+          <motion.span {...fade(0.45)} style={{ display: 'block', color: '#00c3ff' }}>TRADE.</motion.span>
         </h1>
 
         <motion.p {...fade(0.6)} style={{
           fontSize: '13px', lineHeight: 1.9, color: '#5a7090',
-          maxWidth: '480px', marginBottom: '32px',
+          maxWidth: '480px', marginBottom: '16px',
         }}>
-          The world&apos;s first <strong style={{ color: '#eef4fc' }}>Conway Automaton</strong> signal intelligence platform.<br />
-          8-cell state engine × 23-point confluence × autonomous execution.<br />
-          <strong style={{ color: '#eef4fc' }}>Not a prediction. A verified system.</strong>
+          The <strong style={{ color: '#eef4fc' }}>Conway Signal Intelligence Platform</strong> for independent traders.<br />
+          8-cell state engine × 23-point confluence score × real-time market awareness tools.<br />
+          <strong style={{ color: '#eef4fc' }}>High-quality signals. Your decision. Your execution.</strong>
+        </motion.p>
+
+        {/* OJK disclaimer micro-copy */}
+        <motion.p {...fade(0.65)} style={{
+          fontSize: '10px', lineHeight: 1.7, color: '#3a5070',
+          maxWidth: '480px', marginBottom: '28px',
+          padding: '8px 12px', background: 'rgba(0,195,255,0.03)',
+          border: '1px solid rgba(0,195,255,0.1)',
+        }}>
+          ⚠️ Intelligence tools platform — not a trading robot. All trade execution is 100% manual
+          by you on OJK-licensed exchanges (Tokocrypto, Indodax, etc.).
+          No auto-execute. No managed accounts. No auto-trading.
         </motion.p>
 
         {/* ── CTA BUTTONS ── */}
@@ -52,17 +64,17 @@ export default function Hero() {
           <Button
             variant="default"
             size="lg"
-            onClick={() => window.open('https://utas.stockindexer.com/checkout/pro', '_blank')}
+            onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
             style={{ clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))' }}
           >
-            🚀 START 14-DAY FREE TRIAL
+            ⚡ START FROM Rp149K/MONTH
           </Button>
           <Button
             variant="gold"
             size="lg"
-            onClick={() => { document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' }) }}
+            onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            💎 VIEW PRICING &amp; ELITE →
+            💎 VIEW ELITE LIFETIME →
           </Button>
         </motion.div>
 
@@ -72,11 +84,11 @@ export default function Hero() {
           flexWrap: 'wrap', marginTop: '4px',
         }}>
           {[
-            { hl: '1,450+', text: 'active members' },
+            { hl: '1.450+', text: 'active members' },
             null,
-            { hl: '68%',    text: 'avg win rate' },
+            { hl: '74%',    text: 'signal win rate' },
             null,
-            { hl: '+18.4%', text: 'pieBot profit last month' },
+            { hl: '24',     text: 'assets monitored real-time' },
           ].map((item, i) =>
             item === null
               ? <span key={i} style={{ color: '#1e2e4a', fontSize: '12px' }}>•</span>
@@ -120,13 +132,13 @@ export default function Hero() {
             { out: '  cell[4] predator',      val: '    DEAD  (stagnant)',    vc: '#ff0062' },
             { out: '  cell[5] structure',     val: '   DEAD  (no BOS)',       vc: '#ff0062' },
             { out: '  cell[6] session',       val: '     LIVE  (London) ✓',   vc: '#39ff14' },
-            { out: '  cell[7] ofi',           val: '         DEAD  (neutral)',vc: '#ff0062' },
+            { out: '  cell[7] ofi',           val: '         DEAD  (neutral)', vc: '#ff0062' },
             null,
             { p: '▸', cmd: 'conway.state()', out: null },
-            { out: '  live_cells',    val: '    2 / 8',           vc: '#ff8c00' },
-            { out: '  state',         val: '         ○ DORMANT',  vc: '#ff0062' },
-            { out: '  fusion_score',  val: '  9 / 23  [GRADE 4]', vc: '#ff8c00' },
-            { out: '  signal',        val: '        ✗ NO ENTRY — skip', vc: '#ff0062' },
+            { out: '  live_cells',    val: '    2 / 8',            vc: '#ff8c00' },
+            { out: '  state',         val: '         ○ DORMANT',   vc: '#ff0062' },
+            { out: '  fusion_score',  val: '  9 / 23  [GRADE 4]',  vc: '#ff8c00' },
+            { out: '  signal',        val: '        ✗ NO SIGNAL — low confluence', vc: '#ff0062' },
             null,
           ] as ({ p?: string; cmd?: string; out?: string | null; val?: string; vc?: string } | null)[]).map((line, i) => {
             if (line === null) return <div key={i} style={{ height: '8px' }} />
@@ -141,8 +153,8 @@ export default function Hero() {
           })}
           <div style={{ display: 'flex', gap: '8px', marginBottom: '2px' }}>
             <span style={{ color: '#00c3ff' }}>▸</span>
-            <span style={{ color: '#39ff14' }}>bot.status</span>
-            <span style={{ color: '#5a7090' }}> → IDLE — waiting for BORN/ALIVE ≥5</span>
+            <span style={{ color: '#39ff14' }}>signalAdvisor.status</span>
+            <span style={{ color: '#5a7090' }}> → MONITORING — waiting for BORN/ALIVE ≥5 — manual execution only</span>
           </div>
           <div style={{ display: 'flex', gap: '8px' }}>
             <span style={{ color: '#00c3ff' }}>▸</span>
@@ -152,15 +164,19 @@ export default function Hero() {
         {/* Stats row */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1px', background: '#162035', marginTop: '1px' }}>
           {[
-            { v: '81.8%', l: 'BBP Win Rate',   c: '#39ff14' },
-            { v: '287',   l: 'Backtest Trades', c: '#00c3ff' },
-            { v: '1.92',  l: 'Profit Factor',   c: '#ffd700' },
+            { v: '74%',  l: 'Signal Win Rate',  c: '#39ff14' },
+            { v: '287',  l: 'Backtest Signals',  c: '#00c3ff' },
+            { v: '1.92', l: 'Profit Factor',    c: '#ffd700' },
           ].map(s => (
             <div key={s.l} style={{ background: '#0e1628', padding: '14px 16px', textAlign: 'center' }}>
               <div style={{ fontFamily: 'Syne, sans-serif', fontSize: '24px', fontWeight: 800, letterSpacing: '-1px', color: s.c }}>{s.v}</div>
               <div style={{ fontSize: '9px', letterSpacing: '2px', textTransform: 'uppercase', color: '#5a7090', marginTop: '2px' }}>{s.l}</div>
             </div>
           ))}
+        </div>
+        {/* Disclaimer micro */}
+        <div style={{ padding: '8px 16px', borderTop: '1px solid #162035', fontSize: '9px', color: '#2a3d58', letterSpacing: '0.3px' }}>
+          ⚠️ Backtest data for reference only. Not a profit guarantee. All execution is manual by user.
         </div>
       </motion.div>
     </div>
