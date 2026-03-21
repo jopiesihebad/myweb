@@ -6,7 +6,7 @@ export default function Footer() {
       {/* Disclaimer */}
       <div style={{ background: 'rgba(255,140,0,0.03)', borderTop: '1px solid rgba(255,140,0,0.12)', borderBottom: '1px solid rgba(255,140,0,0.12)', padding: '10px 48px', textAlign: 'center' }}>
         <p style={{ fontSize: '10px', color: 'rgba(255,140,0,0.6)', letterSpacing: '0.5px', lineHeight: 1.6 }}>
-          ⚠ Hasil trading masa lalu bukan jaminan hasil di masa depan. Trading berisiko tinggi — hanya gunakan modal yang sanggup kamu tanggung kerugiannya. Semua sinyal bersifat edukatif dan informatif, bukan saran keuangan.
+          ⚠ Past signal performance is not a guarantee of future results. Trading involves significant risk — only use capital you can afford to lose. All signals are educational and informational, not financial advice. Not a trading robot. No auto-execution.
         </p>
       </div>
 
@@ -17,7 +17,7 @@ export default function Footer() {
           { icon: '🔱', text: 'SS BlackBox v6.4 Phantom' },
           { icon: '🏦', text: 'Ownership Intelligence IDX' },
           { icon: '🛡️', text: 'Garansi 14 Hari' },
-          { icon: '🤖', text: 'pieBot Sovereign AI' },
+          { icon: '⚡', text: 'pieBot Signal Advisor' },
         ].map((b, i, arr) => (
           <div key={b.text} style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '7px', fontSize: '9px', color: 'var(--gray)', letterSpacing: '1.5px', textTransform: 'uppercase' }}>
@@ -36,7 +36,7 @@ export default function Footer() {
             Stock<em style={{ color: 'var(--cyan)', fontStyle: 'normal' }}>Indexer</em>
           </span>
           <p style={{ fontSize: '11px', color: 'var(--gray)', lineHeight: 1.7, maxWidth: '220px', marginTop: '8px' }}>
-            The first Conway Automaton signal intelligence platform. Transparent. Verified. Autonomous.
+            The Conway Signal Intelligence Platform for independent traders. Transparent. Data-driven. Your execution.
           </p>
           {/* Affiliate teaser */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '12px 16px', background: 'rgba(189,147,249,0.03)', border: '1px solid rgba(189,147,249,0.1)', marginTop: '16px' }}>
@@ -48,7 +48,7 @@ export default function Footer() {
                 Daftar Affiliate StockIndexer
               </a>
             </span>
-            <span style={{ fontSize: '9px', color: '#bd93f9', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', marginLeft: 'auto', whiteSpace: 'nowrap' }}>40% KOMISI</span>
+            <span style={{ fontSize: '9px', color: '#bd93f9', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', marginLeft: 'auto', whiteSpace: 'nowrap' }}>35% COMMISSION</span>
           </div>
         </div>
 
@@ -59,7 +59,7 @@ export default function Footer() {
               { label: 'Live Dashboard',    href: '/dashboard'     },
               { label: 'Signal Feed',       href: '/#live'         },
               { label: 'Indicator License', href: '/indicator'     },
-              { label: 'Bot Status',        href: '/#bot'          },
+              { label: 'Signal Status',     href: '/#signal-status' },
             ]},
             { title: 'Resources', links: [
               { label: 'API Reference',    href: '/api/webhook'    },
