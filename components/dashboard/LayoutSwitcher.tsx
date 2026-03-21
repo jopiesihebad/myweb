@@ -25,14 +25,14 @@ interface LayoutMeta {
 }
 
 const LAYOUTS: LayoutMeta[] = [
-  { key:'quick',     label:'Quick Glance',      icon:'⚡', desc:'Live overview — signals, chart, risk, stats',      color:'#00c3ff' },
-  { key:'portfolio', label:'Portfolio',          icon:'◈',  desc:'Risk exposure, correlation, rebalancing',          color:'#ffd700' },
-  { key:'signal',    label:'Signal Deep Dive',   icon:'🔱', desc:'All signals, sentiment, news, backtest',           color:'#bd93f9' },
-  { key:'ownership', label:'Ownership Intel',    icon:'🏛',  desc:'IDX shareholding — BBCA/BBRI/ANTM/ASII + AI Q&A', color:'#ff44cc' },
-  { key:'journal',   label:'Trade Journal',      icon:'📋', desc:'Full pieBot trade log + P&L + CSV export',         color:'#39ff14' },
-  { key:'heatmap',   label:'Stock Map',          icon:'🗺',  desc:'Conway heatmap — 24 assets real-time',            color:'#ff8c00' },
-  { key:'tools',     label:'Tools & Brokers',    icon:'🔗',  desc:'Exchanges, platforms, trader setup',               color:'#ff8c00' },
-  { key:'minimal',   label:'Minimal',            icon:'◯',  desc:'Mobile-optimized compact view',                    color:'#8aa0b8' },
+  { key:'quick',     label:'Market Intelligence', icon:'⚡', desc:'Live overview — signal feed, chart, risk meter, stats',      color:'#00c3ff' },
+  { key:'portfolio', label:'Portfolio Awareness', icon:'◈',  desc:'Portfolio risk exposure, correlation, rebalancing',          color:'#ffd700' },
+  { key:'signal',    label:'Signal Analysis',    icon:'🔱', desc:'All signal types, sentiment, news AI, backtest report',           color:'#bd93f9' },
+  { key:'ownership', label:'Ownership Intel',    icon:'🏛',  desc:'IDX shareholding data — BBCA/BBRI/ANTM/ASII + AI Q&A', color:'#ff44cc' },
+  { key:'journal',   label:'Signal Journal',     icon:'📋', desc:'Signal tracking log + performance report + CSV export',         color:'#39ff14' },
+  { key:'heatmap',   label:'Signal Map',         icon:'🗺',  desc:'Conway state heatmap — 24 assets real-time',            color:'#ff8c00' },
+  { key:'tools',     label:'Tools & Exchanges',  icon:'🔗',  desc:'OJK-licensed exchanges, platforms, trader setup',               color:'#ff8c00' },
+  { key:'minimal',   label:'Compact View',       icon:'◯',  desc:'Mobile-optimized compact view',                    color:'#8aa0b8' },
 ]
 
 // ── Shared panel ──────────────────────────────────────────────────────────────
@@ -106,7 +106,7 @@ function PortfolioFirstLayout({
         {/* Left: TV Chart — shows selected ticker */}
         <div style={{ display:'flex', flexDirection:'column', gap:4 }}>
           <div style={{ fontFamily:'Space Mono,monospace', fontSize:8, color:'#4a6080', letterSpacing:1, padding:'0 4px' }}>
-            CHART — click portfolio row or ticker tape to switch
+            CHART — click ticker tape or portfolio row to switch
           </div>
           <TradingViewChart height={400} symbol={activeTicker} />
         </div>
@@ -118,7 +118,7 @@ function PortfolioFirstLayout({
             <span style={{ fontFamily:'Syne,sans-serif', fontSize:12, fontWeight:700, color:'#c8d8e8', letterSpacing:1 }}>
               ACTIVE SIGNALS
             </span>
-            <span style={{ fontFamily:'Space Mono,monospace', fontSize:8, color:'#4a6080' }}>portfolio assets</span>
+            <span style={{ fontFamily:'Space Mono,monospace', fontSize:8, color:'#4a6080' }}>informational — manual execution only</span>
           </div>
           <SignalExplanation />
         </Panel>
@@ -191,7 +191,7 @@ function OwnershipLayout() {
             Ownership Intelligence
           </div>
           <div style={{ fontFamily:'Space Mono,monospace', fontSize:10, color:'#4a6080' }}>
-            IDX shareholding data · Q3 2025 · BBCA · BBRI · ANTM · ASII
+            IDX Shareholding Data · Q3 2025 · BBCA · BBRI · ANTM · ASII
           </div>
         </div>
         <div style={{ display:'flex', flexDirection:'column', alignItems:'flex-end', gap:4 }}>
@@ -203,7 +203,7 @@ function OwnershipLayout() {
             IDX DISCLOSURE
           </span>
           <span style={{ fontFamily:'Space Mono,monospace', fontSize:8, color:'#4a6080' }}>
-            AI Q&A powered by Claude
+            AI Q&A powered by Claude · For reference only
           </span>
         </div>
       </div>
