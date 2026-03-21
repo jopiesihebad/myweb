@@ -2,7 +2,7 @@
 
 // ─────────────────────────────────────────────────────────────
 //  AffiliateTools — "Tools & Brokers" dashboard section
-//  Layer 1 monetization: affiliate links to brokers + platforms
+//  Tools & OJK-Licensed Exchanges — all execution is manual by user
 //  All links use UTM tracking: utm_source=stockindexer
 // ─────────────────────────────────────────────────────────────
 
@@ -15,7 +15,7 @@ const EXCHANGES = [
     url:     'https://okx.com/join/stockindexer',
     logo:    '◈',
     color:   '#00c3ff',
-    note:    'pieBot-compatible · Market + limit orders',
+    note:    'Signal Advisor compatible · Market + limit orders',
   },
   {
     name:    'Binance',
@@ -52,13 +52,13 @@ const PLATFORMS = [
   },
   {
     name:    '3Commas',
-    desc:    'Automate signals into trades · DCA & grid bots',
+    desc:    'Advanced charting & strategy tools · DCA & grid tools',
     tag:     'AUTOMATION',
     tagClr:  '#bd93f9',
     url:     'https://3commas.io/?c=stockindexer',
     logo:    '🤖',
     color:   '#bd93f9',
-    note:    '25% recurring commission for referrals',
+    note:    'OJK-licensed broker · Spot trading only',
   },
 ]
 
