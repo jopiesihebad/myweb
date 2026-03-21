@@ -14,7 +14,7 @@ import FadeUp        from '@/components/FadeUp'
 
 const PERF_STATS = [
   { lbl:'Win Rate',      val:'74%',   valBig:'74',  valSuf:'%',  valSufSz:'20px', color:'#39ff14', sub:'Conway signal tier — all trades',           delta:'▲ BBP standalone: 81.8%' },
-  { lbl:'Profit Factor', val:'1.92',  valBig:'1.92',valSuf:'',   valSufSz:'',     color:'#00c3ff', sub:'Gross profit ÷ gross loss ratio',            delta:'▲ Target threshold: 1.5 — exceeded' },
+  { lbl:'Profit Factor', val:'1.92',  valBig:'1.92',valSuf:'',   valSufSz:'',     color:'#00c3ff', sub:'Gross profit ÷ gross loss ratio backtest',   delta:'▲ Target threshold: 1.5 — exceeded' },
   { lbl:'Avg R:R',       val:'2.3:1', valBig:'2.3', valSuf:':1', valSufSz:'18px', color:'#ffd700', sub:'SL 1.5× ATR · TP 3× ATR',                   delta:'▲ Average win vs average loss' },
   { lbl:'Max Drawdown',  val:'11%',   valBig:'11',  valSuf:'%',  valSufSz:'20px', color:'#ff8c00', sub:'Worst peak-to-trough period',                delta:'▲ Well below 15% safety threshold' },
   { lbl:'Total Trades',  val:'287',   valBig:'287', valSuf:'',   valSufSz:'',     color:'#eef4fc', sub:'3 years · 1H BTCUSDT · Jan 2022–Dec 2025', delta:'▲ Statistically valid sample size' },
@@ -39,18 +39,26 @@ const HOW_STEPS = [
 
 const STACK_LAYERS = [
   { n:'Layer 01', color:'#00c3ff', id:'SS BlackBox v6.4',     platform:'TradingView · Pine Script v6',  desc:'8-cell Conway engine · 23-point confluence · BBP + PM entry signals · CHoCH/BOS · Order Blocks · FVG · Session filter · Webhook output', status:'● LIVE',       statusC:'#39ff14', arrow:'↓ webhook JSON'      },
-  { n:'Layer 02', color:'#39ff14', id:'Conway Automaton',     platform:'conway.tech · Ethereum Base',   desc:'Autonomous execution brain · ETH wallet identity · Genesis prompt trading rules · Think→Act→Observe loop · Self-funded from profit · On-chain audit log', status:'◌ Integrating', statusC:'#ffd700', arrow:'↓ confidence query'  },
-  { n:'Layer 03', color:'#ffd700', id:'DeepNode AI',          platform:'deepnode.ai · Base L2',         desc:'Multi-model AI confidence verification · PoWR reward for accurate signals · On-chain signal validation · 98% task success rate · <$0.01 per query', status:'◇ Q2 2026',    statusC:'#bd93f9', arrow:'↓ execute order'     },
-  { n:'Layer 04', color:'#bd93f9', id:'Exchange API',         platform:'Binance · Bybit · OKX',         desc:'Order placement · ATR-based SL/TP · Position monitoring · USDC profit settlement back to Automaton wallet · Full trade history log', status:'● LIVE',       statusC:'#39ff14', arrow:'' },
+  { n:'Layer 02', color:'#39ff14', id:'Conway Intelligence',  platform:'conway.tech · Ethereum Base',   desc:'Signal intelligence brain · ETH wallet identity · Conway Automaton state rules · Think→Analyze→Report loop · On-chain signal audit log', status:'◌ Integrating', statusC:'#ffd700', arrow:'↓ confidence query'  },
+  { n:'Layer 03', color:'#ffd700', id:'DeepNode AI',          platform:'deepnode.ai · Base L2',         desc:'Multi-model AI confidence verification · PoWR reward for accurate signals · On-chain signal validation · 98% task success rate · <$0.01 per query', status:'◇ Q2 2026',    statusC:'#bd93f9', arrow:'↓ signal output'     },
+  { n:'Layer 04', color:'#bd93f9', id:'Signal Delivery',      platform:'Dashboard · Webhook · API',     desc:'Signal delivery ke member · SL/TP reference level · Signal monitoring dashboard · Performance tracking log · Manual execution oleh user di exchange OJK', status:'● LIVE',       statusC:'#39ff14', arrow:'' },
 ]
 
 const FAQ_ITEMS = [
-  { q:'What is the Conway Automaton state engine?', a:"The Conway Automaton is an 8-cell binary state system that evaluates market conditions each bar close. Each cell represents a specific market condition (weekly trend, volume, session, etc). When 5 or more cells are LIVE simultaneously, the engine enters BORN or ALIVE state and permits trade entries. Below threshold = DORMANT = no trades." },
-  { q:'Is the win rate real or backtested?',        a:"All performance numbers shown are from a genuine Pine Script backtest on BTCUSDT 1H data from January 2022 to December 2025. Commission of 0.05% per side and 2 ticks slippage are included. The 81.8% figure is from a live chart scan of 22 BBP signals — raw, unfiltered, as they appeared on the chart." },
-  { q:'Do I need to know coding to use this?',     a:"No. The PRO plan includes pre-configured TradingView alert templates and webhook setup guides. The ELITE plan includes full 1-on-1 setup support. You need a TradingView Pro+ account and an exchange account — that's it." },
-  { q:'What is Conway Research Automaton?',        a:"Conway Research (conway.tech) is an autonomous AI agent platform that executes tasks 24/7, manages its own Ethereum wallet, and pays for compute from revenue earned. We're integrating it as the execution brain for StockIndexer's bot." },
-  { q:'What happens during DORMANT state?',        a:"Nothing. The bot skips all entry signals when Conway is DORMANT (less than 5/8 cells LIVE). This is intentional — not trading is a valid strategy. Capital preservation is the primary objective." },
-  { q:'Is this financial advice?',                 a:"No. StockIndexer provides signal intelligence tools and educational content. All trading signals are for informational and research purposes only. Past backtest performance does not guarantee future results. Always start with paper trading." },
+  { q:'Does pieBot Signal Advisor execute trades automatically?',
+    a:'NO. pieBot Signal Advisor is an intelligence tools platform — not a trading robot and not an auto-execute system. All signals are informational only. Every buy, sell, or hold decision, as well as trade execution, is done independently and manually by the user on OJK-licensed exchanges (Tokocrypto, Indodax, or other BAPPEBTI-registered exchanges).' },
+  { q:'Apakah ada jaminan profit dari sinyal platform ini?',
+    a:'NONE. pieBot Signal Advisor does not provide any profit guarantee, investment return, or specific trading outcome. All signals are the output of Conway Automaton analysis and are informational in nature. Trading in financial markets carries risk of loss. Backtest results do not guarantee future performance. Users are fully responsible for their own trading decisions and results.' },
+  { q:'Apakah platform ini legal di Indonesia per regulasi OJK?',
+    a:'Yes. StockIndexer.com operates as a subscription-based intelligence tools platform — not as an investment advisor, investment manager, or fund manager. Our business model is purely subscription-based, with no performance fees, no managed accounts, and no user fund management. Users utilize these tools as additional analytical reference within their own independent trading on OJK/BAPPEBTI-licensed exchanges.' },
+  { q:'Apa itu Conway Automaton Signal Engine?',
+    a:'SS BlackBox v6.4 menggunakan model Conway Automaton berbasis 8-cell matrix untuk menganalisis kondisi pasar real-time. Engine ini menghasilkan state monitoring (BORN/ALIVE/DIED/DORMANT), Confluence Score (0–23), dan signal classification (Tier S/A/B/C). Semua output adalah informasi analisis — bukan instruksi trading wajib.' },
+  { q:'Apa yang membuat tier Elite berbeda dari Pro?',
+    a:'Elite memberikan akses seumur hidup ke semua fitur Pro ditambah akses eksklusif invite-only ke SS BlackBox Phantom Private Version di TradingView — indikator visual Conway Automaton yang tidak dijual terpisah dan hanya tersedia untuk member Elite. Plus lifetime update otomatis, prioritas support ≤4 jam, dan early access fitur baru.' },
+  { q:'Di exchange mana saya bisa menggunakan sinyal ini?',
+    a:'Sinyal dapat dijadikan referensi untuk trading di exchange terdaftar OJK/BAPPEBTI: Tokocrypto, Indodax, Pintu, Pluang, dan lainnya. Untuk saham IDX, gunakan broker berizin OJK. StockIndexer.com tidak berafiliasi dengan exchange manapun dan tidak memfasilitasi eksekusi transaksi.' },
+  { q:'Apakah platform ini mengakses akun exchange atau dana saya?',
+    a:'TIDAK. Platform ini tidak memerlukan API key exchange lo, tidak mengakses akun trading lo, dan tidak menyimpan atau mengelola dana apapun. Kami hanya menyediakan intelligence tools berbasis data pasar publik. Informasi akun pengguna disimpan aman menggunakan Supabase dengan enkripsi standar industri.' },
 ]
 
 export default function Page() {
@@ -80,7 +88,7 @@ export default function Page() {
       <section className="sec">
         <div className="sec-eyebrow">Live Signal Stream</div>
         <h2 className="sec-h">Every Signal.<br />Every Bar Close.</h2>
-        <p className="sec-p">Real-time event log across all monitored assets. Filter by signal type. New signals inject automatically every 8 seconds from pieBot.</p>
+        <p className="sec-p">Real-time signal intelligence feed — 24 aset dimonitor. Filter berdasarkan tipe sinyal dan tier. Semua sinyal bersifat informatif untuk referensi analisis mandiri.</p>
         <SignalFeed />
       </section>
 
@@ -137,7 +145,7 @@ export default function Page() {
       <section className="sec">
         <div className="sec-eyebrow">System Overview</div>
         <h2 className="sec-h">How It Works.</h2>
-        <p className="sec-p">Four steps from raw price data to autonomous trade execution.</p>
+        <p className="sec-p">Empat layer dari data pasar mentah ke sinyal intelligence berkualitas tinggi.</p>
         <div className="hiw-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 0, background: 'var(--border)' }}>
           {HOW_STEPS.map((s, i) => (
             <FadeUp key={s.n} delay={i * 0.1}>
@@ -201,7 +209,7 @@ export default function Page() {
               { state:'born',    emoji:'🟢', name:'BORN',    color:'#39ff14', desc:"Previous bar <threshold, current bar ≥threshold. Fresh momentum emerging. Best entry signal — highest probability trade.", wr:'Est. Win Rate: 76–82%', wrC:'#39ff14' },
               { state:'alive',   emoji:'✦',  name:'ALIVE',   color:'#00c3ff', desc:"Both bars ≥threshold. Trend running. Hold open positions, add on retest. No new entry unless BBP cross occurs.", wr:'Est. Win Rate: 72–76%', wrC:'#39ff14' },
               { state:'died',    emoji:'🔴', name:'DIED',    color:'#ff0062', desc:"Previous bar ≥threshold, current bar <threshold. Momentum fading. Prepare to exit. Bot begins monitoring exit triggers.", wr:'Action: Prepare exit', wrC:'#ff8c00' },
-              { state:'dormant', emoji:'○',  name:'DORMANT', color:'#5a7090', desc:"Both bars <threshold. No confluence. Bot skips all entries. Patience is profitability — not trading is a valid position.", wr:'Action: Skip all entries', wrC:'#5a7090' },
+              { state:'dormant', emoji:'○',  name:'DORMANT', color:'#5a7090', desc:"Both bars <threshold. No confluence. Tidak ada sinyal yang dikeluarkan. Menunggu kondisi optimal — tidak masuk pasar adalah keputusan valid.", wr:'Action: Skip all entries', wrC:'#5a7090' },
             ].map(s => (
               <FadeUp key={s.state} delay={0.1}>
                 <div style={{ background: 'var(--panel)', border: '1px solid var(--border)', padding: '20px', position: 'relative', overflow: 'hidden' }}>
@@ -220,7 +228,7 @@ export default function Page() {
       <div className="divider"><hr /></div>
 
       {/* ─── BOT STATUS ─── */}
-      <section className="sec" id="bot">
+      <section className="sec" id="platform">
         <div className="sec-eyebrow">Autonomous Bot — Live Status</div>
         <h2 className="sec-h">The Bot Is<br />Always Watching.</h2>
         <p className="sec-p">Conway Research Automaton running 24/7. Self-funded. Self-monitoring. Transparent on-chain audit log.</p>
@@ -267,7 +275,7 @@ export default function Page() {
                     { txt:' · filter passed', c:'#5a7090' },
                   ]},
                   { t:'17:14', parts:[
-                    { txt:'Max positions reached · skipping EURUSD entry', c:'#5a7090' },
+                    { txt:'Confluence rendah · sinyal EURUSD tidak memenuhi threshold', c:'#5a7090' },
                   ]},
                   { t:'16:58', parts:[
                     { txt:'BBP Crossover detected: ', c:'#5a7090' },
@@ -275,7 +283,7 @@ export default function Page() {
                   ]},
                   { t:'16:58', parts:[
                     { txt:'Order placed: ', c:'#5a7090' },
-                    { txt:'LONG XAUUSD', c:'#5a7090' },
+                    { txt:'Signal Tier A terdeteksi · eksekusi manual oleh user', c:'#5a7090' },
                     { txt:' · qty 0.035 oz', c:'#39ff14' },
                   ]},
                   { t:'16:30', parts:[
@@ -339,7 +347,7 @@ export default function Page() {
       <section className="sec" id="stack">
         <div className="sec-eyebrow">Architecture</div>
         <h2 className="sec-h">The Full Stack.</h2>
-        <p className="sec-p">Four layers of intelligence. One autonomous organism that sees, decides, acts, and learns.</p>
+        <p className="sec-p">Empat layer intelligence. Satu platform yang menganalisis, memfilter, dan mengirimkan sinyal berkualitas tinggi ke trader mandiri.</p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', maxWidth: '800px' }}>
           {STACK_LAYERS.map((l, i) => (
             <div key={l.n}>
@@ -402,10 +410,37 @@ export default function Page() {
           </div>
           <div className="cta-actions" style={{ display: 'flex', gap: '12px', flexDirection: 'column', alignItems: 'flex-end' }}>
             <a href="https://utas.stockindexer.com/checkout/pro" target="_blank" rel="noreferrer" className="btn-cta-primary">🚀 Start 14-Day Trial</a>
-            <a href="#pricing" className="btn-cta-secondary">View All Plans →</a>
+            <a href="#pricing" className="btn-cta-secondary">Lihat Semua Paket →</a>
           </div>
         </div>
       </div>
+
+      {/* ─── DISCLAIMER ─── */}
+      <section className="sec" style={{ background: 'rgba(255,0,98,0.03)', borderTop: '1px solid rgba(255,0,98,0.1)' }}>
+        <div style={{ maxWidth: '860px' }}>
+          <div style={{ fontSize: '9px', letterSpacing: '3px', color: '#ff6080', marginBottom: '12px', fontFamily: '"Space Mono", monospace' }}>
+            DISCLAIMER & PERINGATAN RISIKO
+          </div>
+          <p style={{ fontSize: '11px', color: '#4a6080', lineHeight: 1.9, marginBottom: '10px' }}>
+            <strong style={{ color: '#8aa0b8' }}>Platform Intelligence Tools — Bukan Saran Investasi.</strong>{' '}
+            Seluruh konten, sinyal, analisis, confluence score, dan informasi di StockIndexer.com bersifat informatif
+            dan edukatif. Konten ini TIDAK merupakan saran investasi, rekomendasi trading, atau instruksi beli/jual
+            aset keuangan apapun.
+          </p>
+          <p style={{ fontSize: '11px', color: '#4a6080', lineHeight: 1.9, marginBottom: '10px' }}>
+            <strong style={{ color: '#8aa0b8' }}>Risiko Trading.</strong>{' '}
+            Trading aset keuangan mengandung risiko kerugian signifikan termasuk kehilangan seluruh modal.
+            Hasil backtest dan histori sinyal tidak menjamin hasil di masa depan. Pastikan memahami risiko
+            sebelum trading.
+          </p>
+          <p style={{ fontSize: '11px', color: '#4a6080', lineHeight: 1.9 }}>
+            <strong style={{ color: '#8aa0b8' }}>Tidak Ada Auto-Execute.</strong>{' '}
+            Platform ini tidak mengeksekusi order atas nama pengguna, tidak memiliki akses ke akun exchange,
+            dan tidak mengelola dana. Model bisnis murni subscription. Gunakan hanya exchange berizin
+            OJK/BAPPEBTI untuk eksekusi trading.
+          </p>
+        </div>
+      </section>
 
       <Footer />
     </>
