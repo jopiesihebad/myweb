@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react'
 
 // ─────────────────────────────────────────────────────────────
-//  TradeLog — full audit trail of pieBot trades
+//  Signal Performance Journal
+//  Tracks signal outcomes for independent performance review
 //  Data source: /api/journal (reads soul.md from GitHub)
 //  Fallback: mock data when API unavailable
 // ─────────────────────────────────────────────────────────────
@@ -38,7 +39,7 @@ const TIER_COLOR: Record<string, string> = {
   S: '#39ff14', A: '#00c3ff', B: '#ffd700', C: '#ff8c00',
 }
 
-// Mock data for dev / when GitHub API unavailable
+// Sample signal data — shown when API unavailable
 const MOCK_TRADES: Trade[] = [
   { id:'t-001', timestamp:'2026-03-17T09:14:00Z', ticker:'BTCUSDT', alert_type:'CONWAY_BUY',   tier:'A', entry:84210, sl:83000, tp:86630, exit_price:86500, exit_reason:'TP_HIT',    pnl_r:1.94,  pnl_usd:289, session:'LONDON' },
   { id:'t-002', timestamp:'2026-03-17T14:22:00Z', ticker:'XAUUSD',  alert_type:'GOLD_BUY',     tier:'B', entry:2912,  sl:2890,  tp:2956,  exit_price:2956,  exit_reason:'TP_HIT',    pnl_r:2.0,   pnl_usd:88,  session:'NY'     },
@@ -98,7 +99,7 @@ export default function TradeLog() {
 
   // Export to CSV
   const exportCSV = () => {
-    const headers = ['Time','Ticker','Signal','Tier','Entry','SL','TP','Exit','Reason','PnL R','PnL USD','Session']
+    const headers = ['Time','Ticker','Signal','Tier','Signal Price','SL Ref','TP Ref','Exit Price','Exit Signal','Performance R','Performance USD','Session']
     const rows = filtered.map(t => [
       new Date(t.timestamp).toLocaleString('en-GB'),
       t.ticker,
@@ -118,7 +119,7 @@ export default function TradeLog() {
     const url  = URL.createObjectURL(blob)
     const a    = document.createElement('a')
     a.href     = url
-    a.download = `stockindexer_trades_${new Date().toISOString().slice(0,10)}.csv`
+    a.download = `stockindexer_signals_${new Date().toISOString().slice(0,10)}.csv`
     a.click()
     URL.revokeObjectURL(url)
   }
@@ -139,7 +140,7 @@ export default function TradeLog() {
         <div style={{ display:'flex', alignItems:'center', gap:8 }}>
           <span style={{ width:3, height:16, background:'linear-gradient(180deg,#39ff14,#00c3ff)', borderRadius:2, display:'inline-block' }} />
           <span style={{ fontFamily:'Syne,sans-serif', fontSize:13, fontWeight:700, color:'#c8d8e8', letterSpacing:1, textTransform:'uppercase' }}>
-            Trade Journal
+            Signal Journal
           </span>
           <span style={{ fontFamily:'Space Mono,monospace', fontSize:8, color:'#4a6080', padding:'1px 6px', border:'1px solid #162035', borderRadius:3 }}>
             {loading ? 'SYNCING...' : error ? 'MOCK DATA' : 'LIVE'}
@@ -281,7 +282,7 @@ export default function TradeLog() {
           {filtered.length} of {trades.length} trades · Last updated: {timeAgo(summary.lastUpdated)}
         </span>
         <span style={{ fontFamily:'Space Mono,monospace', fontSize:9, color:'#2a3d58' }}>
-          Source: soul.md via GitHub · {filtered.length} trades in export
+          Source: soul.md via GitHub · {filtered.length} signals in export
         </span>
       </div>
     </div>
