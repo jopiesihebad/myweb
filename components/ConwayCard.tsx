@@ -23,10 +23,10 @@ export type ConwayCardData = {
 
 // ─── Style maps ───────────────────────────────────────────────
 const BADGE_STYLE: Record<ConwayState, React.CSSProperties> = {
-  born:    { color: '#39ff14', borderColor: 'rgba(57,255,20,0.4)',  background: 'rgba(57,255,20,0.06)'  },
-  alive:   { color: '#00c3ff', borderColor: 'rgba(0,195,255,0.4)',  background: 'rgba(0,195,255,0.06)'  },
-  dormant: { color: '#5a7090', borderColor: '#1e2e4a',              background: 'transparent'           },
-  died:    { color: '#ff0062', borderColor: 'rgba(255,0,98,0.4)',   background: 'rgba(255,0,98,0.06)'   },
+  born:    { color: '#39ff14', borderWidth: '1px', borderStyle: 'solid', borderColor: 'rgba(57,255,20,0.4)',  background: 'rgba(57,255,20,0.06)'  },
+  alive:   { color: '#00c3ff', borderWidth: '1px', borderStyle: 'solid', borderColor: 'rgba(0,195,255,0.4)',  background: 'rgba(0,195,255,0.06)'  },
+  dormant: { color: '#5a7090', borderWidth: '1px', borderStyle: 'solid', borderColor: '#1e2e4a',              background: 'transparent'           },
+  died:    { color: '#ff0062', borderWidth: '1px', borderStyle: 'solid', borderColor: 'rgba(255,0,98,0.4)',   background: 'rgba(255,0,98,0.06)'   },
 }
 const BADGE_LABEL: Record<ConwayState, string> = {
   born: 'BORN 🟢', alive: 'ALIVE ✦', dormant: 'DORMANT ○', died: 'DIED 🔴',
@@ -137,7 +137,7 @@ function CardDisplay({ d, pinned, onPin }: { d: ConwayCardData; pinned: boolean;
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '5px' }}>
           {/* Conway state badge */}
-          <div style={{ fontSize: '9px', letterSpacing: '2px', textTransform: 'uppercase', padding: '3px 9px', border: '1px solid', ...BADGE_STYLE[d.state] }}>
+          <div style={{ fontSize: '9px', letterSpacing: '2px', textTransform: 'uppercase', padding: '3px 9px', ...BADGE_STYLE[d.state] }}>
             {BADGE_LABEL[d.state]}
           </div>
           <div style={{ display: 'flex', gap: '5px' }}>
