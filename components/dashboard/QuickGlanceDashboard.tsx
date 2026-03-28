@@ -16,7 +16,7 @@ const STATE_COLOR: Record<string, string> = {
   born: '#39ff14', alive: '#00c3ff', died: '#ff0062', dormant: '#2a3d58',
 }
 
-// ─── Mock backtest data (pieBot historical) ───────────────────
+// ─── Backtest reference data ──────────────────────────────────
 const BACKTEST = {
   winRate:       74.1,
   profitFactor:  1.92,
@@ -508,7 +508,7 @@ function RiskMeter({ openTrades }: { openTrades: any[] }) {
       </div>
       <div style={{ display:'flex', flexDirection:'column', gap:4 }}>
         {openTrades.length === 0 ? (
-          <span style={{ fontFamily:'Space Mono,monospace', fontSize:8, color:'#2a3d58' }}>No open trades · {remaining.toFixed(1)}% available</span>
+          <span style={{ fontFamily:'Space Mono,monospace', fontSize:8, color:'#2a3d58' }}>No active signals · {remaining.toFixed(1)}% available</span>
         ) : openTrades.map((t: any, i: number) => (
           <div key={i} style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
             <span style={{ fontFamily:'JetBrains Mono,monospace', fontSize:10, color:'#eef4fc' }}>{t.ticker}</span>
@@ -702,13 +702,13 @@ export default function QuickGlanceDashboard({ activeTicker, onTickerSelect }: {
           sub={`${signals.filter(s => ALERT_META[s.alert_type]?.category === 'ENTRY').length} entry signals`}
         />
         <StatBox
-          label="PIEBOT WIN RATE"
+          label="SIGNAL WIN RATE"
           value={tradeSummary ? `${tradeSummary.winRate.toFixed(1)}%` : `${BACKTEST.winRate}%`}
           color="#ffd700"
           sub={tradeSummary ? `${tradeSummary.wins}W · ${tradeSummary.losses}L` : 'backtest 2022–2025'}
         />
         <StatBox
-          label="TOTAL P&L"
+          label="SIGNAL P&L"
           value={tradeSummary ? `${tradeSummary.totalPnlR > 0 ? '+' : ''}${tradeSummary.totalPnlR.toFixed(1)}R` : `+${BACKTEST.expectancy}R`}
           color={tradeSummary ? (tradeSummary.totalPnlR > 0 ? '#39ff14' : '#ff0062') : '#39ff14'}
           sub="expectancy per trade"
@@ -813,15 +813,15 @@ export default function QuickGlanceDashboard({ activeTicker, onTickerSelect }: {
         <TradingViewChart key={`tv-${chartTicker}`} symbol={chartTicker} height={420} />
       </div>
 
-      {/* ── Row 3: pieBot Stats + Backtest + Trade Log ── */}
+      {/* ── Row 3: Signal Stats + Backtest + Signal Log ── */}
       <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr 320px', gap: 16 }}>
 
-        {/* pieBot live stats */}
+        {/* Signal state summary */}
         <div style={{ background: '#0a1020', border: '1px solid #162035', borderRadius: 10, padding: '14px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 14 }}>
             <span style={{ width: 3, height: 14, background: 'linear-gradient(180deg,#bd93f9,#ff44cc)', borderRadius: 2, display: 'inline-block' }} />
             <span style={{ fontFamily: 'Syne,sans-serif', fontSize: 12, fontWeight: 700, color: '#c8d8e8', letterSpacing: 1 }}>
-              PIEBOT
+              SIGNAL ENGINE
             </span>
           </div>
 
@@ -851,10 +851,10 @@ export default function QuickGlanceDashboard({ activeTicker, onTickerSelect }: {
           {/* Active sessions */}
           <div style={{ paddingTop: 10, borderTop: '1px solid #162035' }}>
             <div style={{ fontFamily: 'Space Mono,monospace', fontSize: 8, color: '#4a6080', letterSpacing: 1, marginBottom: 8 }}>
-              OPEN POSITIONS
+              SIGNAL WATCH
             </div>
             {recentTrades.filter((t: any) => t.exit_price === null).length === 0 ? (
-              <div style={{ fontFamily: 'Space Mono,monospace', fontSize: 9, color: '#2a3d58' }}>No open trades</div>
+              <div style={{ fontFamily: 'Space Mono,monospace', fontSize: 9, color: '#2a3d58' }}>No active signals</div>
             ) : (
               recentTrades
                 .filter((t: any) => t.exit_price === null)
