@@ -35,6 +35,7 @@ type SignalPayload = {
   atr:           number
   sl_price:      number
   tp_price:      number
+  timeframe?:    string        // '60'=1H, '240'=4H, '15'=15M — dari timeframe.period
   squeeze_risk?: boolean
   timestamp:     string
   message:       string
@@ -227,6 +228,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     console.log(`[Webhook] ${direction} ${category}:`, {
       alert: alertStr, tier: payload.tier, ticker: payload.ticker,
       close: payload.close, cells: `${payload.cells}/8`,
+      tf: payload.timeframe ?? 'unknown',
       fusion: payload.fusion, session: payload.session,
       sl: isEntry ? payload.sl_price : 'n/a',
       tp: isEntry ? payload.tp_price : 'n/a',
@@ -239,6 +241,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     return NextResponse.json({
       ok: true, direction, alert: alertStr, label: meta.label,
       category, tier: payload.tier, ticker: payload.ticker,
+      timeframe: payload.timeframe ?? 'unknown',
       fusion: payload.fusion, cells: payload.cells, ts: payload.timestamp,
     }, { status: 200 })
 
