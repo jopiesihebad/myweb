@@ -220,8 +220,8 @@ function OwnershipLayout() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-//  Layout 5: Trade Journal
-//  Full pieBot trade audit trail · Filter by tier/status
+//  Layout 5: Signal Journal
+//  Signal performance tracking · Filter by tier/status
 //  Summary bar (win rate, P&L, profit factor) · CSV export
 // ─────────────────────────────────────────────────────────────────────────────
 function TradeJournalLayout() {
