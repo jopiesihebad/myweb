@@ -148,8 +148,8 @@ export default function Page() {
         <p className="sec-p">Four layers from raw market data to high-quality signal intelligence.</p>
         <div className="hiw-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 0, background: 'var(--border)' }}>
           {HOW_STEPS.map((s, i) => (
-            <FadeUp key={s.n} delay={i * 0.1}>
-              <div className="hiw-step" style={{ background: 'var(--panel)', padding: '32px 24px', position: 'relative' }}>
+            <FadeUp key={s.n} delay={i * 0.1} style={{ display: 'flex' }}>
+              <div className="hiw-step" style={{ background: 'var(--panel)', padding: '32px 24px', position: 'relative', flex: 1 }}>
                 {i < HOW_STEPS.length - 1 && <span style={{ position: 'absolute', right: '-12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--border2)', fontSize: '18px', zIndex: 2 }}>→</span>}
                 <div style={{ fontFamily: 'Syne,sans-serif', fontSize: '48px', fontWeight: 800, color: 'var(--border2)', lineHeight: 1, marginBottom: '14px', letterSpacing: '-3px' }}>{s.n}</div>
                 <div style={{ fontSize: '28px', marginBottom: '12px' }}>{s.icon}</div>
