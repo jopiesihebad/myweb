@@ -193,7 +193,11 @@ async function forwardToPieBot(payload: SignalPayload): Promise<void> {
 // ─── POST /api/webhook ────────────────────────────────────────
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
-    const secret = req.headers.get('x-webhook-secret')
+    // Auth: cek header ATAU query param ?secret=xxx
+    // TradingView tidak support custom header → pakai query param di Webhook URL
+    const headerSecret = req.headers.get('x-webhook-secret')
+    const querySecret  = req.nextUrl.searchParams.get('secret')
+    const secret       = headerSecret ?? querySecret
     if (process.env.WEBHOOK_SECRET && secret !== process.env.WEBHOOK_SECRET)
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
@@ -254,7 +258,9 @@ export async function GET(): Promise<NextResponse> {
     tradingview_setup: {
       note: 'Pakai 1 URL yang sama untuk LONG dan SHORT script',
       webhook_url: 'https://stockindexer.com/api/webhook',
-      header: { name: 'x-webhook-secret', value: '<WEBHOOK_SECRET dari .env.local>' },
+      webhook_url_format: 'https://stockindexer.com/api/webhook?secret=<WEBHOOK_SECRET>',
+      note_header: 'TradingView tidak support custom header — gunakan query param ?secret= di URL',
+      tradingview_whitelist_ips: ['52.89.214.238','34.212.75.30','54.218.53.128','52.32.178.7'],
       long_script: {
         name: 'SS BlackBox v6.4 — CONWAY AUTOMATON',
         condition: 'alert() function calls',
