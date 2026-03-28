@@ -34,7 +34,7 @@ const HOW_STEPS = [
   { n:'01', icon:'📊', ttl:'Market Scan',   tag:'SS BlackBox v6.4',  desc:'SS BlackBox scans OHLCV data every 1H bar close. 8 Conway cells evaluated simultaneously across weekly trend, baseline, volume, structure, session, and OFI.' },
   { n:'02', icon:'🧬', ttl:'State Decision',tag:'Conway Automaton',   desc:'Conway State Engine computes BORN / ALIVE / DIED / DORMANT. Minimum 5/8 cells required. 23-point Fusion Score determines signal grade from 1 (best) to 5.' },
   { n:'03', icon:'⚡', ttl:'Signal Fire',   tag:'Webhook JSON',       desc:'When conditions align: Conway BORN/ALIVE + BBP Crossover + VWAP + RSI filter + London/NY session, a webhook payload fires to the execution layer.' },
-  { n:'04', icon:'🤖', ttl:'Auto Execute',  tag:'Conway.tech',        desc:'Conway Research Automaton receives signal, validates context, places order with ATR-based SL/TP. Position monitored until SS3/BBP exit or Conway DIED.' },
+  { n:'04', icon:'📡', ttl:'Signal Delivery', tag:'Member Dashboard',   desc:'Signal payload delivered to member dashboard with SL/TP reference levels, tier classification, Fusion Score, and session context. Member reviews and executes independently on OJK/BAPPEBTI-licensed exchange.' },
 ]
 
 const STACK_LAYERS = [
@@ -229,20 +229,20 @@ export default function Page() {
 
       {/* ─── BOT STATUS ─── */}
       <section className="sec" id="platform">
-        <div className="sec-eyebrow">Autonomous Bot — Live Status</div>
-        <h2 className="sec-h">The Bot Is<br />Always Watching.</h2>
-        <p className="sec-p">Signal intelligence engine running 24/7. Transparent signal log. All trade execution is manual by user.</p>
+        <div className="sec-eyebrow">Signal Engine — Live Monitor</div>
+        <h2 className="sec-h">The Engine Is<br />Always Running.</h2>
+        <p className="sec-p">Signal intelligence engine running 24/7. Transparent signal log. All trade execution is manual by user on OJK-licensed exchange.</p>
         <div className="bot-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
           {/* Bot Alpha card */}
           <FadeUp>
             <div style={{ background: 'var(--panel)', border: '1px solid var(--border)', padding: '24px', position: 'relative', overflow: 'hidden' }}>
               <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: 'linear-gradient(90deg,#39ff14,#00c3ff)' }} />
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                <div style={{ fontFamily: 'Syne,sans-serif', fontSize: '18px', fontWeight: 700, letterSpacing: '-0.5px' }}>Conway Bot Alpha</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '9px', letterSpacing: '2px', color: '#39ff14', textTransform: 'uppercase' }}><div className="ldot" /> Paper Trading</div>
+                <div style={{ fontFamily: 'Syne,sans-serif', fontSize: '18px', fontWeight: 700, letterSpacing: '-0.5px' }}>Signal Monitor Alpha</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '9px', letterSpacing: '2px', color: '#39ff14', textTransform: 'uppercase' }}><div className="ldot" /> Tracking Active</div>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '8px', marginBottom: '20px' }}>
-                {[{l:'P&L Today',v:'+2.3%',c:true},{l:'P&L Month',v:'+8.7%',c:true},{l:'Drawdown',v:'−1.2%',c:null},{l:'Win Rate',v:'78%',c:true},{l:'Trades',v:'14',c:null},{l:'Cells',v:'5/8',c:null,gc:'#ffd700'}].map(m => (
+                {[{l:'Signals Today',v:'7',c:null},{l:'This Month',v:'43',c:null},{l:'Grade 1–2',v:'62%',c:true},{l:'Win Rate',v:'78%',c:true},{l:'Trades Tracked',v:'14',c:null},{l:'Cells Avg',v:'5/8',c:null,gc:'#ffd700'}].map(m => (
                   <div key={m.l} style={{ background: 'var(--panel2)', padding: '12px' }}>
                     <div style={{ fontSize: '9px', color: 'var(--gray)', letterSpacing: '1px', marginBottom: '4px' }}>{m.l}</div>
                     <div style={{ fontSize: '16px', fontWeight: 700, fontFamily: 'Space Mono,monospace', color: m.gc ?? (m.c === true ? '#39ff14' : m.c === false ? '#ff0062' : 'var(--white)') }}>{m.v}</div>
@@ -251,10 +251,10 @@ export default function Page() {
               </div>
               <div style={{ background: 'var(--panel2)', border: '1px solid var(--border)', padding: '12px 16px', marginBottom: '12px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontSize: '10px' }}>
-                  <span style={{ color: 'var(--white)', fontWeight: 700 }}>XAUUSD</span>
-                  <span style={{ color: '#39ff14' }}>▲ LONG</span>
+                  <span style={{ color: 'var(--white)', fontWeight: 700 }}>XAUUSD — Latest Signal</span>
+                  <span style={{ color: '#39ff14' }}>▲ LONG Signal</span>
                 </div>
-                {[['Entry Price','2,891.20','var(--white)'],['Current P&L','+21.20 (+0.73%)','#39ff14'],['Stop Loss','2,843.60 (−1.65%)','#ff0062'],['Take Profit','2,954.80 (+2.20%)','#39ff14'],['Exit Condition','SS3 cross / DIED','var(--white)']].map(r => (
+                {[['Signal Type','CONWAY BUY — Tier A','var(--white)'],['Fusion Score','19 / 23 — Grade 2','#00c3ff'],['SL Reference','2,843.60 (−1.65% from signal)','#ff0062'],['TP Reference','2,954.80 (+2.20% from signal)','#39ff14'],['Exit Condition','LH EXIT or CONWAY DIED','var(--white)']].map(r => (
                   <div key={r[0] as string} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', marginBottom: '3px' }}>
                     <span style={{ color: 'var(--gray)' }}>{r[0]}</span>
                     <span style={{ color: r[2] as string, fontFamily: 'Space Mono,monospace' }}>{r[1]}</span>
@@ -278,22 +278,22 @@ export default function Page() {
                     { txt:'Low confluence · EURUSD signal does not meet threshold', c:'#5a7090' },
                   ]},
                   { t:'16:58', parts:[
-                    { txt:'BBP Crossover detected: ', c:'#5a7090' },
-                    { txt:'XAUUSD @ 2,891.20', c:'#00c3ff' },
+                    { txt:'Signal dispatched: ', c:'#5a7090' },
+                    { txt:'XAUUSD CONWAY BUY @ 2,891.20', c:'#00c3ff' },
                   ]},
                   { t:'16:58', parts:[
-                    { txt:'Order placed: ', c:'#5a7090' },
-                    { txt:'Signal Tier A terdeteksi · eksekusi manual oleh user', c:'#5a7090' },
-                    { txt:' · qty 0.035 oz', c:'#39ff14' },
+                    { txt:'Tier A · ', c:'#5a7090' },
+                    { txt:'SL ref 2,843 · TP ref 2,954', c:'#39ff14' },
+                    { txt:' · member review required', c:'#5a7090' },
                   ]},
                   { t:'16:30', parts:[
                     { txt:'London session open · ', c:'#5a7090' },
-                    { txt:'prime window activated', c:'#00c3ff' },
+                    { txt:'prime signal window activated', c:'#00c3ff' },
                   ]},
                   { t:'14:02', parts:[
-                    { txt:'Position closed: ', c:'#5a7090' },
-                    { txt:'BTCUSDT · +2.1%', c:'#39ff14' },
-                    { txt:' · Conway DIED signal', c:'#ff0062' },
+                    { txt:'Exit signal fired: ', c:'#5a7090' },
+                    { txt:'BTCUSDT LH EXIT', c:'#ff0062' },
+                    { txt:' · Conway DIED', c:'#ff0062' },
                   ]},
                 ] as { t: string; parts: { txt: string; c: string }[] }[]).map(({ t, parts }, i) => (
                   <div key={i} style={{ display: 'flex', gap: '10px', marginBottom: '2px' }}>
@@ -317,7 +317,7 @@ export default function Page() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '9px', letterSpacing: '2px', color: '#39ff14', textTransform: 'uppercase' }}><div className="ldot" /> All Systems Go</div>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '20px' }}>
-                {[['TradingView Webhook','● Connected','#39ff14'],['Exchange API (Binance)','● Connected','#39ff14'],['Conway Research Automaton','◌ Integrating','#ffd700'],['DeepNode AI Layer','◇ Q2 2026','#bd93f9'],['Webhook Latency','< 280ms avg','#39ff14'],['Uptime (30 days)','99.94%','#39ff14']].map(r => (
+                {[['TradingView Webhook','● Connected','#39ff14'],['Signal Pipeline','● Active','#39ff14'],['Conway State Engine','◌ Integrating','#ffd700'],['DeepNode AI Layer','◇ Q2 2026','#bd93f9'],['Webhook Latency','< 280ms avg','#39ff14'],['Uptime (30 days)','99.94%','#39ff14']].map(r => (
                   <div key={r[0]} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', padding: '10px 14px', background: 'var(--panel2)' }}>
                     <span style={{ color: 'var(--gray)' }}>{r[0]}</span>
                     <span style={{ color: r[2] }}>{r[1]}</span>
@@ -325,8 +325,8 @@ export default function Page() {
                 ))}
               </div>
               <div style={{ background: 'var(--panel2)', padding: '16px', marginBottom: '12px' }}>
-                <div style={{ fontSize: '9px', letterSpacing: '2px', color: 'var(--gray)', marginBottom: '12px', textTransform: 'uppercase' }}>Risk Limits</div>
-                {[['Risk per trade','1.0%','var(--white)'],['Max daily loss','3.0% — OK','#39ff14'],['Max drawdown limit','15% — OK','#39ff14'],['Max open positions','1 / 1','var(--white)']].map(r => (
+                <div style={{ fontSize: '9px', letterSpacing: '2px', color: 'var(--gray)', marginBottom: '12px', textTransform: 'uppercase' }}>Signal Reference Parameters</div>
+                {[['SL Reference','1.5× ATR from signal price','var(--white)'],['TP Reference','3.0× ATR from signal price','#39ff14'],['Min R:R Threshold','1.5 — signals below skipped','#39ff14'],['Signal Grades','S / A / B / C / SKIP','var(--white)']].map(r => (
                   <div key={r[0]} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', marginBottom: '6px' }}>
                     <span style={{ color: 'var(--gray)' }}>{r[0]}</span>
                     <span style={{ color: r[2] }}>{r[1]}</span>
@@ -334,7 +334,7 @@ export default function Page() {
                 ))}
               </div>
               <div style={{ fontSize: '10px', color: 'var(--gray)', lineHeight: 1.7, padding: '14px', border: '1px solid var(--border)' }}>
-                ⚠ Paper trading mode active. All positions are simulated with real market prices. No real funds at risk until backtest validation is complete.
+                ℹ All signals are informational reference only. SL and TP levels are analytical parameters — not instructions. All trade decisions and execution are made independently by the user on OJK/BAPPEBTI-licensed exchanges.
               </div>
             </div>
           </FadeUp>
